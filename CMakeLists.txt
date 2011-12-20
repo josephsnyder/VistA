@@ -59,24 +59,3 @@ if(TEST_VISTA)
   endif()
 endif()
 
-#-----------------------------------------------------------------------------
-# If we do not have a real build tool then tell ctest_build to run a
-# rudimentary build through a CMake script.
-set(cmake_build_script ${VISTA_BINARY_DIR}/CMake/Build.cmake)
-get_property(cmake_build_scripts GLOBAL PROPERTY VISTA_BUILD_SCRIPTS)
-if(NOT VISTA_HAVE_BUILD_TOOL)
-  configure_file(CMake/Build.cmake.in ${cmake_build_script} @ONLY)
-  set(MAKECOMMAND "${CMAKE_COMMAND} -P \"${cmake_build_script}\""
-    CACHE INTERNAL "Basic build without a native build tool.")
-  string(REPLACE "\"" "\\\"" mc_escaped "${MAKECOMMAND}")
-  set(VISTA_CTEST_BUILD_COMMAND_CODE "set(CTEST_BUILD_COMMAND \"${mc_escaped}\")")
-else()
-  file(REMOVE ${cmake_build_script})
-  get_property(type CACHE MAKECOMMAND PROPERTY TYPE)
-  if("${type}" STREQUAL "INTERNAL")
-    build_command(MAKECOMMAND_DEFAULT_VALUE CONFIGURATION "\${CTEST_CONFIGURATION_TYPE}")
-    set(MAKECOMMAND "${MAKECOMMAND_DEFAULT_VALUE}" CACHE STRING "Command to build the project" FORCE)
-  endif()
-  set(VISTA_CTEST_BUILD_COMMAND_CODE "")
-endif()
-configure_file(CMake/CTestCustom.cmake.in CTestCustom.cmake)

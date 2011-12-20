@@ -272,3 +272,4 @@ option(TEST_VISTA_USERTEST "Add tests from the Testing/UserTest/CMakeLists.txt f
 if(TEST_VISTA_USERTEST)
   add_subdirectory(UserTest)
 endif()
+configure_file("${VISTA_SOURCE_DIR}/WriteErrors.cmake.in" "${VISTA_BINARY_DIR}/WriteErrors.cmake" @ONLY)
