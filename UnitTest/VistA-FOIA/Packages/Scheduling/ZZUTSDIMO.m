@@ -11,11 +11,13 @@ STARTUP ; optional entry point
  ; if present executed before any other entry point any variables
  ; or other work that needs to be done for any or all tests in the
  ; routine.  This is run only once at the beginning.
+ D INIT^ZZUTSDCOM
  Q
  ;
 SHUTDOWN ; optional entry point
  ; if present executed after all other processing is complete to remove
  ; any variables, or undo work done in STARTUP.
+ D CLEANUP^ZZUTSDCOM
  Q
  ;
 SETUP ; optional entry point
@@ -29,10 +31,8 @@ TEARDOWN ; optional entry point
  Q
  ;
 CHKRCODE   ; Unit test to test the return code of $$SDIMO^SDAMA203
- ;
- N SDCLIEN,SDDFN
  ;first case is patient id is NULL, this should just return -2
- S SDCLIEN=3
+ S SDCLIEN=TESTCID1
  S RCODE=$$SDIMO^SDAMA203(SDCLIEN)
  D CHKEQ^XTMUNIT(RCODE,-2,"Expected return code is -2, real: "_RCODE)
  I RCODE=1 K SDIMO(1)
@@ -41,11 +41,11 @@ CHKRCODE   ; Unit test to test the return code of $$SDIMO^SDAMA203
  D CHKEQ^XTMUNIT(RCODE,-1,"Expected return code is -1, real: "_RCODE)
  I RCODE=1 K SDIMO(1)
  ;third case is invalid clinic id -1, this should just return -1
- S RCODE=$$SDIMO^SDAMA203(-1,1)
+ S RCODE=$$SDIMO^SDAMA203(INVLDCID,TESTPID1)
  D CHKEQ^XTMUNIT(RCODE,-1,"Expected return code is -1, real: "_RCODE)
  I RCODE=1 K SDIMO(1)
  ;fourth case is invalid patient id -1, this should just return -1
- S RCODE=$$SDIMO^SDAMA203(3,-1)
+ S RCODE=$$SDIMO^SDAMA203(TESTCID1,INVLDPID)
  D CHKEQ^XTMUNIT(RCODE,-1,"Expected return code is -1, real: "_RCODE)
  I RCODE=1 K SDIMO(1)
  Q
