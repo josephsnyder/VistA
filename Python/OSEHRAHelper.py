@@ -29,18 +29,21 @@ except ImportError, no_pexpect:
 connection=False
 log =False
 
+DEFAULT_TIMEOUT = 60 # system wise default timeout value is 30 seconds
 #---------------------------------------------------------------------------
 class PROMPT(object):
   """Wait for a VISTA> prompt in current namespace."""
 
 class ConnectMUMPS(object):
-
+  def __init__(self):
+    self.timeout = DEFAULT_TIMEOUT
   def ZN(self,namespace):
     self.wait('>')
     self.write('ZN "' + namespace + '"')
     self.namespace=namespace
     self.prompt=self.namespace + '>'
-
+  def settimeout(self, timeout):
+    self.timeout = timeout
   def login(self,username,password):
     self.wait('Username:')
     self.write(username)
@@ -78,7 +81,7 @@ class ConnectMUMPS(object):
     self.wait('DEVICE')
     if sys.platform=='win32':
       self.write('\r')
-      match=connection.expect(['\r\n[0-9]+'],None)
+      match=connection.expect(['\r\n[0-9]+'],self.timeout)
       test=match[1].span()
       number=''
       for i in range(test[0],test[1]):
@@ -87,7 +90,7 @@ class ConnectMUMPS(object):
       self.IENumber = number
     else:
       self.write('')
-      connection.expect(['\n[0-9]+'],None)
+      connection.expect(['\n[0-9]+'])
       number=connection.after
       number=number.lstrip('\r\n')
       self.IENumber = number
@@ -104,21 +107,34 @@ class ConnectWinCache(ConnectMUMPS):
     self.prompt=self.namespace + '>'
     log=file(logfile,'w')
     self.type='cache'
+    self.timeout = DEFAULT_TIMEOUT
 
-  def write(self,command ):
+  def write(self,command):
     global connection
     connection.write(command + '\r')
+    log.write(command + '\r')
+    log.flush()
 
-  def wait(self,command ):
+  def wait(self,command,timeout=None):
     global connection
     if command is PROMPT:
       command = self.prompt
-    log.write(connection.read_until(command))
-
-  def multiwait(self,options):
+    if not timeout: timeout = self.timeout
+    output = connection.expect([command],timeout)
+    if output[2]:
+      log.write(output[2])
+      log.flush()
+    if output[0] == -1 and output[1] == None:
+      raise Exception("Timed out")
+  def multiwait(self,options, timeout=None):
     if isinstance(options,list):
-      index=connection.expect(options)
-      log.write(index[2])
+      if not timeout: timeout = self.timeout
+      index=connection.expect(options,timeout)
+      if index[2]:
+        log.write(index[2])
+        log.flush()
+      if index[0] == -1 and index[1] == None:
+        raise Exception("Timed out")
       return index[0]
     else:
       raise IndexError('Input to multiwait function is not a list')
@@ -134,19 +150,22 @@ class ConnectLinuxCache(ConnectMUMPS):
     self.prompt=self.namespace + '>'
     connection.logfile_read = file(logfile,'w')
     self.type='cache'
+    connection.timeout = DEFAULT_TIMEOUT
 
   def write(self,command ):
     connection.send(command + '\r')
 
-  def wait(self,command ):
+  def wait(self,command,timeout=None):
     global connection
     if command is PROMPT:
       command = self.prompt
-    connection.expect(command)
+    if not timeout: timeout = -1
+    connection.expect(command, timeout)
 
-  def multiwait(self,options):
+  def multiwait(self,options,timeout=None):
     if isinstance(options,list):
-      index=connection.expect(options)
+      if not timeout: timeout = -1
+      index=connection.expect(options, timeout)
       return index
     else:
       raise IndexError('Input to multiwait function is not a list')
@@ -162,19 +181,22 @@ class ConnectLinuxGTM(ConnectMUMPS):
           self.prompt="GTM>"
     connection.logfile_read = file(logfile,'w')
     self.type='GTM'
+    connection.timeout = DEFAULT_TIMEOUT
 
   def write(self,command ):
     connection.send(command + '\r')
 
-  def wait(self,command ):
+  def wait(self,command,timeout=None):
     global connection
     if command is PROMPT:
       command = self.prompt
-    connection.expect(command)
+    if not timeout: timeout = -1
+    connection.expect(command, timeout)
 
-  def multiwait(self,options):
+  def multiwait(self,options,timeout=None):
     if isinstance(options,list):
-      index=connection.expect(options)
+      if not timeout: timeout = -1
+      index=connection.expect(options, timeout)
       return index
     else:
       raise IndexError('Input to multiwait function is not a list')
