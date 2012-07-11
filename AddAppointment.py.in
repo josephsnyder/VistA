@@ -41,8 +41,7 @@ VistA.write(sys.argv[5])
 VistA.wait('APPOINTMENT TYPE')
 VistA.write('REGULAR')
 index = VistA.multiwait(['APPOINTMENT REQUEST','DISPLAY PENDING APPOINTMENTS'])
-#
-#
+
 #  If patient data was not added during registration(GTM or errors on Cache)
 #  This will ask for a bunch of info on the patient. need to code up still.
 # Select ETHNICITY:
@@ -55,7 +54,6 @@ index = VistA.multiwait(['APPOINTMENT REQUEST','DISPLAY PENDING APPOINTMENTS'])
 # BAD ADDRESS INDICATOR:
 # Are you sure that you want to save the above changes?
 # This is a required response. Enter '^' to exit
-#
 #
 if index==1:
   VistA.write('Yes')
