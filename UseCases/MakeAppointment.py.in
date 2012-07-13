@@ -38,37 +38,40 @@ VistA.wait('Select CLINIC')
 VistA.write(sys.argv[4])
 VistA.wait('Select PATIENT NAME')
 VistA.write(sys.argv[5])
-VistA.wait('APPOINTMENT TYPE')
+index = VistA.multiwait(['APPOINTMENT TYPE','SERVICE CONNECTED CONDITION'])
+if index == 1:
+  VistA.write('N')
+  VistA.wait('APPOINTMENT TYPE')
 VistA.write('REGULAR')
-index = VistA.multiwait(['APPOINTMENT REQUEST','DISPLAY PENDING APPOINTMENTS'])
-
-#  If patient data was not added during registration(GTM or errors on Cache)
-#  This will ask for a bunch of info on the patient. need to code up still.
-# Select ETHNICITY:
-# Select RACE:
-# COUNTRY: UNITED STATES// UNITED STATES  USA     United States
-# STREET ADDRESS [LINE 1]:
-# ZIP+4:
-# PHONE NUMBER [RESIDENCE]:
-# PHONE NUMBER [WORK]:
-# BAD ADDRESS INDICATOR:
-# Are you sure that you want to save the above changes?
-# This is a required response. Enter '^' to exit
-#
-if index==1:
-  VistA.write('Yes')
-  VistA.wait('APPOINTMENT REQUEST')
-elif index==2:
-  VistA.write('\r')
+while 1:
+  index = VistA.multiwait(['APPOINTMENT REQUEST','DISPLAY PENDING APPOINTMENTS','save the above changes','ETHNICITY','RACE','COUNTRY','ZIP','STREET','NUMBER','ADDRESS','continue'])
+  if  index==0:
+    break
+  elif index==1:
+    VistA.write('Yes')
+  elif index==2:
+    VistA.write('Y')
+  else:
+    VistA.write('')
 VistA.write('Yes')
 VistA.wait("DATE/TIME")
 VistA.write(sys.argv[1]+'@'+sys.argv[2])
 index = VistA.multiwait(['LENGTH OF APPOINTMENT','DATE/TIME','DO YOU WANT TO CANCEL IT','Add to EWL','PATIENT ALREADY HAS APPOINTMENT ON THE SAME DAY'])
 if index==1:
-  sys.exit(0)
-elif index == 2 or index == 3 or index == 4:
-  VistA.write('No')
-  sys.exit(0)
+  sys.stdout.write("Date/Time not accepted.")
+  sys.exit(1)
+elif index == 2:
+  VistA.write('Y')
+  VistA.wait('Press RETURN to continue')
+  VistA.write('')
+  VistA.wait('LENGTH OF APPOINTMENT')
+elif index == 3:
+  sys.stdout.write("Appointment is beyond acceptable scheduling date")
+  sys.exit(1)
+elif index == 4:
+  sys.stdout.write("Patient " + sys.argv[5] + "already has an appointment on "+sys.argv[1] )
+  VistA.write('')
+  VistA.wait('LENGTH OF APPOINTMENT')
 VistA.write(sys.argv[3])
 VistA.wait('IS THIS CORRECT')
 VistA.write('Yes')

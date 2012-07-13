@@ -123,6 +123,7 @@ if VistA.type=='cache':
   VistA.write('${NAMESPACE}\r\r\r\r\r\r')
 else:
   VistA.write('${VOLUME_SET}\r\r\r\r\r\r')
+
 VistA.wait('Select OPTION:')
 VistA.write('1')
 VistA.wait('INPUT TO WHAT FILE')
@@ -135,6 +136,19 @@ VistA.wait('//')
 VistA.write(VistA.boxvol)
 VistA.wait('RESERVED')
 VistA.write('^\r')
+
+VistA.wait('Select OPTION')
+VistA.write('1')
+VistA.wait('INPUT TO WHAT FILE')
+VistA.write('HOLIDAY\r1')
+VistA.wait('EDIT WHICH FIELD')
+VistA.write('')
+VistA.wait('Select HOLIDAY DATE')
+VistA.write('JUL 4, 2012\rY')
+VistA.wait('HOLIDAY NAME')
+VistA.write('Independence Day\r')
+VistA.wait('Select HOLIDAY DATE')
+VistA.write('')
 
 VistA.wait('Select OPTION')
 VistA.write('1')

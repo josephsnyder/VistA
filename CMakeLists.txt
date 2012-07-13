@@ -345,3 +345,11 @@ if(AUTOMATED_UNIT_TESTING)
     endif()
   endforeach()
 endif()
+#-----------------------------------------------------------------------------#
+##### SECTION TO INCLUDE USECASE TESTING #####
+#-----------------------------------------------------------------------------#
+OPTION(VISTA_USE_CASE_TESTING "Run UseCase testing" OFF)
+if(VISTA_USE_CASE_TESTING)
+  set(VISTA_SITE_NAME "DEMO.OSEHRA.ORG" CACHE STRING "Name to set for the site address when initializing VistA instance.  Default is 'DEMO.OSEHRA.ORG'")
+  add_subdirectory(UseCases)
+endif()
