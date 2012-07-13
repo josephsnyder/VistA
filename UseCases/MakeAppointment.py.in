@@ -50,7 +50,7 @@ while 1:
   elif index==1:
     VistA.write('Yes')
   elif index==2:
-    VistA.write('Y')
+    VistA.write('No')
   else:
     VistA.write('')
 VistA.write('Yes')
