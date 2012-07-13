@@ -259,7 +259,7 @@ if(VISTA_CPRS_FUNCTIONAL_TESTING)
   endif()
   configure_file("${VISTA_SOURCE_DIR}/FunctionalTestingSuite/CPRSPostImportSetupScript.py.in" "@VISTA_BINARY_DIR@/CPRSPostImportSetupScript.py")
   configure_file("${VISTA_SOURCE_DIR}/FunctionalTestingSuite/CPRSTesting.cmake.in" "${VISTA_BINARY_DIR}/Testing/FT_CPRSPostImportTest.cmake" @ONLY)
-  add_test(FT_CPRSPostImport ${CMAKE_COMMAND} -P ${VISTA_BINARY_DIR}/Testing/FT_CPRSPostImportTest.cmake)
+  #add_test(FT_CPRSPostImport ${CMAKE_COMMAND} -P ${VISTA_BINARY_DIR}/Testing/FT_CPRSPostImportTest.cmake)
 # CPRS only runs on Windows, Thus the Sikuli and GUI test will be added only for those types of machines
   if(WIN32)
     find_program(SIKULI_EXECUTABLE Sikuli-IDE.bat DOC "Path to the Sikul-IDE.bat file" HINTS "C:/Program Files/Sikuli X/" "C:/Program Files (x86)/Sikuli X/" )
