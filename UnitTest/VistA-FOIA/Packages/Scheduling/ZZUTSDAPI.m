@@ -18,6 +18,8 @@ SHUTDOWN ; optional entry point
  ; if present executed after all other processing is complete to remove
  ; any variables, or undo work done in STARTUP.
  D CLEANUP^ZZUTSDCOM
+ K ^TMP($J,"SDAMA301")
+ K SDARRAY
  Q
  ;
 SETUP ; optional entry point
@@ -60,7 +62,7 @@ CHKRCODE   ; Unit test to test the return code of $$SDAPI^SDAMA301
  S RCODE=$$SDAPI^SDAMA301(.SDARRAY)
  D CHKEQ^XTMUNIT(RCODE,-1,ERRMSG_" real: "_RCODE)
  D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301",115))'=0,"Expecting Error Code is 115")
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  ;fourth case is valid patient and valid clinic, but should not have any appointment
  K SDARRAY
  S RCODE=0
@@ -71,7 +73,7 @@ CHKRCODE   ; Unit test to test the return code of $$SDAPI^SDAMA301
  S RCODE=$$SDAPI^SDAMA301(.SDARRAY)
  D CHKEQ^XTMUNIT(RCODE,0,"Expected rcode 0, real: "_RCODE)
  D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301"))=0, "^TMP global should be empty")
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  Q
  ;
 CHKPATAPT ; unit test case to check the appointment date
@@ -90,7 +92,7 @@ CHKPATAPT ; unit test case to check the appointment date
  S APPNODE1=^TMP($J,"SDAMA301",VISN0PAT1,VISN0CLI1,VISN0APPT1P1C1,0) ; extra information
  D CHKVISN0APT1(.APPNODE)
  D CHKVISN0APT1EXTRA(.APPNODE1) ;
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  ; Test the filter
  ; first is the date/time filter
  S APPNODE=0,APPNODE1=0
@@ -105,7 +107,7 @@ CHKPATAPT ; unit test case to check the appointment date
  S APPNODE1=^TMP($J,"SDAMA301",VISN0PAT1,VISN0CLI1,VISN0APPT1P1C1,0) ; extra information
  D CHKVISN0APT1(.APPNODE)
  D CHKVISN0APT1EXTRA(.APPNODE1) ;
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  ; second is the date/time filter and appointment status filter
  S APPNODE=0,APPNODE1=0
  S RCODE=0
@@ -118,7 +120,7 @@ CHKPATAPT ; unit test case to check the appointment date
  S APPNODE1=^TMP($J,"SDAMA301",VISN0PAT1,VISN0CLI1,VISN0APPT1P1C1,0) ; extra information
  D CHKVISN0APT1(.APPNODE)
  D CHKVISN0APT1EXTRA(.APPNODE1) ;
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  ; appointment status is NS should not return any results
  S APPNODE=0,APPNODE1=0
  S RCODE=0
@@ -126,7 +128,7 @@ CHKPATAPT ; unit test case to check the appointment date
  S RCODE=$$SDAPI^SDAMA301(.SDARRAY)
  D CHKTF^XTMUNIT(RCODE=0,"Should not have any appointment")
  D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301"))=0, "^TMP global should be empty")
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  ; change the fields to only returl flds 28
  S SDARRAY(3)="R"
  S SDARRAY("FLDS")="28"
@@ -138,7 +140,7 @@ CHKPATAPT ; unit test case to check the appointment date
  D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301",VISN0PAT1,VISN0CLI1,VISN0APPT1P1C1))'=0, "Should have APPT at "_VISN0APPT1P1C1)
  S APPNODE1=^TMP($J,"SDAMA301",VISN0PAT1,VISN0CLI1,VISN0APPT1P1C1,0) ; extra information
  D CHKVISN0APT1EXTRA(.APPNODE1) ;
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  ; Check the Purged option
  ; according to API, if purged is specifed, fields list can not contain 5-9,11,22,28,30,31 or 33
  S SDARRAY("PURGED")=1
@@ -147,6 +149,17 @@ CHKPATAPT ; unit test case to check the appointment date
  S ERRMSG="Expected rcode is -1"
  D CHKEQ^XTMUNIT(RCODE,-1,ERRMSG_" real: "_RCODE)
  D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301",115))'=0,"Expecting Error Code is 115")
+ I RCODE K ^TMP($J,"SDAMA301")
+ ; check the sort option
+ K SDARRAY("PURGED")
+ K SDARRAY(4) ; do not provide the patient filter
+ S SDARRAY("SORT")="P" ; sort by patient
+ S SDARRAT("FLDS")="2;3;4" ; return limit fields
+ S RCODE=0
+ S RCODE=$$SDAPI^SDAMA301(.SDARRAY)
+ D CHKTF^XTMUNIT(RCODE>0,"Should have at least one appointment")
+ D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301"))>0, "^TMP global should NOT be empty")
+ D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301",VISN0PAT1,VISN0APPT1P1C1))>0, "Should have found the appointment")
  I RCODE K ^TMP($J,"SDAMA301")
  Q
  ;
@@ -173,7 +186,7 @@ HASAPPT(PATIEN) ;
  S SDARRAY("FLDS")=1
  S SDARRAY("MAX")=1
  S RCODE=$$SDAPI^SDAMA301(.SDARRAY)
- I RCODE'=0 K ^TMP($J,"SDAMA301")
+ I RCODE K ^TMP($J,"SDAMA301")
  Q RCODE
  ;
 XTROU ;
