@@ -65,7 +65,7 @@ CHKRCODE   ; Unit test to test the return code of $$SDAPI^SDAMA301
  I RCODE K ^TMP($J,"SDAMA301")
  Q
  ;
-CHKPATAPT ; unit test case to check the appointment date
+CHKPATAPPT ; unit test case to check the appointment date
  S RCODE=0
  S RCODE=$$HASAPPT(VISN0PAT1)
  I RCODE'>0 Q
@@ -187,5 +187,5 @@ XTROU ;
  ; search for TAGs to be used as entry points
 XTENT ;
  ;;CHKRCODE; unit test to check return code of $$SDAPI^SDAMA301
- ;;CHKPATAPT; unit test to check patient appointment result from $$SDAPI^SDAMA301
+ ;;CHKPATAPPT; unit test to check patient appointment result from $$SDAPI^SDAMA301
  Q
