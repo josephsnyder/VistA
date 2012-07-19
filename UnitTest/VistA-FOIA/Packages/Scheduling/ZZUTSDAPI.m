@@ -63,17 +63,6 @@ CHKRCODE   ; Unit test to test the return code of $$SDAPI^SDAMA301
  D CHKEQ^XTMUNIT(RCODE,-1,ERRMSG_" real: "_RCODE)
  D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301",115))'=0,"Expecting Error Code is 115")
  I RCODE K ^TMP($J,"SDAMA301")
- ;fourth case is valid patient and valid clinic, but should not have any appointment
- K SDARRAY
- S RCODE=0
- S SDARRAY(1)=TESTDRANG2
- S SDARRAY(2)=TESTCID1
- S SDARRAY(4)=TESTPID1
- S SDARRAY("FLDS")="ALL"
- S RCODE=$$SDAPI^SDAMA301(.SDARRAY)
- D CHKEQ^XTMUNIT(RCODE,0,"Expected rcode 0, real: "_RCODE)
- D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA301"))=0, "^TMP global should be empty")
- I RCODE K ^TMP($J,"SDAMA301")
  Q
  ;
 CHKPATAPT ; unit test case to check the appointment date
