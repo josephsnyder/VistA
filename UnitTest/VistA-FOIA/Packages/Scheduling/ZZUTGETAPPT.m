@@ -120,7 +120,7 @@ CHKRCODE   ; Unit test to test the return code of $$GETAPPT^SDAMA201
  D CHKINVALDCOMB(.APPTSLST,.PSTATLIST)
  Q
  ;
-CHKINVALDCOMB(APPTSLST,PSTATLIST) ;
+CHKINVALDCOMB(APPTSLST,PSTATLIST) ; check the combination of patient status and appt status
  S RCODE=0
  D GETAPPT^SDAMA201(TESTPID1,,APPTSLST,,,.RCODE,PSTATLST)
  S ERRMSG="Expected rcode is -1"
@@ -132,19 +132,25 @@ CHKERRCODE(ERRCODE) ;
  D CHKTF^XTMUNIT($D(^TMP($J,"SDAMA201","GETAPPT","ERROR",ERRCODE))'=0,"Expecting Error Code is "_ERRCODE)
  Q
  ;
-CHKPATAPT ; unit test case to check the appointment date
+CHKPATAPPT ; unit test case to check the appointment date
+ S RCODE=0
+ S RCODE=$$HASAPPT^ZZUTSDAPI(VISN0PAT1)
+ I RCODE'>0 Q
+ ; first case strtdate/enddate
+ S STRTDATE=$P(VISN0APPT1P1C1,".",1)
+ D GETAPPT^SDAMA201(VISN0PAT1,,,STRTDATE,STRTDATE,.RCODE,)
+ D CHKEQ^XTMUNIT(RCODE,1,"Should only have one appointment")
+ I RCODE K ^TMP($J,"SDAMA201","GETAPPT")
  Q
-HASAPPT(PATIEN) ;
- Q 0
- ;
+CHKAPPTDETAIL()
+ Q
 XTROU ;
  ;;SDAMA201
- ;;ZZUTSDCOM
  ; Entry points for tests are specified as the third semi-colon piece,
  ; a description of what it tests is optional as the fourth semi-colon
  ; piece on a line. The first line without a third piece terminates the
  ; search for TAGs to be used as entry points
 XTENT ;
  ;;CHKRCODE; unit test to check return code of $$GETAPPT^SDAMA201
- ;;CHKPATAPT; unit test to check patient appointment result from $$GETAPPT^SDAMA201
+ ;;CHKPATAPPT; unit test to check patient appointment result from $$GETAPPT^SDAMA201
  Q
