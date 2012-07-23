@@ -179,8 +179,8 @@ HASAPPT(PATIEN) ;
  Q RCODE
  ;
 XTROU ;
- ;;SDAMA301
- ;;ZZUTSDCOM
+ ;;;SDAMA301
+ ;;;ZZUTSDCOM
  ; Entry points for tests are specified as the third semi-colon piece,
  ; a description of what it tests is optional as the fourth semi-colon
  ; piece on a line. The first line without a third piece terminates the
