@@ -1,0 +1,152 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+import sys
+import time
+sys.path = ['${VISTA_SOURCE_DIR}/Python'] + sys.path
+
+from OSEHRAHelper import ConnectToMUMPS,PROMPT
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/SchedulingSetup.log","${INSTANCE}","${NAMESPACE}")
+if ('${USERNAME}' and '${PASSWORD}'):
+  VistA.login('${USERNAME}','${PASSWORD}')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('${NAMESPACE}')
+  except IndexError,no_namechange:
+    pass
+VistA.wait(PROMPT)
+
+#Enter the Doctor Robert Alexander
+VistA.write('USER MANAGEMENT')
+VistA.wait('Select User Management Option')
+VistA.write('ADD')
+VistA.wait('name')
+VistA.write('ALEXANDER,ROBERT\rY')
+VistA.wait('INITIAL:')
+VistA.write('RA')
+VistA.wait('SSN:')
+VistA.write('000000029')
+VistA.wait('SEX:')
+VistA.write('M')
+VistA.wait('NPI')
+VistA.write('')
+VistA.wait('NAME COMPONENTS')
+VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rXUCOR\r^SECONDARY MENU OPTIONS\rOR CPRS GUI CHART\rY\r\r\r\rGMV V/M GUI\rY\r\r\r\r^Want to edit ACCESS CODE\rY\rfakedoc1\rfakedoc1\r^Want to edit VERIFY CODE\rY\r2Doc!@#$\r2Doc!@#$\rVISTA HEALTH CARE\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^Language\r\r767\rY\rY\rT-1\r\r^RESTRICT PATIENT SELECTION\r0\r\rCOR\rY\rT-1\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^\rE\rY')
+VistA.wait('User Account Access Letter')
+VistA.write('NO')
+VistA.wait('wish to allocate security keys?')
+VistA.write('Y')
+VistA.wait('Allocate key')
+VistA.write('PROVIDER\r1')
+VistA.wait('Another key')
+VistA.write('GMV MANAGER')
+VistA.wait('Another key')
+VistA.write('LRLAB')
+VistA.wait('Another key')
+VistA.write('LRVERIFY')
+VistA.wait('Another key')
+VistA.write('ORES\r')
+VistA.wait('Another holder')
+VistA.write('')
+VistA.wait('Do you wish to proceed')
+VistA.write('Yes')
+VistA.wait('add this user to mail groups')
+VistA.write('NO')
+
+#Enter the Nurse Mary Smith
+VistA.wait('Select User Management Option')
+VistA.write('ADD')
+VistA.wait('name')
+VistA.write('SMITH,MARY\rY')
+VistA.wait('INITIAL:')
+VistA.write('MS')
+VistA.wait('SSN:')
+VistA.write('000000030')
+VistA.wait('SEX:')
+VistA.write('F')
+VistA.wait('NPI')
+VistA.write('')
+VistA.wait('NAME COMPONENTS')
+VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rXUCOR\r^SECONDARY MENU OPTIONS\rOR CPRS GUI CHART\rY\r\r\r\rGMV V/M GUI\rY\r\r\r\r^Want to edit ACCESS CODE\rY\rfakenurse1\rfakenurse1\r^Want to edit VERIFY CODE\rY\r2Nur!@#$\r2Nur!@#$\rVISTA HEALTH CARE\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^Language\r\r289\rY\rY\rT-1\r\r^RESTRICT PATIENT SELECTION\r0\r\rCOR\rY\rT-1\r\r^\rE\rY')
+VistA.wait('User Account Access Letter')
+VistA.write('NO')
+VistA.wait('wish to allocate security keys?')
+VistA.write('Y')
+VistA.wait('Allocate key')
+VistA.write('PROVIDER\r1')
+VistA.wait('Another key')
+VistA.write('ORELSE\r')
+VistA.wait('Another holder')
+VistA.write('')
+VistA.wait('Do you wish to proceed')
+VistA.write('Yes')
+VistA.wait('add this user to mail groups')
+VistA.write('NO\r')
+
+
+#Give Mary Smith permission to create shared templates
+
+VistA.wait('Menu Option:')
+VistA.write('TIU Maintenance')
+VistA.wait('Option')
+VistA.write('User Class Management')
+VistA.wait('Option')
+VistA.write('List Membership by User')
+VistA.wait('Select USER')
+VistA.write('MS\rAdd\rClinical Coordinator\rT-1\r\r\r')
+VistA.wait('Option')
+VistA.write('\r')
+
+
+time.sleep(10)
+#Set up the Doctors electronic signature
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/PostImportSignature.log","${INSTANCE}","${NAMESPACE}")
+if ('${USERNAME}' and '${PASSWORD}'):
+  VistA.login('${USERNAME}','${PASSWORD}')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('${NAMESPACE}')
+  except IndexError,no_namechange:
+    pass
+VistA.wait(PROMPT)
+VistA.write('D ^ZU')
+VistA.wait('ACCESS CODE:')
+VistA.write('fakedoc1')
+VistA.wait('VERIFY CODE:')
+VistA.write('2Doc!@#$')
+VistA.wait('verify code:')
+VistA.write('2Doc!@#$')
+VistA.wait('VERIFY CODE:')
+VistA.write('1Doc!@#$')
+VistA.wait('right:')
+VistA.write('1Doc!@#$')
+VistA.wait('TYPE NAME')
+VistA.write('')
+VistA.wait('Option:')
+VistA.write('USER\'s TOOLBOX')
+VistA.wait('Toolbox Option')
+VistA.write('ELE')
+VistA.wait('INITIAL')
+VistA.write('')
+VistA.wait('SIGNATURE BLOCK PRINTED NAME')
+VistA.write('')
+VistA.wait('SIGNATURE BLOCK TITLE')
+VistA.write('\r\r\r')
+VistA.wait('SIGNATURE CODE')
+VistA.write('ROBA123')
+VistA.wait('SIGNATURE CODE FOR VERIFICATION')
+VistA.write('ROBA123')
+VistA.wait('Toolbox Option')
+VistA.write('\r\r\r')

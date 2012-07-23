@@ -15,6 +15,7 @@
 #---------------------------------------------------------------------------
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/MakeAppointment.py.in" "@CMAKE_CURRENT_BINARY_DIR@/MakeAppointment.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/PostSetup.py.in" "@CMAKE_CURRENT_BINARY_DIR@/PostImportSetup.py")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddDoctor.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddDoctor.py")
 
 add_test(CASE_Add_Appointment ${PYTHON_EXECUTABLE} "@CMAKE_CURRENT_BINARY_DIR@/MakeAppointment.py" 07/16/2012 1000 30 VHC "CARTER, DAVID JR")
 add_test(CASE_Holiday_Appointment ${PYTHON_EXECUTABLE} "@CMAKE_CURRENT_BINARY_DIR@/MakeAppointment.py" 07/4/2012 1000 30 VHC "CARTER, DAVID JR")
