@@ -145,7 +145,7 @@ CHKPATAPPT ; unit test case to check the appointment date
  ; first case strtdate/enddate
  S STRTDATE=VISN0APPT1P1C1
  D GETPLIST^SDAMA202(VISN0CLI1,,,STRTDATE,STRTDATE,.RCODE,)
- D CHKTF^XTMUNIT(RCODE>=1,"Should have at least one appointment")
+ D CHKTF^XTMUNIT(RCODE>0,"Should have at least one appointment")
  N NODEID
  S NODEID=$$FINDPATNODEID(RCODE)
  D CHKEQ^XTMUNIT(NODEID,24,"Should be the node 24")
@@ -155,7 +155,7 @@ CHKPATAPPT ; unit test case to check the appointment date
  S RCODE=0
  S FLDLIST="1;3;4;12"
  D GETPLIST^SDAMA202(VISN0CLI1,FLDLIST,,STRTDATE,STRTDATE,.RCODE,)
- D CHKTF^XTMUNIT(RCODE>=1,"Should have at least one appointment")
+ D CHKTF^XTMUNIT(RCODE>0,"Should have at least one appointment")
  S NODEID=0
  S NODEID=$$FINDPATNODEID(RCODE)
  D:NODEID>0 CHKAPPTDETAIL(NODEID,.FLDLIST)
@@ -164,7 +164,7 @@ CHKPATAPPT ; unit test case to check the appointment date
  S RCODE=0
  S FLDLIST="3;4;12"
  D GETPLIST^SDAMA202(VISN0CLI1,,"R",STRTDATE,STRTDATE,.RCODE,)
- D CHKTF^XTMUNIT(RCODE>=1,"Should have at least one appointment")
+ D CHKTF^XTMUNIT(RCODE>0,"Should have at least one appointment")
  S NODEID=0
  S NODEID=$$FINDPATNODEID(RCODE)
  D:NODEID>0 CHKAPPTDETAIL(NODEID,.FLDLIST)
@@ -173,7 +173,7 @@ CHKPATAPPT ; unit test case to check the appointment date
  S RCODE=0
  S FLDLIST="3;4;5;6;7;8;9"
  D GETPLIST^SDAMA202(VISN0CLI1,.FLDLIST,"R",STRTDATE,STRTDATE,.RCODE,"O")
- D CHKTF^XTMUNIT(RCODE>=1,"Should have at least one appointment")
+ D CHKTF^XTMUNIT(RCODE>0,"Should have at least one appointment")
  S NODEID=0
  S NODEID=$$FINDPATNODEID(RCODE)
  D:NODEID>0 CHKAPPTDETAIL(NODEID,.FLDLIST)
