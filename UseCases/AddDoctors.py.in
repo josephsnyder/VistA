@@ -17,8 +17,9 @@ import sys
 import time
 sys.path = ['${VISTA_SOURCE_DIR}/Python'] + sys.path
 
+from AddOneDoctor import AddOneDoctor
 from OSEHRAHelper import ConnectToMUMPS,PROMPT
-VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/SchedulingSetup.log","${INSTANCE}","${NAMESPACE}")
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/AddDoctors.log","${INSTANCE}","${NAMESPACE}")
 if ('${USERNAME}' and '${PASSWORD}'):
   VistA.login('${USERNAME}','${PASSWORD}')
 if VistA.type=='cache':
