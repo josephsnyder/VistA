@@ -1,0 +1,61 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+def AddOneDoctor(VistA,fullname,initials,ssn,sex,accesscode,verifycode,language):
+  VistA.wait('Select User Management Option')
+  VistA.write('ADD')
+  VistA.wait('name')
+  VistA.write(fullname)
+  VistA.write('Y')
+  VistA.wait('INITIAL:')
+  VistA.write(initials)
+  VistA.wait('SSN:')
+  VistA.write(ssn)
+  VistA.wait('SEX:')
+  VistA.write(sex)
+  VistA.wait('NPI')
+  VistA.write('')
+  VistA.wait('NAME COMPONENTS')
+  screenmanstring='\r\r\r\r\r^PRIMARY MENU OPTION\rXUCOR\r^SECONDARY MENU OPTIONS\rOR CPRS GUI CHART\rY\r\r\r\rGMV V/M GUI\rY\r\r\r\r'
+  screenmanstring=screenmanstring+'^Want to edit ACCESS CODE\rY\r'
+  screenmanstring=screenmanstring+accesscode+'\r'+accesscode+'\r'
+  screenmanstring=screenmanstring+'^Want to edit VERIFY CODE\rY\r'
+  screenmanstring=screenmanstring+verifycode+'\r'+verifycode+'\r'
+  screenmanstring=screenmanstring+'VISTA HEALTH CARE\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^Language\r\r'
+  screenmanstring=screenmanstring+language+'\r'
+  screenmanstring=screenmanstring+'Y\rY\rT-1\r\r^RESTRICT PATIENT SELECTION\r0\r\rCOR\rY\rT-1\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^\rE\rY'
+  VistA.write(screenmanstring)
+  VistA.wait('User Account Access Letter')
+  VistA.write('NO')
+  VistA.wait('wish to allocate security keys?')
+  VistA.write('Y')
+  VistA.wait('Allocate key')
+  VistA.write('PROVIDER\r1')
+  VistA.wait('Another key')
+  VistA.write('GMV MANAGER')
+  VistA.wait('Another key')
+  VistA.write('LRLAB')
+  VistA.wait('Another key')
+  VistA.write('LRVERIFY')
+  VistA.wait('Another key')
+  VistA.write('ORES\r')
+  VistA.wait('Another holder')
+  VistA.write('')
+  VistA.wait('Do you wish to proceed')
+  VistA.write('Yes')
+  VistA.wait('add this user to mail groups')
+  VistA.write('NO')
+
