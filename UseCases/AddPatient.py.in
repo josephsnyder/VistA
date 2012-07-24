@@ -337,11 +337,17 @@ def CreatePatient(Conn, LastName, FirstName, Gender, DOB, SSN, Veteran):
     VistA.wait('//')
     VistA.write('')
 
-def TestExamplePatients():
+def TestExamplePatients(conn):
+    i=1
     for name in ('ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN'):
-        i=1
         if i%2 == 0:
-            CreatePatient('ZZTEST', name, 'M', 'T-50Y', '00000000'+i, 'Y')
+            if i<10:
+                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+i, 'Y')
+            else:
+                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+i, 'Y')
         else:
-            CreatePatient('ZZTEST', name, 'F', 'T-50Y', '00000000'+i, 'Y')
-CreateExamplePatients(VistA)
+            if i<10:
+                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+i, 'Y')
+            else:
+                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+i, 'Y')
+TestExamplePatients(VistA)
