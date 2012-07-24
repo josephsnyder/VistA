@@ -350,4 +350,5 @@ def TestExamplePatients(conn):
                 CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
             else:
                 CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
+        i=i+1
 TestExamplePatients(VistA)
