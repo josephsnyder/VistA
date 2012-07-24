@@ -23,6 +23,8 @@ from SetupCPRS import SetupCPRS
 from AddHolidays import AddHolidays
 from StartTaskMan import StartTaskMan
 from CreateSystemManager import CreateSystemManager
+from CreateInstitution import CreateInstitution
+from AddDivisions import AddDivisions
 
 VistA=ConnectToVista()
 InitializeFileman(VistA)
@@ -33,53 +35,8 @@ AddHolidays(VistA)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
 
-
-
- #Open FileMan and start by creating the VistA Health Care institution
-
-VistA.wait(PROMPT)
-VistA.write('S DUZ=1 S XUMF=1 D Q^DI')
-VistA.wait('OPTION:')
-VistA.write('1')
-VistA.wait('INPUT TO WHAT FILE:')
-VistA.write('4')
-VistA.wait('EDIT WHICH FIELD')
-VistA.write('STATION NUMBER')
-VistA.wait('THEN EDIT FIELD')
-VistA.write('')
-VistA.wait('Select INSTITUTION NAME:')
-VistA.write('VISTA HEALTH CARE')
-VistA.wait('Are you adding')
-VistA.write('Y')
-VistA.wait('STATION NUMBER:')
-VistA.write('6100')
-VistA.wait('Select INSTITUTION NAME:')
-VistA.write('')
-
-#Next create the Medical Center Division of the VistA Health Care institution
-
-VistA.wait('Select OPTION:')
-VistA.write('1')
-VistA.wait('INPUT TO WHAT FILE:')
-VistA.write('40.8')
-VistA.wait('EDIT WHICH FIELD')
-VistA.write('FACILITY NUMBER')
-VistA.wait('THEN EDIT FIELD')
-VistA.write('INSTITUTION FILE POINTER')
-VistA.wait('THEN EDIT FIELD')
-VistA.write('')
-VistA.wait('DIVISION NAME')
-VistA.write('VISTA MEDICAL CENTER')
-VistA.wait('Are you adding')
-VistA.write('Y')
-VistA.wait('MEDICAL CENTER DIVISION NUM:')
-VistA.write('')
-VistA.wait('FACILITY NUMBER')
-VistA.write('6101')
-VistA.write('')
-VistA.wait('INSTITUTION FILE POINTER')
-VistA.write('6100')
-VistA.write('\r')
+CreateInstitution(VistA,'Georgia General Hospital','6100')
+AddDivisions(VistA,'6100')
 
 #Change the accession number of the Chemistry area
 VistA.wait(PROMPT)
