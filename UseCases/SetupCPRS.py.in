@@ -45,3 +45,21 @@ def SetupCPRS(VistA):
   VistA.wait('RESERVED')
   VistA.write('^\r')
 
+  VistA.wait('Select OPTION')
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('8994.1\r')
+  VistA.wait('Select RPC BROKER SITE PARAMETERS DOMAIN NAME')
+  VistA.write('${VISTA_SITE_NAME}\r\r\r\r' + VistA.boxvol + '\rY\r\r9210\rY')
+  if VistA.type=='cache':
+    VistA.write('1\r\r1\r')
+  else:
+    VistA.write('1\r\r\r')
+
+  VistA.wait('Select OPTION')
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('KERNEL SYSTEM PARAMETERS\rVOLUME SET\r\r')
+  VistA.wait('Select KERNEL SYSTEM PARAMETERS DOMAIN NAME:')
+  VistA.write('${VISTA_SITE_NAME}\r\r${VOLUME_SET}\rY\r500\rN\r\r\r')
+

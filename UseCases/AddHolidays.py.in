@@ -14,7 +14,8 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-AddOneHoliday(VistA,'Christmas'       ,'DEC 25, 2012')
-AddOneHoliday(VistA,'Independence Day','JUL 4, 2012')
-AddOneHoliday(VistA,'Thanksgiving'    ,'NOV 21, 2012')
+def AddHolidays():
+  AddOneHoliday(VistA,'Christmas'       ,'DEC 25, 2012')
+  AddOneHoliday(VistA,'Independence Day','JUL 4, 2012')
+  AddOneHoliday(VistA,'Thanksgiving'    ,'NOV 21, 2012')
 

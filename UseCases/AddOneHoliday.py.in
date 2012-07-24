@@ -15,6 +15,7 @@
 #---------------------------------------------------------------------------
 
 def AddOneHoliday(VistA,name,date):
+  VistA.write('S DUZ=1 D Q^DI')
   VistA.wait('Select OPTION')
   VistA.write('1')
   VistA.wait('INPUT TO WHAT FILE')
@@ -31,5 +32,7 @@ def AddOneHoliday(VistA,name,date):
   VistA.wait('NAME')
   VistA.write('')
   VistA.wait('Select HOLIDAY DATE')
+  VistA.write('')
+  VistA.wait('Select OPTION')
   VistA.write('')
 
