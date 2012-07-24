@@ -14,7 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-def AddOneDoctor(VistA,fullname,initials,ssn,sex,accesscode,verifycode,language):
+def AddOneDoctor(VistA,fullname,initials,ssn,sex,accesscode,verifycode,personclass):
   VistA.wait('Select User Management Option')
   VistA.write('ADD')
   VistA.wait('name')
@@ -35,7 +35,7 @@ def AddOneDoctor(VistA,fullname,initials,ssn,sex,accesscode,verifycode,language)
   screenmanstring=screenmanstring+'^Want to edit VERIFY CODE\rY\r'
   screenmanstring=screenmanstring+verifycode+'\r'+verifycode+'\r'
   screenmanstring=screenmanstring+'VISTA HEALTH CARE\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^Language\r\r'
-  screenmanstring=screenmanstring+language+'\r'
+  screenmanstring=screenmanstring+personclass+'\r'
   screenmanstring=screenmanstring+'Y\rY\rT-1\r\r^RESTRICT PATIENT SELECTION\r0\r\rCOR\rY\rT-1\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^\rE\rY'
   VistA.write(screenmanstring)
   VistA.wait('User Account Access Letter')
