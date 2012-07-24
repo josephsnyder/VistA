@@ -18,6 +18,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/PostSetup.py.in" "@CMAKE_CURRENT_BIN
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddPatient.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddPatient.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddDoctors.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddDoctors.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddOneDoctor.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddOneDoctor.py")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddClinics.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddClinics.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddOneClinic.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddOneClinic.py")
 
 add_test(CASE_Add_Appointment ${PYTHON_EXECUTABLE} "@CMAKE_CURRENT_BINARY_DIR@/MakeAppointment.py" 07/16/2012 1000 30 VHC "CARTER, DAVID JR")
