@@ -342,12 +342,12 @@ def TestExamplePatients(conn):
     for name in ('ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN'):
         if i%2 == 0:
             if i<10:
-                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+i, 'Y')
+                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+str(i), 'Y')
             else:
-                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+i, 'Y')
+                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+str(i), 'Y')
         else:
             if i<10:
-                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+i, 'Y')
+                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
             else:
-                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+i, 'Y')
+                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
 TestExamplePatients(VistA)
