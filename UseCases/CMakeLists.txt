@@ -26,6 +26,7 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/SetupDomain.py.in" "@CMAKE_CURRENT_B
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/SetupCPRS.py.in" "@CMAKE_CURRENT_BINARY_DIR@/SetupCPRS.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddOneHoliday.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddOneHoliday.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddHolidays.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddHolidays.py")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/CreateSystemManager.py.in" "@CMAKE_CURRENT_BINARY_DIR@/CreateSystemManager.py")
 
 add_test(CASE_Add_Appointment ${PYTHON_EXECUTABLE} "@CMAKE_CURRENT_BINARY_DIR@/MakeAppointment.py" 07/16/2012 1000 30 VHC "CARTER, DAVID JR")
 add_test(CASE_Holiday_Appointment ${PYTHON_EXECUTABLE} "@CMAKE_CURRENT_BINARY_DIR@/MakeAppointment.py" 07/4/2012 1000 30 VHC "CARTER, DAVID JR")

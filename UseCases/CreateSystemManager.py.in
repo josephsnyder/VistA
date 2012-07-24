@@ -1,0 +1,63 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+from OSEHRAHelper import ,PROMPT
+
+#---------------------------------------------------------------------
+# Create the System Manager
+#---------------------------------------------------------------------
+
+def CreateSystemManager(VistA):
+  VistA.wait(PROMPT)
+  VistA.write('S DUZ=1 D ^XUP')
+  VistA.wait('Select OPTION NAME')
+  VistA.write('EVE\r1')
+  VistA.wait('Select Systems Manager Menu Option:')
+  VistA.write('USER MANAGEMENT')
+  VistA.wait('Select User Management Option:')
+  VistA.write('ADD')
+  VistA.wait(':')
+  VistA.write('MANAGER,SYSTEM')
+  VistA.wait('No//')
+  VistA.write('Y')
+  VistA.wait('INITIAL:')
+  VistA.write('SM')
+  VistA.wait('SSN:')
+  VistA.write('000000001')
+  VistA.wait('SEX:')
+  VistA.write('M')
+  VistA.wait('NPI')
+  VistA.write('')
+
+  VistA.wait('NAME COMPONENTS')
+  VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rEVE\r1\r^Want to edit ACCESS CODE\rY\rSM1234\rSM1234\r^Want to edit VERIFY CODE\rY\rSM1234!!\rSM1234!!\r^SECONDARY MENU OPTIONS\rOR PARAM COORDINATOR MENU\rY\r\r\r\rTIU IRM MAINTENANCE MENU\rY\r\r\r\rXPAR MENU TOOLS\rY\r\r\r\rDG REGISTER PATIENT\rY\r\r\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^SERVICE/SECTION\rIRM\r^\rY')
+  VistA.wait('User Account Access Letter')
+  VistA.write('NO')
+  VistA.wait('wish to allocate security keys?')
+  VistA.write('Y')
+  VistA.wait('Allocate key')
+  VistA.write('XUMGR')
+  VistA.wait('Another key')
+  VistA.write('XUPROG\r1')
+  VistA.wait('Another key')
+  VistA.write('')
+  VistA.wait('Another holder')
+  VistA.write('')
+  VistA.wait('YES//')
+  VistA.write('')
+  VistA.wait('mail groups?')
+  VistA.write('\r')
+

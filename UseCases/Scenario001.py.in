@@ -16,80 +16,24 @@
 
 from OSEHRAHelper import PROMPT
 from ConnectToVista import ConnectToVista
+from InitializeFileman import InitializeFileman
+from InitializeDevice import InitializeDevice
+from SetupDomain import SetupDomain
+from SetupCPRS import SetupCPRS
+from AddHolidays import AddHolidays
+from StartTaskMan import StartTaskMan
+from CreateSystemManager import CreateSystemManager
 
 VistA=ConnectToVista()
 InitializeFileman(VistA)
 InitializeDevice(VistA)
 SetupDomain(VistA)
 SetupCPRS(VistA)
-SetupHolidays(VistA)
+AddHolidays(VistA)
+StartTaskMan(VistA)
+CreateSystemManager(VistA)
 
 
-
-# Start TaskMan
-VistA.wait(PROMPT)
-VistA.write('K')
-VistA.wait(PROMPT)
-VistA.write('D ^ZTMB')
-
-
-#Create the System Manager
-VistA.wait(PROMPT)
-VistA.write('S DUZ=1 D ^XUP')
-VistA.wait('Select OPTION NAME')
-VistA.write('EVE\r1')
-VistA.wait('Select Systems Manager Menu Option:')
-VistA.write('USER MANAGEMENT')
-VistA.wait('Select User Management Option:')
-VistA.write('ADD')
-VistA.wait(':')
-VistA.write('MANAGER,SYSTEM')
-VistA.wait('No//')
-VistA.write('Y')
-VistA.wait('INITIAL:')
-VistA.write('SM')
-VistA.wait('SSN:')
-VistA.write('000000001')
-VistA.wait('SEX:')
-VistA.write('M')
-VistA.wait('NPI')
-VistA.write('')
-
-#TODO: Give XUPROGMODE key
-VistA.wait('NAME COMPONENTS')
-VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rEVE\r1\r^Want to edit ACCESS CODE\rY\rSM1234\rSM1234\r^Want to edit VERIFY CODE\rY\rSM1234!!\rSM1234!!\r^SECONDARY MENU OPTIONS\rOR PARAM COORDINATOR MENU\rY\r\r\r\rTIU IRM MAINTENANCE MENU\rY\r\r\r\rXPAR MENU TOOLS\rY\r\r\r\rDG REGISTER PATIENT\rY\r\r\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^SERVICE/SECTION\rIRM\r^\rY')
-VistA.wait('User Account Access Letter')
-VistA.write('NO')
-VistA.wait('wish to allocate security keys?')
-VistA.write('Y')
-VistA.wait('Allocate key')
-VistA.write('XUMGR')
-VistA.wait('Another key')
-VistA.write('XUPROG\r1')
-VistA.wait('Another key')
-VistA.write('')
-VistA.wait('Another holder')
-VistA.write('')
-VistA.wait('YES//')
-VistA.write('')
-VistA.wait('mail groups?')
-VistA.write('\r')
-VistA.wait('Option')
-# Set the Listener Starter to run when TaskMan is started
-if VistA.type=='cache':
-  VistA.write('TASK')
-  VistA.wait('Option:')
-  VistA.write('SCHED')
-  VistA.wait('reschedule:')
-  VistA.write('XWB LISTENER STARTER\rY')
-  VistA.wait('COMMAND:')
-  VistA.write('\r^SPECIAL QUEUEING\rSTARTUP\rS\rE\r\r\r\r')
-else:
-  VistA.write('\rY')
-VistA.wait(PROMPT)
-VistA.IEN('NEW PERSON','MANAGER,SYSTEM')
-VistA.wait(PROMPT)
-VistA.write('S DUZ=' + VistA.IENumber + ' S $P(^VA(200,DUZ,0),"^",4)="@"')
 
  #Open FileMan and start by creating the VistA Health Care institution
 
