@@ -37,6 +37,6 @@ VistA.write('Supervisor Menu')
 VistA.wait('Select Supervisor Menu Option:')
 
 #Enter the two example clinics:
-AddOneClinic(VistA,'VISTA HEALTH CARE'    ,'VHC','555-555-1414','ALEXANDER,ROBERT','301','30')
-AddOneClinic(VistA,'VISTA MEDICAL CENTER' ,'VMC','555-555-2525','ALEXANDER,ROBERT','301','30')
+AddOneClinic(VistA,'VISTA HEALTH CARE'    ,'VHC','555-555-1414','ALEXANDER,ROBERT','301','','30')
+AddOneClinic(VistA,'VISTA MEDICAL CENTER' ,'VMC','555-555-2525','ALEXANDER,ROBERT','301','','30')
 
