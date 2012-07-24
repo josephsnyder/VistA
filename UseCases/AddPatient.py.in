@@ -37,8 +37,8 @@ VistA.write('')
 #---------------------------------------------------------------------
 #- SECTION TO CREATE PATIENTS -
 #---------------------------------------------------------------------
-def CreateExamplePatients(ConnectToMUMPS):
-    VistA=ConnectToMUMPS
+def CreateExamplePatients(Conn):
+    VistA=Conn
     #Create the first patient named "David Carter Jr')
 
     VistA.wait('Menu Option:')
@@ -231,8 +231,8 @@ def CreateExamplePatients(ConnectToMUMPS):
     VistA.wait('//')
     VistA.write('')
 
-def CreatePatient(ConnectToMUMPS,LastName, FirstName, Gender, DOB, SSN, Veteran):
-    VistA=ConnectToMUMPS
+def CreatePatient(Conn, LastName, FirstName, Gender, DOB, SSN, Veteran):
+    VistA=Conn
     VistA.wait('Menu Option:')
     VistA.write('Register a Patient')
     VistA.wait('PATIENT NAME')
@@ -258,8 +258,13 @@ def CreatePatient(ConnectToMUMPS,LastName, FirstName, Gender, DOB, SSN, Veteran)
         VistA.write('NO')
     VistA.wait('MULTIPLE BIRTH INDICATOR')
     VistA.write('')
-    VistA.wait('//')
-    VistA.write('^\r')
+    index = VistA.multiwait(['ZZTEST//','a new patient'])
+    if index == 1:
+        VistA.write('Y')
+        VistA.wait('//')
+        VistA.write('^\r')
+    else:
+        VistA.write('^\r')
     VistA.wait('MAIDEN NAME:')
     VistA.write('')
     VistA.wait('[CITY]')
