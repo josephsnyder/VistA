@@ -245,7 +245,7 @@ def CreatePatient(Conn, LastName, FirstName, Gender, DOB, SSN, Veteran):
     VistA.write(SSN)
     VistA.wait('TYPE')
     if Veteran=='Y':
-        VistA.write('VETERAN')
+        VistA.write('SC VETERAN')
         VistA.wait('PATIENT VETERAN')
         VistA.write('YES')
         VistA.wait('SERVICE CONNECTED')
