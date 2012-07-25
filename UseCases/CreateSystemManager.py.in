@@ -60,4 +60,10 @@ def CreateSystemManager(VistA):
   VistA.write('')
   VistA.wait('mail groups?')
   VistA.write('\r')
+  VistA.wait('Select User Management Option:')
+  VistA.write('')
+  VistA.wait('Select Systems Manager Menu Option:')
+  VistA.write('')
+  VistA.wait('Do you really want to halt?')
+  VistA.write('YES')
 
