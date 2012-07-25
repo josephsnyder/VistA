@@ -17,6 +17,10 @@
 from AddOneHoliday import AddOneHoliday
 
 def AddHolidays(VistA):
+  #
+  # Federal Holidays 2012
+  # http://www.opm.gov/operating_status_schedules/fedhol/2012.asp
+  #
   AddOneHoliday(VistA,'New Year Day'                  ,'JAN 2, 2012')
   AddOneHoliday(VistA,'Martin Luther King, Jr. Day'   ,'JAN 16, 2012')
   AddOneHoliday(VistA,'Washington\'s Birthday'        ,'FEB 20, 2012')
@@ -27,4 +31,32 @@ def AddHolidays(VistA):
   AddOneHoliday(VistA,'Veterans Day'                  ,'NOV 12, 2012')
   AddOneHoliday(VistA,'Thanksgiving Day'              ,'NOV 22, 2012')
   AddOneHoliday(VistA,'Christmas Day'                 ,'DEC 25, 2012')
+  #
+  # Federal Holidays 2013
+  # http://www.opm.gov/operating_status_schedules/fedhol/2013.asp
+  #
+  AddOneHoliday(VistA,'New Year Day'                  ,'JAN 1, 2013')
+  AddOneHoliday(VistA,'Martin Luther King, Jr. Day'   ,'JAN 21, 2013')
+  AddOneHoliday(VistA,'Washington\'s Birthday'        ,'FEB 18, 2013')
+  AddOneHoliday(VistA,'Memorial Day'                  ,'MAY 27, 2013')
+  AddOneHoliday(VistA,'Independence Day'              ,'JUL 4, 2013')
+  AddOneHoliday(VistA,'Labor Day'                     ,'SEP 2, 2013')
+  AddOneHoliday(VistA,'Columbus Day'                  ,'OCT 14, 2013')
+  AddOneHoliday(VistA,'Veterans Day'                  ,'NOV 11, 2013')
+  AddOneHoliday(VistA,'Thanksgiving Day'              ,'NOV 28, 2013')
+  AddOneHoliday(VistA,'Christmas Day'                 ,'DEC 25, 2013')
+  #
+  # Federal Holidays 2014
+  # http://www.opm.gov/operating_status_schedules/fedhol/2014.asp
+  #
+  AddOneHoliday(VistA,'New Year Day'                  ,'JAN 1, 2014')
+  AddOneHoliday(VistA,'Martin Luther King, Jr. Day'   ,'JAN 20, 2014')
+  AddOneHoliday(VistA,'Washington\'s Birthday'        ,'FEB 17, 2014')
+  AddOneHoliday(VistA,'Memorial Day'                  ,'MAY 26, 2014')
+  AddOneHoliday(VistA,'Independence Day'              ,'JUL 4, 2014')
+  AddOneHoliday(VistA,'Labor Day'                     ,'SEP 1, 2014')
+  AddOneHoliday(VistA,'Columbus Day'                  ,'OCT 13, 2014')
+  AddOneHoliday(VistA,'Veterans Day'                  ,'NOV 11, 2014')
+  AddOneHoliday(VistA,'Thanksgiving Day'              ,'NOV 27, 2014')
+  AddOneHoliday(VistA,'Christmas Day'                 ,'DEC 25, 2014')
 
