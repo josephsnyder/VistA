@@ -19,7 +19,7 @@ from OSEHRAHelper import PROMPT
 #---------------------------------------------------------------------------
 # Open FileMan and start by creating the VistA Health Care institution
 #---------------------------------------------------------------------------
-def CreateInstitution(institutionname,stationnumber):
+def CreateInstitution(VistA,institutionname,stationnumber):
   VistA.wait(PROMPT)
   VistA.write('S DUZ=1 S XUMF=1 D Q^DI')
   VistA.wait('OPTION:')
