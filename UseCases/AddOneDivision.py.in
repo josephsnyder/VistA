@@ -16,7 +16,7 @@
 
 # Add one Division inside an Institution
 
-def AddOneDivision(VistA,divisionname,facilitynumber,institutionpointer)
+def AddOneDivision(VistA,divisionname,facilitynumber,institutionpointer):
   VistA.wait('Select OPTION:')
   VistA.write('1')
   VistA.wait('INPUT TO WHAT FILE:')
