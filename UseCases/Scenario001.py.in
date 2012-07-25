@@ -27,14 +27,14 @@ from CreateInstitution import CreateInstitution
 from AddDivisions import AddDivisions
 
 VistA=ConnectToVista()
-# InitializeFileman(VistA)
-# InitializeDevice(VistA)
-# SetupDomain(VistA)
-# SetupCPRS(VistA)
-# AddHolidays(VistA)
-# StartTaskMan(VistA)
-# CreateSystemManager(VistA)
-#
-# CreateInstitution(VistA,'Georgia General Hospital','6100')
-# AddDivisions(VistA,'6100')
+InitializeFileman(VistA)
+InitializeDevice(VistA)
+SetupDomain(VistA)
+SetupCPRS(VistA)
+AddHolidays(VistA)
+StartTaskMan(VistA)
+CreateSystemManager(VistA)
+
+CreateInstitution(VistA,'Georgia General Hospital','6100')
+AddDivisions(VistA,'6100')
 
