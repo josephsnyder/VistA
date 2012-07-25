@@ -42,9 +42,8 @@ SetupCPRS(VistA)
 AddHolidays(VistA)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
-AddDoctors(VistA)
 AddPatients(VistA)
 
-CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','124')
-AddDivisions(VistA,'124')
-
+# CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','124')
+# AddDivisions(VistA,'124')
+# AddDoctors(VistA)
