@@ -30,7 +30,7 @@ def AddPatients(VistA):
                 AddOnePatient(VistA, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+str(i), 'Y')
         else:
             if i<10:
-                AddOnePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
+                AddOnePatient(VistA, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
             else:
-                AddOnePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
+                AddOnePatient(VistA, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
         i=i+1
