@@ -13,29 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
-import sys
-import time
-sys.path = ['${VISTA_SOURCE_DIR}/Python'] + sys.path
 
 from AddOneDoctor import AddOneDoctor
-from OSEHRAHelper import ConnectToMUMPS,PROMPT
-VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/AddDoctors.log","${INSTANCE}","${NAMESPACE}")
-if ('${USERNAME}' and '${PASSWORD}'):
-  VistA.login('${USERNAME}','${PASSWORD}')
-if VistA.type=='cache':
-  try:
-    VistA.ZN('${NAMESPACE}')
-  except IndexError,no_namechange:
-    pass
-VistA.wait(PROMPT)
-VistA.write('S DUZ=1 D ^XUP')
+from OSEHRAHelper import PROMPT
 
-VistA.wait('Select OPTION NAME')
-VistA.write('EVE\r1')
-VistA.wait('Select Systems Manager Menu Option:')
-VistA.write('USER MANAGEMENT')
-
-#Enter the Doctor Robert Alexander
-AddOneDoctor(VistA,'ALEXANDER,ROBERT','AR','000000029','M','fakedoc1'  ,'2Doc!@#$','767')
-AddOneDoctor(VistA,'SMITH,MARY'      ,'MS','000000030','F','fakenurse1','2Nur!@#$','289')
+def AddDoctors(VistA):
+  VistA.wait(PROMPT)
+  VistA.write('S DUZ=1 D ^XUP')
+  VistA.wait('Select OPTION NAME')
+  VistA.write('EVE\r1')
+  VistA.wait('Select Systems Manager Menu Option:')
+  VistA.write('USER MANAGEMENT')
+  AddOneDoctor(VistA,'ALEXANDER,ROBERT','AR','000000029','M','fakedoc1'  ,'2Doc!@#$','767')
+  AddOneDoctor(VistA,'SMITH,MARY'      ,'MS','000000030','F','fakenurse1','2Nur!@#$','289')
 

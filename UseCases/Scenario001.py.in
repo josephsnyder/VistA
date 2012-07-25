@@ -42,6 +42,7 @@ AddHolidays(VistA)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
 CreateExamplePatients(VistA)
+AddDoctors(VistA)
 
 CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','124')
 AddDivisions(VistA,'124')
