@@ -14,7 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-from AddPatient import AddPatient
+from AddOnePatient import AddOnePatient
 
 #---------------------------------------------------------------------
 #- SECTION TO CREATE PATIENTS -
@@ -25,12 +25,12 @@ def AddPatients(VistA):
     for name in ('ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN'):
         if i%2 == 0:
             if i<10:
-                AddPatient(VistA, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+str(i), 'Y')
+                AddOnePatient(VistA, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+str(i), 'Y')
             else:
-                AddPatient(VistA, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+str(i), 'Y')
+                AddOnePatient(VistA, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+str(i), 'Y')
         else:
             if i<10:
-                AddPatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
+                AddOnePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
             else:
-                AddPatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
+                AddOnePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
         i=i+1
