@@ -19,8 +19,8 @@ from AddOneDivision import AddOneDivision
 # Create Divisions
 
 def AddDivisions(VistA,institutionpointer):
-  AddOneDivision(VistA,'General Medicine Department',6101,institutionpointer)
-  AddOneDivision(VistA,'Surgery Department'         ,6102,institutionpointer)
+  AddOneDivision(VistA,'General Medicine Department','6101',institutionpointer)
+  AddOneDivision(VistA,'Surgery Department'         ,'6102',institutionpointer)
   # Return to the prompt
   VistA.wait('Select OPTION')
   VistA.write('')
