@@ -14,7 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-from OSEHRAHelper import ,PROMPT
+from OSEHRAHelper import PROMPT
 
 #---------------------------------------------------------------------
 # Create the System Manager
