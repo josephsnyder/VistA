@@ -14,6 +14,12 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
+#---------------------------------------------------------------------------
+# Add location of OSEHRAHelper to the Python path
+import sys
+sys.path = ['${VISTA_SOURCE_DIR}/Python'] + sys.path
+#---------------------------------------------------------------------------
+
 from OSEHRAHelper import PROMPT
 from ConnectToVista import ConnectToVista
 from InitializeFileman import InitializeFileman
