@@ -43,7 +43,7 @@ def CreateSystemManager(VistA):
   VistA.write('')
 
   VistA.wait('NAME COMPONENTS')
-  VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rEVE\r1\r^Want to edit ACCESS CODE\rY\rSM1234\rSM1234\r^Want to edit VERIFY CODE\rY\rSM1234!!\rSM1234!!\r^SECONDARY MENU OPTIONS\rOR PARAM COORDINATOR MENU\rY\r\r\r\rTIU IRM MAINTENANCE MENU\rY\r\r\r\rXPAR MENU TOOLS\rY\r\r\r\rDG REGISTER PATIENT\rY\r\r\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^SERVICE/SECTION\rIRM\r^\rY')
+  VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rEVE\r1\r^Want to edit ACCESS CODE\rY\rSM1234\rSM1234\r^Want to edit VERIFY CODE\rY\rSM1234TMP!!\rSM1234TMP!!\r^SECONDARY MENU OPTIONS\rOR PARAM COORDINATOR MENU\rY\r\r\r\rTIU IRM MAINTENANCE MENU\rY\r\r\r\rXPAR MENU TOOLS\rY\r\r\r\rDG REGISTER PATIENT\rY\r\r\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^SERVICE/SECTION\rIRM\r^\rY')
   VistA.wait('User Account Access Letter')
   VistA.write('NO')
   VistA.wait('wish to allocate security keys?')
@@ -61,6 +61,33 @@ def CreateSystemManager(VistA):
   VistA.wait('mail groups?')
   VistA.write('\r')
   VistA.wait('Select User Management Option:')
+  VistA.write('')
+  VistA.wait('Select Systems Manager Menu Option:')
+  VistA.write('')
+  VistA.wait('Do you really want to halt?')
+  VistA.write('YES')
+  #
+  # Right away do a first login, since VistA will
+  # require the user to change its verify code in
+  # the first login. In this way we know what the
+  # final verify code will be.
+  #
+  VistA.wait(PROMPT)
+  VistA.write('D ^ZU')
+  VistA.wait('ACCESS CODE:')
+  VistA.write('SM1234')
+  VistA.wait('VERIFY CODE:')
+  VistA.write('SM1234TMP!!')
+  #
+  # Dialog changing the temporary verify code
+  #
+  VistA.wait('Please enter your CURRENT verify code:')
+  VistA.write('SM1234TMP!!')
+  VistA.wait('Enter a new VERIFY CODE:')
+  VistA.write('SM1234!!')
+  VistA.wait('Please re-type the new code to show that I have it right:')
+  VistA.write('SM1234!!')
+  VistA.wait('Select TERMINAL TYPE NAME:')
   VistA.write('')
   VistA.wait('Select Systems Manager Menu Option:')
   VistA.write('')
