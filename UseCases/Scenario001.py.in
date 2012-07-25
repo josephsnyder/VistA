@@ -32,7 +32,7 @@ from CreateSystemManager import CreateSystemManager
 from CreateInstitution import CreateInstitution
 from AddDivisions import AddDivisions
 
-VistA=ConnectToVista()
+VistA=ConnectToVista('Scenario001.log')
 InitializeFileman(VistA)
 InitializeDevice(VistA)
 SetupDomain(VistA)
