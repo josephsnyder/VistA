@@ -41,6 +41,6 @@ AddHolidays(VistA)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
 
-CreateInstitution(VistA,'Georgia General Hospital','6100')
-AddDivisions(VistA,'6100')
+CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','124')
+AddDivisions(VistA,'124')
 
