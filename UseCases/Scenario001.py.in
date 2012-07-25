@@ -31,7 +31,7 @@ from StartTaskMan import StartTaskMan
 from CreateSystemManager import CreateSystemManager
 from CreateInstitution import CreateInstitution
 from AddDivisions import AddDivisions
-from AddPatient import CreateExamplePatients
+from AddPatients import AddPatients
 
 VistA=ConnectToVista('Scenario001.log')
 InitializeFileman(VistA)
@@ -41,7 +41,7 @@ SetupCPRS(VistA)
 AddHolidays(VistA)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
-CreateExamplePatients(VistA)
+AddPatients(VistA)
 AddDoctors(VistA)
 
 CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','124')
