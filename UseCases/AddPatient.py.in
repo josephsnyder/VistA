@@ -13,33 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
-import sys
-import time
-sys.path = ['${VISTA_SOURCE_DIR}/Python'] + sys.path
-from OSEHRAHelper import ConnectToMUMPS,PROMPT
-VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddPatient.log","${INSTANCE}","${NAMESPACE}")
-if ('${USERNAME}' and '${PASSWORD}'):
-  VistA.login('${USERNAME}','${PASSWORD}')
-if VistA.type=='cache':
-  try:
-    VistA.ZN('${NAMESPACE}')
-  except IndexError,no_namechange:
-    pass
-VistA.wait(PROMPT)
-VistA.write('D ^ZU')
-VistA.wait('ACCESS CODE:')
-VistA.write('SM1234')
-VistA.wait('VERIFY CODE:')
-VistA.write('SM12345!!')
-VistA.wait('//')
-VistA.write('')
+
+from OSEHRAHelper import PROMPT
 
 #---------------------------------------------------------------------
 #- SECTION TO CREATE PATIENTS -
 #---------------------------------------------------------------------
-def CreateExamplePatients(Conn):
-    VistA=Conn
+def AddPatients(VistA):
     #Create the first patient named "David Carter Jr')
+    VistA.write('D ^ZU')
+    VistA.wait('ACCESS CODE:')
+    VistA.write('SM1234')
+    VistA.wait('VERIFY CODE:')
+    VistA.write('SM12345!!')
+    VistA.wait('//')
+    VistA.write('')
 
     VistA.wait('Menu Option:')
     VistA.write('Register a Patient')
@@ -231,7 +219,7 @@ def CreateExamplePatients(Conn):
     VistA.wait('//')
     VistA.write('')
 
-def CreatePatient(Conn, LastName, FirstName, Gender, DOB, SSN, Veteran):
+def AddPatient(Conn, LastName, FirstName, Gender, DOB, SSN, Veteran):
     VistA=Conn
     VistA.wait('Menu Option:')
     VistA.write('Register a Patient')
@@ -342,13 +330,13 @@ def TestExamplePatients(conn):
     for name in ('ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN'):
         if i%2 == 0:
             if i<10:
-                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+str(i), 'Y')
+                AddPatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+str(i), 'Y')
             else:
-                CreatePatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+str(i), 'Y')
+                AddPatient(conn, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+str(i), 'Y')
         else:
             if i<10:
-                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
+                AddPatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
             else:
-                CreatePatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
+                AddPatient(conn, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
         i=i+1
 TestExamplePatients(VistA)
