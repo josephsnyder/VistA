@@ -117,7 +117,8 @@ def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran):
     else:
       # Workaround to reconnect in GT.M after the attempt
       # to connect to MPI (Master Patient Index) times out.
-      VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddPatientN-gtm.log","${INSTANCE}","${NAMESPACE}")
+      logfilename="AddOnePatient-"+FirstName+","+LastName+".log"
+      VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/"+logfilename,"${INSTANCE}","${NAMESPACE}")
     VistA.wait(PROMPT)
     VistA.write('D ^ZU')
     VistA.wait('ACCESS CODE:')
