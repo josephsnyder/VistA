@@ -16,6 +16,11 @@
 
 from OSEHRAHelper import PROMPT
 
+#
+#  We expect to start here just after returning to the menu prompt:
+#
+#            "Select Systems Manager Menu Option:"
+#
 def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran):
     VistA.wait('Select Systems Manager Menu Option:')
     VistA.write('Register a Patient')

@@ -66,6 +66,10 @@ def CreateSystemManager(VistA):
   VistA.write('')
   VistA.wait('Do you really want to halt?')
   VistA.write('YES')
+  VistA.wait(PROMPT)
+  VistA.IEN('NEW PERSON','MANAGER,SYSTEM')
+  VistA.wait(PROMPT)
+  VistA.write('S DUZ=' + VistA.IENumber + ' S $P(^VA(200,DUZ,0),"^",4)="@"')
   #
   # Right away do a first login, since VistA will
   # require the user to change its verify code in
@@ -89,8 +93,8 @@ def CreateSystemManager(VistA):
   VistA.write('SM1234!!')
   VistA.wait('Select TERMINAL TYPE NAME:')
   VistA.write('')
-  VistA.wait('Select Systems Manager Menu Option:')
-  VistA.write('')
-  VistA.wait('Do you really want to halt?')
-  VistA.write('YES')
-
+  #
+  #  At this point we left in the menu prompt:
+  #
+  #    "Select Systems Manager Menu Option:"
+  #
