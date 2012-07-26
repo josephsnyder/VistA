@@ -24,6 +24,13 @@ def AddDoctors(VistA):
   VistA.write('EVE\r1')
   VistA.wait('Select Systems Manager Menu Option:')
   VistA.write('USER MANAGEMENT')
-  AddOneDoctor(VistA,'ALEXANDER,ROBERT','AR','000000029','M','fakedoc1'  ,'2Doc!@#$','767')
-  AddOneDoctor(VistA,'SMITH,MARY'      ,'MS','000000030','F','fakenurse1','2Nur!@#$','289')
+# Primary Care Physician : TX PRIMARY CARE PROVIDER
+# Orthopedist            : TX ORTHOPEDIST PROVIDER
+# Mental Health          : TX MENTAL HEALTH PROVIDER
+# Audiology (Ancilliary) : TX AUDIOLOGY ANCILLIARY
+  AddOneDoctor(VistA,'ALEXANDER,ROBERT','AR','000000029','M','fakedoc1'  ,'2Doc!@#$','ROBA123','767')
+# change 767 to an entry from the STANDARD POSITION file"
+
+  AddOneDoctor(VistA,'SMITH,MARY'      ,'MS','000000030','F','fakenurse1','2Nur!@#$','MARS345','289')
+# change 280 to an entry from the STANDARD POSITION file"
 
