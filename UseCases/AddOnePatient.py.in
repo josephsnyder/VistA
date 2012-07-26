@@ -14,7 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-from OSEHRAHelper import PROMPT
+from OSEHRAHelper import ConnectToMUMPS,PROMPT
 
 #
 #  We expect to start here just after returning to the menu prompt:
