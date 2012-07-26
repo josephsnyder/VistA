@@ -14,7 +14,10 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-def AddOneDoctor(VistA,fullname,initials,ssn,sex,accesscode,verifycode,personclass):
+#
+# TODO: insert the signaturecode in the script below.
+#
+def AddOneDoctor(VistA,fullname,initials,ssn,sex,accesscode,verifycode,signaturecode,personclass):
   VistA.wait('Select User Management Option')
   VistA.write('ADD')
   VistA.wait('name')
