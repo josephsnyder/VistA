@@ -1,0 +1,59 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+from ConnectToVista import ConnectToVista
+# Add Users Electronic Signature
+def AddElectronicSignature(lastname,accesscode,oldverifycode,newverifycode,signaturecode):
+  VistA=ConnectToVista('AddSignature' + lastname +'.log')
+  VistA.write('D ^ZU')
+  VistA.wait('ACCESS CODE:')
+  VistA.write(accesscode)
+  VistA.wait('VERIFY CODE:')
+  VistA.write(oldverifycode)
+  VistA.wait('verify code:')
+  VistA.write(oldverifycode)
+  VistA.wait('VERIFY CODE:')
+  VistA.write(newverifycode)
+  VistA.wait('right:')
+  VistA.write(newverifycode)
+  VistA.wait('TYPE NAME')
+  VistA.write('')
+  VistA.wait('Option:')
+  VistA.write('USER\'s TOOLBOX')
+  VistA.wait('Toolbox Option')
+  VistA.write('ELE')
+  VistA.wait('INITIAL')
+  VistA.write('')
+  VistA.wait('SIGNATURE BLOCK PRINTED NAME')
+  VistA.write('')
+  VistA.wait('SIGNATURE BLOCK TITLE')
+  VistA.write('')
+  VistA.wait('OFFICE PHONE')
+  VistA.write('')
+  VistA.wait('VOICE PAGER')
+  VistA.write('')
+  VistA.wait('DIGITAL PAGER')
+  VistA.write('')
+  VistA.wait('SIGNATURE CODE')
+  VistA.write(signaturecode)
+  VistA.wait('SIGNATURE CODE FOR VERIFICATION')
+  VistA.write(signaturecode)
+  VistA.wait('Toolbox Option')
+  VistA.write('')
+  VistA.wait('Core Applications Option')
+  VistA.write('')
+  VistA.wait('Do you really want to halt')
+  VistA.write('')
