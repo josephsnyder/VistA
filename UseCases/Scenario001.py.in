@@ -44,6 +44,6 @@ StartTaskMan(VistA)
 CreateSystemManager(VistA)
 AddPatients(VistA)
 
-# CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','124')
+# CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','401','MC','4529860114','Y','VAMC','23 Bradford','San Antonio','Texas','78238-1110')
 # AddDivisions(VistA,'124')
 # AddDoctors(VistA)
