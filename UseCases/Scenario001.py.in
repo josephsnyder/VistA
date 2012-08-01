@@ -33,6 +33,7 @@ from CreateInstitution import CreateInstitution
 from AddDivisions import AddDivisions
 from AddDoctors import AddDoctors
 from AddPatients import AddPatients
+from AddClinics import AddClinics
 
 VistA=ConnectToVista('Scenario001.log')
 InitializeFileman(VistA)
@@ -47,3 +48,5 @@ AddPatients(VistA)
 # CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','401','MC','4529860114','Y','VAMC','23 Bradford','San Antonio','Texas','78238-1110')
 # AddDivisions(VistA,'401')
 # AddDoctors(VistA)
+# AddClinics(VistA,'SMITH,JAMES')
+#
