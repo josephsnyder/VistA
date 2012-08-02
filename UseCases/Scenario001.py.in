@@ -29,7 +29,7 @@ from SetupCPRS import SetupCPRS
 from AddHolidays import AddHolidays
 from StartTaskMan import StartTaskMan
 from CreateSystemManager import CreateSystemManager
-from CreateInstitution import CreateInstitution
+from AddInstitutions import AddInstitutions
 from AddDivisions import AddDivisions
 from AddDoctors import AddDoctors
 from AddPatients import AddPatients
@@ -44,9 +44,8 @@ AddHolidays(VistA)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
 AddPatients(VistA)
+AddInstitutions(VistA,'ALABAMA','401')
+AddDivisions(VistA,'ALABAMA','401')
+AddDoctors(VistA,'ALABAMA')
+AddClinics(VistA,'SMITH,JAMES','ALABAMA')
 
-# CreateInstitution(VistA,'TEXAS VA HEALTH CARE TEST','401','MC','4529860114','Y','VAMC','23 Bradford','San Antonio','Texas','78238-1110')
-# AddDivisions(VistA,'401')
-# AddDoctors(VistA)
-# AddClinics(VistA,'SMITH,JAMES')
-#

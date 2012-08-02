@@ -14,13 +14,11 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-from AddOneDivision import AddOneDivision
-from AddHCSDivision import AddHCSDivision
+from AddOneInstitution import AddOneInstitution
 
-# Create Divisions
+# Create Institutions
 
-def AddDivisions(VistA,state,institutionpointer):
-  AddHCSDivision(VistA, state + ' VA HEALTHCARE SYSTEM' ,institutionpointer  ,'1')
-  AddOneDivision(VistA, state + ' VA MEDICAL CENTER'    ,'1',institutionpointer +'MC')
-  AddOneDivision(VistA, state + ' VA OUTPATIENT CLINC'  ,'1',institutionpointer +'OC')
-
+def AddInstitutions(VistA,state,stationnumber):
+  AddOneInstitution(VistA,state + ' VA HEALTHCARE SYSTEM',stationnumber,    'MC','4529860114','Y','HCS','1 Main ST','Anywhere',state,'14114')
+  AddOneInstitution(VistA,state + ' VA MEDICAL CENTER',stationnumber+'MC',  'MC' ,'8890253874','N','VAMC','1 Main ST','Anywhere',state,'14114')
+  AddOneInstitution(VistA,state + ' VA OUTPATIENT CLINC',stationnumber+'OC',''   ,'7764091279','N','CBOC','1 Main ST','Anywhere',state,'14114')

@@ -16,7 +16,10 @@
 
 from AddOneClinic import AddOneClinic
 
-def AddClinics(VistA,primary):
-  AddOneClinic(VistA,'VISTA HEALTH CARE'    ,'VHC','555-555-1414',primary,'301','301','M','N','General Medicine Department','TEXAS VA HEALTH CARE TEST','30')
-  AddOneClinic(VistA,'VISTA MEDICAL CENTER' ,'VMC','555-555-2525',primary,'301','301','M','N','General Medicine Department','TEXAS VA HEALTH CARE TEST','30')
+def AddClinics(VistA,primary,state):
+  AddOneClinic(VistA,'Mental Health'                 ,'ALMH  ','555-555-1414',primary,'301','301','M','N',state + ' VA MEDICAL CENTER' ,state + ' VA MEDICAL CENTER','30')
+  AddOneClinic(VistA,'Medical Center Primary Care'    ,'ALPC1 ','555-555-2525',primary,'301','301','M','N',state + ' VA MEDICAL CENTER' ,state + ' VA MEDICAL CENTER','30')
+  AddOneClinic(VistA,'Orthopedics'                   ,'ALORTH','555-555-3636',primary,'301','301','M','N',state + ' VA MEDICAL CENTER' ,state + ' VA MEDICAL CENTER','30')
+  AddOneClinic(VistA,'OutPatient Primary Care'       ,'ALPC2 ','555-555-4747',primary,'301','301','M','N',state + ' VA OUTPATIENT CLINC',state + ' VA MEDICAL CENTER','30')
+  AddOneClinic(VistA,'Audiology'                     ,'ALAUD ','555-555-5858',primary,'301','301','M','N',state + ' VA OUTPATIENT CLINC',state + ' VA MEDICAL CENTER','30')
 

@@ -17,8 +17,7 @@
 from AddOneDoctor import AddOneDoctor
 from OSEHRAHelper import PROMPT
 
-def AddDoctors(VistA):
-  VistA.wait(PROMPT)
+def AddDoctors(VistA,state):
   VistA.write('S DUZ=1 D ^XUP')
   VistA.wait('Select OPTION NAME')
   VistA.write('EVE\r1')
@@ -28,9 +27,17 @@ def AddDoctors(VistA):
 # Orthopedist            : TX ORTHOPEDIST PROVIDER
 # Mental Health          : TX MENTAL HEALTH PROVIDER
 # Audiology (Ancilliary) : TX AUDIOLOGY ANCILLIARY
-  AddOneDoctor(VistA,'ALEXANDER,ROBERT','AR','000000029','M','fakedoc1'  ,'2Doc!@#$','ROBA123','767')
+  AddOneDoctor(VistA,'SMITH,JAMES','JS','000000029','9600341165','M','fakedoc1'  ,'2Doc!@#$','SMIJ123','767',   state + ' VA MEDICAL CENTER')
 # change 767 to an entry from the STANDARD POSITION file"
-
-  AddOneDoctor(VistA,'SMITH,MARY'      ,'MS','000000030','F','fakenurse1','2Nur!@#$','MARS345','289')
+  AddOneDoctor(VistA,'SMITH,JANE','JS','000000030','1740265933','F','fakedoc2'   ,'2Doc!@#$','JSMI123','767',   state + ' VA MEDICAL CENTER')
+# change 767 to an entry from the STANDARD POSITION file"
+  AddOneDoctor(VistA,'SMITH,MARY','MS','000000031','0936719257','F','fakenurse1' ,'2Nur!@#$','MARS345','289',   state + ' VA MEDICAL CENTER')
 # change 280 to an entry from the STANDARD POSITION file"
+  VistA.wait('Select User Management Option')
+  VistA.write('')
+  VistA.wait('Select Systems Manager Menu Option')
+  VistA.write('')
+  VistA.wait('Do you really want to halt')
+  VistA.write('')
+  VistA.wait(PROMPT)
 

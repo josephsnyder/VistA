@@ -17,27 +17,30 @@
 #
 # TODO: insert the signaturecode in the script below.
 #
-def AddOneDoctor(VistA,fullname,initials,ssn,sex,accesscode,verifycode,signaturecode,personclass):
+def AddOneDoctor(VistA,fullname,initials,ssn,NPI,sex,accesscode,verifycode,signaturecode,personclass,divisionname):
   VistA.wait('Select User Management Option')
   VistA.write('ADD')
   VistA.wait('name')
   VistA.write(fullname)
   VistA.write('Y')
-  VistA.wait('INITIAL:')
+  index = VistA.multiwait(['INITIAL:','Do you still want to add this entry'])
+  if index==1:
+    VistA.write('Y')
+    VistA.wait('INITIAL')
   VistA.write(initials)
   VistA.wait('SSN:')
   VistA.write(ssn)
   VistA.wait('SEX:')
   VistA.write(sex)
   VistA.wait('NPI')
-  VistA.write('')
+  VistA.write(NPI)
   VistA.wait('NAME COMPONENTS')
   screenmanstring='\r\r\r\r\r^PRIMARY MENU OPTION\rXUCOR\r^SECONDARY MENU OPTIONS\rOR CPRS GUI CHART\rY\r\r\r\rGMV V/M GUI\rY\r\r\r\r'
   screenmanstring=screenmanstring+'^Want to edit ACCESS CODE\rY\r'
   screenmanstring=screenmanstring+accesscode+'\r'+accesscode+'\r'
   screenmanstring=screenmanstring+'^Want to edit VERIFY CODE\rY\r'
   screenmanstring=screenmanstring+verifycode+'\r'+verifycode+'\r'
-  screenmanstring=screenmanstring+'VISTA HEALTH CARE\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^Language\r\r'
+  screenmanstring=screenmanstring+divisionname+'\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^Language\r\r'
   screenmanstring=screenmanstring+personclass+'\r'
   screenmanstring=screenmanstring+'Y\rY\rT-1\r\r^RESTRICT PATIENT SELECTION\r0\r\rCOR\rY\rT-1\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^\rE\rY'
   VistA.write(screenmanstring)
