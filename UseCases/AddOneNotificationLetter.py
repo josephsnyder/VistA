@@ -82,4 +82,4 @@ if __name__ == '__main__':
                                   "SINCERELY")
   AddOneNotificationLetter(VistA, "PRE-APPOINTMENT", "ZZPREAPPT",
                                   "SAMPLE PRE-APPOINTMENT LETTER", 
-                     PRE-APPOINTMENT             "SINCERELY")
+                                  "SINCERELY")
