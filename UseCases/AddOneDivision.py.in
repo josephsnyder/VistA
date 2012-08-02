@@ -1,0 +1,43 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+# Add one Division inside an Institution
+
+def AddOneDivision(VistA,divisionname,facilitynumber,institutionpointer):
+  VistA.wait('Select OPTION:')
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE:')
+  VistA.write('40.8')
+  VistA.wait('EDIT WHICH FIELD')
+  VistA.write('FACILITY NUMBER')
+  VistA.wait('THEN EDIT FIELD')
+  VistA.write('INSTITUTION FILE POINTER')
+  VistA.wait('THEN EDIT FIELD')
+  VistA.write('')
+  VistA.wait('DIVISION NAME')
+  VistA.write(divisionname)
+  VistA.wait('Are you adding')
+  VistA.write('Y')
+  VistA.wait('MEDICAL CENTER DIVISION NUM:')
+  VistA.write('')
+  VistA.wait('FACILITY NUMBER')
+  VistA.write(facilitynumber)
+  VistA.write('')
+  VistA.wait('INSTITUTION FILE POINTER')
+  VistA.write(institutionpointer)
+  VistA.wait('Select MEDICAL CENTER DIVISION NAME')
+  VistA.write('')
+

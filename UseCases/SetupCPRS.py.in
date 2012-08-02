@@ -1,0 +1,65 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+#---------------------------------------------------------------------
+# Setup for CPRS communication
+#---------------------------------------------------------------------
+
+def SetupCPRS(VistA):
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('14.5\r')
+  VistA.wait('Select VOLUME SET')
+  VistA.write('`1')
+  VistA.wait('VOLUME SET:')
+  VistA.write('${VOLUME_SET}\r\r\r\r\r')
+  VistA.wait('TASKMAN FILES UCI')
+  if VistA.type=='cache':
+    VistA.write('${NAMESPACE}\r\r\r\r\r\r')
+  else:
+    VistA.write('${VOLUME_SET}\r\r\r\r\r\r')
+
+  VistA.wait('Select OPTION:')
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('14.7')
+  VistA.wait('ALL//')
+  VistA.write('')
+  VistA.wait('Select TASKMAN SITE PARAMETERS BOX-VOLUME PAIR:')
+  VistA.write('`1')
+  VistA.wait('//')
+  VistA.write(VistA.boxvol)
+  VistA.wait('RESERVED')
+  VistA.write('^\r')
+
+  VistA.wait('Select OPTION')
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('8994.1\r')
+  VistA.wait('Select RPC BROKER SITE PARAMETERS DOMAIN NAME')
+  VistA.write('${VISTA_SITE_NAME}\r\r\r\r' + VistA.boxvol + '\rY\r\r9210\rY')
+  if VistA.type=='cache':
+    VistA.write('1\r\r1\r')
+  else:
+    VistA.write('1\r\r\r')
+
+  VistA.wait('Select OPTION')
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('KERNEL SYSTEM PARAMETERS\rVOLUME SET\r\r')
+  VistA.wait('Select KERNEL SYSTEM PARAMETERS DOMAIN NAME:')
+  VistA.write('${VISTA_SITE_NAME}\r\r${VOLUME_SET}\rY\r500\rN\r\r\r')
+

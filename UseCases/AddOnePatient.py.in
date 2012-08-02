@@ -1,0 +1,130 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+from OSEHRAHelper import ConnectToMUMPS,PROMPT
+
+#
+#  We expect to start here just after returning to the menu prompt:
+#
+#            "Select Systems Manager Menu Option:"
+#
+def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran):
+    VistA.wait('Select Systems Manager Menu Option:')
+    VistA.write('Register a Patient')
+    VistA.wait('PATIENT NAME')
+    VistA.write(LastName+','+FirstName+'\rY')
+    VistA.wait('SEX')
+    VistA.write(Gender)
+    VistA.wait('DATE OF BIRTH')
+    VistA.write(DOB)
+    VistA.wait('SOCIAL SECURITY NUMBER')
+    VistA.write(SSN)
+    VistA.wait('TYPE')
+    if Veteran=='Y':
+        VistA.write('SC VETERAN')
+        VistA.wait('PATIENT VETERAN')
+        VistA.write('YES')
+        VistA.wait('SERVICE CONNECTED')
+        VistA.write('YES')
+    else:
+        VistA.write('NON-VETERAN')
+        VistA.wait('PATIENT VETERAN')
+        VistA.write('NO')
+        VistA.wait('SERVICE CONNECTED')
+        VistA.write('NO')
+    VistA.wait('MULTIPLE BIRTH INDICATOR')
+    VistA.write('')
+    index = VistA.multiwait(['ZZTEST//','a new patient'])
+    if index == 1:
+        VistA.write('Y')
+        VistA.wait('//')
+        VistA.write('^\r')
+    else:
+        VistA.write('^\r')
+    VistA.wait('MAIDEN NAME:')
+    VistA.write('')
+    VistA.wait('[CITY]')
+    VistA.write('Santa Monica')
+    VistA.wait('[STATE]')
+    VistA.write('California')
+    VistA.wait('ALIAS')
+    VistA.write('')
+    if VistA.type=='cache':
+      # Enter in more information about the patient.
+      VistA.wait('exit:')
+      VistA.write('\r')
+      VistA.wait('Patient Data')
+      VistA.write('Y')
+      VistA.wait('QUIT')
+      VistA.write('4')
+      VistA.wait('COUNTRY')
+      VistA.write('')
+      VistA.wait('STREET ADDRESS')
+      VistA.write('834 Ocean Vista Avenue\r')
+      VistA.wait('ZIP')
+      VistA.write('90401')
+      VistA.wait('CITY')
+      VistA.write('1')
+      VistA.wait('PHONE NUMBER')
+      VistA.write('310-555-2233\r\r')
+      VistA.wait('changes')
+      VistA.write('Y\r')
+      VistA.wait('QUIT')
+      VistA.write('^2')
+      VistA.wait('QUIT')
+      VistA.write('3')
+      VistA.wait('ETHNICITY')
+      VistA.write('N')
+      VistA.wait('RACE')
+      VistA.write('B\rY\r')
+      VistA.wait('QUIT')
+      VistA.write('^3')
+      VistA.wait('QUIT')
+      VistA.write('1')
+      VistA.wait('PRIMARY NOK')
+      VistA.write('Carter,David J Sr')
+      VistA.wait('RELATIONSHIP')
+      VistA.write('FATHER')
+      VistA.wait('ADDRESS')
+      VistA.write('Y')
+      VistA.wait('WORK PHONE')
+      VistA.write('310-555-9876')
+      VistA.wait('QUIT')
+      VistA.write('^7')
+      VistA.wait('QUIT')
+      VistA.write('3')
+      VistA.wait('PRIMARY ELIGIBILITY CODE')
+      VistA.write('2\r\r\r\r')
+      VistA.wait('QUIT')
+      VistA.write('^')
+      VistA.wait('condition')
+      VistA.write('N')
+      VistA.wait('today')
+      VistA.write('Y\r')
+    else:
+      # Workaround to reconnect in GT.M after the attempt
+      # to connect to MPI (Master Patient Index) times out.
+      logfilename="AddOnePatient-"+FirstName+","+LastName+".log"
+      VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/"+logfilename,"${INSTANCE}","${NAMESPACE}")
+    VistA.wait(PROMPT)
+    VistA.write('D ^ZU')
+    VistA.wait('ACCESS CODE:')
+    VistA.write('SM1234')
+    VistA.wait('VERIFY CODE:')
+    VistA.write('SM1234!!')
+    VistA.wait('//')
+    VistA.write('')
+

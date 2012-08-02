@@ -1,0 +1,62 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+from AddOneHoliday import AddOneHoliday
+
+def AddHolidays(VistA):
+  #
+  # Federal Holidays 2012
+  # http://www.opm.gov/operating_status_schedules/fedhol/2012.asp
+  #
+  AddOneHoliday(VistA,'New Year Day'                  ,'JAN 2, 2012')
+  AddOneHoliday(VistA,'Martin Luther King, Jr. Day'   ,'JAN 16, 2012')
+  AddOneHoliday(VistA,'Washington\'s Birthday'        ,'FEB 20, 2012')
+  AddOneHoliday(VistA,'Memorial Day'                  ,'MAY 28, 2012')
+  AddOneHoliday(VistA,'Independence Day'              ,'JUL 4, 2012')
+  AddOneHoliday(VistA,'Labor Day'                     ,'SEP 3, 2012')
+  AddOneHoliday(VistA,'Columbus Day'                  ,'OCT 8, 2012')
+  AddOneHoliday(VistA,'Veterans Day'                  ,'NOV 12, 2012')
+  AddOneHoliday(VistA,'Thanksgiving Day'              ,'NOV 22, 2012')
+  AddOneHoliday(VistA,'Christmas Day'                 ,'DEC 25, 2012')
+  #
+  # Federal Holidays 2013
+  # http://www.opm.gov/operating_status_schedules/fedhol/2013.asp
+  #
+  AddOneHoliday(VistA,'New Year Day'                  ,'JAN 1, 2013')
+  AddOneHoliday(VistA,'Martin Luther King, Jr. Day'   ,'JAN 21, 2013')
+  AddOneHoliday(VistA,'Washington\'s Birthday'        ,'FEB 18, 2013')
+  AddOneHoliday(VistA,'Memorial Day'                  ,'MAY 27, 2013')
+  AddOneHoliday(VistA,'Independence Day'              ,'JUL 4, 2013')
+  AddOneHoliday(VistA,'Labor Day'                     ,'SEP 2, 2013')
+  AddOneHoliday(VistA,'Columbus Day'                  ,'OCT 14, 2013')
+  AddOneHoliday(VistA,'Veterans Day'                  ,'NOV 11, 2013')
+  AddOneHoliday(VistA,'Thanksgiving Day'              ,'NOV 28, 2013')
+  AddOneHoliday(VistA,'Christmas Day'                 ,'DEC 25, 2013')
+  #
+  # Federal Holidays 2014
+  # http://www.opm.gov/operating_status_schedules/fedhol/2014.asp
+  #
+  AddOneHoliday(VistA,'New Year Day'                  ,'JAN 1, 2014')
+  AddOneHoliday(VistA,'Martin Luther King, Jr. Day'   ,'JAN 20, 2014')
+  AddOneHoliday(VistA,'Washington\'s Birthday'        ,'FEB 17, 2014')
+  AddOneHoliday(VistA,'Memorial Day'                  ,'MAY 26, 2014')
+  AddOneHoliday(VistA,'Independence Day'              ,'JUL 4, 2014')
+  AddOneHoliday(VistA,'Labor Day'                     ,'SEP 1, 2014')
+  AddOneHoliday(VistA,'Columbus Day'                  ,'OCT 13, 2014')
+  AddOneHoliday(VistA,'Veterans Day'                  ,'NOV 11, 2014')
+  AddOneHoliday(VistA,'Thanksgiving Day'              ,'NOV 27, 2014')
+  AddOneHoliday(VistA,'Christmas Day'                 ,'DEC 25, 2014')
+
