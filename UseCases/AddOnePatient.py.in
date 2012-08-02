@@ -107,7 +107,10 @@ def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran):
       VistA.wait('QUIT')
       VistA.write('3')
       VistA.wait('PRIMARY ELIGIBILITY CODE')
-      VistA.write('2\r\r\r\r')
+      if Veteran=='Y':
+        VistA.write('3r\r\r\r')
+      else:
+        VistA.write('2\r\r\r\r')
       VistA.wait('QUIT')
       VistA.write('^')
       VistA.wait('condition')
@@ -119,12 +122,5 @@ def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran):
       # to connect to MPI (Master Patient Index) times out.
       logfilename="AddOnePatient-"+FirstName+","+LastName+".log"
       VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/"+logfilename,"${INSTANCE}","${NAMESPACE}")
-    VistA.wait(PROMPT)
-    VistA.write('D ^ZU')
-    VistA.wait('ACCESS CODE:')
-    VistA.write('SM1234')
-    VistA.wait('VERIFY CODE:')
-    VistA.write('SM1234!!')
-    VistA.wait('//')
-    VistA.write('')
+
 
