@@ -25,7 +25,16 @@ def GotoAppointmentMenu(VistA):
   VistA.write('Appointment Menu')
   VistA.wait('Select Appointment Menu Option:')
 
-def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, length):
+def GotoPrompt(VistA):
+  VistA.wait('Select PATIENT NAME:')
+  VistA.write('^')
+  VistA.wait('Select Appointment Menu Option:')
+  VistA.write('^')
+  VistA.wait('Select Scheduling Manager\'s Menu Option:')
+  VistA.write('^')
+  VistA.wait(PROMPT)
+
+def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, length, isPatientCancelled = True):
   GotoAppointmentMenu(VistA)
   VistA.write('Cancel Appointment')
   VistA.wait('Select PATIENT NAME:')
@@ -33,7 +42,10 @@ def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, lengt
   VistA.wait('DO YOU WANT TO CANCEL \(P\)AST OR \(F\)UTURE APPOINTMENTS\?')
   VistA.write('F') # future appointment only
   VistA.wait('APPOINTMENTS CANCELLED BY \(P\)ATIENT OR BY \(C\)LINIC\?')
-  VistA.write('P') # patient cancel
+  if isPatientCancelled:
+    VistA.write('P') # patient cancel
+  else:
+    VistA.write('C') # clinic cancel
   VistA.wait('Select CANCELLATION REASONS NAME:')
   VistA.write(reason)
   VistA.wait('CANCELLATION REMARKS:')
@@ -43,7 +55,8 @@ def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, lengt
                            'Select PATIENT NAME:'])
   if index == 1:
     print "No appointment for patient: %s" % patientName
-    VistA.write('^\r^')
+    VistA.write('^')
+    GotoPrompt(VistA)
     return
 # figure out which appoint is the one we wanted
   allTexts = VistA.getAfter().split('\n')
@@ -51,6 +64,7 @@ def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, lengt
   apptLine = None
   choice = None
   for txt in allTexts:
+    print txt
     if (txt.find(datetime) > 0 and 
         txt.find(clinicName) > 0 ):
       hasAppt = True
@@ -65,7 +79,9 @@ def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, lengt
     VistA.write(str(choice))
   else:
     print "Count not find the appointment to cancel"
-    VistA.write('^\r^')
+    VistA.write('^')
+    GotoPrompt(VistA)
+    return
   VistA.wait('Press RETURN to continue:')
   VistA.write('')
   VistA.wait('DO YOU WISH TO REBOOK ANY APPOINTMENT')
@@ -74,8 +90,7 @@ def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, lengt
   VistA.write('Y')
   VistA.wait('DEVICE')
   VistA.write(';132;999')
-  VistA.wait('Select PATIENT NAME:')
-  VistA.write('^\r^')
+  GotoPrompt(VistA)
 
 from OSEHRAHelper import ConnectToMUMPS,PROMPT
 from ConnectToVista import ConnectToVista
@@ -87,3 +102,9 @@ if __name__ == '__main__':
                        "UNABLE TO KEEP APPOINTMENT",
                        "Aug 22, 2012  8:00 AM",
                        "60")
+
+  CancelOneAppointment(VistA, "ZZTEST,EIGHT", 
+                       "Medical Center Primary Care",
+                       "CLINIC CANCELLED",
+                       "Aug 20, 2012  1:00 PM",
+                       "30", False)
