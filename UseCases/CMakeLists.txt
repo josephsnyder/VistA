@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+
+set(VISTA_STATE "" CACHE STRING "Set the State the Health Care system will be in")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddClinics.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddClinics.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddDivisions.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddDivisions.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/AddDoctors.py.in" "@CMAKE_CURRENT_BINARY_DIR@/AddDoctors.py")
