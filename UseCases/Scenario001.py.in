@@ -35,6 +35,7 @@ from AddDoctors import AddDoctors
 from AddPatients import AddPatients
 from AddClinics import AddClinics
 from MakeAppointment import MakeAppointment
+import VerifyOneAppointment
 
 VistA=ConnectToVista('Scenario001.log')
 VistA.write('TSTART')
@@ -51,5 +52,10 @@ AddDivisions(VistA,'${VISTA_STATE}','401')
 AddDoctors(VistA,'${VISTA_STATE}')
 AddClinics(VistA,'SMITH,JAMES','${VISTA_STATE}')
 MakeAppointment(VistA,'8/15','0900','60','Audiology','ZZTEST,ONE')
+found = VerifyOneAppointment.VerifyOneAppointment(VistA,'ZZTEST,ONE','Audiology','Aug 15, 2012  9:00 AM','60')
+if found:
+  sys.exit(0)
+else:
+  sys.exit(1)
 VistA.write('TROLLBACK')
 

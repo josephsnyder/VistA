@@ -39,5 +39,6 @@ configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Scenario001.py.in" "@CMAKE_CURRENT_B
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/SetupCPRS.py.in" "@CMAKE_CURRENT_BINARY_DIR@/SetupCPRS.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/SetupDomain.py.in" "@CMAKE_CURRENT_BINARY_DIR@/SetupDomain.py")
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/StartTaskMan.py.in" "@CMAKE_CURRENT_BINARY_DIR@/StartTaskMan.py")
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/VerifyOneAppointment.py" "@CMAKE_CURRENT_BINARY_DIR@/VerifyOneAppointment.py")
 
 add_test(CASE_Scenario001 ${PYTHON_EXECUTABLE} "@CMAKE_CURRENT_BINARY_DIR@/Scenario001.py")
