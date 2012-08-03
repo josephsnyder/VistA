@@ -35,7 +35,6 @@ from AddDoctors import AddDoctors
 from AddPatients import AddPatients
 from AddClinics import AddClinics
 from MakeAppointment import MakeAppointment
-from VerifyAppointment import VerifyAppointment
 
 VistA=ConnectToVista('Scenario001.log')
 VistA.write('TSTART')
