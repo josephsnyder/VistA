@@ -50,13 +50,13 @@ def CheckInOnePatient(VistA, patientName, clinicName, date, time):
   VistA.write(date)
   VistA.wait('Select Clinic:')
   VistA.write(clinicName) # future appointment only
-  VistA.wait('Select Patient:')Next Appointment Date:
+  VistA.wait('Select Patient:')
   VistA.write(patientName)
   VistA.wait('Select Appointment:')
 # figure out which Next Appointment Date:appoint is the one we wanPress RETURN to continue:ted
   allTexts = VistA.getAfter().split('\n')
   dateTime = '%s@%s' % (date, time)
-  apptLine = NonePress RETURN to continue:
+  apptLine = None
   choice = None
   for txt in allTexts:
     if txt.find(dateTime) > 0 :
@@ -65,20 +65,24 @@ def CheckInOnePatient(VistA, patientName, clinicName, date, time):
       break
   if apptLine:
     # find out the line #
-    choice = re.search('^ (?P<choice>\d+) +', appLine)
+    choice = re.search('^ (?P<choice>\d+) +', apptLine)
     if choice:
       choice = int(choice.group('choice'))
-      print choice
       VistA.write(str(choice))
       VistA.wait('Continue\?')
       VistA.write("YES")
-      VistA.wait('Press RETURN to continue:')
-      VistA.write('')
-  else:
+      index = VistA.multiwait(['CHECKED-IN:',
+                               'Press RETURN to continue:'])
+      if index == 0:
+        print "Appointment is already checked in"
+        VistA.write('^')
+      else:
+        VistA.write('')
+  else:CHECKED-IN:
     print "Could not find the appointment %s@%s %s" % (date, time, clinicName)
     VistA.write('^')
   GotoPrompt(VistA)
-  return apptLine not None
+  return (apptLine != None)
 
 def CheckOutOnePatient(VistA, patientName, clinicName,
                        apptdate, appttime, checkoutDT,
@@ -92,32 +96,33 @@ def CheckOutOnePatient(VistA, patientName, clinicName,
   VistA.write(date)
   VistA.wait('Select Clinic:')
   VistA.write(clinicName) # future appointment only
-  VistA.wait('Select Patient:')Next Appointment Date:
-  VistA.write(patientName)Enter PROCEDURE 
+  VistA.wait('Select Patient:')
+  VistA.write(patientName)
   VistA.wait('Select Appointment:')
-# figure out which Next Appointment Date:appoint is the one we wanPress RETURN to continue:ted
+# figure out which Next Appointment Date
   allTexts = VistA.getAfter().split('\n')
   dateTime = '%s@%s' % (date, time)
-  apptLine = NonePress RETURN to continue:
+  apptLine = None
   choice = None
   for txt in allTexts:
+    print txt
     if txt.find(dateTime) > 0 :
       hasAppt = True
       apptLine = txt
       break
   if apptLine:
     # find out the line #
-    choice = re.search('^ (?P<choice>\d+) +', appLine)
+    choice = re.search('^ (?P<choice>\d+) +', apptLine)
     if choice:
-      choice = int(choice.group('choice'))Enter PROCEDURE 
+      choice = int(choice.group('choice'))
       print choice
       VistA.write(str(choice))
-      VistA.wait('Check out date and time:')Enter PROCEDURE 
-      VistA.write(checkoutDT)Enter PROCEDURE Enter PROCEDURE 
-      VistA.wait('Enter PROVIDER:')Enter PROCEDURE 
+      VistA.wait('Check out date and time:')
+      VistA.write(checkoutDT)
+      VistA.wait('Enter PROVIDER:')
       VistA.write(provider)
       VistA.wait('Enter Diagnosis :')
-      VistA.write(diagnosis)Enter PROCEDURE 
+      VistA.write(diagnosis)
       VistA.wait('Enter PROCEDURE ')
       VistA.write(procedure)
       VistA.wait('Continue\?')
@@ -128,15 +133,13 @@ def CheckOutOnePatient(VistA, patientName, clinicName,
     print "Could not find the appointment %s@%s %s" % (date, time, clinicName)
     VistA.write('^')
   GotoPrompt(VistA)
-  return apptLine not None
-  pass
+  return (apptLine != None)
 
-from OSEHRAHelper import ConnectToMUMPS,PROMPTNext Appointment Date:
+from OSEHRAHelper import ConnectToMUMPS,PROMPT
 from ConnectToVista import ConnectToVista
-Press RETURN to continue:
 if __name__ == '__main__':
   VistA = ConnectToVista("TEST.LOG")
   CheckInOnePatient(VistA, "ZZTEST,EIGHT", 
                     "Medical Center Primary Care",
-                    "Aug 03, 2012"
+                    "AUG 03, 2012",
                     "12:30")
