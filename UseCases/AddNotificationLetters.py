@@ -28,7 +28,7 @@ def AddNotificationLetters(VistA):
   AddOneNotificationLetter(VistA, "APPOINTMENT CANCELLED", "ZZAPPTCANCELLED",
                                   "SAMPLE APPOINTMENT CANCELLED LETTER", 
                                   "SINCERELY")
-  AddOneNotificationLetter(VistA, "CLINIC CANCELLED", "ZZCLINICCELLED",
+  AddOneNotificationLetter(VistA, "CLINIC CANCELLED", "ZZCLINICCANCELLED",
                                   "SAMPLE CLINIC CANCELLED LETTER", 
                                   "SINCERELY")
   AddOneNotificationLetter(VistA, "NO-SHOW", "ZZNOSHOW",
