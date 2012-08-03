@@ -49,6 +49,10 @@ class ConnectMUMPS(object):
     self.write(username)
     self.wait('Password')
     self.write(password)
+  def getMatch(self):
+    return None
+  def getAfter(self):
+    return None
 
   def getenv(self,volume):
     self.write('D GETENV^%ZOSV W Y')
@@ -108,6 +112,8 @@ class ConnectWinCache(ConnectMUMPS):
     log=file(logfile,'w')
     self.type='cache'
     self.timeout = DEFAULT_TIMEOUT
+    self.match = None
+    self.before = None
 
   def write(self,command):
     global connection
@@ -121,6 +127,8 @@ class ConnectWinCache(ConnectMUMPS):
       command = self.prompt
     if not timeout: timeout = self.timeout
     output = connection.expect([command],timeout)
+    self.match = output[1]
+    self.after = output[2] 
     if output[2]:
       log.write(output[2])
       log.flush()
@@ -130,6 +138,8 @@ class ConnectWinCache(ConnectMUMPS):
     if isinstance(options,list):
       if not timeout: timeout = self.timeout
       index=connection.expect(options,timeout)
+      self.match = index[1]
+      self.after = index[2]
       if index[2]:
         log.write(index[2])
         log.flush()
@@ -138,6 +148,10 @@ class ConnectWinCache(ConnectMUMPS):
       return index[0]
     else:
       raise IndexError('Input to multiwait function is not a list')
+  def getMatch(self):
+    return self.match
+  def getAfter(self):
+    return self.after
 
 class ConnectLinuxCache(ConnectMUMPS):
   def __init__(self,logfile,instance,namespace,location='127.0.0.1'):
@@ -169,6 +183,10 @@ class ConnectLinuxCache(ConnectMUMPS):
       return index
     else:
       raise IndexError('Input to multiwait function is not a list')
+  def getMatch(self):
+    return connection.match
+  def getAfter(self):
+    return connection.after
 
 class ConnectLinuxGTM(ConnectMUMPS):
   def __init__(self,logfile,instance,namespace,location='127.0.0.1'):
@@ -200,6 +218,10 @@ class ConnectLinuxGTM(ConnectMUMPS):
       return index
     else:
       raise IndexError('Input to multiwait function is not a list')
+  def getMatch(self):
+    return connection.match
+  def getAfter(self):
+    return connection.after
 
 def ConnectToMUMPS(logfile,instance='CACHE',namespace='VISTA',location='127.0.0.1'):
 
