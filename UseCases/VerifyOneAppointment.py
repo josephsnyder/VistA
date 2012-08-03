@@ -34,7 +34,7 @@ def GotoPrompt(VistA):
   VistA.wait(PROMPT)
 
 def VerifyOneAppointment(VistA, patientName, clinicName, datetime, length):
-  found = False
+  Found = False
   GotoAppointmentMenu(VistA)
   VistA.write('Display Appointments')
   VistA.wait('Select PATIENT NAME:')
