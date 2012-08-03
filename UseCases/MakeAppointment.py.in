@@ -13,73 +13,65 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
-import sys
-sys.path = ['${VISTA_SOURCE_DIR}/Python'] + sys.path
-
-from OSEHRAHelper import ConnectToMUMPS,PROMPT
-VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddAppointment.log","${INSTANCE}","${NAMESPACE}")
-if ('${USERNAME}' and '${PASSWORD}'):
-  VistA.login('${USERNAME}','${PASSWORD}')
-if VistA.type=='cache':
-  try:
-    VistA.ZN('${NAMESPACE}')
-  except IndexError,no_namechange:
-    pass
-
-VistA.wait(PROMPT)
-VistA.write('S DUZ=1 D ^XUP')
-VistA.wait('Select OPTION NAME')
-VistA.write('SDUSER')
-VistA.wait('Menu Option')
-VistA.write('Appointment Menu')
-VistA.wait('Appointment Menu Option')
-VistA.write('Make Appointment')
-VistA.wait('Select CLINIC')
-VistA.write(sys.argv[4])
-VistA.wait('Select PATIENT NAME')
-VistA.write(sys.argv[5])
-index = VistA.multiwait(['APPOINTMENT TYPE','SERVICE CONNECTED CONDITION'])
-if index == 1:
-  VistA.write('N')
-  VistA.wait('APPOINTMENT TYPE')
-VistA.write('REGULAR')
-while 1:
-  index = VistA.multiwait(['APPOINTMENT REQUEST','DISPLAY PENDING APPOINTMENTS','save the above changes','ETHNICITY','RACE','COUNTRY','ZIP','STREET','NUMBER','ADDRESS','continue'])
-  if  index==0:
-    break
-  elif index==1:
-    VistA.write('Yes')
-  elif index==2:
-    VistA.write('No')
-  else:
+#
+# usage MakeAppointment(date[08/15/2012],time[0900],lengthofappointment[30],ClinicName[Audiology],PatientName[ZZTEST,ONE]
+#
+from OSEHRAHelper import PROMPT
+def MakeAppointment(VistA,date,time,lengthofapp,clinicname,patientname):
+  VistA.wait(PROMPT)
+  VistA.write('S DUZ=1 D ^XUP')
+  VistA.wait('Select OPTION NAME')
+  VistA.write('SDUSER')
+  VistA.wait('Menu Option')
+  VistA.write('Appointment Menu')
+  VistA.wait('Appointment Menu Option')
+  VistA.write('Make Appointment')
+  VistA.wait('Select CLINIC')
+  VistA.write(clinicname)
+  VistA.wait('Select PATIENT NAME')
+  VistA.write(patientname)
+  index = VistA.multiwait(['APPOINTMENT TYPE','SERVICE CONNECTED CONDITION'])
+  if index == 1:
+    VistA.write('N')
+    VistA.wait('APPOINTMENT TYPE')
+  VistA.write('REGULAR')
+  while 1:
+    index = VistA.multiwait(['APPOINTMENT REQUEST','DISPLAY PENDING APPOINTMENTS','save the above changes','ETHNICITY','RACE','COUNTRY','ZIP','STREET','NUMBER','ADDRESS','continue'])
+    if  index==0:
+      break
+    elif index==1:
+      VistA.write('Yes')
+    elif index==2:
+      VistA.write('No')
+    else:
+      VistA.write('')
+  VistA.write('Yes')
+  VistA.wait("DATE/TIME")
+  VistA.write(date+'@'+time)
+  index = VistA.multiwait(['LENGTH OF APPOINTMENT','DATE/TIME','DO YOU WANT TO CANCEL IT','Add to EWL','PATIENT ALREADY HAS APPOINTMENT ON THE SAME DAY'])
+  if index==1:
+    sys.stdout.write("Date/Time not accepted.")
+    sys.exit(1)
+  elif index == 2:
+    VistA.write('Y')
+    VistA.wait('Press RETURN to continue')
     VistA.write('')
-VistA.write('Yes')
-VistA.wait("DATE/TIME")
-VistA.write(sys.argv[1]+'@'+sys.argv[2])
-index = VistA.multiwait(['LENGTH OF APPOINTMENT','DATE/TIME','DO YOU WANT TO CANCEL IT','Add to EWL','PATIENT ALREADY HAS APPOINTMENT ON THE SAME DAY'])
-if index==1:
-  sys.stdout.write("Date/Time not accepted.")
-  sys.exit(1)
-elif index == 2:
-  VistA.write('Y')
+    VistA.wait('LENGTH OF APPOINTMENT')
+  elif index == 3:
+    sys.stdout.write("Appointment is beyond acceptable scheduling date")
+    sys.exit(1)
+  elif index == 4:
+    sys.stdout.write("Patient " + sys.argv[5] + "already has an appointment on "+sys.argv[1] )
+    VistA.write('')
+    VistA.wait('LENGTH OF APPOINTMENT')
+  VistA.write(lengthofapp)
+  VistA.wait('IS THIS CORRECT')
+  VistA.write('Yes')
+  VistA.wait('WANT PATIENT NOTIFIED')
+  VistA.write('No')
+  VistA.wait('OTHER INFO')
+  VistA.write('')
+  VistA.wait('SENT TO CLINIC')
+  VistA.write('No')
   VistA.wait('Press RETURN to continue')
-  VistA.write('')
-  VistA.wait('LENGTH OF APPOINTMENT')
-elif index == 3:
-  sys.stdout.write("Appointment is beyond acceptable scheduling date")
-  sys.exit(1)
-elif index == 4:
-  sys.stdout.write("Patient " + sys.argv[5] + "already has an appointment on "+sys.argv[1] )
-  VistA.write('')
-  VistA.wait('LENGTH OF APPOINTMENT')
-VistA.write(sys.argv[3])
-VistA.wait('IS THIS CORRECT')
-VistA.write('Yes')
-VistA.wait('WANT PATIENT NOTIFIED')
-VistA.write('No')
-VistA.wait('OTHER INFO')
-VistA.write('')
-VistA.wait('SENT TO CLINIC')
-VistA.write('No')
-VistA.wait('Press RETURN to continue')
-VistA.write('\r\r\r')
+  VistA.write('\r\r\r')
