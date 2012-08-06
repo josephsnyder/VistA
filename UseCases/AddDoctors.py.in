@@ -23,16 +23,24 @@ def AddDoctors(VistA,state):
   VistA.write('EVE\r1')
   VistA.wait('Select Systems Manager Menu Option:')
   VistA.write('USER MANAGEMENT')
-# Primary Care Physician : TX PRIMARY CARE PROVIDER
-# Orthopedist            : TX ORTHOPEDIST PROVIDER
-# Mental Health          : TX MENTAL HEALTH PROVIDER
-# Audiology (Ancilliary) : TX AUDIOLOGY ANCILLIARY
-  AddOneDoctor(VistA,'SMITH,JAMES','JS','000000029','9600341165','M','fakedoc1'  ,'2Doc!@#$','SMIJ123','767',   state + ' VA MEDICAL CENTER')
-# change 767 to an entry from the STANDARD POSITION file"
-  AddOneDoctor(VistA,'SMITH,JANE','JS','000000030','1740265933','F','fakedoc2'   ,'2Doc!@#$','JSMI123','767',   state + ' VA MEDICAL CENTER')
-# change 767 to an entry from the STANDARD POSITION file"
-  AddOneDoctor(VistA,'SMITH,MARY','MS','000000031','0936719257','F','fakenurse1' ,'2Nur!@#$','MARS345','289',   state + ' VA MEDICAL CENTER')
-# change 280 to an entry from the STANDARD POSITION file"
+  if '${VISTA_STATE}' == 'GEORGIA':
+    # Primary Care Physician : GA PRIMARY CARE PROVIDER
+    AddOneDoctor(VistA,'SMITH,JANE','JS','000000029','0383166994','F','fakedoc2'  ,'2Doc!@#$','JSMI123','769',   state + ' VA MEDICAL CENTER')
+    # Orthopedist            : GA ORTHOPEDIST PROVIDER
+    AddOneDoctor(VistA,'JOHNSON,MICHAEL','MJ','000000038','9382539572','M','fakecar2'   ,'3Car!@#$','JOHM123','776',   state + ' VA MEDICAL CENTER')
+    # Mental Health          : GA MENTAL HEALTH PROVIDER
+    AddOneDoctor(VistA,'CLARK,GEORGE','GC','000000041','0838136816','M','mhdoctor2'   ,'3Mhd!@#$','GEOK123','352',   state + ' VA MEDICAL CENTER')
+    # Audiology (Ancilliary) : GA AUDIOLOGY ANCILLIARY
+    AddOneDoctor(VistA,'KIRK,JOSEPH','JK','000000042','0625639600','M','audidoctor2'   ,'2Aud!@#$','JOEK123','239',   state + ' VA MEDICAL CENTER')
+  elif '${VISTA_STATE}' == 'ALABAMA':
+    # Primary Care Physician : AL PRIMARY CARE PROVIDER
+    AddOneDoctor(VistA,'SMITH,JAMES','JS','000000029','0507657696','M','fakedoc1'  ,'2Doc!@#$','SMIJ123','769',   state + ' VA MEDICAL CENTER')
+    # Orthopedist            : AL ORTHOPEDIST PROVIDER
+    AddOneDoctor(VistA,'JOHNSON,MICHAEL','MJ','000000038','9382539572','M','fakecar1'   ,'2Car!@#$','JOHM123','776',   state + ' VA MEDICAL CENTER')
+    # Mental Health          : AL MENTAL HEALTH PROVIDER
+    AddOneDoctor(VistA,'WILLIAMS,TIMOTHY','TW','000000039','0528050707','M','mhdoctor1'   ,'2Mhd!@#$','TIMW123','352',   state + ' VA MEDICAL CENTER')
+    # Audiology (Ancilliary) : AL AUDIOLOGY ANCILLIARY
+    AddOneDoctor(VistA,'ALEXANDER,ROBERT','RA','000000034','0720312863','M','audidoctor1'   ,'2Aud!@#$','ROBA123','239',   state + ' VA MEDICAL CENTER')
   VistA.wait('Select User Management Option')
   VistA.write('')
   VistA.wait('Select Systems Manager Menu Option')
