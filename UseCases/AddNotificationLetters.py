@@ -37,4 +37,3 @@ def AddNotificationLetters(VistA):
   AddOneNotificationLetter(VistA, "PRE-APPOINTMENT", "ZZPREAPPT",
                                   "SAMPLE PRE-APPOINTMENT LETTER", 
                                   "SINCERELY")
-

@@ -38,7 +38,6 @@ def AssignOneClinicNotificationLetter(VistA, letterName, letterType, clinicName)
   VistA.write('^')
   VistA.wait('Select OPTION:')
   VistA.write('^')
-  VistA.wait(PROMPT)
 
 def AddOneNotificationLetter(VistA, letterType, letterName, firstPara, lastPara):
   VistA.write('S DUZ=1 D ^XUP')
@@ -59,7 +58,6 @@ def AddOneNotificationLetter(VistA, letterType, letterName, firstPara, lastPara)
     VistA.write('^')
     VistA.wait('Select Scheduling Manager\'s Menu Option:')
     VistA.write('^')
-    VistA.wait(PROMPT)
     return
   VistA.write('Y')
   VistA.wait('NAME:')
@@ -86,7 +84,6 @@ def AddOneNotificationLetter(VistA, letterType, letterName, firstPara, lastPara)
   VistA.write('')
   VistA.wait('Select Scheduling Manager\'s Menu Option:')
   VistA.write('^')
-  VistA.wait(PROMPT)
 
 from OSEHRAHelper import ConnectToMUMPS,PROMPT
 from ConnectToVista import ConnectToVista

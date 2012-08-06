@@ -31,7 +31,7 @@ def GotoPrompt(VistA):
   VistA.write('^')
   VistA.wait('Select Scheduling Manager\'s Menu Option:')
   VistA.write('^')
-  VistA.wait(PROMPT)
+  #VistA.wait(PROMPT)
 
 def VerifyOneAppointment(VistA, patientName, clinicName, datetime, length):
   Found = False

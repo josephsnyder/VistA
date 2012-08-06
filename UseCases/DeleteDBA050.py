@@ -17,6 +17,7 @@
 # Remove One institution from the instiatution file
 
 def deleteFileManEntry(VistA, filemanName, entryName):
+  VistA.write('S DUZ=1 D Q^DI')
   VistA.wait('Select OPTION:')
   VistA.write('1')
   VistA.wait('INPUT TO WHAT FILE:')
@@ -32,6 +33,8 @@ def deleteFileManEntry(VistA, filemanName, entryName):
     VistA.write('^')
     VistA.wait(' NAME:')
     VistA.write('^')
+    VistA.wait('Select OPTION:')
+    VistA.write('^')
     return
   VistA.write('@')
   VistA.wait('SURE YOU WANT TO DELETE')
@@ -43,7 +46,12 @@ def deleteFileManEntry(VistA, filemanName, entryName):
   VistA.wait('DELETE ALL POINTERS\? Yes\/\/')
   VistA.write('')
   VistA.wait(' NAME:')
-  VistA.write('')
+  VistA.write('^')
+  while True:
+    index = VistA.multiwait(['DEVICE:','Select OPTION:'])
+    VistA.write('^')
+    if index == 1:
+      break
 
 def RemoveOneInstitution(VistA,institutionName, divisionName):
   deleteFileManEntry(VistA, "4", institutionName)
@@ -57,5 +65,4 @@ from ConnectToVista import ConnectToVista
 
 if __name__ == '__main__':
   VistA = ConnectToVista("TEST.LOG")
-  VistA.write('S DUZ=1 D Q^DI')
   DeleteDBA050(VistA)

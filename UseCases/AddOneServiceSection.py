@@ -17,6 +17,7 @@
 # Add one Division inside an Institution
 
 def AddOneServiceSection(VistA, serviceName, serviceType):
+  VistA.write('S DUZ=1 D Q^DI')
   VistA.wait('Select OPTION:')
   VistA.write('1')
   VistA.wait('INPUT TO WHAT FILE:')
@@ -46,13 +47,14 @@ def AddOneServiceSection(VistA, serviceName, serviceType):
   VistA.write('')
   VistA.wait('Select SERVICE/SECTION NAME:')
   VistA.write('')
+  VistA.wait('Select OPTION:')
+  VistA.write('')
 
 from OSEHRAHelper import ConnectToMUMPS,PROMPT
 from ConnectToVista import ConnectToVista
 
 if __name__ == '__main__':
   VistA = ConnectToVista("TEST.LOG")
-  VistA.write("S DUZ=1 D Q^DI")
   AddOneServiceSection(VistA, "MEDICINE", "C")
   AddOneServiceSection(VistA, "SURGICAL", "C")
   AddOneServiceSection(VistA, "PSYCHIATRIC", "C")
