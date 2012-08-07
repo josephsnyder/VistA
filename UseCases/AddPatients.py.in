@@ -25,26 +25,32 @@ from OSEHRAHelper import PROMPT
 #  We expect to start here just after calling CreateSystemManager
 #  and to be in the "Select Systems Manager Menu Option:"
 #
-def AddPatients(VistA):
-    i=1
-    for name in ('ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN'):
-        if i%2 == 0:
-            if i<10:
-                AddOnePatient(VistA, 'ZZTEST', name, 'M', '01/01/1962', '00000000'+str(i), 'Y')
-            else:
-                AddOnePatient(VistA, 'ZZTEST', name, 'M', '01/01/1962', '0000000'+str(i), 'Y')
+def AddTestCommonPatients(VistA):
+    AddOnePatient(VistA, 'ZZTEST', 'ONE', 'M', '11/01/1962', '100000000', 'Y')
+    AddOnePatient(VistA, 'ZZTEST', 'TWO', 'F', '10/01/1963', '100000001', 'N')
+    AddOnePatient(VistA, 'ZZTEST', 'THREE', 'M', '11/01/1964', '100000002', 'Y')
+    AddOnePatient(VistA, 'ZZTEST', 'FOUR', 'F', '10/01/1965', '100000003', 'N')
+
+PatientTestTuple = ('FIVE','SIX','SEVEN','EIGHT','NINE','TEN',
+                    'ELEVEN','TWELVE','THIRTEEN','FOURTEEN')
+
+def AddTestPatientBySite(VistA, siteName):
+    isLastOne = False
+    for index in range(0,len(PatientTestTuple)):
+        isLastOne = (index == len(PatientTestTuple)-1)
+        birthDate = '%02d/%02d/%4d' % (01,index+1,1966+index) # this is the birth date
+        SSN = "%09d" % (000000004 + index) # this is the social security number
+        if index % 2 == 0:
+            AddOnePatient(VistA, 'ZZTEST', siteName + PatientTestTuple[index],
+                          'M', birthDate, SSN, 'Y', isLastOne)
         else:
-            if i<10:
-                AddOnePatient(VistA, 'ZZTEST', name, 'F', '01/01/1962', '00000000'+str(i), 'Y')
-            else:
-                AddOnePatient(VistA, 'ZZTEST', name, 'F', '01/01/1962', '0000000'+str(i), 'Y')
-        i=i+1
-        if name != 'FOURTEEN':
-          VistA.wait(PROMPT)
-          VistA.write('D ^ZU')
-          VistA.wait('ACCESS CODE:')
-          VistA.write('SM1234')
-          VistA.wait('VERIFY CODE:')
-          VistA.write('SM1234!!')
-          VistA.wait('//')
-          VistA.write('')
+            AddOnePatient(VistA, 'ZZTEST', siteName + PatientTestTuple[index],
+                          'F', birthDate, SSN, 'N', isLastOne)
+
+TestPatientSet = set(["ALABAMA","GEORGIA"])
+
+def AddTestPatients(VistA, siteName):
+    AddTestCommonPatients(VistA)
+    if siteName not in TestPatientSet:
+        return
+    AddTestPatientBySite(VistA, siteName)

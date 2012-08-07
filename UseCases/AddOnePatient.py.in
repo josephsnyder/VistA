@@ -21,7 +21,7 @@ from OSEHRAHelper import ConnectToMUMPS,PROMPT
 #
 #            "Select Systems Manager Menu Option:"
 #
-def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran):
+def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran, isLastOne=False):
     VistA.wait('Select Systems Manager Menu Option:')
     VistA.write('Register a Patient')
     VistA.wait('PATIENT NAME')
@@ -122,5 +122,15 @@ def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran):
       # to connect to MPI (Master Patient Index) times out.
       logfilename="AddOnePatient-"+FirstName+","+LastName+".log"
       VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/"+logfilename,"${INSTANCE}","${NAMESPACE}")
+
+    if not isLastOne:
+        VistA.wait(PROMPT)
+        VistA.write('D ^ZU')
+        VistA.wait('ACCESS CODE:')
+        VistA.write('SM1234')
+        VistA.wait('VERIFY CODE:')
+        VistA.write('SM1234!!')
+        VistA.wait('//')
+        VistA.write('')
 
 
