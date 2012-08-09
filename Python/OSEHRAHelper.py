@@ -51,7 +51,7 @@ class ConnectMUMPS(object):
     self.write(password)
   def getMatch(self):
     return None
-  def getAfter(self):
+  def getBefore(self):
     return None
 
   def getenv(self,volume):
@@ -128,7 +128,7 @@ class ConnectWinCache(ConnectMUMPS):
     if not timeout: timeout = self.timeout
     output = connection.expect([command],timeout)
     self.match = output[1]
-    self.after = output[2] 
+    self.before = output[2] 
     if output[2]:
       log.write(output[2])
       log.flush()
@@ -139,7 +139,7 @@ class ConnectWinCache(ConnectMUMPS):
       if not timeout: timeout = self.timeout
       index=connection.expect(options,timeout)
       self.match = index[1]
-      self.after = index[2]
+      self.before = index[2]
       if index[2]:
         log.write(index[2])
         log.flush()
@@ -150,8 +150,8 @@ class ConnectWinCache(ConnectMUMPS):
       raise IndexError('Input to multiwait function is not a list')
   def getMatch(self):
     return self.match
-  def getAfter(self):
-    return self.after
+  def getBefore(self):
+    return self.before
 
 class ConnectLinuxCache(ConnectMUMPS):
   def __init__(self,logfile,instance,namespace,location='127.0.0.1'):
@@ -185,8 +185,8 @@ class ConnectLinuxCache(ConnectMUMPS):
       raise IndexError('Input to multiwait function is not a list')
   def getMatch(self):
     return connection.match
-  def getAfter(self):
-    return connection.after
+  def getBefore(self):
+    return connection.before
 
 class ConnectLinuxGTM(ConnectMUMPS):
   def __init__(self,logfile,instance,namespace,location='127.0.0.1'):
@@ -220,8 +220,8 @@ class ConnectLinuxGTM(ConnectMUMPS):
       raise IndexError('Input to multiwait function is not a list')
   def getMatch(self):
     return connection.match
-  def getAfter(self):
-    return connection.after
+  def getBefore(self):
+    return connection.before
 
 def ConnectToMUMPS(logfile,instance='CACHE',namespace='VISTA',location='127.0.0.1'):
 
