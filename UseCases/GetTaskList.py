@@ -13,8 +13,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
-
 from OSEHRAHelper import PROMPT
+import re
+
+def parseTaskList(output):
+  taskList = []
+  curTask = None
+  for line in output.split('\n'):
+    line = line.strip()
+    if len(line) == 0:
+      continue
+    #print "The current line is [%s]" % line
+    if re.search('^-+$', line):
+      if curTask and len(curTask) > 3:
+        taskList.append(curTask)
+        curTask = None
+      continue
+    if not curTask:
+      result = re.search('^(?P<taskid>[0-9]+): (?P<routine>.*?),', line)
+      if result:
+        curTask = dict()
+        curTask['routine'] = result.group('routine')
+        pieces = line.split('.')
+        if pieces and len(pieces) > 2:
+          curTask['device'] = pieces[1]
+          curTask['volset'] = pieces[2]
+    else:
+      result = re.search('^Scheduled for (?P<date>.*?) at (?P<time>.*?)$', line)
+      if result:
+        curTask['date'] = result.group('date')
+        curTask['time'] = result.group('time')
+  if curTask and len(curTask) > 3:
+    taskList.append(curTask)
+  print taskList
+  return taskList
 
 def GetTaskList(VistA):
   # go to the taskman menu
@@ -27,16 +59,9 @@ def GetTaskList(VistA):
   VistA.write('Every task')
   VistA.wait('DEVICE: ')
   VistA.write(';132;9999')
-  while True:
-    index = VistA.multiwait(['-+\r','\d+:.*?\n','Enter RETURN to continue or'])
-    if index == 2:
-      VistA.write('')
-      break
-    if index == 0:
-      continue
-    if index == 1: 
-      print VistA.getBefore()
-      continue
+  VistA.wait('Enter RETURN to continue or')
+  parseTaskList(VistA.getBefore())
+  VistA.write('')
   VistA.wait('Select Type Of Listing:')
   VistA.write('')
   VistA.wait('Select Taskman Management Option:')
