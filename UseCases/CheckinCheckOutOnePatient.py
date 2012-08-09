@@ -54,7 +54,7 @@ def CheckInOnePatient(VistA, patientName, clinicName, date, time):
   VistA.write(patientName)
   VistA.wait('Select Appointment:')
 # figure out which Next Appointment Date:appoint is the one we wanPress RETURN to continue:ted
-  allTexts = VistA.getAfter().split('\n')
+  allTexts = VistA.getBefore().split('\n')
   dateTime = '%s@%s' % (date, time)
   apptLine = None
   choice = None
@@ -100,7 +100,7 @@ def CheckOutOnePatient(VistA, patientName, clinicName,
   VistA.write(patientName)
   VistA.wait('Select Appointment:')
 # figure out which Next Appointment Date
-  allTexts = VistA.getAfter().split('\n')
+  allTexts = VistA.getBefore().split('\n')
   dateTime = '%s@%s' % (date, time)
   apptLine = None
   choice = None

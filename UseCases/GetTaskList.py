@@ -35,7 +35,7 @@ def GetTaskList(VistA):
     if index == 0:
       continue
     if index == 1: 
-      print VistA.getAfter()
+      print VistA.getBefore()
       continue
   VistA.wait('Select Type Of Listing:')
   VistA.write('')

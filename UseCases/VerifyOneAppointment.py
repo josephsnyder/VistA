@@ -45,7 +45,7 @@ def VerifyOneAppointment(VistA, patientName, clinicName, datetime, length):
   VistA.write(';132;999')
   VistA.wait('Select PATIENT NAME:')
 # figure out which appoint is the one we wanted
-  allTexts = VistA.getAfter().split('\n')
+  allTexts = VistA.getBefore().split('\n')
   hasAppt = False
   for txt in allTexts:
     if ( txt.find(datetime) >= 0 and 

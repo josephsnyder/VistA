@@ -59,7 +59,7 @@ def CancelOneAppointment(VistA, patientName, clinicName, reason, datetime, lengt
     GotoPrompt(VistA)
     return
 # figure out which appoint is the one we wanted
-  allTexts = VistA.getAfter().split('\n')
+  allTexts = VistA.getBefore().split('\n')
   hasAppt = False
   apptLine = None
   choice = None
