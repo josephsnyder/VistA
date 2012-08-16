@@ -15,6 +15,7 @@
 #---------------------------------------------------------------------------
 
 set(VISTA_STATE "" CACHE STRING "Set the State the Health Care system will be in")
+set(VISTA_BACKUP "" CACHE PATH "Path to the local backup of VistA")
 file(GLOB PythonInput ${CMAKE_CURRENT_SOURCE_DIR}/*.py.in)
 foreach(InputFile ${PythonInput})
   get_filename_component(pythonFileName ${InputFile} NAME_WE)

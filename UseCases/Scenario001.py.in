@@ -40,9 +40,9 @@ from AddServiceSection import AddServiceSection
 from AddNotificationLetters import AddNotificationLetters
 from DeleteDBA050 import DeleteDBA050
 from AssignNotificationLetter import AssignNotificationLetter
+from ReplaceDatabase import ReplaceDatabase
 
 VistA=ConnectToVista('Scenario001.log')
-VistA.write('TSTART')
 InitializeFileman(VistA)
 InitializeDevice(VistA)
 SetupDomain(VistA)
@@ -61,7 +61,7 @@ AddClinics(VistA,'${VISTA_STATE}')
 AssignNotificationLetter(VistA)
 MakeAppointment(VistA,'8/15','0900','60','Audiology','ZZTEST,ONE')
 found = VerifyOneAppointment(VistA,'ZZTEST,ONE','Audiology','Aug 15, 2012  9:00 AM','60')
-VistA.write('TROLLBACK')
+ReplaceDatabase()
 if found:
   sys.exit(0)
 else:
