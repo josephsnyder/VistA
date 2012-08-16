@@ -16,6 +16,9 @@
 
 from AddOnePatient import AddOnePatient
 from OSEHRAHelper import PROMPT
+from ConnectToVista import ConnectToVista
+import json
+import sys
 
 #---------------------------------------------------------------------
 #- SECTION TO CREATE PATIENTS -
@@ -54,3 +57,15 @@ def AddTestPatients(VistA, siteName):
     if siteName not in TestPatientSet:
         return
     AddTestPatientBySite(VistA, siteName)
+
+def AddTestPatientsByConfig(VistA, patientsJson):
+    for patient in patientsJson:
+        isLastItem = (patient == patientsJson[-1])
+        print patient
+        AddOnePatient(VistA, patient.get('Last Name',''),
+                      patient.get('First Name', ''),
+                      patient.get('Gender', ''),
+                      patient.get('Date Of Birth',''),
+                      patient.get('SSN',''),
+                      patient.get('Veteran',''),
+                      isLastItem)

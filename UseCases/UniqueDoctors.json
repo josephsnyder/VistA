@@ -1,0 +1,40 @@
+{
+  "Doctors":[
+    {
+      "Full Name":"SMITH,JAMES",
+      "Initials":"JS",
+      "SSN":"000000029",
+      "NPI":"0507657696",
+      "Gender":"M",
+      "Access Code":"fakedoc1",
+      "Verify Code":"2Doc!@#$",
+      "Signature Code":"SMIJ123",
+      "Person Class":"779",
+      "Division Name":"ALABAMA VA MEDICAL CENTER"
+    },
+    {
+      "Full Name":"WILLIAMS,TIMOTHY",
+      "Initials":"TW",
+      "SSN":"000000039",
+      "NPI":"0528050707",
+      "Gender":"M",
+      "Access Code":"mhdoctor1",
+      "Verify Code":"2Mhd!@#$",
+      "Signature Code":"TIMW123",
+      "Person Class":"352",
+      "Division Name":"ALABAMA VA MEDICAL CENTER"
+    },
+    {
+      "Full Name":"ALEXANDER,ROBERT",
+      "Initials":"RA",
+      "SSN":"000000034",
+      "NPI":"0720312863",
+      "Gender":"M",
+      "Access Code":"mhdoctor1",
+      "Verify Code":"2Aud!@#$",
+      "Signature Code":"ROBA123",
+      "Person Class":"239",
+      "Division Name":"ALABAMA VA MEDICAL CENTER"
+    }
+  ]
+}

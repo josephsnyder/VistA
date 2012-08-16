@@ -1,0 +1,36 @@
+{
+  "Patients":[
+    {
+      "First Name":"ONE",
+      "Last Name":"ZZTEST",
+      "Gender":"M",
+      "Date Of Birth":"11/01/1962",
+      "SSN":"100000000",
+      "Veteran":"Y"
+    },
+    {
+      "First Name":"TWO",
+      "Last Name":"ZZTEST",
+      "Gender":"F",
+      "Date Of Birth":"10/01/1963",
+      "SSN":"100000001",
+      "Veteran":"N"
+    },
+    {
+      "First Name":"THREE",
+      "Last Name":"ZZTEST",
+      "Gender":"M",
+      "Date Of Birth":"11/01/1964",
+      "SSN":"100000002",
+      "Veteran":"Y"
+    },
+    {
+      "First Name":"FOUR",
+      "Last Name":"ZZTEST",
+      "Gender":"F",
+      "Date Of Birth":"10/01/1965",
+      "SSN":"100000003",
+      "Veteran":"N"
+    }
+  ]
+}

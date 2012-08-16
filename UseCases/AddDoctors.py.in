@@ -17,12 +17,25 @@
 from AddOneDoctor import AddOneDoctor
 from OSEHRAHelper import PROMPT
 
-def AddDoctors(VistA,state):
+def GoToUserManagementMenu(VistA):
   VistA.write('S DUZ=1 D ^XUP')
   VistA.wait('Select OPTION NAME')
   VistA.write('EVE\r1')
   VistA.wait('Select Systems Manager Menu Option:')
   VistA.write('USER MANAGEMENT')
+
+def GoToPrompt(VistA):
+  while True:
+    index = VistA.multiwait(['Select User Management Option',
+                             'Select Systems Manager Menu Option',
+                             'Do you really want to halt'])
+    VistA.write('')
+    if index == 2:
+      break
+  VistA.wait(PROMPT)
+
+def AddDoctors(VistA,state):
+  GoToUserManagementMenu(VistA)
   if '${VISTA_STATE}' == 'GEORGIA':
     # Primary Care Physician : GA PRIMARY CARE PROVIDER
     AddOneDoctor(VistA,'SMITH,JANE','JS','000000029','0383166994','F','fakedoc2'  ,'2Doc!@#$','JSMI123','769',   state + ' VA MEDICAL CENTER')
@@ -41,11 +54,15 @@ def AddDoctors(VistA,state):
     AddOneDoctor(VistA,'WILLIAMS,TIMOTHY','TW','000000039','0528050707','M','mhdoctor1'   ,'2Mhd!@#$','TIMW123','352',   state + ' VA MEDICAL CENTER')
     # Audiology (Ancilliary) : AL AUDIOLOGY ANCILLIARY
     AddOneDoctor(VistA,'ALEXANDER,ROBERT','RA','000000034','0720312863','M','audidoctor1'   ,'2Aud!@#$','ROBA123','239',   state + ' VA MEDICAL CENTER')
-  VistA.wait('Select User Management Option')
-  VistA.write('')
-  VistA.wait('Select Systems Manager Menu Option')
-  VistA.write('')
-  VistA.wait('Do you really want to halt')
-  VistA.write('')
-  VistA.wait(PROMPT)
+  GoToPrompt(VistA)
 
+def AddDoctorsByConfig(VistA, doctorsJson):
+  GoToUserManagementMenu(VistA)
+  for doctor in doctorsJson:
+    print doctor
+    AddOneDoctor(VistA, doctor['Full Name'], doctor['Initials'],
+                 doctor['SSN'], doctor['NPI'], doctor['Gender'],
+                 doctor['Access Code'], doctor['Verify Code'],
+                 doctor['Signature Code'], doctor['Person Class'],
+                 doctor['Division Name'])
+  GoToPrompt(VistA)

@@ -1,0 +1,69 @@
+{
+  "Clinics":[
+    {
+      "Name":"Mental Health",
+      "Abbreviation":"ALMH",
+      "Phone Number":"555-555-1414",
+      "Provider":"WILLIAMS,TIMOTHY",
+      "Stop Code":"301",
+      "Credit Stop Code":"301",
+      "Service Type":"M",
+      "Non-Count":"N",
+      "Parent Division":"ALABAMA VA MEDICAL CENTER",
+      "Parent Institution":"ALABAMA VA MEDICAL CENTER",
+      "Appointment Length":"30"
+    },
+    {
+      "Name":"Medical Center Primary Care",
+      "Abbreviation":"ALPC1",
+      "Phone Number":"555-555-2525",
+      "Provider":"SMITH,JAMES",
+      "Stop Code":"301",
+      "Credit Stop Code":"301",
+      "Service Type":"M",
+      "Non-Count":"N",
+      "Parent Division":"ALABAMA VA MEDICAL CENTER",
+      "Parent Institution":"ALABAMA VA MEDICAL CENTER",
+      "Appointment Length":"30"
+    },
+    {
+      "Name":"Orthopedics",
+      "Abbreviation":"ALORTH",
+      "Phone Number":"555-555-3636",
+      "Provider":"JOHNSON,MICHAEL",
+      "Stop Code":"301",
+      "Credit Stop Code":"301",
+      "Service Type":"M",
+      "Non-Count":"N",
+      "Parent Division":"ALABAMA VA MEDICAL CENTER",
+      "Parent Institution":"ALABAMA VA MEDICAL CENTER",
+      "Appointment Length":"30"
+    },
+    {
+      "Name":"OutPatient Primary Care",
+      "Abbreviation":"ALPC2",
+      "Phone Number":"555-555-4747",
+      "Provider":"SMITH,JAMES",
+      "Stop Code":"301",
+      "Credit Stop Code":"301",
+      "Service Type":"M",
+      "Non-Count":"N",
+      "Parent Division":"ALABAMA VA MEDICAL CENTER",
+      "Parent Institution":"ALABAMA VA MEDICAL CENTER",
+      "Appointment Length":"30"
+    },
+    {
+      "Name":"Audiology",
+      "Abbreviation":"ALAUD",
+      "Phone Number":"555-555-5858",
+      "Provider":"ALEXANDER,ROBERT",
+      "Stop Code":"301",
+      "Credit Stop Code":"301",
+      "Service Type":"M",
+      "Non-Count":"N",
+      "Parent Division":"ALABAMA VA MEDICAL CENTER",
+      "Parent Institution":"ALABAMA VA MEDICAL CENTER",
+      "Appointment Length":"30"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "Institutions":[
+    {
+      "Name":"ALABAMA VA HEALTHCARE SYSTEM",
+      "Station Number":"401",
+      "Type Code":"MC",
+      "NPI":"4529860114",
+      "MultiDivision":"Y",
+      "Facility Type":"HCS",
+      "Street":"1 Main ST",
+      "City":"Anywhere",
+      "State":"ALABAMA",
+      "Zip Code":"14114"
+    },
+    {
+      "Name":"ALABAMA VA MEDICAL CENTER",
+      "Station Number":"401MC",
+      "Type Code":"MC",
+      "NPI":"8890253874",
+      "MultiDivision":"N",
+      "Facility Type":"VAMC",
+      "Street":"1 Main ST",
+      "City":"Anywhere",
+      "State":"ALABAMA",
+      "Zip Code":"14114"
+    },
+    {
+      "Name":"ALABAMA OUTPATIENT CLINIC",
+      "Station Number":"401OC",
+      "NPI":"7764091279",
+      "MultiDivision":"N",
+      "Facility Type":"CBOC",
+      "Street":"1 Main ST",
+      "City":"Anywhere",
+      "State":"ALABAMA",
+      "Zip Code":"14114"
+    }
+  ]
+}

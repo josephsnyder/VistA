@@ -1,0 +1,16 @@
+{
+  "Doctors":[
+    {
+      "Full Name":"JOHNSON,MICHAEL",
+      "Initials":"MJ",
+      "SSN":"000000038",
+      "NPI":"9382539572",
+      "Gender":"M",
+      "Access Code":"fakedoc2",
+      "Verify Code":"3Car!@#$",
+      "Signature Code":"JOHM123",
+      "Person Class":"776",
+      "Division Name":"ALABAMA VA MEDICAL CENTER"
+    }
+  ]
+}

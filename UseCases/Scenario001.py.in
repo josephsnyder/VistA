@@ -29,11 +29,11 @@ from SetupCPRS import SetupCPRS
 from AddHolidays import AddHolidays
 from StartTaskMan import StartTaskMan
 from CreateSystemManager import CreateSystemManager
-from AddInstitutions import AddInstitutions
-from AddDivisions import AddDivisions
-from AddDoctors import AddDoctors
-from AddPatients import AddTestPatients
-from AddClinics import AddClinics
+from AddInstitutions import AddInstitutions, AddInstitutionsByConfig
+from AddDivisions import AddDivisions, AddDivisionsByConfig
+from AddDoctors import AddDoctors, AddDoctorsByConfig
+from AddPatients import AddTestPatients, AddTestPatientsByConfig
+from AddClinics import AddClinics, AddClinicsByConfig
 from MakeAppointment import MakeAppointment
 from VerifyOneAppointment import VerifyOneAppointment
 from AddServiceSection import AddServiceSection
@@ -41,7 +41,9 @@ from AddNotificationLetters import AddNotificationLetters
 from DeleteDBA050 import DeleteDBA050
 from AssignNotificationLetter import AssignNotificationLetter
 from ReplaceDatabase import ReplaceDatabase
+from JSONConfig import JSONConfigParser
 
+configParser = JSONConfigParser('Scenario001.json')
 VistA=ConnectToVista('Scenario001.log')
 InitializeFileman(VistA)
 InitializeDevice(VistA)
@@ -52,12 +54,18 @@ AddNotificationLetters(VistA)
 AddHolidays(VistA)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
-AddTestPatients(VistA, '${VISTA_STATE}')
-AddInstitutions(VistA,'${VISTA_STATE}','401')
-AddDivisions(VistA,'${VISTA_STATE}','401')
+print ("Adding Test Patients")
+AddTestPatientsByConfig(VistA, configParser.getAllPatients())
+print ("Adding Institutions")
+AddInstitutionsByConfig(VistA,configParser.getAllInstitutions())
+print ("Adding Divisions")
+AddDivisionsByConfig(VistA, configParser.getAllDivisions())
+print ("Deleting DBA050")
 DeleteDBA050(VistA)
-AddDoctors(VistA,'${VISTA_STATE}')
-AddClinics(VistA,'${VISTA_STATE}')
+print ("Adding Doctors")
+AddDoctorsByConfig(VistA, configParser.getAllDoctors())
+print ("Adding Clinics")
+AddClinicsByConfig(VistA, configParser.getAllClinics())
 AssignNotificationLetter(VistA)
 MakeAppointment(VistA,'12/12','0900','60','Audiology','ZZTEST,ONE')
 found = VerifyOneAppointment(VistA,'ZZTEST,ONE','Audiology','Dec 12, 2012  9:00 AM','60')

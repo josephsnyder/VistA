@@ -27,3 +27,11 @@ def AddClinics(VistA,state):
   AddOneClinic(VistA,'OutPatient Primary Care'       ,'ALPC2 ','555-555-4747',primary[0],'301','301','M','N',state + ' VA OUTPATIENT CLINC',state + ' VA MEDICAL CENTER','30')
   AddOneClinic(VistA,'Audiology'                     ,'ALAUD ','555-555-5858',primary[3],'301','301','M','N',state + ' VA OUTPATIENT CLINC',state + ' VA MEDICAL CENTER','30')
 
+def AddClinicsByConfig(VistA, clinicsJson):
+  for clinic in clinicsJson:
+    AddOneClinic(VistA, clinic['Name'], clinic['Abbreviation'],
+                 clinic['Phone Number'], clinic['Provider'],
+                 clinic['Stop Code'], clinic['Credit Stop Code'],
+                 clinic['Service Type'], clinic['Non-Count'],
+                 clinic['Parent Division'], clinic['Parent Institution'],
+                 clinic['Appointment Length'])

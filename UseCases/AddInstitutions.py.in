@@ -22,3 +22,12 @@ def AddInstitutions(VistA,state,stationnumber):
   AddOneInstitution(VistA,state + ' VA HEALTHCARE SYSTEM',stationnumber,    'MC','4529860114','Y','HCS','1 Main ST','Anywhere',state,'14114')
   AddOneInstitution(VistA,state + ' VA MEDICAL CENTER',stationnumber+'MC',  'MC' ,'8890253874','N','VAMC','1 Main ST','Anywhere',state,'14114')
   AddOneInstitution(VistA,state + ' VA OUTPATIENT CLINC',stationnumber+'OC',''   ,'7764091279','N','CBOC','1 Main ST','Anywhere',state,'14114')
+
+def AddInstitutionsByConfig(VistA, institutionsJson):
+  for institution in institutionsJson:
+    AddOneInstitution(VistA, institution['Name'], institution['Station Number'],
+                      institution.get('Type Code',''), institution['NPI'],
+                      institution['MultiDivision'], institution['Facility Type'],
+                      institution.get('Street',''), institution.get('City',''),
+                      institution.get('State',''), institution.get('Zip Code',''))
+

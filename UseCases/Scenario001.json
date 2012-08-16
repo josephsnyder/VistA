@@ -1,0 +1,13 @@
+{
+  "Institutions":"Institutions.json",
+  "Divisions":"Divisions.json",
+  "Doctors":{
+    "Common Doctors":"CommonDoctors.json",
+    "Unique Doctors":"UniqueDoctors.json"
+  },
+  "Clinics":"Clinics.json",
+  "Patients":{
+    "Common Patients":"CommonPatients.json",
+    "Unique Patients":"UniquePatients.json"
+  }
+}

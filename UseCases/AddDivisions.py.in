@@ -24,3 +24,10 @@ def AddDivisions(VistA,state,institutionpointer):
   AddOneDivision(VistA, state + ' VA MEDICAL CENTER'    ,'1',institutionpointer +'MC')
   AddOneDivision(VistA, state + ' VA OUTPATIENT CLINC'  ,'1',institutionpointer +'OC')
 
+def AddDivisionsByConfig(VistA, divJson):
+  for division in divJson:
+    print division
+    if "MultiDivision" in division:
+      AddHCSDivision(VistA, division['Name'], division['Facility Number'], '1')
+    else:
+      AddOneDivision(VistA, division['Name'], division['Outpatient Only'], division['Facility Number'])

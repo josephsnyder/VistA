@@ -117,6 +117,7 @@ class ConnectWinCache(ConnectMUMPS):
 
   def write(self,command):
     global connection
+    command = command.encode('ascii','ignore')
     connection.write(command + '\r')
     log.write(command + '\r')
     log.flush()
@@ -125,6 +126,8 @@ class ConnectWinCache(ConnectMUMPS):
     global connection
     if command is PROMPT:
       command = self.prompt
+    else:
+      command = command.encode('ascii','ignore')
     if not timeout: timeout = self.timeout
     output = connection.expect([command],timeout)
     self.match = output[1]
@@ -167,12 +170,15 @@ class ConnectLinuxCache(ConnectMUMPS):
     connection.timeout = DEFAULT_TIMEOUT
 
   def write(self,command ):
+    command = command.encode('ascii','ignore')
     connection.send(command + '\r')
 
   def wait(self,command,timeout=None):
     global connection
     if command is PROMPT:
       command = self.prompt
+    else:
+      command = command.encode('ascii','ignore')
     if not timeout: timeout = -1
     connection.expect(command, timeout)
 
@@ -202,6 +208,7 @@ class ConnectLinuxGTM(ConnectMUMPS):
     connection.timeout = DEFAULT_TIMEOUT
 
   def write(self,command ):
+    command = command.encode('ascii','ignore')
     connection.send(command + '\r')
 
   def wait(self,command,timeout=None):

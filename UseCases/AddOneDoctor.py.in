@@ -62,6 +62,9 @@ def AddOneDoctor(VistA,fullname,initials,ssn,NPI,sex,accesscode,verifycode,signa
   VistA.write('')
   VistA.wait('Do you wish to proceed')
   VistA.write('Yes')
-  VistA.wait('add this user to mail groups')
-  VistA.write('NO')
+  try:
+    VistA.wait('add this user to mail groups', 5)
+    VistA.write('NO')
+  except Exception, e:
+    VistA.write('')
 
