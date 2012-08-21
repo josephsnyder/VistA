@@ -60,3 +60,8 @@ def AddHolidays(VistA):
   AddOneHoliday(VistA,'Thanksgiving Day'              ,'NOV 27, 2014')
   AddOneHoliday(VistA,'Christmas Day'                 ,'DEC 25, 2014')
 
+def AddHolidaysByConfig(VistA, holidaysJson):
+  for holiday in holidaysJson:
+    name = holiday["Name"]
+    for date in holiday["Date"]:
+      AddOneHoliday(VistA, name, date)

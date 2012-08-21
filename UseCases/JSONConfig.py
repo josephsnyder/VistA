@@ -29,6 +29,7 @@ class JSONConfigParser(object):
     self._allInstitutions = None
     self._allDivisions = None
     self._allClinics = None
+    self._allHolidays = None
     self.__parseConfig__()
 
   def __parseConfig__(self):
@@ -43,6 +44,8 @@ class JSONConfigParser(object):
       self._allInstitutions = self.__getResultArrayFromInputFile__(configJson['Institutions'], 'Institutions')
     if "Divisions" in configJson:
       self._allDivisions = self.__getResultArrayFromInputFile__(configJson['Divisions'], 'Divisions')
+    if "Holidays" in configJson:
+      self._allHolidays = self.__getResultArrayFromInputFile__(configJson['Holidays'], 'Holidays')
 
   def __getResultArrayFromInputFile__(self, jsonInputFile, keyName):
       jsonFile = open(jsonInputFile, 'rb')
@@ -88,6 +91,9 @@ class JSONConfigParser(object):
   def getAllDivisions(self):
     return self._allDivisions
 
+  def getAllHolidays(self):
+    return self._allHolidays
+
 if __name__ == '__main__':
   configParser = JSONConfigParser('Scenario001.json')
   patients = configParser.getAllPatients()
@@ -95,3 +101,5 @@ if __name__ == '__main__':
     print patient
   for doctor in configParser.getAllDoctors():
     print doctor
+  for holidays in configParser.getAllHolidays():
+    print holidays

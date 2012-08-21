@@ -26,7 +26,7 @@ from InitializeFileman import InitializeFileman
 from InitializeDevice import InitializeDevice
 from SetupDomain import SetupDomain
 from SetupCPRS import SetupCPRS
-from AddHolidays import AddHolidays
+from AddHolidays import AddHolidays, AddHolidaysByConfig
 from StartTaskMan import StartTaskMan
 from CreateSystemManager import CreateSystemManager
 from AddInstitutions import AddInstitutions, AddInstitutionsByConfig
@@ -51,7 +51,10 @@ SetupDomain(VistA)
 SetupCPRS(VistA)
 AddServiceSection(VistA)
 AddNotificationLetters(VistA)
-AddHolidays(VistA)
+allHolidays = configParser.getAllHolidays()
+if allHolidays:
+  print ("Adding Holidays")
+  AddHolidaysByConfig(VistA, allHolidays)
 StartTaskMan(VistA)
 CreateSystemManager(VistA)
 print ("Adding Test Patients")

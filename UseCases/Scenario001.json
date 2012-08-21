@@ -9,5 +9,6 @@
   "Patients":{
     "Common Patients":"CommonPatients.json",
     "Unique Patients":"UniquePatients.json"
-  }
+  },
+  "Holidays":"Holidays.json"
 }

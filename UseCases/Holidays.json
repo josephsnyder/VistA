@@ -1,0 +1,84 @@
+{
+  "Holidays":[
+    {
+      "Name":"New Year Day",
+      "Date":[
+        "JAN 2, 2012",
+        "JAN 1, 2013",
+        "JAN 1, 2014"
+      ]
+    },
+    {
+      "Name":"Martin Luther King, Jr. Day",
+      "Date":[
+        "JAN 16, 2012",
+        "JAN 21, 2013",
+        "JAN 20, 2014"
+      ]
+    },
+    {
+      "Name":"Washington's Birthday",
+      "Date":[
+        "FEB 20, 2012",
+        "FEB 18, 2013",
+        "FEB 17, 2014"
+      ]
+    },
+    {
+      "Name":"Memorial Day",
+      "Date":[
+        "MAY 28, 2012",
+        "MAY 27, 2013",
+        "MAY 26, 2014"
+      ]
+    },
+    {
+      "Name":"Independence Day",
+      "Date":[
+        "JUL 4, 2012",
+        "JUL 4, 2013",
+        "JUL 4, 2014"
+      ]
+    },
+    {
+      "Name":"Labor Day",
+      "Date":[
+        "SEP 3, 2012",
+        "SEP 2, 2013",
+        "SEP 1, 2014"
+      ] 
+    },
+    {
+      "Name":"Columbus Day",
+      "Date":[
+        "OCT 8, 2012",
+        "OCT 14, 2013",
+        "OCT 13, 2014"
+      ]
+    },
+    {
+      "Name":"Veterans Day",
+      "Date":[
+        "NOV 12, 2012",
+        "NOV 11, 2013",
+        "NOV 11, 2014"
+      ]
+    },
+    {
+      "Name":"Thanksgiving Day",
+      "Date":[
+        "NOV 22, 2012",
+        "NOV 28, 2013",
+        "NOV 27, 2014"
+      ]
+    },
+    {
+      "Name":"Christmas Day",
+      "Date":[
+        "DEC 25, 2012",
+        "DEC 25, 2013",
+        "DEC 25, 2014"
+      ]
+    }
+  ]
+}
