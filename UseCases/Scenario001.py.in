@@ -37,7 +37,7 @@ from AddClinics import AddClinics, AddClinicsByConfig
 from MakeAppointment import MakeAppointment
 from VerifyOneAppointment import VerifyOneAppointment
 from AddServiceSection import AddServiceSection
-from AddNotificationLetters import AddNotificationLetters
+from AddNotificationLetters import AddNotificationLetters, AddNotificationLettersByConfig
 from DeleteDBA050 import DeleteDBA050
 from AssignNotificationLetter import AssignNotificationLetter
 from ReplaceDatabase import ReplaceDatabase
@@ -50,7 +50,10 @@ InitializeDevice(VistA)
 SetupDomain(VistA)
 SetupCPRS(VistA)
 AddServiceSection(VistA)
-AddNotificationLetters(VistA)
+allLetters = configParser.getAllNotificationLetters()
+if allLetters:
+  print ("Adding Notification Letters")
+  AddNotificationLettersByConfig(VistA, allLetters)
 allHolidays = configParser.getAllHolidays()
 if allHolidays:
   print ("Adding Holidays")

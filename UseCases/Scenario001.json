@@ -10,5 +10,6 @@
     "Common Patients":"CommonPatients.json",
     "Unique Patients":"UniquePatients.json"
   },
-  "Holidays":"Holidays.json"
+  "Holidays":"Holidays.json",
+  "Notification Letters":"NotificationLetters.json"
 }

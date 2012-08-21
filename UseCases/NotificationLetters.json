@@ -1,0 +1,28 @@
+{
+  "Notification Letters":[
+    {
+      "Type":"APPOINTMENT CANCELLED",
+      "Name":"ZZAPPTCANCELLED",
+      "First Paragraph":"SAMPLE APPOINTMENT CANCELLED LETTER",
+      "Second Paragraph":"SINCERELY"
+    },
+    {
+      "Type":"CLINIC CANCELLED",
+      "Name":"ZZCLINICCANCELLED",
+      "First Paragraph":"SAMPLE CLINIC CANCELLED LETTER",
+      "Second Paragraph":"SINCERELY"
+    },
+    {
+      "Type":"NO-SHOW",
+      "Name":"ZZNOSHOW",
+      "First Paragraph":"SAMPLE NO-SHOW LETTER",
+      "Second Paragraph":"SINCERELY"
+    },
+    {
+      "Type":"PRE-APPOINTMENT",
+      "Name":"ZZPREAPPT",
+      "First Paragraph":"SAMPLE PRE-APPOINTMENT LETTER",
+      "Second Paragraph":"SINCERELY"
+    }
+  ]
+}

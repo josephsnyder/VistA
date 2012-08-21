@@ -37,3 +37,10 @@ def AddNotificationLetters(VistA):
   AddOneNotificationLetter(VistA, "PRE-APPOINTMENT", "ZZPREAPPT",
                                   "SAMPLE PRE-APPOINTMENT LETTER", 
                                   "SINCERELY")
+
+def AddNotificationLettersByConfig(VistA, lettersJson):
+  for letter in lettersJson:
+    AddOneNotificationLetter(VistA, letter['Type'],
+                                    letter['Name'],
+                                    letter['First Paragraph'],
+                                    letter['Second Paragraph'])
