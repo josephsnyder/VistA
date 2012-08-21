@@ -21,3 +21,7 @@ def AddServiceSection(VistA):
   AddOneServiceSection(VistA, "SURGICAL", "C")
   AddOneServiceSection(VistA, "PSYCHIATRIC", "C")
   AddOneServiceSection(VistA, "ANCILLARY", "")
+
+def AddServiceSectionByConfig(VistA, sectionsJson):
+  for section in sectionsJson:
+    AddOneServiceSection(VistA, section['Name'], section['Type'])

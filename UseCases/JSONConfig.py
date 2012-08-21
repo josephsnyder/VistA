@@ -31,6 +31,7 @@ class JSONConfigParser(object):
     self._allClinics = None
     self._allHolidays = None
     self._allNotificationLetters = None
+    self._allServiceSections = None
     self.__parseConfig__()
 
   def __parseConfig__(self):
@@ -50,6 +51,9 @@ class JSONConfigParser(object):
     if "Notification Letters" in configJson:
       self._allNotificationLetters = self.__getResultArrayFromInputFile__(configJson['Notification Letters'],
                                                                           'Notification Letters')
+    if "Service Sections" in configJson:
+      self._allServiceSections = self.__getResultArrayFromInputFile__(configJson['Service Sections'],
+                                                                      'Service Sections')
 
   def __getResultArrayFromInputFile__(self, jsonInputFile, keyName):
       jsonFile = open(jsonInputFile, 'rb')
@@ -101,6 +105,9 @@ class JSONConfigParser(object):
   def getAllNotificationLetters(self):
     return self._allNotificationLetters
 
+  def getAllServiceSections(self):
+    return self._allServiceSections
+
 if __name__ == '__main__':
   configParser = JSONConfigParser('Scenario001.json')
   patients = configParser.getAllPatients()
@@ -112,3 +119,5 @@ if __name__ == '__main__':
     print holidays
   for letter in configParser.getAllNotificationLetters():
     print letter
+  for section in configParser.getAllServiceSections():
+    print section

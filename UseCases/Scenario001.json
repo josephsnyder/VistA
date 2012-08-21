@@ -11,5 +11,6 @@
     "Unique Patients":"UniquePatients.json"
   },
   "Holidays":"Holidays.json",
-  "Notification Letters":"NotificationLetters.json"
+  "Notification Letters":"NotificationLetters.json",
+  "Service Sections":"ServiceSections.json"
 }

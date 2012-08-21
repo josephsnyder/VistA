@@ -1,0 +1,20 @@
+{
+  "Service Sections":[
+    {
+      "Type":"C",
+      "Name":"MEDICINE"
+    },
+    {
+      "Type":"C",
+      "Name":"SURGICAL"
+    },
+    {
+      "Type":"C",
+      "Name":"PSYCHIATRIC"
+    },
+    {
+      "Type":"",
+      "Name":"ANCILLARY"
+    }
+  ]
+}

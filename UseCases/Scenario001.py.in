@@ -36,7 +36,7 @@ from AddPatients import AddTestPatients, AddTestPatientsByConfig
 from AddClinics import AddClinics, AddClinicsByConfig
 from MakeAppointment import MakeAppointment
 from VerifyOneAppointment import VerifyOneAppointment
-from AddServiceSection import AddServiceSection
+from AddServiceSection import AddServiceSection, AddServiceSectionByConfig
 from AddNotificationLetters import AddNotificationLetters, AddNotificationLettersByConfig
 from DeleteDBA050 import DeleteDBA050
 from AssignNotificationLetter import AssignNotificationLetter
@@ -49,7 +49,10 @@ InitializeFileman(VistA)
 InitializeDevice(VistA)
 SetupDomain(VistA)
 SetupCPRS(VistA)
-AddServiceSection(VistA)
+allServiceSections = configParser.getAllServiceSections()
+if allServiceSections:
+  print ("Adding Service Sections")
+  AddServiceSectionByConfig(VistA, allServiceSections)
 allLetters = configParser.getAllNotificationLetters()
 if allLetters:
   print ("Adding Notification Letters")
