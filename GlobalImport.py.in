@@ -28,7 +28,7 @@ if VistA.type=='cache':
     pass
 VistA.wait(PROMPT)
 VistA.write('D LIST^ZGI("${OSEHRA_PATH}/globals.lst","${OSEHRA_PATH}/")')
-VistA.wait(PROMPT, 1500)
+VistA.wait(PROMPT, ${GLOBALS_IMPORT_TIMEOUT})
 VistA.write('D ^ZTMGRSET')
 index = VistA.multiwait(['Should I continue?', 'System:'])
 while True:
