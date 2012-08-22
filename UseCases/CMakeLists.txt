@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
-
-set(VISTA_STATE "" CACHE STRING "Set the State the Health Care system will be in")
+set(VISTA_STATE "ALABAMA" CACHE STRING "Set the State the Health Care system will be in")
+set_property(CACHE VISTA_STATE PROPERTY STRINGS "ALABAMA;GEORGIA")
 set(VISTA_BACKUP "" CACHE PATH "Path to the local backup of VistA")
 file(GLOB PythonInput ${CMAKE_CURRENT_SOURCE_DIR}/*.py.in)
 foreach(InputFile ${PythonInput})
@@ -30,6 +30,16 @@ file(GLOB JSONFiles ${CMAKE_CURRENT_SOURCE_DIR}/*.json)
 foreach(JSONFile ${JSONFiles})
   get_filename_component(fileName ${JSONFile} NAME)
   configure_file("${CMAKE_CURRENT_SOURCE_DIR}/${fileName}" "${CMAKE_CURRENT_BINARY_DIR}/${fileName}")
+endforeach()
+file(GLOB JSONInputFile ${CMAKE_CURRENT_SOURCE_DIR}/*.json.in)
+foreach(JSONInput ${JSONInputFile})
+  get_filename_component(jsonFileName ${JSONInput} NAME_WE)
+  configure_file("${JSONInput}" "${CMAKE_CURRENT_BINARY_DIR}/${jsonFileName}.json")
+endforeach()
+file(GLOB JSONInputFile ${CMAKE_CURRENT_SOURCE_DIR}/${VISTA_STATE}/*.json.in)
+foreach(JSONInput ${JSONInputFile})
+  get_filename_component(jsonFileName ${JSONInput} NAME_WE)
+  configure_file("${JSONInput}" "${CMAKE_CURRENT_BINARY_DIR}/${jsonFileName}.json")
 endforeach()
 
 add_test(CASE_Scenario001 ${PYTHON_EXECUTABLE} "@CMAKE_CURRENT_BINARY_DIR@/Scenario001.py")

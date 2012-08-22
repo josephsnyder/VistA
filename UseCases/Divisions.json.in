@@ -1,17 +1,17 @@
 {
   "Divisions":[
     {
-      "Name":"ALABAMA VA HEALTHCARE SYSTEM",
+      "Name":"${VISTA_STATE} VA HEALTHCARE SYSTEM",
       "Facility Number":"401",
       "MultiDivision":"Y"
     },
     {
-      "Name":"ALABAMA VA MEDICAL CENTER",
+      "Name":"${VISTA_STATE} VA MEDICAL CENTER",
       "Facility Number":"401MC",
       "Outpatient Only":"1"
     },
     {
-      "Name":"ALABAMA VA OUTPATIENT CLINIC",
+      "Name":"${VISTA_STATE} VA OUTPATIENT CLINIC",
       "Facility Number":"401OC",
       "Outpatient Only":"1"
     }

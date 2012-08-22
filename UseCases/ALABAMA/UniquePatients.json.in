@@ -1,7 +1,7 @@
 {
   "Patients":[
     {
-      "First Name":"ALABAMAFIVE",
+      "First Name":"${VISTA_STATE}FIVE",
       "Last Name":"ZZTEST",
       "Gender":"M",
       "Date Of Birth":"01/01/1966",
@@ -9,7 +9,7 @@
       "Veteran":"Y"
     },
     {
-      "First Name":"ALABAMASIX",
+      "First Name":"${VISTA_STATE}SIX",
       "Last Name":"ZZTEST",
       "Gender":"F",
       "Date Of Birth":"01/02/1967",
@@ -17,7 +17,7 @@
       "Veteran":"N"
     },
     {
-      "First Name":"ALABAMASEVEN",
+      "First Name":"${VISTA_STATE}SEVEN",
       "Last Name":"ZZTEST",
       "Gender":"M",
       "Date Of Birth":"01/03/1968",
@@ -25,7 +25,7 @@
       "Veteran":"Y"
     },
     {
-      "First Name":"ALABAMAEIGHT",
+      "First Name":"${VISTA_STATE}EIGHT",
       "Last Name":"ZZTEST",
       "Gender":"F",
       "Date Of Birth":"01/04/1969",
@@ -33,7 +33,7 @@
       "Veteran":"N"
     },
     {
-      "First Name":"ALABAMANINE",
+      "First Name":"${VISTA_STATE}NINE",
       "Last Name":"ZZTEST",
       "Gender":"M",
       "Date Of Birth":"01/05/1970",
@@ -41,7 +41,7 @@
       "Veteran":"Y"
     },
     {
-      "First Name":"ALABAMATEN",
+      "First Name":"${VISTA_STATE}TEN",
       "Last Name":"ZZTEST",
       "Gender":"F",
       "Date Of Birth":"01/06/1971",
@@ -49,7 +49,7 @@
       "Veteran":"N"
     },
     {
-      "First Name":"ALABAMAELEVEN",
+      "First Name":"${VISTA_STATE}ELEVEN",
       "Last Name":"ZZTEST",
       "Gender":"M",
       "Date Of Birth":"01/07/1972",
@@ -57,7 +57,7 @@
       "Veteran":"Y"
     },
     {
-      "First Name":"ALABAMATWELVE",
+      "First Name":"${VISTA_STATE}TWELVE",
       "Last Name":"ZZTEST",
       "Gender":"F",
       "Date Of Birth":"01/08/1973",
@@ -65,7 +65,7 @@
       "Veteran":"N"
     },
     {
-      "First Name":"ALABAMATHIRTEEN",
+      "First Name":"${VISTA_STATE}THIRTEEN",
       "Last Name":"ZZTEST",
       "Gender":"M",
       "Date Of Birth":"01/09/1974",
@@ -73,7 +73,7 @@
       "Veteran":"Y"
     },
     {
-      "First Name":"ALABAMAFOURTEEN",
+      "First Name":"${VISTA_STATE}FOURTEEN",
       "Last Name":"ZZTEST",
       "Gender":"F",
       "Date Of Birth":"01/10/1975",

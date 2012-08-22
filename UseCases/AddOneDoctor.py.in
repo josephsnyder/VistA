@@ -63,8 +63,15 @@ def AddOneDoctor(VistA,fullname,initials,ssn,NPI,sex,accesscode,verifycode,signa
   VistA.wait('Do you wish to proceed')
   VistA.write('Yes')
   try:
-    VistA.wait('add this user to mail groups', 5)
-    VistA.write('NO')
+    while True:
+      index = VistA.multiwait(['add this user to mail groups',
+                               'Select User Management Option:'], 5)
+      if index == 0:
+        VistA.write('NO')
+        continue
+      elif index == 1:
+        VistA.write('?')
+        break
   except Exception, e:
     VistA.write('')
 

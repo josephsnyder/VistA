@@ -1,0 +1,40 @@
+{
+  "Doctors":[
+    {
+      "Full Name":"SMITH,JANE",
+      "Initials":"JS",
+      "SSN":"000000029",
+      "NPI":"0383166994",
+      "Gender":"F",
+      "Access Code":"fakedoc2",
+      "Verify Code":"2Doc!@#$",
+      "Signature Code":"JSM123",
+      "Person Class":"769",
+      "Division Name":"${VISTA_STATE} VA MEDICAL CENTER"
+    },
+    {
+      "Full Name":"CLARK,GEORGE",
+      "Initials":"GC",
+      "SSN":"000000041",
+      "NPI":"0838136816",
+      "Gender":"M",
+      "Access Code":"mhdoctor2",
+      "Verify Code":"3Mhd!@#$",
+      "Signature Code":"GEOK123",
+      "Person Class":"352",
+      "Division Name":"${VISTA_STATE} VA MEDICAL CENTER"
+    },
+    {
+      "Full Name":"KIRK,JOSEPH",
+      "Initials":"JK",
+      "SSN":"000000042",
+      "NPI":"0625639600",
+      "Gender":"M",
+      "Access Code":"audidoctor2",
+      "Verify Code":"2Aud!@#$",
+      "Signature Code":"JOEK123",
+      "Person Class":"239",
+      "Division Name":"${VISTA_STATE} VA MEDICAL CENTER"
+    }
+  ]
+}

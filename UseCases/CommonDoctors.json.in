@@ -10,7 +10,7 @@
       "Verify Code":"3Car!@#$",
       "Signature Code":"JOHM123",
       "Person Class":"776",
-      "Division Name":"ALABAMA VA MEDICAL CENTER"
+      "Division Name":"${VISTA_STATE} VA MEDICAL CENTER"
     }
   ]
 }

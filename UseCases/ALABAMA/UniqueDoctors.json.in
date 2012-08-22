@@ -9,8 +9,8 @@
       "Access Code":"fakedoc1",
       "Verify Code":"2Doc!@#$",
       "Signature Code":"SMIJ123",
-      "Person Class":"779",
-      "Division Name":"ALABAMA VA MEDICAL CENTER"
+      "Person Class":"769",
+      "Division Name":"${VISTA_STATE} VA MEDICAL CENTER"
     },
     {
       "Full Name":"WILLIAMS,TIMOTHY",
@@ -22,7 +22,7 @@
       "Verify Code":"2Mhd!@#$",
       "Signature Code":"TIMW123",
       "Person Class":"352",
-      "Division Name":"ALABAMA VA MEDICAL CENTER"
+      "Division Name":"${VISTA_STATE} VA MEDICAL CENTER"
     },
     {
       "Full Name":"ALEXANDER,ROBERT",
@@ -30,11 +30,11 @@
       "SSN":"000000034",
       "NPI":"0720312863",
       "Gender":"M",
-      "Access Code":"mhdoctor1",
+      "Access Code":"audidoctor1",
       "Verify Code":"2Aud!@#$",
       "Signature Code":"ROBA123",
       "Person Class":"239",
-      "Division Name":"ALABAMA VA MEDICAL CENTER"
+      "Division Name":"${VISTA_STATE} VA MEDICAL CENTER"
     }
   ]
 }
