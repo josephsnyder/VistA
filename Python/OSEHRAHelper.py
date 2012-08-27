@@ -156,6 +156,35 @@ class ConnectWinCache(ConnectMUMPS):
   def getBefore(self):
     return self.before
 
+  def startCoverage(self):
+    self.write('D ^%SYS.MONLBL')
+    self.wait('choice')
+    self.write('1')
+    self.wait('Routine Name')
+    self.write('*')
+    self.wait('Routine Name')
+    self.write('')
+    self.wait('choice')
+    self.write('2')
+    self.wait('choice')
+    self.write('1')
+    self.wait('continue')
+    self.write('\r')
+
+  def stopCoverage(self,path):
+    newpath,filename=os.path.split(path)
+    self.write('D ^%SYS.MONLBL')
+    self.wait('choice')
+    self.write('6')
+    self.wait('Routine number')
+    self.write('*')
+    self.wait('FileName')
+    self.write(newpath + '/Coverage/' + filename.replace('.log','.cmcov'))
+    self.wait('continue')
+    self.write('')
+    self.wait('choice')
+    self.write('1\r')
+
 class ConnectLinuxCache(ConnectMUMPS):
   def __init__(self,logfile,instance,namespace,location='127.0.0.1'):
     global connection,log
@@ -194,6 +223,35 @@ class ConnectLinuxCache(ConnectMUMPS):
   def getBefore(self):
     return connection.before
 
+  def startCoverage(self):
+    self.write('D ^%SYS.MONLBL')
+    self.wait('choice')
+    self.write('1')
+    self.wait('Routine Name')
+    self.write('*')
+    self.wait('Routine Name')
+    self.write('')
+    self.wait('choice')
+    self.write('2')
+    self.wait('choice')
+    self.write('1')
+    self.wait('continue')
+    self.write('\r')
+
+  def stopCoverage(self,path):
+    newpath,filename=os.path.split(path)
+    self.write('D ^%SYS.MONLBL')
+    self.wait('choice')
+    self.write('6')
+    self.wait('Routine number')
+    self.write('*')
+    self.wait('FileName')
+    self.write(newpath + '/Coverage/' + filename.replace('.log','.cmcov'))
+    self.wait('continue')
+    self.write('')
+    self.wait('choice')
+    self.write('1\r')
+
 class ConnectLinuxGTM(ConnectMUMPS):
   def __init__(self,logfile,instance,namespace,location='127.0.0.1'):
     global connection,log
@@ -229,6 +287,25 @@ class ConnectLinuxGTM(ConnectMUMPS):
     return connection.match
   def getBefore(self):
     return connection.before
+
+  def startCoverage(self):
+    self.write('K ^ZZCOVERAGE VIEW "TRACE":1:"^ZZCOVERAGE"')
+
+  def stopCoverage(self,path):
+     path,filename =os.path.split(path)
+     self.write('VIEW "TRACE":0:"^ZZCOVERAGE"')
+     self.wait(PROMPT)
+     self.write('D ^%GO')
+     self.wait('Global')
+     self.write('ZZCOVERAGE')
+     self.wait('Global')
+     self.write('')
+     self.wait('Label:')
+     self.write('')
+     self.wait('Format')
+     self.write('ZWR')
+     self.wait('device')
+     self.write(path +'/Coverage/'+ filename.replace('.log','.mcov'))
 
 def ConnectToMUMPS(logfile,instance='CACHE',namespace='VISTA',location='127.0.0.1'):
 

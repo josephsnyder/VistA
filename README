@@ -4,3 +4,107 @@ This project provides tools to perform automatic testing of a VistA
 instance running under a GT.M or InterSystems Cache environment.
 
 Please visit http://osehra.org for more information.
+
+----------------------------------------------------------------------------
+Coverage:	
+
+
+If the option is selected, print a warning message saying that the tests
+may take longer and use more memory.  Also warn that parsing the coverage
+will require a newer version of CMake (v2.8.9)
+
+The coverage will look for a specific file in the binary directory to tell
+what coverage will be used.  On Cache instances, the file will be called
+cache_coverage.cmcov, on GT.M it will be gtm_coverage.mcov.  This file
+will contain two lines:
+
+        packages: ${OSEHRA_Path}/Packages
+        coverage_dir:${VISTA_BINARY_DIR}/Testing/Temporary/Coverage
+
+This file will be automatically written by CMake when the option is
+chosen.  This file should be written new at each run of configuration.
+Add a check before the USE_COVERAGE if-block to check if the .mcov/.cmcov
+file exists, and remove it if the file is there.
+
+The two environments that we use (Cache/GT.M) will use their own method of
+tracing.
+
+  GT.M:
+    The GT.M version is the "VIEW TRACE" command which keeps track of
+    the lines used in a global named ZZCOVERAGE.  The startCoverage should kill the old
+    global and start the trace again.
+
+    The stopCoverage command should stop the trace, and then go into the GlobalPrint
+    routine(^%GO) and print out the ZZCOVERAGE global to a file with the extension of
+    .mcov in the ${VISTA_BINARY_DIR}/Testing/Temporary/Coverage directory.  
+    
+      def startCoverage(self):
+        self.write('K ^ZZCOVERAGE VIEW "TRACE":1:"^ZZCOVERAGE"')
+
+      def stopCoverage(self,path):
+         path,filename =os.path.split(path)
+         self.write('VIEW "TRACE":0:"^ZZCOVERAGE"')
+         self.wait(PROMPT)
+         self.write('D ^%GO')
+         self.wait('Global')
+         self.write('ZZCOVERAGE')
+         self.wait('Global')
+         self.write('')
+         self.wait('Label:')
+         self.write('')
+         self.wait('Format')
+         self.write('ZWR')
+         self.wait('device')
+         self.write(path +'/Coverage/'+ filename.replace('.log','.mcov'))
+
+  Cache:
+    
+    The Cache utility used to perform coverage is the %SYS.MONLBL.
+    The startCoverage function for the two Cache setups should start the %SYS.MONLBL
+    and choosing the options to capture line coverage(option #2) for all processes
+    
+    The stopCoverage function should pause the monitor and write out the captured information
+    a .csv style to a file with a .cmcov extension in the ${VISTA_BINARY_DIR}/Testing/Temporary/Coverage directory.
+    Then stop the listener, and exit the utility. 
+    
+    The Cache if-block should also print out an additional warning, the memory
+    used by the %SYS.MONLBL is controlled by the configuration variable
+    "gmHeap", in the Advanced Memory Settings tab. It should warn the user that this
+    number may need to be increased to use the coverage capability.
+
+      def startCoverage(self):
+        self.write('D ^%SYS.MONLBL')
+        self.wait('choice')
+        self.write('1')
+        self.wait('Routine Name')
+        self.write('*')
+        self.wait('Routine Name')
+        self.write('')
+        self.wait('choice')
+        self.write('2')
+        self.wait('choice')
+        self.write('1')
+        self.wait('continue')
+        self.write('\r')
+
+      def stopCoverage(self,path):
+        newpath,filename=os.path.split(path)
+        self.write('D ^%SYS.MONLBL')
+        self.wait('choice')
+        self.write('6')
+        self.wait('Routine number')
+        self.write('*')
+        self.wait('FileName')
+        self.write(newpath + '/Coverage/' + filename.replace('.log','.cmcov'))
+        self.wait('continue')
+        self.write('')
+        self.wait('choice')
+        self.write('1\r')
+        
+  Usage:
+    The coverage will run automatically as a step in a Dashboard submission (ctest -D Nightly or ctest -D Experimental).
+    It will parse the .cmcov/.mcov files and create XML documents that are displayed in the Coverage section of the dashboard.
+    
+    The coverage can be run on demand with a slightly changed CTest command.  
+      ctest -D ExperimentalCoverage
+    will run only the coverage step and print the results to the screen.

@@ -41,6 +41,12 @@ set(BUILD_TESTING "ON" CACHE INTERNAL "Always build testing")
 option(USE_XINDEX_WARNINGS_AS_FAILURES "Use warnings as a failure condition for XINDEX tests?" OFF)
 option(BUILD_REPORTS "Build Reports." OFF)
 option(CLEAN_DATABASE "Overwrite the database file during build phase of testing? To remove this option, delete the CMake Cache" OFF)
+option(USE_COVERAGE "Create a coverage map of VistA based off the testing" OFF)
+
+if(USE_COVERAGE)
+    message(WARNING "Selecting the coverage option may cause the tests to run slower as there are more tasks to preform during a given test.  This will also create new text files during the run.
+    It also requires a newer version of CMake: http://www.kitware.com/blog/home/post/360")
+endif()
 
 # how much time to allocate in seconds for the process of importing globals
 set(GLOBALS_IMPORT_TIMEOUT 3600 CACHE STRING "Timeout in seconds for importing globals")
@@ -167,6 +173,19 @@ if(ccontrol)
         " Also verify that telnet port is set to 23 via Configuration->Device Settings->Telnet Settings ")
     endif()
   endif()
+  
+  if(EXISTS ${VISTA_BINARY_DIR}/cache_coverage.cmcov)
+    file(REMOVE ${VISTA_BINARY_DIR}/cache_coverage.cmcov)
+  endif()
+  if(USE_COVERAGE)
+    message(WARNING "
+Before running, check that gmHeap ( Configuration -> Advanced Memory Settings) is set to a proper value.
+The 'Memory Check' option from the main menu of ^%SYS.MONLBL will tell you if enough memory has allocated.  The value used during testing was 85000")
+    file(WRITE ${VISTA_BINARY_DIR}/cache_coverage.cmcov "packages:${OSEHRA_PATH}/Packages\r\ncoverage_dir:${VISTA_BINARY_DIR}/Testing/Temporary/Coverage")
+    file(MAKE_DIRECTORY "${VISTA_BINARY_DIR}/Testing/Temporary/Coverage")
+  endif()
+  
+  
 endif()
 
 #if gtmprofile.sh is found, the linux programs and GT.M testing evironment is used.
@@ -191,6 +210,16 @@ if(GTMPROFILE)
   if( BUILD_REPORTS )
     add_subdirectory( Reports )
   endif(BUILD_REPORTS)
+  
+  if(EXISTS ${VISTA_BINARY_DIR}/gtm_coverage.mcov)
+    file(REMOVE ${VISTA_BINARY_DIR}/gtm_coverage.mcov)
+  endif()
+
+    #Option to include tracing for coverage purposes
+  if (USE_COVERAGE)
+    file(WRITE ${VISTA_BINARY_DIR}/gtm_coverage.mcov "packages:${OSEHRA_PATH}/Packages\r\ncoverage_dir:${VISTA_BINARY_DIR}/Testing/Temporary/Coverage")
+    file(MAKE_DIRECTORY "${VISTA_BINARY_DIR}/Testing/Temporary/Coverage")
+  endif()
 endif()
 
 option(USE_LOGIN "Sign into the VistA Instance using a name and password" OFF)
