@@ -43,6 +43,8 @@ from AssignNotificationLetter import AssignNotificationLetter
 from ReplaceDatabase import ReplaceDatabase
 from JSONConfig import JSONConfigParser
 
+""" reset the database """
+ReplaceDatabase()
 configParser = JSONConfigParser('Scenario001.json')
 VistA=ConnectToVista('Scenario001.log')
 if '${USE_COVERAGE}' == 'ON':
@@ -52,6 +54,7 @@ InitializeFileman(VistA)
 InitializeDevice(VistA)
 SetupDomain(VistA)
 SetupCPRS(VistA)
+StartTaskMan(VistA)
 allServiceSections = configParser.getAllServiceSections()
 if allServiceSections:
   print ("Adding Service Sections")
@@ -64,7 +67,6 @@ allHolidays = configParser.getAllHolidays()
 if allHolidays:
   print ("Adding Holidays")
   AddHolidaysByConfig(VistA, allHolidays)
-StartTaskMan(VistA)
 CreateSystemManager(VistA)
 print ("Adding Test Patients")
 AddTestPatientsByConfig(VistA, configParser.getAllPatients())

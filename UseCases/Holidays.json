@@ -17,6 +17,14 @@
       ]
     },
     {
+      "Name":"Valentines’ Day",
+      "Date":[
+        "FEB 13, 2012",
+        "FEB 14, 2013",
+        "FEB 14, 2014"
+      ]
+    },
+    {
       "Name":"Washington's Birthday",
       "Date":[
         "FEB 20, 2012",
@@ -38,6 +46,14 @@
         "JUL 4, 2012",
         "JUL 4, 2013",
         "JUL 4, 2014"
+      ]
+    },
+    {
+      "Name":"National VA Organization Day",
+      "Date":[
+        "JUL 20, 2012",
+        "JUL 22, 2013",
+        "JUL 21, 2014"
       ]
     },
     {
