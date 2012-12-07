@@ -40,7 +40,7 @@ set(BUILD_TESTING "ON" CACHE INTERNAL "Always build testing")
 #options that will show up on the CMake Gui that allows customization of the project
 option(USE_XINDEX_WARNINGS_AS_FAILURES "Use warnings as a failure condition for XINDEX tests?" OFF)
 option(BUILD_REPORTS "Build Reports." OFF)
-option(CLEAN_DATABASE "Overwrite the database file during build phase of testing? To remove this option, delete the CMake Cache" OFF)
+set(CLEAN_DATABASE "OFF" CACHE INTERNAL "Overwrite the database file during build phase of testing? To remove this option, delete the CMake Cache")
 option(USE_COVERAGE "Create a coverage map of VistA based off the testing" OFF)
 
 if(USE_COVERAGE)
