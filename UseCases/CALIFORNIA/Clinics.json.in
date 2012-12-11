@@ -2,9 +2,9 @@
   "Clinics":[
     {
       "Name":"Mental Health",
-      "Abbreviation":"ALMH",
+      "Abbreviation":"CAMH",
       "Phone Number":"555-555-1414",
-      "Provider":"WILLIAMS,TIMOTHY",
+      "Provider":"BROWN,CLARK",
       "Stop Code":"301",
       "Credit Stop Code":"301",
       "Service Type":"M",
@@ -15,9 +15,9 @@
     },
     {
       "Name":"Medical Center Primary Care",
-      "Abbreviation":"ALPC1",
+      "Abbreviation":"CAPC1",
       "Phone Number":"555-555-2525",
-      "Provider":"SMITH,JAMES",
+      "Provider":"WHITE,MARK",
       "Stop Code":"301",
       "Credit Stop Code":"301",
       "Service Type":"M",
@@ -28,7 +28,7 @@
     },
     {
       "Name":"Orthopedics",
-      "Abbreviation":"ALORTH",
+      "Abbreviation":"CAORTH",
       "Phone Number":"555-555-3636",
       "Provider":"JOHNSON,MICHAEL",
       "Stop Code":"301",
@@ -41,9 +41,9 @@
     },
     {
       "Name":"OutPatient Primary Care",
-      "Abbreviation":"ALPC2",
+      "Abbreviation":"CAPC2",
       "Phone Number":"555-555-4747",
-      "Provider":"SMITH,JAMES",
+      "Provider":"WHITE,MARK",
       "Stop Code":"301",
       "Credit Stop Code":"301",
       "Service Type":"M",
@@ -54,9 +54,9 @@
     },
     {
       "Name":"Audiology",
-      "Abbreviation":"ALAUD",
+      "Abbreviation":"CAAUD",
       "Phone Number":"555-555-5858",
-      "Provider":"ALEXANDER,ROBERT",
+      "Provider":"HUDSON,MARIO",
       "Stop Code":"301",
       "Credit Stop Code":"301",
       "Service Type":"M",

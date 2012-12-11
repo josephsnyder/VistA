@@ -50,10 +50,13 @@ VistA=ConnectToVista('Scenario001.log')
 if '${USE_COVERAGE}' == 'ON':
   VistA.startCoverage()
   VistA.wait(PROMPT)
-InitializeFileman(VistA)
-InitializeDevice(VistA)
-SetupDomain(VistA)
-SetupCPRS(VistA)
+if ("${VISTA_STATE}" != "CALIFONIA"): # assume CALIFONIA is using VISN0's data
+  InitializeFileman(VistA)
+  InitializeDevice(VistA)
+  SetupDomain(VistA)
+  SetupCPRS(VistA)
+else:
+  VistA.write("") # make sure the prompt is available again
 StartTaskMan(VistA)
 allServiceSections = configParser.getAllServiceSections()
 if allServiceSections:
