@@ -53,6 +53,7 @@ if '${USE_COVERAGE}' == 'ON':
 if ("${VISTA_STATE}" != "CALIFORNIA"): # assume CALIFORNIA is using VISN0's data
   InitializeFileman(VistA)
   InitializeDevice(VistA)
+  SetupDomain(VistA)
   SetupCPRS(VistA)
 else:
   SetupDomain(VistA)
