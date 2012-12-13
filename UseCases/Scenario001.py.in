@@ -82,8 +82,8 @@ AddDoctorsByConfig(VistA, configParser.getAllDoctors())
 print ("Adding Clinics")
 AddClinicsByConfig(VistA, configParser.getAllClinics())
 AssignNotificationLetter(VistA)
-MakeAppointment(VistA,'12/12','0900','60','Audiology','ZZTEST,ONE')
-found = VerifyOneAppointment(VistA,'ZZTEST,ONE','Audiology','Dec 12, 2012  9:00 AM','60')
+MakeAppointment(VistA,'4/5','0900','60','Audiology','ZZTEST,ONE')
+found = VerifyOneAppointment(VistA,'ZZTEST,ONE','Audiology','Apr 05, 2013  9:00 AM','60')
 if '${USE_COVERAGE}' == 'ON':
   VistA.stopCoverage("${VISTA_BINARY_DIR}/Testing/Temporary/Scenario001.log")
 if found:
