@@ -22,6 +22,8 @@ from OSEHRAHelper import PROMPT
 #---------------------------------------------------------------------
 
 def SetupDomain(VistA):
+  VistA.wait(PROMPT)
+  VistA.write('S DUZ=1 D Q^DI')
   VistA.wait('Select OPTION:')
   VistA.write('1')
   VistA.wait('INPUT TO WHAT FILE')
@@ -60,4 +62,5 @@ def SetupDomain(VistA):
   VistA.wait('MODIFY WHAT FILE')
   VistA.write('8994.1\rNO\rY\rY\r')
   VistA.wait('Select OPTION')
+  VistA.write('')
 

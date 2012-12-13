@@ -99,20 +99,27 @@ def AddOneInstitution(VistA,institutionname,stationnumber,typecode,NPI,multidivi
   VistA.write('VA')
   VistA.wait('STATION NUMBER:')
   VistA.write(stationnumber)
-  VistA.wait('OFFICIAL VA NAME')
-  VistA.write('')
-  VistA.wait('INACTIVE FACILITY FLAG')
-  VistA.write('')
-  VistA.wait('BILLING FACILITY NAME')
-  VistA.write('')
-  VistA.wait('CURRENT LOCATION')
-  VistA.write('1')
-  VistA.wait('Select EFFECTIVE DATE')
-  VistA.write('')
-  VistA.wait('Select CODING SYSTEM')
-  VistA.write('')
-  VistA.wait('Select INSTITUTION NAME:')
-  VistA.write('')
+  OptionalList = ['OFFICIAL VA NAME',
+                  'INACTIVE FACILITY FLAG',
+                  'BILLING FACILITY NAME',
+                  'CURRENT LOCATION',
+                  'Select EFFECTIVE DATE',
+                  'Select CODING SYSTEM',
+                  # special treatment section
+                  'Select NAME:',
+                  'Select INSTITUTION NAME:']
+  while True:
+    index = VistA.multiwait(OptionalList)
+    if index == len(OptionalList) - 2: # assicoate name
+      VistA.write("VAHS")
+      VistA.wait('//')
+      VistA.write('Y')
+      VistA.wait('NAME NUMBER:')
+      VistA.write('')
+    else:
+      VistA.write('')
+    if index == len(OptionalList) - 1:
+      break
   VistA.wait('Select OPTION')
   VistA.write('')
 

@@ -21,6 +21,7 @@ from OSEHRAHelper import PROMPT
 #---------------------------------------------------------------------
 
 def InitializeFileman(VistA):
+  VistA.wait(PROMPT)
   VistA.write('D ^DINIT')
   VistA.wait('Initialize VA FileMan now?')
   VistA.write('Yes')

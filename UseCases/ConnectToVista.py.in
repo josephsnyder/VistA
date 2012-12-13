@@ -29,5 +29,6 @@ def ConnectToVista(logfilename):
     except IndexError,no_namechange:
       pass
   VistA.wait(PROMPT)
+  VistA.write("")
   return VistA
 

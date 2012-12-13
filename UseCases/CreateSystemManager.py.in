@@ -20,12 +20,13 @@ from OSEHRAHelper import PROMPT
 # Create the System Manager
 #---------------------------------------------------------------------
 
+default_access_code = "SM1234"
+temp_verify_code = "SM1234TMP!!"
+init_verify_code = "SM1234!!"
+def_service_section = "IRM"
+
 def CreateSystemManager(VistA):
-  default_access_code = "SM1234"
-  temp_verify_code = "SM1234TMP!!"
-  init_verify_code = "SM1234!!"
-  def_service_section = "IRM"
-  is_visn0 = "${VISTA_STATE}" == "CALIFONIA" # assume CALIFONIA is using VISN0's data
+  is_visn0 = "${VISTA_STATE}" == "CALIFORNIA" # assume CALIFONIA is using VISN0's data
   if is_visn0:
     temp_verify_code = init_verify_code
     def_service_section = "MEDICAL ADMIN"
@@ -105,7 +106,6 @@ def CreateSystemManager(VistA):
   VistA.wait('jump to a specific field\.')
   VistA.write('E')
   # Print User Account Access Letter
-  #VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rEVE\r1\r^Want to edit ACCESS CODE\rY\rSM1234\rSM1234\r^Want to edit VERIFY CODE\rY\rSM1234TMP!!\rSM1234TMP!!\r^SECONDARY MENU OPTIONS\rOR PARAM COORDINATOR MENU\rY\r\r\r\rTIU IRM MAINTENANCE MENU\rY\r\r\r\rXPAR MENU TOOLS\rY\r\r\r\rDG REGISTER PATIENT\rY\r\r\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^SERVICE/SECTION\rIRM\r^\rY')
   VistA.wait('User Account Access Letter')
   VistA.write('NO')
   VistA.wait('wish to allocate security keys?')
@@ -161,3 +161,11 @@ def CreateSystemManager(VistA):
   #
   #    "Select Systems Manager Menu Option:"
   #
+
+def SignInAsSysmtemManager(VistA):
+  VistA.wait(PROMPT)
+  VistA.write('D ^ZU')
+  VistA.wait('ACCESS CODE:')
+  VistA.write(default_access_code)
+  VistA.wait('VERIFY CODE:')
+  VistA.write(init_verify_code)

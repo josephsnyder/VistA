@@ -57,7 +57,7 @@ class ConnectMUMPS(object):
   def getenv(self,volume):
     self.write('D GETENV^%ZOSV W Y')
     if sys.platform=='win32':
-      match=connection.expect([volume + ':[0-9A-Za-z-]+'],None)
+      match=connection.expect([volume + ':[0-9A-Za-z-]+'],30)
       test=match[1].span()
       VistAboxvol=''
       for i in range(test[0],test[1]):
@@ -157,6 +157,7 @@ class ConnectWinCache(ConnectMUMPS):
     return self.before
 
   def startCoverage(self):
+    self.wait(PROMPT)
     self.write('D ^%SYS.MONLBL')
     self.wait('choice')
     self.write('1')
@@ -173,6 +174,7 @@ class ConnectWinCache(ConnectMUMPS):
 
   def stopCoverage(self,path):
     newpath,filename=os.path.split(path)
+    self.wait(PROMPT)
     self.write('D ^%SYS.MONLBL')
     self.wait('choice')
     self.write('6')

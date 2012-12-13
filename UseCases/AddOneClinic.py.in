@@ -17,6 +17,7 @@
 from OSEHRAHelper import PROMPT
 
 def AddOneClinic(VistA,clinicname,abbreviation,phonenumber,provider,stopcode,creditstopcode,servicetype,noncount,parentdiv,parentinst,appointmentlength):
+  is_visn0 = "${VISTA_STATE}" == "CALIFORNIA" # assume CALIFONIA is using VISN0's data
   VistA.write('S DUZ=1 D ^XUP')
   VistA.wait('Select OPTION NAME')
   VistA.write('SDMGR')
@@ -78,10 +79,13 @@ def AddOneClinic(VistA,clinicname,abbreviation,phonenumber,provider,stopcode,cre
   VistA.write('1')
   VistA.wait('FUTURE BOOKING')
   VistA.write('365')
-  VistA.wait('HOUR CLINIC DISPLAY BEGINS')
-  VistA.write('8')
-  VistA.wait('START TIME FOR AUTO REBOOK')
-  VistA.write('8')
+  OptionalList = ['HOUR CLINIC DISPLAY BEGINS',
+                  'START TIME FOR AUTO REBOOK']
+  while True:
+    index = VistA.multiwait(OptionalList)
+    VistA.write('8')
+    if index == len(OptionalList) -1 :
+      break
   VistA.wait('DAYS FOR AUTO-REBOOK')
   VistA.write('1')
   VistA.wait('SCHEDULE ON HOLIDAYS')
@@ -102,12 +106,18 @@ def AddOneClinic(VistA,clinicname,abbreviation,phonenumber,provider,stopcode,cre
   VistA.write(appointmentlength)
   VistA.wait('VARIABLE')
   VistA.write('Yes')
-  VistA.wait('DISPLAY INCREMENTS PER HOUR')
-  slots = 60/int(appointmentlength)
-  VistA.write(str(slots))
+  OptionalList = ['DISPLAY INCREMENTS PER HOUR',
+                  'AVAILABILITY DATE:']
+  while True:
+    index = VistA.multiwait(OptionalList)
+    if index == 0:
+      slots = 60/int(appointmentlength)
+      VistA.write(str(slots))
+      continue
+    else:
+      break
   dates = ['JUL 2,2012','JUL 3,2012','JUL 4,2012','JUL 5,2012','JUL 6,2012']
   for date in dates:
-    VistA.wait('AVAILABILITY DATE')
     VistA.write(date)
     VistA.wait('TIME')
     VistA.write('0800-1200\r2')
@@ -117,7 +127,7 @@ def AddOneClinic(VistA,clinicname,abbreviation,phonenumber,provider,stopcode,cre
     VistA.write('')
     VistA.wait('PATTERN OK')
     VistA.write('Yes')
-  VistA.wait('AVAILABILITY DATE')
+    VistA.wait('AVAILABILITY DATE')
   VistA.write('')
   VistA.wait('Select CLINIC NAME')
   VistA.write('')

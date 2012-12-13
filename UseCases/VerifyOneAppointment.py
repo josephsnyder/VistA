@@ -39,7 +39,12 @@ def VerifyOneAppointment(VistA, patientName, clinicName, datetime, length):
   VistA.write('Display Appointments')
   VistA.wait('Select PATIENT NAME:')
   VistA.write(patientName)
-  VistA.wait('Do you want to see only pending appointments\?')
+  index = VistA.multiwait(['Select PATIENT NAME:',
+           'Do you want to see only pending appointments\?'])
+  if index == 0: # patient is not found
+    print "Patient %s does not exist" % patientName
+    GotoPrompt(VistA)
+    return False
   VistA.write('YES') # future appointment only
   VistA.wait('DEVICE')
   VistA.write(';132;999')

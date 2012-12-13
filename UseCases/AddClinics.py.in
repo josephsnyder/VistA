@@ -29,6 +29,7 @@ def AddClinics(VistA,state):
 
 def AddClinicsByConfig(VistA, clinicsJson):
   for clinic in clinicsJson:
+    print clinic
     AddOneClinic(VistA, clinic['Name'], clinic['Abbreviation'],
                  clinic['Phone Number'], clinic['Provider'],
                  clinic['Stop Code'], clinic['Credit Stop Code'],

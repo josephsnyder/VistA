@@ -50,12 +50,12 @@ VistA=ConnectToVista('Scenario001.log')
 if '${USE_COVERAGE}' == 'ON':
   VistA.startCoverage()
   VistA.wait(PROMPT)
-if ("${VISTA_STATE}" != "CALIFONIA"): # assume CALIFONIA is using VISN0's data
+if ("${VISTA_STATE}" != "CALIFORNIA"): # assume CALIFORNIA is using VISN0's data
   InitializeFileman(VistA)
   InitializeDevice(VistA)
-  SetupDomain(VistA)
   SetupCPRS(VistA)
 else:
+  SetupDomain(VistA)
   VistA.write("") # make sure the prompt is available again
 StartTaskMan(VistA)
 allServiceSections = configParser.getAllServiceSections()
@@ -70,24 +70,26 @@ allHolidays = configParser.getAllHolidays()
 if allHolidays:
   print ("Adding Holidays")
   AddHolidaysByConfig(VistA, allHolidays)
+print ("Adding Institutions")
+AddInstitutionsByConfig(VistA,configParser.getAllInstitutions())
+print ("Adding Divisions")
+AddDivisionsByConfig(VistA, configParser.getAllDivisions())
+print ("Adding Doctors")
+AddDoctorsByConfig(VistA, configParser.getAllDoctors())
+print ("Adding Clinics")
+AddClinicsByConfig(VistA, configParser.getAllClinics())
+print ("Assigning Notification Letter")
+AssignNotificationLetter(VistA)
+#MakeAppointment(VistA,'12/12','0900','60','Audiology','ZZTEST,ONE')
+found = VerifyOneAppointment(VistA,'ZZTEST,ONE','Audiology','Dec 12, 2012  9:00 AM','60')
+print ("Adding System Manager")
 CreateSystemManager(VistA)
 print ("Adding Test Patients")
 AddTestPatientsByConfig(VistA, configParser.getAllPatients())
-#print ("Adding Institutions")
-#AddInstitutionsByConfig(VistA,configParser.getAllInstitutions())
-#print ("Adding Divisions")
-#AddDivisionsByConfig(VistA, configParser.getAllDivisions())
-#print ("Adding Doctors")
-#AddDoctorsByConfig(VistA, configParser.getAllDoctors())
-#print ("Adding Clinics")
-#AddClinicsByConfig(VistA, configParser.getAllClinics())
-#AssignNotificationLetter(VistA)
-#MakeAppointment(VistA,'12/12','0900','60','Audiology','ZZTEST,ONE')
-#found = VerifyOneAppointment(VistA,'ZZTEST,ONE','Audiology','Dec 12, 2012  9:00 AM','60')
-#if '${USE_COVERAGE}' == 'ON':
-#  VistA.stopCoverage("${VISTA_BINARY_DIR}/Testing/Temporary/Scenario001.log")
-#if found:
-#  sys.exit(0)
-#else:
-#  sys.exit(1)
+if '${USE_COVERAGE}' == 'ON':
+  VistA.stopCoverage("${VISTA_BINARY_DIR}/Testing/Temporary/Scenario001.log")
+if found:
+  sys.exit(0)
+else:
+  sys.exit(1)
 
