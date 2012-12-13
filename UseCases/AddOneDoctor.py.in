@@ -17,8 +17,8 @@
 #
 # TODO: insert the signaturecode in the script below.
 #
-def_service_section = "IRM"
 def AddOneDoctor(VistA,fullname,initials,ssn,NPI,sex,accesscode,verifycode,signaturecode,personclass,divisionname):
+  def_service_section = "IRM"
   is_visn0 = "${VISTA_STATE}" == "CALIFORNIA" # assume CALIFONIA is using VISN0's data
   if is_visn0:
     def_service_section = "MEDICAL ADMIN"

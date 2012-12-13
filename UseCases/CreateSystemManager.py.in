@@ -26,6 +26,10 @@ init_verify_code = "SM1234!!"
 def_service_section = "IRM"
 
 def CreateSystemManager(VistA):
+  default_access_code = "SM1234"
+  temp_verify_code = "SM1234TMP!!"
+  init_verify_code = "SM1234!!"
+  def_service_section = "IRM"
   is_visn0 = "${VISTA_STATE}" == "CALIFORNIA" # assume CALIFONIA is using VISN0's data
   if is_visn0:
     temp_verify_code = init_verify_code
