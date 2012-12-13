@@ -21,6 +21,14 @@ from OSEHRAHelper import PROMPT
 #---------------------------------------------------------------------
 
 def CreateSystemManager(VistA):
+  default_access_code = "SM1234"
+  temp_verify_code = "SM1234TMP!!"
+  init_verify_code = "SM1234!!"
+  def_service_section = "IRM"
+  is_visn0 = "${VISTA_STATE}" == "CALIFONIA" # assume CALIFONIA is using VISN0's data
+  if is_visn0:
+    temp_verify_code = init_verify_code
+    def_service_section = "MEDICAL ADMIN"
   VistA.wait(PROMPT)
   VistA.write('S DUZ=1 D ^XUP')
   VistA.wait('Select OPTION NAME')
@@ -31,9 +39,13 @@ def CreateSystemManager(VistA):
   VistA.write('ADD')
   VistA.wait(':')
   VistA.write('MANAGER,SYSTEM')
-  VistA.wait('No//')
-  VistA.write('Y')
-  VistA.wait('INITIAL:')
+  while True:
+    index = VistA.multiwait(['N[oO]//', 'INITIAL:'])
+    if index != 1:
+      VistA.write('Y')
+      continue
+    else:
+      break
   VistA.write('SM')
   VistA.wait('SSN:')
   VistA.write('000000001')
@@ -43,7 +55,57 @@ def CreateSystemManager(VistA):
   VistA.write('')
 
   VistA.wait('NAME COMPONENTS')
-  VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rEVE\r1\r^Want to edit ACCESS CODE\rY\rSM1234\rSM1234\r^Want to edit VERIFY CODE\rY\rSM1234TMP!!\rSM1234TMP!!\r^SECONDARY MENU OPTIONS\rOR PARAM COORDINATOR MENU\rY\r\r\r\rTIU IRM MAINTENANCE MENU\rY\r\r\r\rXPAR MENU TOOLS\rY\r\r\r\rDG REGISTER PATIENT\rY\r\r\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^SERVICE/SECTION\rIRM\r^\rY')
+  VistA.write('\r\r\r') # use all the default for NAME COMPONENTS and return back to main
+  VistA.wait('jump to a specific field\.')
+  VistA.write('C') # close command
+  # go to PRIMARY MENU OPTION
+  VistA.write('^PRIMARY MENU OPTION')
+  VistA.write('EVE') # set to EVE
+  VistA.wait("Choose 1-[\d] or '\^' to quit: ")
+  VistA.write("1") # the first selection is EVE
+  VistA.write('')
+  # set up secondary menu
+  VistA.write('^SECONDARY MENU')
+  second_menu_options = ('OR PARAM COORDINATOR MENU',
+                         'TIU IRM MAINTENANCE MENU',
+                         'XPAR MENU TOOLS',
+                         'DG REGISTER PATIENT')
+  for option in second_menu_options:
+    VistA.write(option)
+    VistA.wait('// ')
+    VistA.write('Y')
+    VistA.write('')
+    VistA.write('')
+    VistA.wait('jump to a specific field\.')
+    VistA.write('C') # close command
+  # want to edit ACCESS CODE
+  VistA.write('^Want to edit ACCESS CODE')
+  VistA.write('Y')
+  VistA.wait("Enter a new ACCESS CODE")
+  VistA.write(default_access_code)
+  VistA.wait('Please re-type the new code to show that I have it right:')
+  VistA.write(default_access_code)
+  # skip to verify code
+  VistA.write('^Want to edit VERIFY CODE')
+  VistA.write('Y')
+  VistA.wait("Enter a new VERIFY CODE:")
+  VistA.write(temp_verify_code)
+  VistA.wait('Please re-type the new code to show that I have it right: ')
+  VistA.write(temp_verify_code)
+  # set up the multiple sign-on
+  VistA.write('^MULTIPLE SIGN-ON')
+  VistA.write('1') # select the first one
+  VistA.write('1') # select allowed
+  VistA.write('99') # set the limit to be 99
+  # set up service/section
+  VistA.write('^SERVICE/SECTION')
+  VistA.write(def_service_section)
+  VistA.wait('jump to a specific field\.')
+  VistA.write('S')
+  VistA.wait('jump to a specific field\.')
+  VistA.write('E')
+  # Print User Account Access Letter
+  #VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rEVE\r1\r^Want to edit ACCESS CODE\rY\rSM1234\rSM1234\r^Want to edit VERIFY CODE\rY\rSM1234TMP!!\rSM1234TMP!!\r^SECONDARY MENU OPTIONS\rOR PARAM COORDINATOR MENU\rY\r\r\r\rTIU IRM MAINTENANCE MENU\rY\r\r\r\rXPAR MENU TOOLS\rY\r\r\r\rDG REGISTER PATIENT\rY\r\r\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^SERVICE/SECTION\rIRM\r^\rY')
   VistA.wait('User Account Access Letter')
   VistA.write('NO')
   VistA.wait('wish to allocate security keys?')
@@ -79,18 +141,19 @@ def CreateSystemManager(VistA):
   VistA.wait(PROMPT)
   VistA.write('D ^ZU')
   VistA.wait('ACCESS CODE:')
-  VistA.write('SM1234')
+  VistA.write(default_access_code)
   VistA.wait('VERIFY CODE:')
-  VistA.write('SM1234TMP!!')
+  VistA.write(temp_verify_code)
   #
   # Dialog changing the temporary verify code
   #
-  VistA.wait('Please enter your CURRENT verify code:')
-  VistA.write('SM1234TMP!!')
-  VistA.wait('Enter a new VERIFY CODE:')
-  VistA.write('SM1234!!')
-  VistA.wait('Please re-type the new code to show that I have it right:')
-  VistA.write('SM1234!!')
+  if not is_visn0:
+    VistA.wait('Please enter your CURRENT verify code:')
+    VistA.write(temp_verify_code)
+    VistA.wait('Enter a new VERIFY CODE:')
+    VistA.write(init_verify_code)
+    VistA.wait('Please re-type the new code to show that I have it right:')
+    VistA.write(init_verify_code)
   VistA.wait('Select TERMINAL TYPE NAME:')
   VistA.write('')
   #

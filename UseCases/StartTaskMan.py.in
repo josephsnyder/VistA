@@ -20,5 +20,31 @@ def StartTaskMan(VistA):
   # VistA.wait(PROMPT)
   # VistA.write('K')
   VistA.wait(PROMPT)
-  VistA.write('D ^ZTMB')
-
+  VistA.write("S DUZ=1 D ^XUP") # program menu
+  VistA.wait("Select OPTION NAME:")
+  VistA.write("EVE") # Systems Manager Menu
+  VistA.wait("CHOOSE 1-\d+:")
+  VistA.write("1") # Systems Manager Menu
+  VistA.wait("Select Systems Manager Menu Option:")
+  VistA.write("Taskman Management")
+  VistA.wait("Select Taskman Management Option:")
+  VistA.write("Taskman Management Utilities")
+  VistA.wait("Select Taskman Management Utilities Option:")
+  VistA.write("Restart Task Manager")
+  index = VistA.multiwait(["ARE YOU SURE YOU WANT TO RESTART ANOTHER TASKMAN\?",
+                           "ARE YOU SURE YOU WANT TO RESTART TASKMAN\?"])
+  if index == 0:
+    VistA.write("NO")
+  elif index == 1:
+    VistA.write("YES")
+    VistA.wait("Restarting...TaskMan restarted\!")
+  VistA.wait("Select Taskman Management Utilities Option:")
+  VistA.write("")
+  VistA.wait("Select Taskman Management Option:")
+  VistA.write("")
+  VistA.wait("Select Systems Manager Menu Option:")
+  VistA.write("") # Systems Manager Menu
+  VistA.wait("Do you really want to halt\?")
+  VistA.write("YES") # Systems Manager Menu
+  VistA.wait(PROMPT)
+  VistA.write("")
