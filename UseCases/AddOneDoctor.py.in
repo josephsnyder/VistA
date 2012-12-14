@@ -61,16 +61,16 @@ def AddOneDoctor(VistA,fullname,initials,ssn,NPI,sex,accesscode,verifycode,signa
   # want to edit ACCESS CODE
   VistA.write('^Want to edit ACCESS CODE')
   VistA.write('Y')
-  VistA.wait("Enter a new ACCESS CODE")
+  VistA.wait("\<Hidden\>:")
   VistA.write(accesscode)
-  VistA.wait('Please re-type the new code to show that I have it right:')
+  #VistA.wait('Please re-type the new code to show that I have it right:')
   VistA.write(accesscode)
   # skip to verify code
   VistA.write('^Want to edit VERIFY CODE')
   VistA.write('Y')
-  VistA.wait("Enter a new VERIFY CODE:")
+  #VistA.wait("Enter a new VERIFY CODE:")
   VistA.write(verifycode)
-  VistA.wait('Please re-type the new code to show that I have it right: ')
+  #VistA.wait('Please re-type the new code to show that I have it right: ')
   VistA.write(verifycode)
   # setup the Person Class
   # we have to go to LANGUAGE first

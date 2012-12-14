@@ -112,9 +112,9 @@ def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran, isLastO
       VistA.write('^7')
       VistA.wait('QUIT')
       VistA.write('3')
-      VistA.wait('PRIMARY ELIGIBILITY CODE')
+      VistA.wait('PRIMARY ELIGIBILITY CODE:')
       if Veteran=='Y':
-        VistA.write('3\r\r\r\r')
+        VistA.write('\r\r\r\r')
       else:
         VistA.write('2\r\r\r\r')
       VistA.wait('QUIT')
