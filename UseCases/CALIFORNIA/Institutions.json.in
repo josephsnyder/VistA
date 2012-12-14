@@ -1,0 +1,39 @@
+{
+  "Institutions":[
+    {
+      "Name":"${VISTA_STATE} VA HEALTHCARE SYS",
+      "Station Number":"401",
+      "Type Code":"MC",
+      "NPI":"4529860114",
+      "MultiDivision":"Y",
+      "Facility Type":"HCS",
+      "Street":"Headquaters California Health Care Sys",
+      "City":"Sacramento",
+      "State":"${VISTA_STATE}",
+      "Zip Code":"94203"
+    },
+    {
+      "Name":"${VISTA_STATE} VA MEDICAL CENTER",
+      "Station Number":"401MC",
+      "Type Code":"MC",
+      "NPI":"8890253874",
+      "MultiDivision":"N",
+      "Facility Type":"VAMC",
+      "Street":"23 Bradford Avenue",
+      "City":"Sacramento",
+      "State":"${VISTA_STATE}",
+      "Zip Code":"94203"
+    },
+    {
+      "Name":"${VISTA_STATE} OUTPATIENT CLINIC",
+      "Station Number":"401OC",
+      "NPI":"7764091279",
+      "MultiDivision":"N",
+      "Facility Type":"CBOC",
+      "Street":"23 Eckerd Avenue",
+      "City":"Sacramento",
+      "State":"${VISTA_STATE}",
+      "Zip Code":"94203"
+    }
+  ]
+}
