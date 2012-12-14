@@ -17,9 +17,25 @@
 from OSEHRAHelper import ConnectToMUMPS,PROMPT
 from CreateSystemManager import SignInAsSysmtemManager
 
+def gotoRegisterPatientMenu(VistA):
+  #SignInAsSysmtemManager(VistA)
+  VistA.wait('Select Systems Manager Menu Option:')
+  VistA.write('Register a Patient')
+
+def gotoPrompt(VistA):
+  VistA.wait('PATIENT NAME:')
+  VistA.write('')
+  VistA.wait('Select Systems Manager Menu Option:')
+  VistA.write('')
+  VistA.wait('//')
+  VistA.write('')
+
+
 def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran, isLastOne=False):
-    VistA.wait('Select Systems Manager Menu Option:')
-    VistA.write('Register a Patient')
+
+    is_visn0 = "${VISTA_STATE}" == "CALIFORNIA" # assume CALIFONIA is using VISN0's data
+    if is_visn0:
+      return AddOnePatientVISN0(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran, isLastOne)
     OptionList = ['printer: ',
                   'PATIENT NAME']
     while True:
@@ -131,7 +147,152 @@ def AddOnePatient(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran, isLastO
 
     if not isLastOne:
       SignInAsSysmtemManager(VistA)
+      gotoRegisterPatientMenu(VistA)
+
+def AddOnePatientVISN0(VistA, LastName, FirstName, Gender, DOB, SSN, Veteran, isLastOne=False):
+  OptionList = ['printer: ',
+                'PATIENT NAME']
+  while True:
+    index = VistA.multiwait(OptionList)
+    if index == len(OptionList)-1:
+      VistA.write(LastName+','+FirstName)
+      break
+    if index == 0:
+      VistA.write("NULL DEVICE")
+
+  VistA.wait('ARE YOU ADDING')
+  VistA.write('Y')
+  VistA.wait('SEX')
+  VistA.write(Gender)
+  VistA.wait('DATE OF BIRTH')
+  VistA.write(DOB)
+  VistA.wait('SOCIAL SECURITY NUMBER')
+  VistA.write(SSN)
+  VistA.wait('TYPE')
+  if Veteran=='Y':
+      VistA.write('SC VETERAN')
+      VistA.wait('PATIENT VETERAN')
+      VistA.write('YES')
+      VistA.wait('SERVICE CONNECTED')
+      VistA.write('YES')
+  else:
+      VistA.write('NON-VETERAN')
+      VistA.wait('PATIENT VETERAN')
+      VistA.write('NO')
+      VistA.wait('SERVICE CONNECTED')
+      VistA.write('NO')
+  VistA.wait('MULTIPLE BIRTH INDICATOR')
+  VistA.write('')
+  index = VistA.multiwait(['FAMILY \(LAST\) NAME:','a new patient'])
+  if index == 1:
+      VistA.write('Y')
       VistA.wait('//')
-      VistA.write('')
-
-
+      VistA.write('^\r')
+  else:
+      VistA.write('^\r')
+  VistA.wait('Press ENTER to continue')
+  VistA.write('')
+  VistA.wait('MAIDEN NAME:')
+  VistA.write('')
+  VistA.wait('[CITY]')
+  VistA.write('Santa Monica')
+  VistA.wait('[STATE]')
+  VistA.write('California')
+  VistA.wait('ALIAS')
+  VistA.write('')
+  # talk to MPI failed
+  if VistA.type=='cache':
+    # Enter in more information about the patient.
+    VistA.wait('exit:')
+    VistA.write('\r')
+    VistA.wait('Do you wish to request a HINQ inquiry  \?')
+    VistA.write('N')
+    VistA.wait('Select Admitting Area:')
+    VistA.write('')
+    VistA.wait('Patient Data')
+    VistA.write('Y')
+    #VistA.wait('Address\?')
+    #VistA.write('N')
+    VistA.wait('QUIT')
+    VistA.write('4')
+    VistA.wait('COUNTRY')
+    VistA.write('')
+    VistA.wait('STREET ADDRESS')
+    VistA.write('834 Ocean Vista Avenue\r')
+    VistA.wait('ZIP')
+    VistA.write('90401')
+    VistA.wait('CITY')
+    VistA.write('1')
+    VistA.wait('PHONE NUMBER')
+    VistA.write('310-555-2233\r\r')
+    VistA.wait('changes')
+    VistA.write('Y\r')
+    VistA.wait('QUIT')
+    VistA.write('^2')
+    VistA.wait('QUIT')
+    VistA.write('3')
+    VistA.wait('ETHNICITY')
+    VistA.write('N')
+    VistA.wait('RACE')
+    VistA.write('B\rY\r')
+    VistA.wait('QUIT')
+    VistA.write('^3')
+    VistA.wait('QUIT')
+    VistA.write('1')
+    VistA.wait('PRIMARY NOK')
+    VistA.write('Carter,David J Sr')
+    VistA.wait('RELATIONSHIP')
+    VistA.write('FATHER')
+    VistA.wait('ADDRESS')
+    VistA.write('Y')
+    VistA.wait('WORK PHONE')
+    VistA.write('310-555-9876')
+    VistA.wait('QUIT')
+    VistA.write('^7')
+    VistA.wait('QUIT')
+    VistA.write('3')
+    VistA.wait('PRIMARY ELIGIBILITY CODE:')
+    if Veteran=='Y':
+      VistA.write('\r\r\r\r')
+    else:
+      VistA.write('2\r\r\r\r')
+    VistA.wait('QUIT')
+    VistA.write('^')
+    # this is the part that you will need to answer local questions
+    VistA.wait('NAME: ')
+    VistA.write('^')
+    VistA.wait('DO YOU WANT TO UPDATE THESE INCONSISTENCIES NOW\?')
+    VistA.write('N')
+    VistA.wait('missing Income Data\?')
+    VistA.write('N')
+    VistA.wait('condition')
+    VistA.write('N')
+    VistA.wait('today')
+    VistA.write('Y\r')
+    VistA.wait('TYPE OF BENEFIT APPLIED FOR: ')
+    VistA.write('3') # outpatient medical
+    VistA.wait('TYPE OF CARE APPLIED FOR:')
+    VistA.write('5') # all other
+    VistA.wait('FACILITY APPLYING TO:')
+    VistA.write('')
+    VistA.wait('REGISTRATION ELIGIBILITY CODE:')
+    VistA.write('')
+    VistA.wait('NEED RELATED TO AN ACCIDENT:')
+    VistA.write('U')
+    VistA.wait('NEED RELATED TO OCCUPATION:')
+    VistA.write('U')
+    if Veteran == 'Y':
+      VistA.wait('Enrollment System\?')
+      VistA.write('N')
+      VistA.wait('as soon as available\? :')
+      VistA.write('N')
+    VistA.wait('PRINT 10-10EZ\?')
+    VistA.write('N')
+    VistA.wait('PRINT DRUG PROFILE\?')
+    VistA.write('N')
+    VistA.wait('PRINT HEALTH SUMMARY\?')
+    VistA.write('N')
+    VistA.wait('ROUTING SLIP\?')
+    VistA.write('N')
+    if isLastOne:
+      gotoPrompt

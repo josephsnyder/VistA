@@ -14,7 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
-from AddOnePatient import AddOnePatient
+from AddOnePatient import AddOnePatient, gotoRegisterPatientMenu
 from OSEHRAHelper import PROMPT
 from ConnectToVista import ConnectToVista
 import json
@@ -59,6 +59,7 @@ def AddTestPatients(VistA, siteName):
     AddTestPatientBySite(VistA, siteName)
 
 def AddTestPatientsByConfig(VistA, patientsJson):
+    gotoRegisterPatientMenu(VistA)
     for patient in patientsJson:
         isLastItem = (patient == patientsJson[-1])
         print patient

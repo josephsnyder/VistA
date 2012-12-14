@@ -50,7 +50,8 @@ VistA=ConnectToVista('Scenario001.log')
 if '${USE_COVERAGE}' == 'ON':
   VistA.startCoverage()
   VistA.wait(PROMPT)
-if ("${VISTA_STATE}" != "CALIFORNIA"): # assume CALIFORNIA is using VISN0's data
+is_visn0 = "${VISTA_STATE}" == "CALIFORNIA" # assume CALIFORNIA is using VISN0's data
+if not is_visn0:
   InitializeFileman(VistA)
   InitializeDevice(VistA)
   SetupDomain(VistA)
@@ -75,6 +76,8 @@ print ("Adding System Manager")
 CreateSystemManager(VistA)
 print ("Adding Test Patients")
 AddTestPatientsByConfig(VistA, configParser.getAllPatients())
+if is_visn0:
+  VistA=ConnectToVista('Scenario001.log')
 print ("Adding Institutions")
 AddInstitutionsByConfig(VistA,configParser.getAllInstitutions())
 print ("Adding Divisions")

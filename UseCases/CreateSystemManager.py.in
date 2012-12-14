@@ -173,3 +173,5 @@ def SignInAsSysmtemManager(VistA):
   VistA.write(default_access_code)
   VistA.wait('VERIFY CODE:')
   VistA.write(init_verify_code)
+  VistA.wait('Select TERMINAL TYPE NAME:')
+  VistA.write('')

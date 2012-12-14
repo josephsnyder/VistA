@@ -15,6 +15,7 @@
 #---------------------------------------------------------------------------
 
 from OSEHRAHelper import PROMPT
+import re
 
 def GotoAppointmentMenu(VistA):
   # go to the appointment menu
@@ -54,7 +55,7 @@ def VerifyOneAppointment(VistA, patientName, clinicName, datetime, length):
   hasAppt = False
   for txt in allTexts:
     if ( txt.find(datetime) >= 0 and 
-         txt.find(clinicName) >= 0 ):
+         re.search(clinicName, txt, re.IGNORECASE) ):
       hasAppt = True
       break
   if hasAppt:
