@@ -73,5 +73,6 @@ def MakeAppointment(VistA,date,time,lengthofapp,clinicname,patientname):
   VistA.write('')
   VistA.wait('SENT TO CLINIC')
   VistA.write('No')
-  VistA.wait('Press RETURN to continue')
+  index = VistA.multiwait(['Press RETURN to continue',
+                           'Select CLINIC: '], 60)
   VistA.write('\r\r\r\r')
