@@ -1,0 +1,56 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.py
+#---------------------------------------------------------------------------
+import shutil
+import subprocess
+import hashlib
+import sys
+import gzip
+import time
+
+
+def BackupDatabase(BackupPath="${VISTA_BACKUP}",BackupName="CACHE.DAT"):
+  command = '${ccontrol} stop ${INSTANCE} quietly'
+  rcode = subprocess.call(command.split(),shell=False)
+  if rcode != 0:
+    sys.exit(rcode)
+  shutil.copy('${VISTA_Path}/CACHE.DAT',BackupPath)
+  oldsha1 = generateSha1Sum('${VISTA_Path}/CACHE.DAT')
+  newsha1 = generateSha1Sum(BackupPath+'/CACHE.DAT')
+
+  if oldsha1 == newsha1:
+    f_in = open(BackupPath +'/CACHE.DAT','rb')
+    f_out = gzip.open(BackupPath + '/' + BackupName + str(time.time()) +'.gzip','wb',5)
+    f_out.writelines(f_in)
+    f_in.close()
+    f_out.close()
+    print "VistA Backup was successful, restarting the instance"
+    command = '${ccontrol} start ${INSTANCE}'
+    subprocess.call(command.split(),shell=False)
+  else:
+    print "VistA Backup was unsuccessful.  Cache will remain stopped until started by the user"
+
+def generateSha1Sum(inputFilename):
+  import os
+  assert os.path.exists(inputFilename)
+  sha1sum = hashlib.sha1()
+  inputFile = open(inputFilename, "rb")
+  for line in inputFile:
+    sha1sum.update(line)
+  inputFile.close()
+  return sha1sum.hexdigest()
+
+if __name__ == '__main__':
+  BackupDatabase()
