@@ -32,7 +32,7 @@ def BackupDatabase(BackupPath="${VISTA_BACKUP}",BackupName="CACHE.DAT"):
 
   if oldsha1 == newsha1:
     f_in = open(BackupPath +'/CACHE.DAT','rb')
-    f_out = gzip.open(BackupPath + '/' + BackupName + str(time.time()) +'.gzip','wb',5)
+    f_out = gzip.open(BackupPath + '/' + BackupName + str(time.time()) +'.gz','wb',5)
     f_out.writelines(f_in)
     f_in.close()
     f_out.close()
