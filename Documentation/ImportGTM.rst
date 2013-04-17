@@ -27,7 +27,7 @@ When the \"GTM>\" prompt is there, you are in the GT.M environment and can execu
 
   GTM> :usertype:`D ^%RI`
 
-  Routine Input Utility - Converts RO files to *.m files.
+  Routine Input Utility - Converts RO files to \*.m files.
 
   Formfeed delimited <No>?
 
@@ -38,7 +38,7 @@ The routines.ro file that was created earlier is not formfeed delimited, so the 
 .. parsed-literal::
 
   Formfeed delimited <No>? :usertype:`<ENTER>`
-  Input Device: <terminal>: :usertype:`/home/osehra/Downloads/VistA-FOIA/VistAroutines.ro`
+  Input Device: <terminal>: :usertype:`/home/osehra/Downloads/VistA/routines.ro`
 
   Routines
 
@@ -94,9 +94,10 @@ to import the VistA globals from the repository
 
 .. parsed-literal::
 
- GTM> :usertype:`W $$LIST^ZGI("/path-to/VistA-FOIA/globals.lst","/path-to/VistA-FOIA/")`
+ GTM> :usertype:`W $$LIST^ZGI("/path-to/VistA/globals.lst"[,"/path-to/VistA-FOIA/"])`
 
-Please note that the second string must end with a slash "/" given that it represent a directory path. If you omit the final "/" the command will not operate correctly.
+Please note that the optional second string must end with a slash "/" given that it represent a directory path. If you omit the final "/" the command will not operate correctly.
+This path should only be used if the '-r' option was used in preparing the globals.lst and should match the path given there.
 
 This will take the globals.lst file and use the entries in it to tell GT.M to import that .zwr file.
 

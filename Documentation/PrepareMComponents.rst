@@ -1,38 +1,41 @@
-Prepare M Components for Import
-===============================
+Prepare M source for Import into instance
+=========================================
 
 .. role:: usertype
     :class: usertype
 
+Within the VistA-FOIA source tree, there is a Packages folder which contains all of the VistA-FOIA M components divided by package name.
+Inside each package directory lies a 'Routines' directory and a 'Globals' directory.  The 'Routines' directory contains the routines, while
+the latter contains globals divided into the FileMan files they contain.
 
-The VistA-FOIA source tree contains VistA M components including routines and globals represented as host files.
-These files must be prepared for import into a M database instance to run VistA. The Packages folder contains all
-of the VistA FOIA software divided by package name. Inside each package directory lies a Routines directory and a
-Globals directory. The latter contains globals divided up by the FileMan files they contain.
+We have written a python file, found in the VistA Scripts directory, which will create the two necessary files that will be
+used to perform the actual import process.  The required arguments are a list of the full path to directories that contain M components files.
+During the execution, these directories, and all subdirectories below them, will be searched for components to pack. The script
+has some optional tags which can introduce some other behavior:
 
-Execute the following two commands to prepare the data for import.  One command utilizes a python file called PackRO.py, found in the
-Scripts directory of the VistA source tree.
+  ========================   =======================================
+            Tag                            Description
+  ========================   =======================================
+            -h                  Displays the help text for the file
 
-.. parsed-literal::
+            -o                 Sets directory that the output files
+                               will be saved to
 
-  VistA-FOIA$ :usertype:`git ls-files -- "\*.m" | python /path-to/VistA/Scripts/PackRO.py > VistAroutines.ro`
+            -r                 The path that the paths in the
+                               globals.lst will share as a common
+                               root.  This path will be needed later
+                               if the option is used.
 
-This will create a very large .ro file which contains the contents of the .m files that are contained in the source tree.
+  ========================   =======================================
 
-.. parsed-literal::
-
-  VistA-FOIA$ :usertype:`git ls-files -- "\*.zwr" > globals.lst`
-
-The globals.lst will contain a list of paths to the .zwr files in the source tree.
-
-The first command lists all the files that have the extension \'.m\' and passes those names to the python script PackRO.py to pack them into a file named VistAroutines.ro. The second command lists all files that have the extension \'.zwr\' and writes those into a file named globals.lst. This list will be read by the OSEHRA ZGI routine during the import step.
-
-Also, there is a set of OSEHRA routines that have been written to handle the importing and exporting of globals in the ZWR format.
-These two routines are found in the Scripts directory of the VistA source tree.  They must be packed and imported like the
-other VistA routines before the globals can be imported.
-
-To pack the routines, run a modified version of the pack command found above:
+An example usage follows
 
 .. parsed-literal::
 
-  VistA$ :usertype:`git ls-files -- "Scripts/\*.m" | python Scripts/PackRO.py > OSEHRAroutines.ro`
+  VistA$ :usertype:`python Scripts/PrepareMComponentsForImport.py "C:/path-to/VistA-FOIA" "C:/path-to/VistA/Scripts"`
+
+The script will find all files in the VistA-FOIA that have the extension \'.m\' and passes those names to the python script PackRO.py to
+pack them into file routine.ro.  It will also find two OSEHRA specific routines ZGI and ZGO which are used to import and export globals.
+These routines are found in the VistA/Scripts directory.  The scripts last step is to find all files that have the extension \'.zwr\' and
+write the file location of those globals in a file called 'globals.lst'.
+This 'globals.lst' will be read by the OSEHRA ZGI routine during a later import step.
