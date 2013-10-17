@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdash>
+ <system>
+   <platform></platform>                        <!--Windows/Linux-->
+   <version></version>                          <!--for Windows - 7 or VistA or XP/for Linux - Ubuntu or CENTOS or RedHat etc.-->
+   <bits></bits>                                <!--Bit order of machine 32 or 64 -->
+   <basedirectory></basedirectory>              <!-- Directory where repositories will be cloned and testing performed -->
+ </system>
+ <compiler>
+   <name></name>                                <!-- Cache or GTM-->
+   <version></version>                          <!-- Version of MUMPS Environment: CacheCube -> About or -->
+   <generator></generator>
+ </compiler>
+ <cmake>
+   <version></version>                          <!-- result of the command: cmake --version -->
+   <path></path>                                <!-- Path to folder containing cmake/ctest executable -->
+ </cmake>
+ <program>
+   <name>git</name>
+   <version></version>                          <!-- result of the command git --version -->
+   <path></path>                                <!-- Path to the git executable -->
+ </program>
+</cdash>
