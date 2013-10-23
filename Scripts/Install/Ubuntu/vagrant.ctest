@@ -1,0 +1,12 @@
+set(PROJECT "Open Source EHR")
+set(CDASH_SITENAME "$ENV{buildid}.vagrant")
+set(CDASH_SYSTEMNAME "Ubuntu-32")
+set(CDASH_SITE_CONFIG_FILE "/home/vagrant/machine.cdash.xml")
+set(CDASH_TEMP_DIRECTORY "/home/vagrant/Dash")
+set(CTEST_EXECUTABLE "/usr/bin/ctest.exe")
+set(CTEST_DROP_SITE "code.osehra.org/CDash")
+set(CTEST_DROP_URL "/submit.php")
+set(CTEST_DROP_DURATION 32400)        #32400 (seconds) means the listener will run for 9 hours
+
+# Now include the common setup for cdash
+include(cdash_client_common.ctest)

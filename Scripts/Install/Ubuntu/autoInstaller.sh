@@ -64,7 +64,13 @@ echo "Your build id is: $buildid you will need this to identify your build on th
 # These use the Dashboard branch of the VistA repository
 # The dashboard will clone VistA and VistA-M repos
 cd ~
-ctest -S /vagrant/test.cmake
+# ctest -S /vagrant/test.cmake
+mkdir Dash
+cp /vagrant/cdash_client_common.ctest ~/
+cp /vagrant/vagrant.ctest ~/
+cp /vagrant/machine.cdash.xml ~/
+cp /vagrant/clientinformation.cmake ~/Dash
+ctest -S vagrant.ctest -VV
 
 # Remind users of their build id
 echo "Your build id is: $buildid you will need this to identify your build on the VistA dashboard"

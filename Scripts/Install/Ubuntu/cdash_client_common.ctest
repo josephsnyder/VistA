@@ -1,0 +1,152 @@
+#---------------------------------------------------------------------------
+# Copyright 2011-2013 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+# OSEHRA VistA Dashboard Client Script
+#
+# This script contains code to listen for CDash to create a request for testing
+# from a client machine.
+#
+# Put this script in a directory such as "~/Dashboards/Scripts" or
+# "c:/Dashboards/Scripts".  Create a file next to this script, say
+# 'my_dashboard.cmake', with code of the following form:
+#
+#   # These variables define the system
+#   set(PROJECT "Open Source EHR")
+#   set(CDASH_SITENAME "machine.site")
+#   set(CDASH_SYSTEMNAME "Windows-64bits")
+#   set(CDASH_SITE_CONFIG_FILE "/path/to/file/machine.cdash.xml")
+#   set(CDASH_TEMP_DIRECTORY "/path/to/directory/tmp")
+#   set(CTEST_EXECUTABLE "/path/to/executable/ctest.exe")
+#   set(CTEST_DROP_SITE "code.osehra.org/CDash")
+#   set(CTEST_DROP_URL "/submit.php")
+#   set(CTEST_DROP_DURATION 32400)        #32400 (seconds) means the listener will run for 9 hours
+#
+#   # Now include the common setup for cdash
+#   include(cdash_client_common.ctest)
+#
+#   # Client maintainer: me@mydomain.net
+#   set(CTEST_SITE "machine.site")
+#   set(CTEST_BUILD_NAME "Platform-MEnvironment")
+#
+# Move the accompanying file "machine.cdash.xml" into the same directory
+# and fill in the xml file based on the comments on each line as it pertains
+# to your system.
+#
+# In the location that was set as the basedirectory in the above XML file,
+# Add a file: "clientinformation.cmake" with code of the following form:
+#
+#   # GT.M only:
+#   set(TEST_VISTA_FRESH_GTM_ROUTINE_DIR "/path/to/database/r")
+#   set(TEST_VISTA_FRESH_GTM_GLOBALS_DAT "/path/to/database/g.dat")
+#   set(db "/path/to/instance/VistA")
+#   set(ENV{gtm_dist} "/path/to/gtm/")
+#   set(ENV{gtmroutines} "${db}/o(${db}/r) $ENV{gtm_dist}")
+#   set(ENV{gtmgbldir} "${db}/database")
+#   set(ENV{gtm_tmp} "/tmp")
+#   set(ENV{PATH} "$ENV{gtm_dist}:$ENV{PATH}")
+#
+#   # Cache only:
+#   set(VISTA_CACHE_NAMESPACE "VISTA")
+#   set(TEST_VISTA_FRESH_CACHE_DAT_VISTA "/path/to/database/cache.dat")
+#   set(TEST_VISTA_FRESH_CACHE_DAT_EMPTY "/path/to/database/empty.dat")
+#   # (Copy an empty cache.dat to create empty.dat)
+#
+# Then run a scheduled task (cron job) with a command line such as
+#
+#   ctest -S ~/Dashboards/Scripts/my_dashboard.cmake -V
+#
+# By default the source and build trees will be placed in the path
+# "../MyTests/" relative to your script location.
+#
+# The following variables may be set before including this script
+# to configure it:
+#
+#   dashboard_model       = Nightly | Experimental | Continuous
+#   dashboard_root_name   = Change name of "My Tests" directory
+#   dashboard_source_name = Name of source directory (VistA)
+#   dashboard_binary_name = Name of binary directory (VistA-build)
+#   dashboard_CMakeCache  = Initial CMakeCache.txt file content
+#   dashboard_do_coverage = True to enable coverage (ex: gcov)
+#   dashboard_do_memcheck = True to enable memcheck (ex: valgrind)
+#   CTEST_GIT_COMMAND     = path to git command-line client
+#   CTEST_BUILD_FLAGS     = build tool arguments (ex: -j2)
+#   CTEST_DASHBOARD_ROOT  = Where to put source and build trees
+#   CTEST_TEST_TIMEOUT    = Per-test timeout length
+#   CTEST_TEST_ARGS       = ctest_test args (ex: PARALLEL_LEVEL 4)
+#   CMAKE_MAKE_PROGRAM    = Path to "make" tool to use
+#
+# Options to configure Git:
+#   dashboard_git_url      = Custom git clone url
+#   dashboard_git_branch   = Custom remote branch to track
+#   dashboard_git_crlf     = Value of core.autocrlf for repository
+#   dashboard_git_M_url    = Custom git clone url for M reference repo
+#   dashboard_git_M_branch = Custom remote M branch to track
+
+# Everything below this line shouldn't be modified
+set(CTEST_SOURCE_DIRECTORY "${CDASH_TEMP_DIRECTORY}/dummysource")
+set(CTEST_BINARY_DIRECTORY "${CDASH_TEMP_DIRECTORY}/dummybin")
+set(CTEST_DROP_METHOD "http")
+set(CTEST_DROP_LOCATION ${CTEST_DROP_URL}?sitename=${CDASH_SITENAME}&systemname=${CDASH_SYSTEMNAME}&submitinfo=1)
+set(CTEST_DROP_SITE_CDASH true)
+ctest_submit(FILES ${CDASH_SITE_CONFIG_FILE} RETURN_VALUE res)
+
+IF(NOT "${res}" STREQUAL "0")
+  MESSAGE(FATAL_ERROR "Cannot submit site file")
+ENDIF(NOT "${res}" STREQUAL "0")
+
+# Get the siteid from CDash
+SET(CDASH_URL ${CTEST_DROP_METHOD}://${CTEST_DROP_SITE}${CTEST_DROP_URL})
+SET(CDASH_CTESTSCRIPT_FILE ${CDASH_TEMP_DIRECTORY}/ctestscript.cdash)
+file(DOWNLOAD ${CDASH_URL}?sitename=${CDASH_SITENAME}&systemname=${CDASH_SYSTEMNAME}&getsiteid=1 ${CDASH_CTESTSCRIPT_FILE})
+file(READ ${CDASH_CTESTSCRIPT_FILE} CDASH_SITE_ID)
+string(STRIP ${CDASH_SITE_ID} CDASH_SITE_ID)
+
+IF(${CDASH_SITE_ID} MATCHES  "ERROR:")
+  MESSAGE(FATAL_ERROR ${CDASH_SITE_ID})
+ENDIF(${CDASH_SITE_ID} MATCHES  "ERROR:")
+
+IF(${CDASH_SITE_ID} EQUAL "0")
+  MESSAGE(FATAL_ERROR "Cannot define site id")
+ENDIF(${CDASH_SITE_ID} EQUAL "0")
+
+MESSAGE("SiteId="${CDASH_SITE_ID})
+
+# Start the loop
+while (${CTEST_ELAPSED_TIME} LESS 36000)
+
+  # Check if CDash has a job to run
+  file(DOWNLOAD ${CDASH_URL}?siteid=${CDASH_SITE_ID}&getjob=1 ${CDASH_CTESTSCRIPT_FILE})
+  file(STRINGS ${CDASH_CTESTSCRIPT_FILE} firstLine LIMIT_COUNT 1)
+
+  IF(${firstLine} EQUAL "0")
+    MESSAGE("Nothing to do...")
+    ctest_sleep(20)
+  ENDIF(${firstLine} EQUAL "0")
+
+  # If it's not zero that means CDash has something for me
+  IF(NOT ${firstLine} EQUAL "0")
+    # Extract the job schedule id
+    string(REGEX REPLACE "#" "" jobScheduleId ${firstLine})
+    # Run the script
+    MESSAGE("Running script")
+    SET(CTEST_RUN_CURRENT_SCRIPT 0)
+    file(READ ${CDASH_CTESTSCRIPT_FILE} scriptFile)
+    ctest_run_script(${CDASH_CTESTSCRIPT_FILE})
+    # Mark the job has done
+    file(DOWNLOAD ${CDASH_URL}?siteid=${CDASH_SITE_ID}&jobdone=1 ${CDASH_CTESTSCRIPT_FILE})
+    MESSAGE("DONE Running script")
+  ENDIF(NOT ${firstLine} EQUAL "0")
+
+endwhile(${CTEST_ELAPSED_TIME} LESS 36000)

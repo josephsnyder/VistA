@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdash>
+ <system>
+   <platform>Linux</platform>                        <!--Windows/Linux-->
+   <version>Ubuntu</version>                          <!--for Windows - 7 or VistA or XP/for Linux - Ubuntu or CENTOS or RedHat etc.-->
+   <bits>32</bits>                                <!--Bit order of machine 32 or 64 -->
+   <basedirectory>/home/vagrant/Dash</basedirectory>              <!-- Directory where repositories will be cloned and testing performed -->
+ </system>
+ <compiler>
+   <name>GT.M</name>                                <!-- Cache or GTM-->
+   <version>V6.0-002</version>                          <!-- Version of MUMPS Environment: CacheCube -> About or -->
+   <generator>Unix MakeFiles</generator>
+ </compiler>
+ <cmake>
+   <version>2.8.7</version>                          <!-- result of the command: cmake \-\-version -->
+   <path>/usr/bin</path>                                <!-- Path to folder containing cmake/ctest executable -->
+ </cmake>
+ <program>
+   <name>git</name>
+   <version>1.7.9.5</version>                          <!-- result of the command git \-\-version -->
+   <path>/usr/bin/git</path>                                <!-- Path to the git executable -->
+ </program>
+</cdash>
