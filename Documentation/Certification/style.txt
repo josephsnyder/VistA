@@ -1,0 +1,3 @@
+styles:  
+  heading1:
+    alignment: TA_CENTER
