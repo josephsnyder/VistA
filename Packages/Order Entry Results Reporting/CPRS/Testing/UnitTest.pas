@@ -34,6 +34,7 @@ procedure runTests(name:  string);
 implementation
   procedure addSuite(suite: ITestSuite);
   begin
+    WriteLn(Output,'Registering Test: ' + suite.Name);
     TestFrameWork.RegisterTest(suite);
     namearray[index] := suite.Name;
     suitearray[index] := suite;
@@ -46,10 +47,10 @@ implementation
     testfound := false;
     for i := 0 to index-1 do
       if namearray[i] = name then
-      begin
-         TextTestRunner.RunTest(suitearray[i],rxbHaltOnFailures);
-         testfound := true;
-      end;
+        begin
+           TextTestRunner.RunTest(suitearray[i],rxbHaltOnFailures);
+           testfound := true;
+        end;
   if Not testfound then
     begin
     WriteLn(Output, 'No registered tests match the supplied name: '+ name);

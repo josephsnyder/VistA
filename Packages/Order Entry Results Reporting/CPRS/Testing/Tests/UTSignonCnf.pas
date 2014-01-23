@@ -49,5 +49,5 @@ begin
 end;
 
 begin
-UnitTest.addSuite(UTSignonCnfTests.Suite);
+  UnitTest.addSuite(UTSignonCnfTests.Suite);
 end.

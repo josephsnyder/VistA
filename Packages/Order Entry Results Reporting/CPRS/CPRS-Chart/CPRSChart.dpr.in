@@ -319,7 +319,18 @@ uses
   fSpellNotify in '@SOURCE@\fSpellNotify.pas' {frmSpellNotify},
   uCombatVet in '@SOURCE@\uCombatVet.pas',
   fCombatVet in '@SOURCE@\fCombatVet.pas' {frmCombatVet},
-  fOCMonograph in '@SOURCE@\Orders\fOCMonograph.pas' {frmOCMonograph};
+  fOCMonograph in '@SOURCE@\Orders\fOCMonograph.pas' {frmOCMonograph},
+  fCSRemaining in '@SOURCE@\Orders\fCSRemaining.pas' {frmCSRemaining},
+  Wcrypt2 in '@SOURCE@\XuDigSig\Wcrypt2.pas',
+  WinSCard in '@SOURCE@\XuDigSig\WinSCard.pas',
+  XlfHex in '@SOURCE@\XuDigSig\XlfHex.pas',
+  XlfMime in '@SOURCE@\XuDigSig\XlfMime.pas',
+  XuDsigConst in '@SOURCE@\XuDigSig\XuDsigConst.pas',
+  XuDsigS in '@SOURCE@\XuDigSig\XuDsigS.pas',
+  XuDsigU in '@SOURCE@\XuDigSig\XuDsigU.pas',
+  fPINPrompt in '@SOURCE@\XuDigSig\fPINPrompt.pas',
+  fProbFreetext in '@SOURCE@\fProbFreetext.pas' {frmProbFreetext},
+  uHelpManager in '@SOURCE@\uHelpManager.pas';
 
 {$R '@SOURCE@\CPRSChart.tlb'}
 
@@ -342,9 +353,12 @@ begin
     Application.Title := 'CPRS - Patient Chart';
     Application.HelpFile := 'cprs.hlp';
     Application.CreateForm(TdmodShared, dmodShared);
-  Application.CreateForm(TfrmFrame, frmFrame);
-  Application.CreateForm(TfrmSearchStop, frmSearchStop);
-  frmSplash.Free;                               // close & free splash screen
+    Application.CreateForm(TfrmFrame, frmFrame);
+    Application.CreateForm(TfrmSearchStop, frmSearchStop);
+    Application.CreateForm(TfrmProbFreetext, frmProbFreetext);
+    if assigned(frmSplash) then
+      frmSplash.Free;                               // close & free splash screen
+
     Application.Run;
   end;
 end.

@@ -37,6 +37,7 @@
     <DCC_ResourcePath>Dcp\$(Configuration);@SOURCE@</DCC_ResourcePath>
     <DCC_ObjPath>Dcp\$(Configuration);@SOURCE@</DCC_ObjPath>
     <DCC_IncludePath>Dcp\$(Configuration);@SOURCE@</DCC_IncludePath>
+    <DCC_HppOutput>..\D2007</DCC_HppOutput>
   </PropertyGroup>
   <ProjectExtensions>
     <Borland.Personality>Delphi.Personality</Borland.Personality>

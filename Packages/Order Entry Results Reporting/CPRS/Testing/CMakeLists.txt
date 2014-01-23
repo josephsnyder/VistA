@@ -18,11 +18,16 @@ add_delphi_project(CPRSTesting)
 # Search through the Tests directory for files
 file(GLOB testsuites ${CMAKE_CURRENT_SOURCE_DIR}/Tests/*.pas)
 foreach (suite ${testsuites})
-  get_filename_component(suite ${suite} NAME_WE)
-
-  # We assume that the test suite is the name of the file w/out extension with 'Tests' appended to the end.
-    add_test(NAME DUnit${suite} COMMAND ${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIGURATION>/CPRSTesting.exe "${suite}Tests")
-
-  # If our 'No registered tests' message is found, the test fails.
-  set_tests_properties(DUnit${suite} PROPERTIES FAIL_REGULAR_EXPRESSION "No registered tests")
+  # Read through each file and find the class name that precedes "=class(TTestCase)"
+  file(STRINGS ${suite} testcontents)
+  foreach(line ${testcontents})
+    #message(${line})
+    string(REGEX MATCH "[A-Za-z0-9 ]+=[ ]*class\\(TTestCase\\)" name ${line})
+    if(name)
+      string(REGEX REPLACE "[ =]*class\\(TTestCase\\)|^ +" "" name ${name} )
+      add_test(NAME DUnit${name} COMMAND ${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIGURATION>/CPRSTesting.exe "${name}")
+      # If our 'No registered tests' message is found, the test fails.
+      set_tests_properties(DUnit${name} PROPERTIES FAIL_REGULAR_EXPRESSION "No registered tests")
+    endif()
+  endforeach()
 endforeach()
