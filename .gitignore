@@ -22,3 +22,6 @@ __history
 # GT.M JOB command output files
 *.mjo
 *.mje
+
+tmp/*
+

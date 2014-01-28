@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdash>
+ <system>
+   <platform>Windows</platform>
+   <version>7</version>
+   <bits>64</bits>
+   <basedirectory>C:/Users/osehra-agent/CDashHome/cdashclient_workspace</basedirectory>
+ </system>
+ <compiler>
+   <name>Cache</name>
+   <version>2011.1.2</version>
+   <generator>Unix Makefiles</generator>
+ </compiler>
+ <cmake>
+   <version>2.8.12.1</version>
+   <path>C:/Program Files (x86)/CMake 2.8/bin/cmake.exe</path>
+ </cmake>
+ <program>
+   <name>git</name>
+   <version>1.8.5.2</version>
+   <path>C:/Program Files (x86)/Git/bin/git.exe</path>
+ </program>
+</cdash>

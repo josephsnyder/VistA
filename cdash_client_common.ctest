@@ -124,7 +124,8 @@ ENDIF(${CDASH_SITE_ID} EQUAL "0")
 MESSAGE("SiteId="${CDASH_SITE_ID})
 
 # Start the loop
-while (${CTEST_ELAPSED_TIME} LESS 36000)
+
+while (${CTEST_ELAPSED_TIME} LESS 64800)
 
   # Check if CDash has a job to run
   file(DOWNLOAD ${CDASH_URL}?siteid=${CDASH_SITE_ID}&getjob=1 ${CDASH_CTESTSCRIPT_FILE})
@@ -149,4 +150,4 @@ while (${CTEST_ELAPSED_TIME} LESS 36000)
     MESSAGE("DONE Running script")
   ENDIF(NOT ${firstLine} EQUAL "0")
 
-endwhile(${CTEST_ELAPSED_TIME} LESS 36000)
+endwhile(${CTEST_ELAPSED_TIME} LESS 64800)
