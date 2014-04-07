@@ -42,7 +42,11 @@ class SCActions (Actions):
     def signon (self):
         ''' This provides a signon via ^XUP or ^ZU depending on the value of acode'''
         if self.acode is None:
-            self.VistA.write('S DUZ=1 D ^XUP')
+            self.VistA.write('S DUZ=1 D Q^DI')
+            self.VistA.wait('Select OPTION')
+            self.VistA.write('^')
+            self.VistA.wait(self.VistA.prompt)
+            self.VistA.write('D ^XUP')
             if self.sched is not None:
                 self.VistA.wait('OPTION NAME:')
                 self.VistA.write('SDAM APPT MGT')
