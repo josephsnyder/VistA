@@ -2,6 +2,9 @@
  ;;0.1;MASH UTILITIES;
  ;
  I '(+$SY=47) W !,"This coverage analysis is currently only available in GT.M" Q  ; GT.M only!
+ ; END Local Modification(OSEHRA/JPS):Only run tests if %ut has text
+ Q:$T(^%ut)=""
+  ; END Local Modification(OSEHRA/JPS):Only run tests if %ut has text
  ;
  ; if SHOWALL is true (1) all coverage globals data are listed
  ; if SHOWALL is false (0), only the %utCOVREPORT global is listed

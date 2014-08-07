@@ -2,17 +2,21 @@ ut01POST ;VEN-SMH/JLI - post install for M-Unit Test software ;08/23/14  09:52
  ;;0.1;MASH UTILITIES
  D RENAME
  N $ETRAP S $ETRAP="D ERROR^ZZUTPOST"
- W !,"Running unit tests to confirm renaming of ut* to %ut*",!,"(5 failures and 1 error are intentional in these tests)",!
- D EN^%ut("%utt1")
- W !!,"Again, 5 failures and 1 error are intentional in these tests."
+ ; Local Modification(OSEHRA/JPS):Comment out lines that run tests after renaming
+ ; W !,"Running unit tests to confirm renaming of ut* to %ut*",!,"(5 failures and 1 error are intentional in these tests)",!
+ ; D EN^%ut("%utt1")
+ ; W !!,"Again, 5 failures and 1 error are intentional in these tests."
+ ; End local modification
  Q
  ;
 RENAME ;
  N %S,%D ; Source destination
  S U="^"
  ;
- S %S="ut^ut1^utt1^utt2^utt3^utt4^utt5^utt6^uttcovr"
- S %D="%ut^%ut1^%utt1^%utt2^%utt3^%utt4^%utt5^%utt6^%uttcovr"
+ ; Local Modification(OSEHRA/JPS):Only rename the test routines
+ S %S="utt1^utt2^utt3^utt4^utt5^utt6^uttcovr"  ;ut^ut1^
+ S %D="%utt1^%utt2^%utt3^%utt4^%utt5^%utt6^%uttcovr" ;%ut^%ut1^
+ ; End local modification
  ;
 MOVE ; rename % routines
  N %,X,Y,M

@@ -13,7 +13,9 @@
  ;
  ; Sam H
  ;
- D EN^%ut($T(+0),1) ; Run tests here, be verbose.
+ ; Local Modification(OSEHRA/JPS); Only run tests if %ut has text
+ D:$T(^%ut)'="" EN^%ut($T(+0),1) ; Run tests here, be verbose.
+ ; END Local Modification(OSEHRA/JPS):Only run tests if %ut has text
  QUIT
  ;
 STARTUP ; M-Unit Start-Up - This runs before anything else.
@@ -146,4 +148,4 @@ XTROU ; Routines containing additional tests
  ;;%utt2; old %utNITU
  ;;%utt4; old %utNITW
  ;;%utt5;
- ;;%utt6;
+ ;%utt6;

@@ -19,6 +19,9 @@
  ;  + 3 x the number of tests present.
  ;
  ; run unit tests by command line
+ ; Local Modification(OSEHRA/JPS):Only run tests if %ut has text
+ Q:$T(^%ut)=""
+ ; END Local Modification(OSEHRA/JPS):Only run tests if %ut has text
  N VERBOSE
  S VERBOSE=0
 VERBOSE ;
