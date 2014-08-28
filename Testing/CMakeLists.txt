@@ -212,6 +212,11 @@ if(TEST_VISTA_MUNIT)
       #Creates the command that will be called for the Test
       add_test(UNITTEST_${package_file_name} ${CMAKE_COMMAND} -P ${SCRIPT_OUTPUT_DIR}/${package_file_name}.cmake)
       set_tests_properties(UNITTEST_${package_file_name} PROPERTIES FAIL_REGULAR_EXPRESSION "QUITTING")
+      if(${package_file_name} STREQUAL "Mash_Utilities")
+        set_tests_properties(UNITTEST_${package_file_name} PROPERTIES PASS_REGULAR_EXPRESSION
+        "7 failures and encountered 1 error.*5 failures and encountered 1 error.*0 failures and encountered 0 errors"
+        ENVIRONMENT COVFILE=)
+      endif()
     endif()
   endforeach()
 endif()
