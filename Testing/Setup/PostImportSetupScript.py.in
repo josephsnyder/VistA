@@ -133,6 +133,22 @@ OSEHRASetup.addTemplatePermission(VistA,"MS")
 OSEHRASetup.createClinic(VistA,'VISTA HEALTH CARE','VHC','M')
 
 time.sleep(10)
+# Add more information to each user
+#
+# Add a DEA# to Robert Alexander to allow for prescription writing
+# Add SMITH,MARY to the Nurse Staff file through the proper menu option.
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/PostImportUserUpdate.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
+if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
+  VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('${VISTA_CACHE_NAMESPACE}')
+  except IndexError,no_namechange:
+    pass
+
+OSEHRASetup.setupPharmacyUser(VistA,"ALEXANDER,ROBERT","AA7984366")
+OSEHRASetup.addNurseToStaff(VistA,'SMITH,MARY')
+
 #Set up the Doctors electronic signature
 VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/PostImportSignature.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
 if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
