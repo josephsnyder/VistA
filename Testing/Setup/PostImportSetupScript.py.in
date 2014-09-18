@@ -80,6 +80,13 @@ OSEHRASetup.setupVistADomain(VistA,"${TEST_VISTA_SETUP_SITE_NAME}")
 OSEHRASetup.setupBoxVolPair(VistA,'${TEST_VISTA_SETUP_VOLUME_SET}','${TEST_VISTA_SETUP_SITE_NAME}','${VISTA_TCP_PORT}')
 OSEHRASetup.setupVolumeSet(VistA,"${TEST_VISTA_SETUP_SITE_NAME}",'${TEST_VISTA_SETUP_VOLUME_SET}',"${VISTA_CACHE_NAMESPACE}")
 
+# Alter the setup of some of the other parts of VistA
+# Stop the HINQ query by turning it off in the MAS Parameters file
+OSEHRASetup.removeHINQ(VistA)
+# Set up an "Outpatient Site" for pharmacy that uses has the computer
+# assign the prescription number
+OSEHRASetup.setupOutpatientSite(VistA,"VHCOutSite1","6100OS")
+
 # Start TaskMan
 if VistA.type=='cache':
   # If using Cache as the M environment, Schedule a task to start the
@@ -132,12 +139,16 @@ OSEHRASetup.addTemplatePermission(VistA,"MS")
 # Add clinic via the XUP menu to allow scheduling
 OSEHRASetup.createClinic(VistA,'VISTA HEALTH CARE','VHC','M')
 
+
+
 time.sleep(10)
 # Add more information to each user
 #
 # Add a DEA# to Robert Alexander to allow for prescription writing
 # Add SMITH,MARY to the Nurse Staff file through the proper menu option.
-VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/PostImportUserUpdate.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
+# Set up the operating room
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/RealisticSetup.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
+=================================================================================
 if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
   VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
 if VistA.type=='cache':
@@ -148,6 +159,7 @@ if VistA.type=='cache':
 
 OSEHRASetup.setupPharmacyUser(VistA,"ALEXANDER,ROBERT","AA7984366")
 OSEHRASetup.addNurseToStaff(VistA,'SMITH,MARY')
+OSEHRASetup.setupOperatingRoom(VistA,"VHC Oper Room 1","VHCOR1","Wing 3 Room 21","General")
 
 #Set up the Doctors electronic signature
 VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/PostImportSignature.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
