@@ -1,0 +1,6 @@
+type,lname,fname,initials,SSN,sex, ACode,VCode1,VCode2,SigCode,DEAnum
+P,ALEXANDER,ROBERT,RA,000000029,M,fakedoc1,2Doc!@#$,1Doc!@#$,ROBA123,AA7984366
+N,SMITH,MARY,MS,000000030,F,fakenurse1,2Nur!@#$,1Nur!@#$,MARYS123,
+C,CLERK,JOE,JC,000000112,M,fakeclerk1,2Cle!@#$,1Cle!@#$,CLERKJ123,
+P,WADDELL,SAM,SW,000000115,M,fakedoc2,4Doc!@#$,3Doc!@#$,SWAD246,AW7981144
+N,LLOYD,MARCUS,ML,000000078,M,fakenurse2,4Nur!@#$,3Nur!@#$,MARCL441,

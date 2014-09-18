@@ -578,6 +578,7 @@ def addDoctor(VistA,name,init,SSN,sex,AC,VC1):
   # the System Manager.
   # Needs:
   # Doctor Name, Doctor Initials, SSN, Sex, Access Code, Verify Code
+  VistA.wait("Systems Manager Menu")
   VistA.write('USER MANAGEMENT')
   VistA.wait('User Management')
   VistA.write('ADD')
@@ -706,21 +707,23 @@ def addClerk(VistA,name,init,SSN,sex,AC,VC1):
   VistA.wait('NAME COMPONENTS')
   # A ScreenMan form opens at this point, and the following information is set:
   # Primary Menu:   XUCORE
-  # Secondary Menu: GMPL DATA ENTRY
+  # Secondary Menu: GMPL DATA ENTRY.SROSCHOP(Surgery Schedule Operations)
   # Access Code:    <passed as argument>
   # Verify Code:    <passed as argument>
   # No restriction on Patient Selection
   # Allowed multiple sign-ons
   # Core CPRS Tab access
-  VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rXUCOR\r^SECONDARY MENU OPTIONS\rGMPL DATA ENTRY\rY\r\r\r\rOR CPRS GUI CHART\rY\r\r\r\rGMV V/M GUI\rY\r\r\r\r^Want to edit ACCESS CODE\rY\r'+AC+'\r'+AC+'\r^Want to edit VERIFY CODE\rY\r'+VC1+'\r'+VC1+'\rVISTA HEALTH CARE\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^RESTRICT PATIENT SELECTION\r0\r\rCOR\rY\rT-1\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^\rE\rY')
+  VistA.write('\r\r\r\r\r^PRIMARY MENU OPTION\rXUCOR\r^SECONDARY MENU OPTIONS\rONCO #SITE MANAGER MENU\rY\r\r\r\rSROSCHOP\rY\r\r\r\rGMPL DATA ENTRY\rY\r\r\r\rOR CPRS GUI CHART\rY\r\r\r\rGMV V/M GUI\rY\r\r\r\r^Want to edit ACCESS CODE\rY\r'+AC+'\r'+AC+'\r^Want to edit VERIFY CODE\rY\r'+VC1+'\r'+VC1+'\rVISTA HEALTH CARE\rY\r\r\r\r\r^SERVICE/SECTION\rIRM\r^RESTRICT PATIENT SELECTION\r0\r\rCOR\rY\rT-1\r\r^MULTIPLE SIGN-ON\r1\r1\r99\r^\rE\rY')
   # Exiting the ScreenMan form, Allocate Security Key
-  # ORELSE
+  # ORELSE,SROSCH,
   VistA.wait('User Account Access Letter')
   VistA.write('NO')
   VistA.wait('wish to allocate security keys?')
   VistA.write('Y')
   VistA.wait('Allocate key')
   VistA.write('ORELSE')
+  VistA.wait('Another key')
+  VistA.write('SROSCH')
   VistA.wait('Another key')
   VistA.write('')
   VistA.wait('Another holder')
@@ -1178,3 +1181,67 @@ def addPatient(VistA,name,sex,DOB,SSN,vet):
     VistA.wait('Registration login')
     VistA.write('NOW')
     VistA.wait(PROMPT)
+
+#  Add a nurse user to the NURS STAFF File (#210)
+#  Using the Staff Record Edit option
+def addNurseToStaff(VistA,nurname):
+  VistA.wait("Systems Manager Menu")
+  VistA.write('CORE')
+  VistA.wait('Core Applications')
+  VistA.write('NU')
+  VistA.wait('Nursing System Manager')
+  VistA.write('1')
+  VistA.wait('Select Administrator')
+  VistA.write('1')
+  VistA.wait('Administration Records')
+  VistA.write('Staff Record Edit')
+  VistA.wait('Nursing Service Staff Name')
+  VistA.write(nurname)
+  index = VistA.multiwait(['ARE YOU ADDING','OK'])
+  if index ==0:
+    VistA.write('Y')
+    VistA.wait('PRIMARY POSITION START DATE')
+    VistA.write('T-365')
+    VistA.wait('PRIMARY DUTY LOCATION')
+    VistA.write('^')
+  else:
+    VistA.write('')
+  VistA.wait('Staff Record Edit')
+  VistA.write('^')
+  VistA.wait('Administration Records')
+  VistA.write('')
+  VistA.wait('Select Administrator')
+  VistA.write('')
+  VistA.wait('Nursing System Manager')
+  VistA.write('')
+  VistA.wait('Core Applications')
+  VistA.write('')
+
+def setupPharmacyUser(VistA,provname,DEAnum):
+  VistA.wait(PROMPT)
+  VistA.write('S DUZ=1 D ^XUP')
+  VistA.wait('Select OPTION NAME')
+  VistA.write('PSO PROVIDER EDIT')
+  VistA.wait('Select Provider')
+  VistA.write(provname)
+  index = VistA.multiwait(['Do you want to make','PRESCRIBER'])
+  if index==0:
+    VistA.write('Y')
+    VistA.wait('PRESCRIBER')
+  VistA.write('')
+  VistA.wait('TAX ID')
+  VistA.write('')
+  VistA.wait('EXCLUSIONARY CHECK PERFORMED')
+  VistA.write('')
+  VistA.wait('DATE EXCLUSIONARY LIST CHECKED')
+  VistA.write('')
+  VistA.wait('ON EXCLUSIONARY LIST')
+  VistA.write('')
+  VistA.wait('AUTHORIZED TO WRITE MED ORDERS')
+  VistA.write('YES')
+  VistA.wait('DEA#')
+  VistA.write(DEAnum)
+  VistA.multiwait(['DETOX','VA'])
+  VistA.write('^')
+  VistA.wait('Select Provider')
+  VistA.write('')
