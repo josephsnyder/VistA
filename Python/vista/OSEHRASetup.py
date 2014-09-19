@@ -1278,14 +1278,20 @@ def addPatient(VistA,name,sex,DOB,SSN,vet):
   VistA.wait('SOCIAL SECURITY NUMBER')
   VistA.write(SSN)
   VistA.wait('TYPE')
-  VistA.write('NON-VETERAN')
+  if vet=='Y':
+    VistA.write('NSC VETERAN')
+  else:
+    VistA.write('NON-VETERAN')
   VistA.wait('PATIENT VETERAN')
   VistA.write(vet)
   VistA.wait('SERVICE CONNECTED')
   VistA.write('NO')
   VistA.wait('MULTIPLE BIRTH INDICATOR')
   VistA.write('')
-  VistA.wait('//')
+  index = VistA.multiwait(['FAMILY','Do you still want to add'])
+  if index == 1:
+    VistA.write('Y')
+    VistA.wait('FAMILY')
   VistA.write('^\r')
   VistA.wait('MAIDEN NAME:')
   VistA.write('')
@@ -1333,7 +1339,6 @@ def addPatient(VistA,name,sex,DOB,SSN,vet):
     VistA.write('Y')
     VistA.wait('Registration login')
     VistA.write('NOW')
-    VistA.wait(PROMPT)
 
 #  Add a nurse user to the NURS STAFF File (#210)
 #  Using the Staff Record Edit option
@@ -1399,3 +1404,96 @@ def setupPharmacyUser(VistA,provname,DEAnum):
   VistA.write('^')
   VistA.wait('Select Provider')
   VistA.write('')
+
+def addOncologySuspense(VistA,patName):
+  VistA.write('Oncology Site Manager Menu')
+  VistA.wait('Select Oncology Site Manager Menu')
+  VistA.write('TR')
+  VistA.wait('Select DHCP Tumor Registry',70)
+  VistA.write('SUS')
+  VistA.wait('Casefinding/Suspense')
+  VistA.write('SE')
+  VistA.wait('ONCOLOGY PATIENT NAME')
+  VistA.write(patName)
+  while True:
+    index = VistA.multiwait(['OK','Are you adding','SUSPENSE DATE'])
+    if index == 2:
+      break
+    else:
+      VistA.write('Y')
+  VistA.write('T-5')
+  VistA.wait('ONCOLOGY PATIENT NAME')
+  VistA.write('')
+  VistA.wait('Casefinding/Suspense')
+  VistA.write('')
+  VistA.wait('DHCP Tumor Registry')
+  VistA.write('')
+  VistA.wait('Oncology Site Manager Menu')
+  VistA.write('')
+  VistA.wait('Core Applications')
+
+def addSurgeryAppointment(VistA,patName,day,StartTime,EndTime,room,Diagnosis):
+  #This is to be filled in eventually
+  # Add OR setup to infrastructure
+  #
+  VistA.write('Schedule Operations')
+  index = VistA.multiwait(['to continue','Select Schedule Operations'])
+  if index == 0:
+    VistA.write('')
+    VistA.wait('Select Schedule Operations')
+  VistA.write('SU')
+  VistA.wait('Schedule a Procedure')
+  VistA.write(day)
+  VistA.wait('Select Patient')
+  VistA.write(patName)
+  index = VistA.multiwait(['CHOOSE','Select Number'])
+  if index == 0:
+    VistA.write('1')
+    VistA.wait('Select Number')
+  VistA.write('4')
+  VistA.wait('Schedule a case')
+  VistA.write(room)
+  VistA.wait('Reserve from what time')
+  VistA.write(StartTime)
+  VistA.wait('Reserve to what time')
+  VistA.write(EndTime)
+  VistA.wait('Desired Procedure Date')
+  VistA.write(day)
+  VistA.wait('Surgeon')
+  VistA.write('ALEXANDER,ROBERT')
+  VistA.wait('Attending Surgeon')
+  VistA.write('ALEXANDER,ROBERT')
+  VistA.wait('Surgical Specialty')
+  VistA.write('General')
+  VistA.wait('Principal Operative Procedure')
+  VistA.write('SURGERY For patient ' + patName)
+  VistA.wait('Principal Preoperative Diagnosis')
+  VistA.write(Diagnosis)
+  index = VistA.multiwait(['to continue','Principal Anesthetist'])
+  if index ==0:
+    VistA.write('')
+    VistA.wait('Principal Anesthetist')
+  VistA.write('')
+  VistA.wait('Anesthesiologist Supervisor')
+  VistA.write('')
+  VistA.wait('Principal Procedure')
+  VistA.write('')
+  VistA.wait('Planned Principal Procedure Code')
+  VistA.write('')
+  VistA.wait('OTHER PROCEDURE')
+  VistA.write('')
+  VistA.wait('Brief Clinical History')
+  VistA.write('NO')
+  VistA.wait('Request Blood Availability')
+  VistA.write('N')
+  while True:
+    index = VistA.multiwait(['to continue','Screen Server Function','Principal Preoperative Diagnosis','Prin Pre-OP ICD Diagnosis Code','Hospital Admission Status',
+                        'Case Schedule Type','First Assistant','Second Assistant','Attending Surgeon','Requested Postoperative','Case Schedule',
+                        'SURGERY POSITION','Surgery Position','Requested Anesthesia','Request Frozen Section','Requested Preoperative X',
+                        'Intraoperative X','Request Medical Media','Request Clean','REFERRING PHYSICIAN','Edit'])
+    VistA.write('')
+    if index == 0:
+      break
+  VistA.wait('Schedule Operations')
+  VistA.write('')
+  VistA.wait('Core Applications')

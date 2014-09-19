@@ -148,7 +148,6 @@ time.sleep(10)
 # Add SMITH,MARY to the Nurse Staff file through the proper menu option.
 # Set up the operating room
 VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/RealisticSetup.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
-=================================================================================
 if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
   VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
 if VistA.type=='cache':
@@ -209,3 +208,44 @@ if VistA.type=='cache':
 # VistA, Patient Name, Patient Sex,Patient DOB, Patient SSN, Patient Veteran?
 OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
 OSEHRASetup.addPatient(VistA,"Carter,David JR","M","03/02/2001","000000113","N")
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddPatients.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
+if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
+  VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('${VISTA_CACHE_NAMESPACE}')
+  except IndexError,no_namechange:
+    pass
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addPatient(VistA,"Carter,David Sr","M","04/14/1982","000000124","Y")
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddPatients.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
+if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
+  VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('${VISTA_CACHE_NAMESPACE}')
+  except IndexError,no_namechange:
+    pass
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addPatient(VistA,"Green, Linda","F","09/18/1979","000000352","N")
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddPatients.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
+if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
+  VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('${VISTA_CACHE_NAMESPACE}')
+  except IndexError,no_namechange:
+    pass
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addPatient(VistA,"Roberts, Marcus","M","11/30/1961","000000648","Y")
+VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddPatients.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
+if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
+  VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('${VISTA_CACHE_NAMESPACE}')
+  except IndexError,no_namechange:
+    pass
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addOncologySuspense(VistA,"Green,Linda")
+OSEHRASetup.addSurgeryAppointment(VistA,"Roberts, Marcus","T+1","14:50","16:35","VHC","Appendicitis")

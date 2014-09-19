@@ -920,7 +920,7 @@ class ADTActions (Actions):
         self.VistA.wait_re('START WITH LOG IN DATE/TIME: FIRST//')
         self.VistA.write('')
         self.VistA.wait('DEVICE')
-        self.VistA.write('HOME')
+        self.VistA.write('HOME;;9999')
         if sys.platform == 'win32':
             self.VistA.wait('Right Margin')
             self.VistA.write('')
