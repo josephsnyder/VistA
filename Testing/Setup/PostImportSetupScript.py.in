@@ -181,3 +181,12 @@ if VistA.type=='cache':
 # VistA, Patient Name, Patient Sex,Patient DOB, Patient SSN, Patient Veteran?
 OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
 OSEHRASetup.addPatient(VistA,"Carter,David JR","M","03/02/2001","000000113","N")
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addPatient(VistA,"Carter,David Sr","M","04/14/1982","000000124","Y")
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addPatient(VistA,"Green, Linda","F","09/18/1979","000000352","N")
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addPatient(VistA,"Roberts, Marcus","M","11/30/1961","000000648","Y")
+OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
+OSEHRASetup.addOncologySuspense(VistA,"Green,Linda")
+OSEHRASetup.addSurgeryAppointment(VistA,"Roberts, Marcus","T+1","14:50","16:35","VHC","Appendicitis")
