@@ -187,9 +187,8 @@ if VistA.type=='cache':
     pass
 OSEHRASetup.setupOperatingRoom(VistA,"VHC Oper Room 1","VHCOR1","Wing 3 Room 21","General")
 
-# Add patient to the instance using the Clerk user
-# and the Register a Patient menu option.
-# The patient can be a veteran but not service connected
+# Sign on as a Clerk user and add patients to package specific
+# patient lists.
 VistA=ConnectToMUMPS("${VISTA_BINARY_DIR}/Testing/Log/AddPatients.log","${VISTA_CACHE_INSTANCE}","${VISTA_CACHE_NAMESPACE}")
 if ('${VISTA_CACHE_USERNAME}' and '${VISTA_CACHE_PASSWORD}'):
   VistA.login('${VISTA_CACHE_USERNAME}','${VISTA_CACHE_PASSWORD}')
@@ -201,4 +200,5 @@ if VistA.type=='cache':
 # Function arguments:
 # VistA, Patient Name, Patient Sex,Patient DOB, Patient SSN, Patient Veteran?
 OSEHRASetup.signonZU(VistA,"fakeclerk1","1Cle!@#$")
-OSEHRASetup.addPatient(VistA,"Carter,David JR","M","03/02/2001","000000113","N")
+OSEHRASetup.addOncologySuspense(VistA,"Green,Linda")
+OSEHRASetup.addSurgeryAppointment(VistA,"Roberts, Marcus","T+1","14:50","16:35","VHC","Appendicitis")

@@ -23,3 +23,7 @@ key|fullname|lname|fname|minit|sex|dob|type|veteran|service|twin|maiden|cityob|s
 323556789|twentytwo, patient v|twentytwo|patient|v|M|7/6/1944|SC VETERAN|Y|Y|N|Rogers|Monmoth|NJ|0
 123455678|twentythree, patient w|twentythree|patient|w|M|6/5/1946|SC VETERAN|Y|Y|N|Brady|Redbank|NJ|0
 323554567|twentyfour, patient x|twentyfour|patient|x|M|3/2/1948|SC VETERAN|Y|Y|N|Zebra|Trenton|NJ|1
+000000113|carter, david JR|carter|david|j|M|3/2/2001|NON-VETERAN|N|N|N|Coppola|DAVIS|CA|1
+000000124|carter, david SR|carter|david|j|M|4/14/1982|NSC VETERAN|Y|N|N|Sharron|DAVIS|CA|0
+000000352|green, linda s|green|linda|s|F|11/30/1961|NON-VETERAN|N|N|N|Samuels|OMAHA|NB|0
+000000648|roberts,marcus l|roberts|marcus|l|M|9/18/1979|SC VETERAN|Y|Y|N|Archer|SCRANTON|PA|0
