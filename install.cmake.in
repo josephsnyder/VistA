@@ -1,0 +1,81 @@
+#---------------------------------------------------------------------------
+# Copyright 2015 The Open Source Electronic Health Record Alliance
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+
+macro(stop_mumps_process)
+  execute_process(COMMAND whoami
+                  OUTPUT_VARIABLE user
+                  OUTPUT_STRIP_TRAILING_WHITESPACE)
+  execute_process(COMMAND pgrep -u ${user} -d ";" mumps
+                  OUTPUT_VARIABLE output
+                  RESULT_VARIABLE retCode
+                  OUTPUT_STRIP_TRAILING_WHITESPACE)
+  if(output)
+    foreach(pid ${output})
+      execute_process(COMMAND "@GTM_DIST@/mupip" stop ${pid})
+    endforeach()
+  endif()
+endmacro()
+
+
+if("@JOB_COMPILER_NAME@" STREQUAL "Cache")
+
+  execute_process(COMMAND "@CCONTROL_EXECUTABLE@" stop @VISTA_CACHE_INSTANCE@ quietly)
+  message("@VISTA_CACHE_INSTANCE@ stopped, replacing from backup")
+  get_filename_component(TEST_VISTA_FRESH_CACHE_DIR_VISTA @TEST_VISTA_FRESH_CACHE_DAT_VISTA@ DIRECTORY)
+  file(COPY @TEST_VISTA_FRESH_CACHE_DAT_BACKUP@ DESTINATION ${TEST_VISTA_FRESH_CACHE_DIR_VISTA})
+  message("Restarting @VISTA_CACHE_INSTANCE@")
+  execute_process(COMMAND "@CCONTROL_EXECUTABLE@" start @VISTA_CACHE_INSTANCE@)
+  set(CONNECTION_ARGS "-S" 1 "-CN" "@VISTA_CACHE_NAMESPACE@")
+
+else()
+
+ stop_mumps_process()
+ # Remove all old files from GT.M instance
+ file(REMOVE @TEST_VISTA_FRESH_GTM_GLOBALS_DAT@ )
+ file(REMOVE_RECURSE @TEST_VISTA_FRESH_GTM_ROUTINE_DIR@/)
+ file(MAKE_DIRECTORY @TEST_VISTA_FRESH_GTM_ROUTINE_DIR@)
+ message("Removed old files")
+ get_filename_component(TEST_VISTA_FRESH_GTM_GLOBALS_DIR @TEST_VISTA_FRESH_GTM_GLOBALS_DAT@ PATH)
+ message("populating global database file in ${TEST_VISTA_FRESH_GTM_GLOBALS_DIR}")
+ # Untar the global database file backup
+ execute_process(COMMAND "/bin/tar" "-xvf" "@TEST_VISTA_FRESH_GTM_GLOBAL_BACKUP@"
+                 WORKING_DIRECTORY "${TEST_VISTA_FRESH_GTM_GLOBALS_DIR}")
+ message("populating routines in @TEST_VISTA_FRESH_GTM_ROUTINE_DIR@")
+ # Untar the routine files backup
+ execute_process(COMMAND "/bin/tar" "-xvf" "@TEST_VISTA_FRESH_GTM_ROUTINE_BACKUP@"
+                 WORKING_DIRECTORY "@TEST_VISTA_FRESH_GTM_ROUTINE_DIR@" )
+
+ message("Done!")
+ set(CONNECTION_ARGS "-S" 2)
+endif()
+
+#
+# Execute the PatchSequenceApply script to install all patches found
+#
+
+execute_process(
+  COMMAND "@PYTHON_EXECUTABLE@" "@CTEST_SOURCE_DIRECTORY@/Scripts/PatchSequenceApply.py"
+  ${CONNECTION_ARGS}
+  -p "@CTEST_SOURCE_DIRECTORY@/Packages/"
+  -l "@CTEST_BINARY_DIRECTORY@/Testing/Temporary"
+  -n all -i
+  WORKING_DIRECTORY "@CTEST_SOURCE_DIRECTORY@"
+  ERROR_VARIABLE  install_err
+  RESULT_VARIABLE tmp
+  )
+if(install_err)
+  message(FATAL_ERROR "${install_err}")
+endif()
