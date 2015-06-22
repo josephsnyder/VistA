@@ -61,7 +61,11 @@ def createSignonContext(sock):
   sendRequestByFile(inputfile,sock)
 
 def signInAlexander(sock):
-  inputfile = "signon.xml"
+  inputfile = "signonDr.xml"
+  sendRequestByFile(inputfile,sock)
+
+def signInClerk(sock):
+  inputfile = "signonCl.xml"
   sendRequestByFile(inputfile,sock)
 
 def sendRequestByFile(inputfile, sock):
@@ -86,20 +90,25 @@ def getResponse(sock, timeout=10):
         break
   return output
 
-def runRPC(self,rpcfilename, signon):
+def runRPC(self,rpcfilename, signonName):
   if os.path.dirname(__file__)+ "/" == "/":
     resultsfile = rpcfilename.replace(".xml","_results.xml")
   else:
     resultsfile = os.path.dirname(__file__)+ "/" + rpcfilename.replace(".xml","_results.xml")
   correct_response = open(resultsfile,'r').read()
   sock = createSocket()
-  if signon:
-    createSignonContext(sock)
-    getResponse(sock)
+  createSignonContext(sock)
+  getResponse(sock)
+  if signonName == "dr":
     signInAlexander(sock)
     getResponse(sock)
     createORContext(sock)
     getResponse(sock)
+  else:
+    signInClerk(sock)
+    getResponse(sock)
+    print "blah"
+
   sendRequestByFile(rpcfilename,sock)
   response = getResponse(sock)
   print "Response from " + rpcfilename
@@ -115,17 +124,17 @@ def createSocket():
 class TestM2MBroker(unittest.TestCase):
 
   def test_IamHere_NoSignon(self):
-    runRPC(self,"imhere.xml",False)
+    runRPC(self,"imhere.xml","cl")
   def test_IamHere_Signon(self):
-    runRPC(self,"imhere.xml",True)
+    runRPC(self,"imhere.xml","dr")
   def test_GetIntroMessage_NoSignon(self):
-    runRPC(self,"getintromessage.xml",False)
+    runRPC(self,"getintromessage.xml","dr")
   def test_GetPatientList_Signon(self):
-    runRPC(self,"getpatientlist.xml",True)
+    runRPC(self,"getpatientlist.xml","dr")
   def test_GetPatientList_NoSignon(self):
-    runRPC(self,"patientlisterror.xml",False)
+    runRPC(self,"patientlisterror.xml","cl")
   def test_GetPatientVitals_NoSignon(self):
-    runRPC(self,"getpatientvitals.xml",False)
+    runRPC(self,"getpatientvitals.xml","cl")
 
 def main():
   # Import Argparse and add Scripts/ directory to sys.path

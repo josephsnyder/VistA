@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<vistalink type="Gov.VA.Med.RPC.Request" mode="RPCBroker" >
+<rpc uri="XUS AV CODE" >
+<params>
+<param type="string" position="1" >"fakeclerk1;1Cle!@#$"</param>
+</params>
+</rpc>
+</vistalink>
