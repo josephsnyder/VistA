@@ -130,6 +130,23 @@ def configureNULLDevice(VistA):
   VistA.wait("Select OPTION")
   VistA.write("")
 
+def enablePLPackageInterface(VistA):
+  # Enable one of the Package Interfaces (357.6) that
+  # is used in the RAS functional Testing
+  startFileman(VistA)
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('PACKAGE INTERFACE')
+  VistA.wait('EDIT WHICH FIELD')
+  VistA.write('AVAILABLE\r')
+  VistA.wait('NAME:')
+  VistA.write('GMP SELECT CLINIC')
+  VistA.wait('AVAILABLE')
+  #  Path added is dependent on the platform that is being used.
+  VistA.write('Y\r')
+  VistA.wait("Select OPTION")
+  VistA.write("")
+
 def setupVistADomain(VistA,site_name):
   # Enter the site name into the DOMAIN file via FileMan
   startFileman(VistA)

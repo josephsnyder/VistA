@@ -115,7 +115,7 @@ class PLActions (Actions):
             self.VistA.write('N')
 
     def add(self, ssn, clinic, comment, onsetdate, status, acutechronic,
-              service, probnum=None, icd=None, evalue=None, verchknum=None):
+              service, probnum=None, icd=None, evalue=None, verchknum=None,snomed=None):
         ''' Add a problem using clinic or user with assigned selection list'''
         self.VistA.wait('Problem List Mgt Menu')
         self.VistA.write('Patient Problem List')
@@ -133,7 +133,10 @@ class PLActions (Actions):
         elif probnum is None :  # SL doesn't exist
             self.VistA.wait('PROBLEM')
             self.VistA.write(icd)
-            self.VistA.wait('Ok?')
+            index = self.VistA.multiwait(['PROBLEM','Ok'])
+            if index==0:
+              self.VistA.write(snomed)
+              self.VistA.wait('Ok')
             self.VistA.write('YES')
         else :  # Use SL
             self.VistA.wait('Select Item')
@@ -530,9 +533,10 @@ class PLActions (Actions):
         self.VistA.write(catname)
         self.VistA.wait('Select Item')
         self.VistA.write('AD')
-        self.VistA.wait('Select Specialty Subset')
-        self.VistA.write(spec)
-        self.VistA.wait('PROBLEM')
+        index = self.VistA.multiwait(['PROBLEM','Select Specialty Subset'])
+        if index == 1:
+          self.VistA.write(spec)
+          self.VistA.wait('PROBLEM')
         self.VistA.write(icd)
         index = self.VistA.multiwait(['Ok', 'STOP or Select', 'A suitable term'])
         if index == 0:
@@ -714,7 +718,7 @@ class PLActions (Actions):
         self.VistA.wait('Create Problem Selection Lists')
         self.VistA.write('')
 
-    def createibform (self, clinic, formname, groupname, plist):
+    def createibform (self, clinic, formname, groupname, plist,snomedlist):
         '''Create IB Encounter Form'''
         self.VistA.wait('Problem List Mgt Menu')
         self.VistA.write('')
@@ -752,13 +756,31 @@ class PLActions (Actions):
             self.VistA.wait('Select Action')
             self.VistA.write('Add Selection')
             self.VistA.wait('Select PROBLEM:')
-            self.VistA.write(pitem + '\r\rGroup1\r\r^\rTest')
+            self.VistA.write(pitem)
+            index = self.VistA.multiwait(['Select PROBLEM','Ok'])
+            if index == 0:
+              self.VistA.write(snomedlist[plist.index(pitem)])
+              self.VistA.wait('Ok')
+            self.VistA.write('\rGroup1\r\r^')
         self.VistA.wait('Select Action')
         self.VistA.write('QUIT\rYES')
         self.VistA.wait('Select Action')
         self.VistA.write('QUIT\r\r\r')
         self.VistA.wait('Integrated Billing Master Menu')
         self.VistA.write('Problem List')
+
+    def checkOutOfOrder (self, menuName):
+        '''Remove Category from a Selection List'''
+        self.VistA.wait('Problem List Mgt Menu')
+        self.VistA.write('Create Problem Selection Lists')
+        self.VistA.wait('Create Problem Selection Lists')
+        self.VistA.write('?');
+        index = self.VistA.multiwait(['SNOMED CT','Select Problem Selection Lists'])
+        self.VistA.write('')
+        if index == 0:
+          return False
+        else:
+          return True
 
     def sellistib (self, formname, listname, clinic):
         '''Remove Category from a Selection List'''
@@ -786,7 +808,7 @@ class PLActions (Actions):
         self.VistA.wait('Clinic')
         self.VistA.write(clinic)
         for vitem in vlist:
-            self.VistA.wait(vitem)
+            self.VistA.wait_re(vitem)
         self.VistA.wait('Select Item')
         self.VistA.write('Quit')
         self.VistA.wait('Select Action')
@@ -799,7 +821,7 @@ class PLActions (Actions):
         self.VistA.wait('PATIENT NAME')
         self.VistA.write(ssn)
         for vitem in vlist:
-            self.VistA.wait(vitem)
+            self.VistA.wait_re(vitem)
         self.VistA.wait('Select Action')
         self.VistA.write('Quit')
 
@@ -814,13 +836,16 @@ class PLActions (Actions):
         self.VistA.wait('to exit:')
         self.VistA.write('')
 
-    def verpatsrch(self, prob, vlist):
+    def verpatsrch(self, prob,snomed, vlist):
         '''Verify a patient problem list, content and order'''
         self.VistA.wait('Problem List Mgt Menu')
         self.VistA.write('Search for Patients having selected Problem')
         self.VistA.wait('PROBLEM:')
         self.VistA.write(prob)
-        self.VistA.wait('Ok?')
+        index = self.VistA.multiwait(['Ok','PROBLEM'])
+        if index == 1:
+          self.VistA.write(snomed)
+          self.VistA.wait('Ok')
         self.VistA.write('')
         self.VistA.wait('Select STATUS:')
         self.VistA.write('')
@@ -1014,23 +1039,29 @@ class PLActions (Actions):
         self.VistA.wait('Select Item')
         self.VistA.write(itemnum)  # select 1, 2,4,5,or6
 
-    def editpart2(self, ssn, probnum, itemnum, chgval):
+    def editpart2(self, ssn, probnum, itemnum, chgval, snomed=''):
         ''' Edit for lock test'''
         self.VistA.wait(':')
         self.VistA.write(chgval)
-        rval = self.VistA.multiwait(['Select Item', 'Ok?'])
+        rval = self.VistA.multiwait(['Select Item', 'Ok','A suitable term'])
         if rval == 0:
             self.VistA.write('SC')
         elif rval == 1:
             self.VistA.write('Yes')
             self.VistA.wait('Select Item')
             self.VistA.write('SC')
+        elif rval == 2:
+           self.VistA.write(snomed)
+           self.VistA.wait('Ok')
+           self.VistA.write('Yes')
+           self.VistA.wait('Select Item')
+           self.VistA.write('SC')
         self.VistA.wait('Select Action')
         self.VistA.write('QUIT')
         self.VistA.wait('Print a new problem list')
         self.VistA.write('N')
 
-    def badeditpart1(self, ssn, probnum, itemnum, chgval):
+    def badeditpart1(self, ssn, probnum, itemnum, chgval,snomed):
         ''' Simple edit of problem, items 1,2,4,5 or 6 only'''
         self.VistA.wait('Problem List Mgt Menu')
         self.VistA.write('Patient Problem List')
@@ -1042,7 +1073,10 @@ class PLActions (Actions):
         self.VistA.write(probnum)  # which patient problem
         # self.VistA.wait('Select Item')
         # self.VistA.write(itemnum)
-        self.VistA.wait('edited by another user')
+        index = self.VistA.multiwait(['Select Problem', 'edited by another user'])
+        if index == 0:
+          self.VistA.write(snomed)
+          self.VistA.wait('edited by another user')
         self.VistA.write('QUIT')
 
     def editPLsite(self, ver, prompt, uselex, order, screendups):
