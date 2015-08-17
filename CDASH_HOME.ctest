@@ -18,6 +18,7 @@
 # on the Clients tab of the CDash createProject page.
 #
 
+set(CLIENT_BASE_DIRECTORY "/path/to/base")
 message("${CLIENT_BASE_DIRECTORY}")
 if(EXISTS "${CLIENT_BASE_DIRECTORY}/clientinformation.cmake")
   include("${CLIENT_BASE_DIRECTORY}/clientinformation.cmake")

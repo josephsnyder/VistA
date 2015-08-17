@@ -22,26 +22,32 @@
 # "c:/Dashboards/Scripts".  Create a file next to this script, say
 # 'my_dashboard.cmake', with code of the following form:
 #
-   # Client maintainer: joe.snyder@kitware.com
-   set(CTEST_SITE "OSEHRAvm2.kitware")
-   set(CTEST_BUILD_NAME "Ubuntu-GTM")
-   set(CLIENT_BASE_DIRECTORY "C:/Users/joe.snyder/Work/tmp")
-#
+
+   # Client maintainer: user@domain.com
+   set(CTEST_SITE "")
+   set(CTEST_BUILD_NAME "")
+
 #   # GT.M only:
-   set(TEST_VISTA_FRESH_GTM_ROUTINE_DIR "/home/softhat/local/VistA/r")
-   set(TEST_VISTA_FRESH_GTM_GLOBALS_DAT "/home/softhat/local/VistA/database.dat")
-   set(TEST_VISTA_FRESH_GTM_GLOBAL_BACKUP "/home/softhat/local/VistA/database.tar")
-   set(TEST_VISTA_FRESH_GTM_ROUTINE_BACKUP "/home/softhat/local/VistA/routines.tar")
+   set(TEST_VISTA_FRESH_GTM_ROUTINE_DIR "/path/to/r")
+   set(TEST_VISTA_FRESH_GTM_GLOBALS_DAT "/path/to/database.dat")
+   # The tar file for TEST_VISTA_FRESH_GTM_GLOBAL_BACKUP should only contain the
+   # .dat file from a GT.M instance
+   set(TEST_VISTA_FRESH_GTM_GLOBAL_BACKUP "/path/to/database.tar")
+   # The tar file for TEST_VISTA_FRESH_GTM_ROUTINE_BACKUP should only contain the
+   # .m files from a GT.M instance
+   set(TEST_VISTA_FRESH_GTM_ROUTINE_BACKUP "/path/to/routines.tar")
+
+
 #
-   # Cache only:
+    # Cache only:
 #   set(VISTA_CACHE_NAMESPACE "VISTA")
 #   set(VISTA_CACHE_INSTANCE "Cache")
-#   set(TEST_VISTA_FRESH_CACHE_DAT_EMPTY "C:/Users/joe.snyder/Desktop/EmptyCache/CACHE.DAT")
-#   set(TEST_VISTA_FRESH_CACHE_DAT_BACKUP "C:/Users/joe.snyder/Desktop/FOIA-master/CACHE.DAT")
-#   set(TEST_VISTA_FRESH_CACHE_DAT_VISTA "C:/InterSystems/Cache/mgr/VistA/CACHE.DAT")
-#   set(CCONTROL_EXECUTABLE "C:/Intersystems/Cache/bin/ccontrol.exe")
-   # (Copy an empty cache.dat to create empty.dat)
-   
+#   set(TEST_VISTA_FRESH_CACHE_DAT_EMPTY "/path/to/EmptyCache/CACHE.DAT")
+#   set(TEST_VISTA_FRESH_CACHE_DAT_BACKUP "/path/to/FOIA-master/CACHE.DAT")
+#   set(TEST_VISTA_FRESH_CACHE_DAT_VISTA "/path/to/VistA/CACHE.DAT")
+#   set(CCONTROL_EXECUTABLE "/path/to/ccontrol.exe")
+#   set(TEST_VISTA_TELNET_PORT 23)
+
    set(dashboard_CMakeCache "
    VISTA_CACHE_INSTANCE:STRING=CACHE
    TEST_VISTA_XINDEX_WARNINGS_AS_FAILURES:BOOL=OFF
