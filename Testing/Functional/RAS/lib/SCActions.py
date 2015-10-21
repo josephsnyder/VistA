@@ -801,7 +801,7 @@ class SCActions (Actions):
         self.VistA.write('')
         self.VistA.wait('Diagnosis')
         self.VistA.write(icd)
-        index = self.VistA.multiwait(['No records','OK'])
+        index = self.VistA.multiwait(['No records','O[kK]'])
         if index == 0:
           self.VistA.write(icd10)
           self.VistA.wait('OK')
@@ -1008,7 +1008,7 @@ class SCActions (Actions):
         self.VistA.write('')
         self.VistA.wait('Diagnosis')
         self.VistA.write(icd)
-        index = self.VistA.multiwait(['No records','Ok'])
+        index = self.VistA.multiwait(['No records','O[Kk]'])
         if index == 0:
           self.VistA.write(icd10)
           self.VistA.wait('OK')
@@ -1341,7 +1341,7 @@ class SCActions (Actions):
         for ptime in timelist:
             self.VistA.wait('SCHEDULE TIME:')
             self.VistA.write(ptime)
-            rval = self.VistA.multiwait(['APPOINTMENT TYPE:', '...OK'])
+            rval = self.VistA.multiwait(['APPOINTMENT TYPE:', '...O[Kk]'])
             if rval == 0:
                 self.VistA.write('Regular')
             elif rval == 1:

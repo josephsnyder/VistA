@@ -538,7 +538,7 @@ class ADTActions (Actions):
         self.VistA.write('Waiting List Entry')
         self.VistA.wait('Select WAIT LIST DIVISION')
         self.VistA.write('VISTA MEDICAL CENTER')
-        rval = self.VistA.multiwait(['as a new WAIT LIST', '...OK'])
+        rval = self.VistA.multiwait(['as a new WAIT LIST', '...O[Kk]'])
         if rval == 0:
             self.VistA.write('Yes')
         elif rval == 1:
@@ -650,7 +650,7 @@ class ADTActions (Actions):
         self.VistA.write('No')
         self.VistA.wait('PRINCIPAL diagnosis')
         self.VistA.write(diag)
-        index = self.VistA.multiwait(['\?\?','OK'])
+        index = self.VistA.multiwait(['\?\?','O[Kk]'])
         if index == 0:
           self.VistA.write(ICD10diag)
           self.VistA.wait('OK')
@@ -659,7 +659,7 @@ class ADTActions (Actions):
         self.VistA.write('')
         self.VistA.wait('Enter SECONDARY diagnosis')
         self.VistA.write(sdiag)
-        index = self.VistA.multiwait(['\?\?','OK'])
+        index = self.VistA.multiwait(['\?\?','O[Kk]'])
         if index == 0:
           self.VistA.write(ICD10diag)
           self.VistA.wait('OK')

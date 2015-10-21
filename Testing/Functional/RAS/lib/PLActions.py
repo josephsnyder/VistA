@@ -792,7 +792,7 @@ class PLActions (Actions):
         self.VistA.write('Create Problem Selection Lists')
         self.VistA.wait('Create Problem Selection Lists')
         self.VistA.write('?');
-        index = self.VistA.multiwait(['SNOMED CT','Select Problem Selection Lists'])
+        index = self.VistA.multiwait(['SNOMED CT','Problem Selection Lists'])
         self.VistA.write('')
         if index == 0:
           return False
