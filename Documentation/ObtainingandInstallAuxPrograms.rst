@@ -41,13 +41,19 @@ Python is a scripting language used to manage the packing and unpacking of the
 OSEHRA code base. It is free and Open Source. Python can be downloaded from
 http://www.python.org/download/ using the instructions on the web site.
 
-`Python 2.7`_ is preferred, if not available, need at least python 2.6 with
-argument parser support.  Do not use python 3.0 and up as that is not backward
-compatible with 2.7.
+OSEHRA recommends that `Python 2.7`_ is the version that is used with the
+OSEHRA VistA system. For Windows users, `installer files`_ are available
+instead of the source or tar downloads.
 
-It is also recommmended that you add the path to python executable to your
-system PATH environment variable, ``%PATH%`` for Windows, and ``$PATH``
-for Unix/Linix.
+If 2.7 is not avilable for your system, an install of Python 2.6 with argument
+parser support should be equivalent.  **Do not use any version of Python 3.0 or
+higher**.  The command structure is different between the Python versions and
+the scripts will likely throw an error when being executed.
+
+It is also recommmended that you add the path to Python executable to your
+system PATH environment variable, as the installers will not perform this step
+automatically.  Add the path to the python executable into the environment
+variable ``%PATH%`` for Windows and ``$PATH`` for Unix/Linix.
 
 Sikuli
 -------
@@ -110,6 +116,7 @@ PExpect_ interface to connect a VistA instance.
 .. _OSEHRAHelper.py:
    http://code.osehra.org/gitweb?p=VistA.git;a=blob;f=Python/vista/OSEHRAHelper.py
 .. _`Python 2.7`: http://www.python.org/download/releases/2.7.5/
+.. _`installer files': https://www.python.org/downloads/windows/
 .. _`pwin32 extension`: http://sourceforge.net/projects/pywin32/
 .. _`pwin32 extension files`: http://sourceforge.net/projects/pywin32/files/
 .. _`plink`: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
