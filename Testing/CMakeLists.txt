@@ -249,6 +249,8 @@ option(TEST_VISTA_FUNCTIONAL_SIK "Use Python and Sikuli to test Vitals and CPRS"
 option(TEST_VISTA_FUNCTIONAL_RAS "Use Python to test VistA via roll and scroll" OFF)
 option(TEST_VISTA_SETUP "Prepopulate the database with sample data including users, patients, locations, etc. " ON)
 if(TEST_VISTA_SETUP)
+  set(TEST_VISTA_OLD_CPRS_VERSION "1.0.30.69" CACHE STRING "Version of CPRS to change in VistA" )
+  set(TEST_VISTA_NEW_CPRS_VERSION  "1.0.30.16" CACHE STRING "Version of CPRS to change to")
   set(logfile "${VISTA_BINARY_DIR}/Testing/Log/PostImport.log")
   configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Setup/PostImportSetupScript.py.in" "${CMAKE_CURRENT_BINARY_DIR}/Setup/PostImportSetupScript.py")
   configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Setup/importPats.py.in" "${CMAKE_CURRENT_BINARY_DIR}/Setup/importPats.py")

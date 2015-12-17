@@ -130,6 +130,32 @@ def configureNULLDevice(VistA):
   VistA.wait("Select OPTION")
   VistA.write("")
 
+def configureCPRSVersion(VistA,oldCPRSVersion,newCPRSVersion):
+  #  A utility to change the version of CPRS that is expected
+  #  by the VistA instance.  Changing the menu text of the
+  #  OR CPRS GUI CHART option will change the value that it
+  #  expects the client to be
+  startFileman(VistA)
+  VistA.write('1')
+  VistA.wait('INPUT TO WHAT FILE')
+  VistA.write('19')
+  VistA.wait('EDIT WHICH FIELD')
+  VistA.write('MENU TEXT\r')
+  VistA.wait('NAME:')
+  VistA.write('OR CPRS GUI CHART')
+  index = VistA.multiwait([newCPRSVersion,'Replace'])
+  if index == 1:
+    VistA.write(oldCPRSVersion)
+    index = VistA.multiwait(["Replace","With"])
+    if index == 1:
+      VistA.write(newCPRSVersion)
+      VistA.wait("Replace")
+  VistA.write("")
+  VistA.wait("Select OPTION NAME")
+  VistA.write("")
+  VistA.wait("Select OPTION")
+  VistA.write("")
+
 def setupVistADomain(VistA,site_name):
   # Enter the site name into the DOMAIN file via FileMan
   startFileman(VistA)

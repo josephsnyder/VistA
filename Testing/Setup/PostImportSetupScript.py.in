@@ -64,6 +64,11 @@ OSEHRASetup.setupPrimaryHFSDir(VistA,'${TEST_VISTA_SETUP_PRIMARY_HFS_DIRECTORY}'
 
 OSEHRASetup.configureNULLDevice(VistA)
 
+# Change the CPRS Version that the VistA instance expects to connect to
+# by changing the Menu Text in the OR CPRS GUI CHART option
+
+OSEHRASetup.configureCPRSVersion(VistA,"${TEST_VISTA_OLD_CPRS_VERSION}","${TEST_VISTA_NEW_CPRS_VERSION}")
+
 # Create and Christen the New Domain:
 # Enter the site name into the DOMAIN file then
 # christen the domain via the XMUDCHR routine.
