@@ -108,7 +108,12 @@ def populate(input):
     # Map by package namespace (prefix).
     for ns in sorted(namespaces.keys(),order_long_to_short):
         path = namespaces[ns]
-        gbls = [gbl for gbl in globals if gbl.startswith(ns)]
+        gbls=[]
+        for gbl in globals:
+          gblout = gbl.split('+')
+          gblName = gblout[1] if (len(gblout) > 1) else gblout[0]
+          if gblName.startswith(ns):
+            gbls.append(gbl)
         rtns = [rtn for rtn in routines if rtn.startswith(ns)]
         if (rtns or gbls) and not path:
             sys.stderr.write('Namespace "%s" has no path!\n' % ns)
