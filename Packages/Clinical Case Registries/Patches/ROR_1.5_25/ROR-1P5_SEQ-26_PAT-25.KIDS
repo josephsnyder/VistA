@@ -1,0 +1,2731 @@
+Released ROR*1.5*25 SEQ #26
+Extracted from mail message
+**KIDS**:ROR*1.5*25^
+
+**INSTALL NAME**
+ROR*1.5*25
+"BLD",9623,0)
+ROR*1.5*25^CLINICAL CASE REGISTRIES^0^3150331^y
+"BLD",9623,1,0)
+^^2^2^3141104^^
+"BLD",9623,1,1,0)
+Updates to support ICD-10 for PTF's increase in the number of ICD-10
+"BLD",9623,1,2,0)
+codes to 25.
+"BLD",9623,4,0)
+^9.64PA^^0
+"BLD",9623,6)
+1^
+"BLD",9623,6.3)
+9
+"BLD",9623,"ABPKG")
+n
+"BLD",9623,"INIT")
+POST^RORP025
+"BLD",9623,"KRN",0)
+^9.67PA^779.2^20
+"BLD",9623,"KRN",.4,0)
+.4
+"BLD",9623,"KRN",.401,0)
+.401
+"BLD",9623,"KRN",.402,0)
+.402
+"BLD",9623,"KRN",.403,0)
+.403
+"BLD",9623,"KRN",.5,0)
+.5
+"BLD",9623,"KRN",.84,0)
+.84
+"BLD",9623,"KRN",3.6,0)
+3.6
+"BLD",9623,"KRN",3.8,0)
+3.8
+"BLD",9623,"KRN",9.2,0)
+9.2
+"BLD",9623,"KRN",9.8,0)
+9.8
+"BLD",9623,"KRN",9.8,"NM",0)
+^9.68A^8^7
+"BLD",9623,"KRN",9.8,"NM",1,0)
+RORX013A^^0^B79404657
+"BLD",9623,"KRN",9.8,"NM",2,0)
+RORX015A^^0^B90387034
+"BLD",9623,"KRN",9.8,"NM",4,0)
+RORHL081^^0^B53447433
+"BLD",9623,"KRN",9.8,"NM",5,0)
+RORXU010^^0^B14122091
+"BLD",9623,"KRN",9.8,"NM",6,0)
+RORUTL11^^0^B4346474
+"BLD",9623,"KRN",9.8,"NM",7,0)
+RORP025^^0^B6132875
+"BLD",9623,"KRN",9.8,"NM",8,0)
+RORUPD09^^0^B11230376
+"BLD",9623,"KRN",9.8,"NM","B","RORHL081",4)
+ 
+"BLD",9623,"KRN",9.8,"NM","B","RORP025",7)
+ 
+"BLD",9623,"KRN",9.8,"NM","B","RORUPD09",8)
+
+"BLD",9623,"KRN",9.8,"NM","B","RORUTL11",6)
+ 
+"BLD",9623,"KRN",9.8,"NM","B","RORX013A",1)
+ 
+"BLD",9623,"KRN",9.8,"NM","B","RORX015A",2)
+ 
+"BLD",9623,"KRN",9.8,"NM","B","RORXU010",5)
+ 
+"BLD",9623,"KRN",19,0)
+19
+"BLD",9623,"KRN",19,"NM",0)
+^9.68A^^
+"BLD",9623,"KRN",19.1,0)
+19.1
+"BLD",9623,"KRN",101,0)
+101
+"BLD",9623,"KRN",409.61,0)
+409.61
+"BLD",9623,"KRN",771,0)
+771
+"BLD",9623,"KRN",779.2,0)
+779.2
+"BLD",9623,"KRN",870,0)
+870
+"BLD",9623,"KRN",8989.51,0)
+8989.51
+"BLD",9623,"KRN",8989.52,0)
+8989.52
+"BLD",9623,"KRN",8994,0)
+8994
+"BLD",9623,"KRN","B",.4,.4)
+ 
+"BLD",9623,"KRN","B",.401,.401)
+ 
+"BLD",9623,"KRN","B",.402,.402)
+ 
+"BLD",9623,"KRN","B",.403,.403)
+ 
+"BLD",9623,"KRN","B",.5,.5)
+ 
+"BLD",9623,"KRN","B",.84,.84)
+ 
+"BLD",9623,"KRN","B",3.6,3.6)
+ 
+"BLD",9623,"KRN","B",3.8,3.8)
+ 
+"BLD",9623,"KRN","B",9.2,9.2)
+ 
+"BLD",9623,"KRN","B",9.8,9.8)
+ 
+"BLD",9623,"KRN","B",19,19)
+ 
+"BLD",9623,"KRN","B",19.1,19.1)
+ 
+"BLD",9623,"KRN","B",101,101)
+ 
+"BLD",9623,"KRN","B",409.61,409.61)
+ 
+"BLD",9623,"KRN","B",771,771)
+ 
+"BLD",9623,"KRN","B",779.2,779.2)
+ 
+"BLD",9623,"KRN","B",870,870)
+ 
+"BLD",9623,"KRN","B",8989.51,8989.51)
+ 
+"BLD",9623,"KRN","B",8989.52,8989.52)
+ 
+"BLD",9623,"KRN","B",8994,8994)
+ 
+"BLD",9623,"QUES",0)
+^9.62^^
+"BLD",9623,"REQB",0)
+^9.611^3^2
+"BLD",9623,"REQB",2,0)
+DG*5.3*884^2
+"BLD",9623,"REQB",3,0)
+ROR*1.5*27^2
+"BLD",9623,"REQB","B","DG*5.3*884",2)
+
+"BLD",9623,"REQB","B","ROR*1.5*27",3)
+
+"INIT")
+POST^RORP025
+"MBREQ")
+0
+"PKG",192,-1)
+1^1
+"PKG",192,0)
+CLINICAL CASE REGISTRIES^ROR^CLINICAL CASE REGISTRIES
+"PKG",192,20,0)
+^9.402P^^
+"PKG",192,22,0)
+^9.49I^1^1
+"PKG",192,22,1,0)
+1.5^3060208^3060221^66481
+"PKG",192,22,1,"PAH",1,0)
+25^3150331^123457081
+"PKG",192,22,1,"PAH",1,1,0)
+^^2^2^3150331
+"PKG",192,22,1,"PAH",1,1,1,0)
+Updates to support ICD-10 for PTF's increase in the number of ICD-10
+"PKG",192,22,1,"PAH",1,1,2,0)
+codes to 25.
+"QUES","XPF1",0)
+Y
+"QUES","XPF1","??")
+^D REP^XPDH
+"QUES","XPF1","A")
+Shall I write over your |FLAG| File
+"QUES","XPF1","B")
+YES
+"QUES","XPF1","M")
+D XPF1^XPDIQ
+"QUES","XPF2",0)
+Y
+"QUES","XPF2","??")
+^D DTA^XPDH
+"QUES","XPF2","A")
+Want my data |FLAG| yours
+"QUES","XPF2","B")
+YES
+"QUES","XPF2","M")
+D XPF2^XPDIQ
+"QUES","XPI1",0)
+YO
+"QUES","XPI1","??")
+^D INHIBIT^XPDH
+"QUES","XPI1","A")
+Want KIDS to INHIBIT LOGONs during the install
+"QUES","XPI1","B")
+NO
+"QUES","XPI1","M")
+D XPI1^XPDIQ
+"QUES","XPM1",0)
+PO^VA(200,:EM
+"QUES","XPM1","??")
+^D MG^XPDH
+"QUES","XPM1","A")
+Enter the Coordinator for Mail Group '|FLAG|'
+"QUES","XPM1","B")
+
+"QUES","XPM1","M")
+D XPM1^XPDIQ
+"QUES","XPO1",0)
+Y
+"QUES","XPO1","??")
+^D MENU^XPDH
+"QUES","XPO1","A")
+Want KIDS to Rebuild Menu Trees Upon Completion of Install
+"QUES","XPO1","B")
+NO
+"QUES","XPO1","M")
+D XPO1^XPDIQ
+"QUES","XPZ1",0)
+Y
+"QUES","XPZ1","??")
+^D OPT^XPDH
+"QUES","XPZ1","A")
+Want to DISABLE Scheduled Options, Menu Options, and Protocols
+"QUES","XPZ1","B")
+NO
+"QUES","XPZ1","M")
+D XPZ1^XPDIQ
+"QUES","XPZ2",0)
+Y
+"QUES","XPZ2","??")
+^D RTN^XPDH
+"QUES","XPZ2","A")
+Want to MOVE routines to other CPUs
+"QUES","XPZ2","B")
+NO
+"QUES","XPZ2","M")
+D XPZ2^XPDIQ
+"RTN")
+7
+"RTN","RORHL081")
+0^4^B53447433^B53807054
+"RTN","RORHL081",1,0)
+RORHL081 ;HOIFO/BH - HL7 INPATIENT DATA: OBX ;10/27/05 12:32pm
+"RTN","RORHL081",2,0)
+ ;;1.5;CLINICAL CASE REGISTRIES;**19,25**;Feb 17, 2006;Build 9
+"RTN","RORHL081",3,0)
+ ;
+"RTN","RORHL081",4,0)
+ ; This routine uses the following IAs:
+"RTN","RORHL081",5,0)
+ ;
+"RTN","RORHL081",6,0)
+ ; #92           Read access to the PTF file (Controlled)
+"RTN","RORHL081",7,0)
+ ; #6130         PTFICD^DGPTFUT         
+"RTN","RORHL081",8,0)
+ ;
+"RTN","RORHL081",9,0)
+ ;******************************************************************************
+"RTN","RORHL081",10,0)
+ ;******************************************************************************
+"RTN","RORHL081",11,0)
+ ; --- ROUTINE MODIFICATION LOG ---
+"RTN","RORHL081",12,0)
+ ; 
+"RTN","RORHL081",13,0)
+ ;PKG/PATCH   DATE       DEVELOPER   MODIFICATION
+"RTN","RORHL081",14,0)
+ ;----------- ---------- ----------- ----------------------------------------
+"RTN","RORHL081",15,0)
+ ;ROR*1.5*19  MAY 2012   K GUPTA     Support for ICD-10 Coding System.
+"RTN","RORHL081",16,0)
+ ;ROR*1.5*25  OCT 2014   T KOPP      Support for expanded # of PTF diagnoses
+"RTN","RORHL081",17,0)
+ ;                                    and procedures for ICD-10
+"RTN","RORHL081",18,0)
+ ;
+"RTN","RORHL081",19,0)
+ ;******************************************************************************
+"RTN","RORHL081",20,0)
+ ;******************************************************************************
+"RTN","RORHL081",21,0)
+ Q
+"RTN","RORHL081",22,0)
+ ;
+"RTN","RORHL081",23,0)
+ ;***** BED SECTION (501 segment)
+"RTN","RORHL081",24,0)
+BEDSEC(RORIEN) ;
+"RTN","RORHL081",25,0)
+ N DATE,ERRCNT,FLD,IEN4502,IENS,NODE,OID,RORBS,RORBSED,RORBSSD,RORBUF,RORIBUF,RORCODE,RORMSG,TMP,RORICDSNAM,DIERR
+"RTN","RORHL081",26,0)
+ S ERRCNT=0
+"RTN","RORHL081",27,0)
+ S OID="INBED"_RORCS_"Bedsection Diagnosis"_RORCS_"VA080"
+"RTN","RORHL081",28,0)
+ S NODE=$$ROOT^DILFD(45.02,","_RORIEN_",",1)
+"RTN","RORHL081",29,0)
+ ;---
+"RTN","RORHL081",30,0)
+ S DATE=$$GET1^DIQ(45,RORIEN_",",2,"I",,"RORMSG")
+"RTN","RORHL081",31,0)
+ I $G(DIERR)  D  S ERRCNT=ERRCNT+1
+"RTN","RORHL081",32,0)
+ . D DBS^RORERR("RORMSG",-99,,RORDFN,45,RORIEN_",")
+"RTN","RORHL081",33,0)
+ S (RORBSSD,RORBSED)=$$FM2HL^RORHL7(DATE)
+"RTN","RORHL081",34,0)
+ ;
+"RTN","RORHL081",35,0)
+ S DATE=""
+"RTN","RORHL081",36,0)
+ F  S DATE=$O(@NODE@("AM",DATE))  Q:DATE=""  D
+"RTN","RORHL081",37,0)
+ . S IEN4502=0
+"RTN","RORHL081",38,0)
+ . F  S IEN4502=$O(@NODE@("AM",DATE,IEN4502))  Q:IEN4502'>0  D
+"RTN","RORHL081",39,0)
+ . . S RORBSSD=RORBSED  K RORBUF
+"RTN","RORHL081",40,0)
+ . . S IENS=IEN4502_","_RORIEN_","
+"RTN","RORHL081",41,0)
+ . . ;--- Load the data
+"RTN","RORHL081",42,0)
+ . . D GETS^DIQ(45.02,IENS,"2;10","EI","RORBUF","RORMSG")
+"RTN","RORHL081",43,0)
+ . . I $G(DIERR)  D  S ERRCNT=ERRCNT+1
+"RTN","RORHL081",44,0)
+ . . . D DBS^RORERR("RORMSG",-99,,RORDFN,45.02,IENS)
+"RTN","RORHL081",45,0)
+ . . ;--- Name of the bed section
+"RTN","RORHL081",46,0)
+ . . S RORBS=$$ESCAPE^RORHL7($G(RORBUF(45.02,IENS,2,"E")))
+"RTN","RORHL081",47,0)
+ . . ;--- End date
+"RTN","RORHL081",48,0)
+ . . S RORBSED=$$FM2HL^RORHL7($G(RORBUF(45.02,IENS,10,"I")))
+"RTN","RORHL081",49,0)
+ . . ;--- ICD codes
+"RTN","RORHL081",50,0)
+ . . S (RORCODE,RORICDSNAM)=""
+"RTN","RORHL081",51,0)
+ . . D GETICD(501,RORIEN,IEN4502,"",.RORCODE,.RORICDSNAM)
+"RTN","RORHL081",52,0)
+ . . ;--- Store the segment (if there is at least one ICD code)
+"RTN","RORHL081",53,0)
+ . . D:RORCODE'="" SETOBX(OID,RORICDSNAM_":"_RORCODE,RORBS,RORBSED,RORBSSD)
+"RTN","RORHL081",54,0)
+ ;
+"RTN","RORHL081",55,0)
+ Q ERRCNT
+"RTN","RORHL081",56,0)
+ ;
+"RTN","RORHL081",57,0)
+ ;***** DISCHARGE DIAGNOSIS CODES (701 segment)
+"RTN","RORHL081",58,0)
+DDIAG(RORIEN) ;
+"RTN","RORHL081",59,0)
+ N ERRCNT,FLD,IFL,OID,RORIBUF,RORDDIAG,TMP,RORICDSNAM
+"RTN","RORHL081",60,0)
+ S ERRCNT=0,OID="INDIS"_RORCS_"Discharge Diagnosis"_RORCS_"VA080"
+"RTN","RORHL081",61,0)
+ ;--- ICD codes
+"RTN","RORHL081",62,0)
+ S (RORDDIAG,RORICDSNAM)=""
+"RTN","RORHL081",63,0)
+ D GETICD(701,RORIEN,"",0,.RORDDIAG,.RORICDSNAM)
+"RTN","RORHL081",64,0)
+ ;--- Store the segment (if there is at least one ICD code)
+"RTN","RORHL081",65,0)
+ D:RORDDIAG'="" SETOBX(OID,RORICDSNAM_":"_RORDDIAG)
+"RTN","RORHL081",66,0)
+ Q ERRCNT
+"RTN","RORHL081",67,0)
+ ;
+"RTN","RORHL081",68,0)
+ ;***** OBX SEGMENT(S) BUILDER (INPATIENT)
+"RTN","RORHL081",69,0)
+ ;
+"RTN","RORHL081",70,0)
+ ; RORIEN        IEN of file #45
+"RTN","RORHL081",71,0)
+ ; RORDFN        DFN of Patient Record in File #2
+"RTN","RORHL081",72,0)
+ ;
+"RTN","RORHL081",73,0)
+ ; Return Values:
+"RTN","RORHL081",74,0)
+ ;       <0  Error Code
+"RTN","RORHL081",75,0)
+ ;        0  Ok
+"RTN","RORHL081",76,0)
+ ;       >0  Non-fatal error(s)
+"RTN","RORHL081",77,0)
+ ;
+"RTN","RORHL081",78,0)
+OBX(RORIEN,RORDFN) ;
+"RTN","RORHL081",79,0)
+ N ERRCNT,RC,RORCS,RORLST,RORMSG,RORRS,TMP
+"RTN","RORHL081",80,0)
+ S (ERRCNT,RC)=0
+"RTN","RORHL081",81,0)
+ D ECH^RORHL7(.RORCS,,.RORRS)
+"RTN","RORHL081",82,0)
+ ;
+"RTN","RORHL081",83,0)
+ ;--- Principal diagnosis
+"RTN","RORHL081",84,0)
+ S RC=$$PRIN(RORIEN)
+"RTN","RORHL081",85,0)
+ I RC  S ERRCNT=ERRCNT+1  Q:RC<0 RC
+"RTN","RORHL081",86,0)
+ ;--- Primary discharge diagnosis
+"RTN","RORHL081",87,0)
+ S RC=$$PDISCH(RORIEN)
+"RTN","RORHL081",88,0)
+ I RC  S ERRCNT=ERRCNT+1  Q:RC<0 RC
+"RTN","RORHL081",89,0)
+ ;--- Discharge diagnosis codes
+"RTN","RORHL081",90,0)
+ S RC=$$DDIAG(RORIEN)
+"RTN","RORHL081",91,0)
+ I RC  S ERRCNT=ERRCNT+1  Q:RC<0 RC
+"RTN","RORHL081",92,0)
+ ;--- Bed section
+"RTN","RORHL081",93,0)
+ S RC=$$BEDSEC(RORIEN)
+"RTN","RORHL081",94,0)
+ I RC  S ERRCNT=ERRCNT+1  Q:RC<0 RC
+"RTN","RORHL081",95,0)
+ ;--- Surgical procedures
+"RTN","RORHL081",96,0)
+ S RC=$$SURGPRO(RORIEN)
+"RTN","RORHL081",97,0)
+ I RC  S ERRCNT=ERRCNT+1  Q:RC<0 RC
+"RTN","RORHL081",98,0)
+ ;--- Other diagnoses
+"RTN","RORHL081",99,0)
+ S RC=$$OTRPROC(RORIEN)
+"RTN","RORHL081",100,0)
+ I RC  S ERRCNT=ERRCNT+1  Q:RC<0 RC
+"RTN","RORHL081",101,0)
+ ;
+"RTN","RORHL081",102,0)
+ Q ERRCNT
+"RTN","RORHL081",103,0)
+ ;
+"RTN","RORHL081",104,0)
+ ;***** OTHER DIAGNOSES
+"RTN","RORHL081",105,0)
+OTRPROC(RORIEN) ;
+"RTN","RORHL081",106,0)
+ N ERRCNT,FLD,IEN4505,IENS,IFL,NODE,OID,RORBUF,RORMSG,ROROPBS,ROROPCD,ROROPDTE,TMP,RORICDSNAM
+"RTN","RORHL081",107,0)
+ S ERRCNT=0
+"RTN","RORHL081",108,0)
+ S OID="INOTR"_RORCS_"Other Diagnosis"_RORCS_"VA080"
+"RTN","RORHL081",109,0)
+ S NODE=$$ROOT^DILFD(45.05,","_RORIEN_",",1)
+"RTN","RORHL081",110,0)
+ ;
+"RTN","RORHL081",111,0)
+ S IEN4505=0
+"RTN","RORHL081",112,0)
+ F  S IEN4505=$O(@NODE@(IEN4505))  Q:IEN4505'>0  D
+"RTN","RORHL081",113,0)
+ . S IENS=IEN4505_","_RORIEN_","  K RORBUF
+"RTN","RORHL081",114,0)
+ . ;--- Load the data
+"RTN","RORHL081",115,0)
+ . D GETS^DIQ(45.05,IENS,".01;1;","EI","RORBUF","RORMSG")
+"RTN","RORHL081",116,0)
+ . I $G(DIERR)  D  S ERRCNT=ERRCNT+1
+"RTN","RORHL081",117,0)
+ . . D DBS^RORERR("RORMSG",-99,,RORDFN,45.05,IENS)
+"RTN","RORHL081",118,0)
+ . ;--- Name of the facility
+"RTN","RORHL081",119,0)
+ . S ROROPBS=$$ESCAPE^RORHL7($G(RORBUF(45.05,IENS,1,"E")))
+"RTN","RORHL081",120,0)
+ . ;--- Date of the procedure
+"RTN","RORHL081",121,0)
+ . S ROROPDTE=$$FM2HL^RORHL7($G(RORBUF(45.05,IENS,.01,"I")))
+"RTN","RORHL081",122,0)
+ . ;--- ICD codes
+"RTN","RORHL081",123,0)
+ . S (ROROPCD,RORICDSNAM)=""
+"RTN","RORHL081",124,0)
+ . D GETICD(601,RORIEN,IEN4505,"",.ROROPCD,.RORICDSNAM)
+"RTN","RORHL081",125,0)
+ . ;--- Store the segment (if there is at least one ICD code)
+"RTN","RORHL081",126,0)
+ . D:ROROPCD'="" SETOBX(OID,RORICDSNAM_":"_ROROPCD,ROROPBS,,ROROPDTE)
+"RTN","RORHL081",127,0)
+ ;
+"RTN","RORHL081",128,0)
+ Q ERRCNT
+"RTN","RORHL081",129,0)
+ ;
+"RTN","RORHL081",130,0)
+ ;***** PRIMARY DISCHARGE DIAGNOSIS
+"RTN","RORHL081",131,0)
+PDISCH(IEN) ;
+"RTN","RORHL081",132,0)
+ N ERRCNT,OID,RORDD,RORMSG,TMP,RORICDSNAM,RORBUF
+"RTN","RORHL081",133,0)
+ S ERRCNT=0,OID="INPRI"_RORCS_"Primary Dis. Diagnosis"_RORCS_"VA080"
+"RTN","RORHL081",134,0)
+ ;--- Load the data
+"RTN","RORHL081",135,0)
+ S IEN=IEN_","
+"RTN","RORHL081",136,0)
+ D GETS^DIQ(45,IEN,79,"EI","RORBUF","RORMSG")
+"RTN","RORHL081",137,0)
+ I $G(DIERR)  D  S ERRCNT=ERRCNT+1
+"RTN","RORHL081",138,0)
+ . D DBS^RORERR("RORMSG",-99,,RORDFN,45,IEN)
+"RTN","RORHL081",139,0)
+ S RORDD=$G(RORBUF(45,IEN,79,"E"))
+"RTN","RORHL081",140,0)
+ ;--- Store the segment
+"RTN","RORHL081",141,0)
+ I RORDD'="" D
+"RTN","RORHL081",142,0)
+ . S RORICDSNAM=$$CSNAME^RORHLUT1(80,$G(RORBUF(45,IEN,79,"I")))
+"RTN","RORHL081",143,0)
+ . D SETOBX(OID,RORICDSNAM_":"_RORDD)
+"RTN","RORHL081",144,0)
+ Q ERRCNT
+"RTN","RORHL081",145,0)
+ ;
+"RTN","RORHL081",146,0)
+ ;***** PRINCIPAL DIAGNOSIS
+"RTN","RORHL081",147,0)
+PRIN(IEN) ;
+"RTN","RORHL081",148,0)
+ N ERRCNT,OID,RORMSG,RORPDIAG,TMP,RORICDSNAM,RORBUF,RORFLD
+"RTN","RORHL081",149,0)
+ S ERRCNT=0,OID="INAD"_RORCS_"Admitting Diagnosis"_RORCS_"VA080"
+"RTN","RORHL081",150,0)
+ ;--- Load the data
+"RTN","RORHL081",151,0)
+ S IEN=IEN_","
+"RTN","RORHL081",152,0)
+ D GETS^DIQ(45,IEN,79,"EI","RORBUF","RORMSG")
+"RTN","RORHL081",153,0)
+ I $G(DIERR)  D  S ERRCNT=ERRCNT+1
+"RTN","RORHL081",154,0)
+ . D DBS^RORERR("RORMSG",-99,,RORDFN,45,IEN)
+"RTN","RORHL081",155,0)
+ S RORPDIAG=$G(RORBUF(45,IEN,79,"E")),RORFLD=79
+"RTN","RORHL081",156,0)
+ ; Look at pre-1986 Dx only if PRIMARY DIAGNOSIS is missing
+"RTN","RORHL081",157,0)
+ I RORPDIAG="" D
+"RTN","RORHL081",158,0)
+ . K RORBUF,RORMSG
+"RTN","RORHL081",159,0)
+ . D GETS^DIQ(45,IEN,80,"EI","RORBUF","RORMSG")
+"RTN","RORHL081",160,0)
+ . I $G(DIERR)  D  S ERRCNT=ERRCNT+1
+"RTN","RORHL081",161,0)
+ .. D DBS^RORERR("RORMSG",-99,,RORDFN,45,IEN)
+"RTN","RORHL081",162,0)
+ . S RORPDIAG=$G(RORBUF(45,IEN,80,"E")),RORFLD=80
+"RTN","RORHL081",163,0)
+ ;--- Store the segment
+"RTN","RORHL081",164,0)
+ I RORPDIAG'="" D
+"RTN","RORHL081",165,0)
+ . S RORICDSNAM=$$CSNAME^RORHLUT1(80,$G(RORBUF(45,IEN,RORFLD,"I")))
+"RTN","RORHL081",166,0)
+ . D SETOBX(OID,RORICDSNAM_":"_RORPDIAG)
+"RTN","RORHL081",167,0)
+ Q ERRCNT
+"RTN","RORHL081",168,0)
+ ;
+"RTN","RORHL081",169,0)
+ ;***** LOW-LEVEL SEGMENT BUILDER
+"RTN","RORHL081",170,0)
+ ;
+"RTN","RORHL081",171,0)
+ ; OBX3          Observation Identifier
+"RTN","RORHL081",172,0)
+ ;
+"RTN","RORHL081",173,0)
+ ; OBX5          Observation Value
+"RTN","RORHL081",174,0)
+ ;
+"RTN","RORHL081",175,0)
+ ; [OBX6]        Bed Section
+"RTN","RORHL081",176,0)
+ ;
+"RTN","RORHL081",177,0)
+ ; [OBX12]       Bed Section End Date/Time
+"RTN","RORHL081",178,0)
+ ;
+"RTN","RORHL081",179,0)
+ ; [OBX14]       Bed Section Start Date, if OBX3 contains
+"RTN","RORHL081",180,0)
+ ;               "INBED^Bedsection Diagnosis";
+"RTN","RORHL081",181,0)
+ ;               Surgical Procedure Date, if OBX3 contains
+"RTN","RORHL081",182,0)
+ ;               "INSURG^Surgical Procedures";
+"RTN","RORHL081",183,0)
+ ;               Other Procedure Date, if OBX3 contains
+"RTN","RORHL081",184,0)
+ ;               "INOTR^Other Diagnosis".
+"RTN","RORHL081",185,0)
+ ;
+"RTN","RORHL081",186,0)
+SETOBX(OBX3,OBX5,OBX6,OBX12,OBX14) ;
+"RTN","RORHL081",187,0)
+ N RORSEG
+"RTN","RORHL081",188,0)
+ S RORSEG(0)="OBX"
+"RTN","RORHL081",189,0)
+ ;--- OBX-2 Value Type
+"RTN","RORHL081",190,0)
+ S RORSEG(2)="FT"
+"RTN","RORHL081",191,0)
+ ;--- OBX-3 Observation Identifier
+"RTN","RORHL081",192,0)
+ S RORSEG(3)=OBX3
+"RTN","RORHL081",193,0)
+ ;--- OBX-5 Observation Value
+"RTN","RORHL081",194,0)
+ S RORSEG(5)=OBX5
+"RTN","RORHL081",195,0)
+ ;--- OBX-6 Bed Section
+"RTN","RORHL081",196,0)
+ S:$G(OBX6)'="" RORSEG(6)=OBX6
+"RTN","RORHL081",197,0)
+ ;--- OBX-11 Observation Result Status
+"RTN","RORHL081",198,0)
+ S RORSEG(11)="F"
+"RTN","RORHL081",199,0)
+ ;--- OBX-12 Bed Section End Date/Time
+"RTN","RORHL081",200,0)
+ S:$G(OBX12)'="" RORSEG(12)=OBX12
+"RTN","RORHL081",201,0)
+ ;--- OBX-14 Bed Section Start Date/Time or Procedure Date
+"RTN","RORHL081",202,0)
+ S:$G(OBX14)'="" RORSEG(14)=OBX14
+"RTN","RORHL081",203,0)
+ ;--- Store the segment
+"RTN","RORHL081",204,0)
+ D ADDSEG^RORHL7(.RORSEG)
+"RTN","RORHL081",205,0)
+ Q
+"RTN","RORHL081",206,0)
+ ;
+"RTN","RORHL081",207,0)
+ ;***** SURGICAL PROCEDURES  (401 segment)
+"RTN","RORHL081",208,0)
+SURGPRO(RORIEN) ;
+"RTN","RORHL081",209,0)
+ N ERRCNT,FLD,IEN4501,IENS,IFL,NODE,OID,RORBUF,RORIBUF,RORMSG,SDTE,SPCD,TMP,RORICDSNAM
+"RTN","RORHL081",210,0)
+ S ERRCNT=0
+"RTN","RORHL081",211,0)
+ ;S SPFLST="8;9;10;11;12"
+"RTN","RORHL081",212,0)
+ S OID="INSURG"_RORCS_"Surgical Procedures"_RORCS_"VA080"
+"RTN","RORHL081",213,0)
+ S NODE=$$ROOT^DILFD(45.01,","_RORIEN_",",1)
+"RTN","RORHL081",214,0)
+ ;
+"RTN","RORHL081",215,0)
+ S IEN4501=0
+"RTN","RORHL081",216,0)
+ F  S IEN4501=$O(@NODE@(IEN4501))  Q:IEN4501'>0  D
+"RTN","RORHL081",217,0)
+ . S IENS=IEN4501_","_RORIEN_","  K RORBUF
+"RTN","RORHL081",218,0)
+ . ;--- Load the data
+"RTN","RORHL081",219,0)
+ . D GETS^DIQ(45.01,IENS,".01;","EI","RORBUF","RORMSG")
+"RTN","RORHL081",220,0)
+ . I $G(DIERR)  D  S ERRCNT=ERRCNT+1
+"RTN","RORHL081",221,0)
+ . . D DBS^RORERR("RORMSG",-99,,RORDFN,45.01,IENS)
+"RTN","RORHL081",222,0)
+ . ;--- Date of the procedure
+"RTN","RORHL081",223,0)
+ . S SDTE=$$FM2HL^RORHL7($G(RORBUF(45.01,IENS,.01,"I")))
+"RTN","RORHL081",224,0)
+ . ;--- Procedure codes
+"RTN","RORHL081",225,0)
+ . S (SPCD,RORICDSNAM)="",IFL=0
+"RTN","RORHL081",226,0)
+ . D GETICD(401,RORIEN,IEN4501,"",.SPCD,.RORICDSNAM)
+"RTN","RORHL081",227,0)
+ . ;--- Store the segment (if there is at least one code)
+"RTN","RORHL081",228,0)
+ . D:SPCD'="" SETOBX(OID,RORICDSNAM_":"_SPCD,,,SDTE)
+"RTN","RORHL081",229,0)
+ ;
+"RTN","RORHL081",230,0)
+ Q ERRCNT
+"RTN","RORHL081",231,0)
+ ;
+"RTN","RORHL081",232,0)
+GETICD(RORSEG,RORIEN,RORIEN1,RORSTART,RORCODE,RORICDSNAM) ;  Extract Dx or proc
+"RTN","RORHL081",233,0)
+ N RORIBUF,IFL,FLD,TMP
+"RTN","RORHL081",234,0)
+ ;--- Get ICD codes
+"RTN","RORHL081",235,0)
+ D PTFICD^DGPTFUT(RORSEG,RORIEN,RORIEN1,.RORIBUF)
+"RTN","RORHL081",236,0)
+ S (RORCODE,RORICDSNAM)="",IFL=0
+"RTN","RORHL081",237,0)
+ S FLD=$G(RORSTART) F  S FLD=$O(RORIBUF(FLD)) Q:FLD=""  I $G(RORIBUF(FLD))'="" D
+"RTN","RORHL081",238,0)
+ . S TMP=$P(RORIBUF(FLD),U,3) Q:TMP=""
+"RTN","RORHL081",239,0)
+ . S IFL=IFL+1,$P(RORCODE,RORRS,IFL)=TMP
+"RTN","RORHL081",240,0)
+ . S:RORICDSNAM="" RORICDSNAM=$$CSNAME^RORHLUT1(80,$P(RORIBUF(FLD),U))
+"RTN","RORHL081",241,0)
+ Q
+"RTN","RORHL081",242,0)
+ ;
+"RTN","RORP025")
+0^7^B6132875^n/a
+"RTN","RORP025",1,0)
+RORP025 ;ALB/TK - POST INSTALL PATCH 25 ;10/22/2014
+"RTN","RORP025",2,0)
+ ;;1.5;CLINICAL CASE REGISTRIES;**25**;;Build 9
+"RTN","RORP025",3,0)
+ ; This routine uses the following IAs:
+"RTN","RORP025",4,0)
+ ;
+"RTN","RORP025",5,0)
+ ; #10141   XPDUTL (supported)
+"RTN","RORP025",6,0)
+ ; #2053    UPDATE^DIE (supported)
+"RTN","RORP025",7,0)
+ ; #2054    CLEAN^DILF (supported)
+"RTN","RORP025",8,0)
+ ;*****************************************************************************
+"RTN","RORP025",9,0)
+ ;Update to ROR METADATA
+"RTN","RORP025",10,0)
+ ;*****************************************************************************
+"RTN","RORP025",11,0)
+POST ; Post install for patch ROR*1.5*25
+"RTN","RORP025",12,0)
+ N DA,RORFDA,RORDATA,RORERR,RORIENS,RORPARM,RORMSG,I,I1
+"RTN","RORP025",13,0)
+ S RORPARM("DEVELOPER")=1
+"RTN","RORP025",14,0)
+ D BMES^XPDUTL("POST INSTALL START")
+"RTN","RORP025",15,0)
+ F I=1:1 S RORDATA=$P($T(META45+I),";;",2) Q:RORDATA=""  D
+"RTN","RORP025",16,0)
+ . S RORIENS="?+"_(I+1)_",45,"
+"RTN","RORP025",17,0)
+ . S RORFDA(799.22,RORIENS,.01)=$P(RORDATA,U)
+"RTN","RORP025",18,0)
+ . S RORFDA(799.22,RORIENS,.02)=$P(RORDATA,U,2)
+"RTN","RORP025",19,0)
+ . S RORFDA(799.22,RORIENS,2)=$P(RORDATA,U,3)
+"RTN","RORP025",20,0)
+ . S RORFDA(799.22,RORIENS,4)=$P(RORDATA,U,4)
+"RTN","RORP025",21,0)
+ . S RORFDA(799.22,RORIENS,1)=$P(RORDATA,U,5)
+"RTN","RORP025",22,0)
+ . S RORFDA(799.22,RORIENS,6)=$P(RORDATA,U,6)
+"RTN","RORP025",23,0)
+ D UPDATE^DIE(,"RORFDA","","RORMSG")
+"RTN","RORP025",24,0)
+ I $G(RORMSG) D  Q
+"RTN","RORP025",25,0)
+ . D BMES^XPDUTL("Update to ROR METADATA <<FAILED>>")
+"RTN","RORP025",26,0)
+ . S I="RORMSG",I1=0 F  S I=$Q(@I) Q:I'["RORMSG"  S I1=I1+1,RORERR(I1)=@I
+"RTN","RORP025",27,0)
+ . D MES^XPDUTL(.RORERR)
+"RTN","RORP025",28,0)
+ E  D
+"RTN","RORP025",29,0)
+ . D BMES^XPDUTL("Update to ROR METADATA <SUCCESSFUL>")
+"RTN","RORP025",30,0)
+ D CLEAN^DILF
+"RTN","RORP025",31,0)
+ D BMES^XPDUTL("POST INSTALL COMPLETE")
+"RTN","RORP025",32,0)
+ Q
+"RTN","RORP025",33,0)
+ ;
+"RTN","RORP025",34,0)
+ ;******************************************************************************
+"RTN","RORP025",35,0)
+ ; Data to be added to ROR METADATA file (#799.2)
+"RTN","RORP025",36,0)
+ ; DATA NAME^CODE^REQUIRED^VALUE TYPE^LOADER API^FIELD NUMBER
+"RTN","RORP025",37,0)
+ ;******************************************************************************
+"RTN","RORP025",38,0)
+META45 ;
+"RTN","RORP025",39,0)
+ ;;SECONDARY DIAGNOSIS 10^133^1^Internal^1^79.241
+"RTN","RORP025",40,0)
+ ;;SECONDARY DIAGNOSIS 11^134^1^Internal^1^79.242
+"RTN","RORP025",41,0)
+ ;;SECONDARY DIAGNOSIS 12^135^1^Internal^1^79.243
+"RTN","RORP025",42,0)
+ ;;SECONDARY DIAGNOSIS 13^136^1^Internal^1^79.244
+"RTN","RORP025",43,0)
+ ;;SECONDARY DIAGNOSIS 14^137^1^Internal^1^79.245
+"RTN","RORP025",44,0)
+ ;;SECONDARY DIAGNOSIS 15^138^1^Internal^1^79.246
+"RTN","RORP025",45,0)
+ ;;SECONDARY DIAGNOSIS 16^139^1^Internal^1^79.247
+"RTN","RORP025",46,0)
+ ;;SECONDARY DIAGNOSIS 17^140^1^Internal^1^79.248
+"RTN","RORP025",47,0)
+ ;;SECONDARY DIAGNOSIS 18^141^1^Internal^1^79.249
+"RTN","RORP025",48,0)
+ ;;SECONDARY DIAGNOSIS 19^142^1^Internal^1^79.2491
+"RTN","RORP025",49,0)
+ ;;SECONDARY DIAGNOSIS 20^143^1^Internal^1^79.24911
+"RTN","RORP025",50,0)
+ ;;SECONDARY DIAGNOSIS 21^144^1^Internal^1^79.24912
+"RTN","RORP025",51,0)
+ ;;SECONDARY DIAGNOSIS 22^145^1^Internal^1^79.24913
+"RTN","RORP025",52,0)
+ ;;SECONDARY DIAGNOSIS 23^146^1^Internal^1^79.24914
+"RTN","RORP025",53,0)
+ ;;SECONDARY DIAGNOSIS 24^147^1^Internal^1^79.24915
+"RTN","RORP025",54,0)
+ ;
+"RTN","RORUPD09")
+0^8^B11230376^B11144111
+"RTN","RORUPD09",1,0)
+RORUPD09 ;HCIOFO/SG - PROCESSING OF THE 'PTF' FILE  ;8/3/05 9:50am
+"RTN","RORUPD09",2,0)
+ ;;1.5;CLINICAL CASE REGISTRIES;**18,25**;Feb 17, 2006;Build 9
+"RTN","RORUPD09",3,0)
+ ;
+"RTN","RORUPD09",4,0)
+ ;*****************************************************************************
+"RTN","RORUPD09",5,0)
+ ;*****************************************************************************
+"RTN","RORUPD09",6,0)
+ ;                       --- ROUTINE MODIFICATION LOG ---
+"RTN","RORUPD09",7,0)
+ ;        
+"RTN","RORUPD09",8,0)
+ ;PKG/PATCH    DATE        DEVELOPER    MODIFICATION
+"RTN","RORUPD09",9,0)
+ ;-----------  ----------  -----------  ----------------------------------------
+"RTN","RORUPD09",10,0)
+ ;ROR*1.5*18   APR 2012    C RAY        Modified PTF RULE to use B xref #798.5
+"RTN","RORUPD09",11,0)
+ ;ROR*1.5*25   FEB 2015    T KOPP       Modified PTF rule to add new Diagnosis
+"RTN","RORUPD09",12,0)
+ ;                                      fields for ICD-10 PTF expansion.
+"RTN","RORUPD09",13,0)
+ ;                                      
+"RTN","RORUPD09",14,0)
+ ;*****************************************************************************
+"RTN","RORUPD09",15,0)
+ ;*****************************************************************************
+"RTN","RORUPD09",16,0)
+ ; This routine uses the following IAs:
+"RTN","RORUPD09",17,0)
+ ;
+"RTN","RORUPD09",18,0)
+ ; #3157         RPC^DGPTFAPI
+"RTN","RORUPD09",19,0)
+ ; #3545         Access to the "AAD" cross-reference and the field 80
+"RTN","RORUPD09",20,0)
+ ; #10103        $$FMADD^XLFDT (supported)
+"RTN","RORUPD09",21,0)
+ ; #2171         $$IEN^XUAF4 (supported)
+"RTN","RORUPD09",22,0)
+ ;
+"RTN","RORUPD09",23,0)
+ ;
+"RTN","RORUPD09",24,0)
+ Q
+"RTN","RORUPD09",25,0)
+ ;
+"RTN","RORUPD09",26,0)
+ ;***** LOADS DATA ELEMENT VALUES
+"RTN","RORUPD09",27,0)
+ ;
+"RTN","RORUPD09",28,0)
+ ; IENS          IENS of the current record
+"RTN","RORUPD09",29,0)
+ ;
+"RTN","RORUPD09",30,0)
+ ; Return values:
+"RTN","RORUPD09",31,0)
+ ;       <0  Error code
+"RTN","RORUPD09",32,0)
+ ;        0  Ok
+"RTN","RORUPD09",33,0)
+ ;
+"RTN","RORUPD09",34,0)
+LOAD(IENS) ;
+"RTN","RORUPD09",35,0)
+ N RC  S RC=0
+"RTN","RORUPD09",36,0)
+ ;--- API #1
+"RTN","RORUPD09",37,0)
+ I $D(RORUPD("SR",RORFILE,"F",1))  D  Q:RC<0 RC
+"RTN","RORUPD09",38,0)
+ . S RC=$$LOADFLDS^RORUPDUT(RORFILE,IENS)
+"RTN","RORUPD09",39,0)
+ ;--- API #2
+"RTN","RORUPD09",40,0)
+ I $D(RORUPD("SR",RORFILE,"F",2))  D  Q:RC<0 RC
+"RTN","RORUPD09",41,0)
+ . N API,DE,IN,IP,RORBUF,VT
+"RTN","RORUPD09",42,0)
+ . D RPC^DGPTFAPI(.RORBUF,+IENS)
+"RTN","RORUPD09",43,0)
+ . I $G(RORBUF(0))<0  S API="RPC^DGPTFAPI"  D  Q
+"RTN","RORUPD09",44,0)
+ . . S RC=$$ERROR^RORERR(-57,,,,RORBUF(0),API)
+"RTN","RORUPD09",45,0)
+ . ;---
+"RTN","RORUPD09",46,0)
+ . S DE=""
+"RTN","RORUPD09",47,0)
+ . F  S DE=$O(RORUPD("SR",RORFILE,"F",2,DE))  Q:DE=""  D
+"RTN","RORUPD09",48,0)
+ . . S VT=""
+"RTN","RORUPD09",49,0)
+ . . F  S VT=$O(RORUPD("SR",RORFILE,"F",2,DE,VT))  Q:VT=""  D
+"RTN","RORUPD09",50,0)
+ . . . S IP=+$P(RORUPD("SR",RORFILE,"F",2,DE,VT),U,1)  Q:IP'>0
+"RTN","RORUPD09",51,0)
+ . . . S IN=+$P(RORUPD("SR",RORFILE,"F",2,DE,VT),U,2)
+"RTN","RORUPD09",52,0)
+ . . . S RORVALS("DV",RORFILE,DE,VT)=$P($G(RORBUF(IN)),U,IP)
+"RTN","RORUPD09",53,0)
+ Q 0
+"RTN","RORUPD09",54,0)
+ ;
+"RTN","RORUPD09",55,0)
+ ;***** PROCESSING OF THE 'PTF' FILE
+"RTN","RORUPD09",56,0)
+ ;
+"RTN","RORUPD09",57,0)
+ ; UPDSTART      Date of the earliest update
+"RTN","RORUPD09",58,0)
+ ; PATIEN        Patient IEN
+"RTN","RORUPD09",59,0)
+ ;
+"RTN","RORUPD09",60,0)
+ ; Return values:
+"RTN","RORUPD09",61,0)
+ ;       <0  Error code
+"RTN","RORUPD09",62,0)
+ ;        0  Continue processing of the current patient
+"RTN","RORUPD09",63,0)
+ ;        1  Stop processing
+"RTN","RORUPD09",64,0)
+ ;
+"RTN","RORUPD09",65,0)
+PTF(UPDSTART,PATIEN) ;
+"RTN","RORUPD09",66,0)
+ N RORFILE       ; File number
+"RTN","RORUPD09",67,0)
+ ;
+"RTN","RORUPD09",68,0)
+ N ADMDT,ADMIENS,EDT,IEN,LOCATION,NODE,RC,TMP
+"RTN","RORUPD09",69,0)
+ S RORFILE=45,EDT=RORUPD("DSEND")
+"RTN","RORUPD09",70,0)
+ ;--- Check the event references if the events are enabled
+"RTN","RORUPD09",71,0)
+ I $G(RORUPD("FLAGS"))["E"  D  Q:RC'>0 RC
+"RTN","RORUPD09",72,0)
+ . S RC=$$GET^RORUPP02(PATIEN,3,.UPDSTART,.EDT)
+"RTN","RORUPD09",73,0)
+ . S:RC>1 UPDSTART=UPDSTART\1,EDT=$$FMADD^XLFDT(EDT\1,1)
+"RTN","RORUPD09",74,0)
+ ;--- Subtract 1 second from the start date to include
+"RTN","RORUPD09",75,0)
+ ;    it into the interval
+"RTN","RORUPD09",76,0)
+ S ADMDT=$$FMADD^XLFDT(UPDSTART,,,,-1)
+"RTN","RORUPD09",77,0)
+ ;
+"RTN","RORUPD09",78,0)
+ ;--- Browse through the admissions
+"RTN","RORUPD09",79,0)
+ S NODE=RORUPD("ROOT",RORFILE),NODE=$NA(@NODE@("AAD",PATIEN))
+"RTN","RORUPD09",80,0)
+ S RC=0
+"RTN","RORUPD09",81,0)
+ F  S ADMDT=$O(@NODE@(ADMDT))  Q:(ADMDT="")!(ADMDT'<EDT)  D  Q:RC
+"RTN","RORUPD09",82,0)
+ . S IEN=""
+"RTN","RORUPD09",83,0)
+ . F  S IEN=$O(@NODE@(ADMDT,IEN))  Q:IEN=""  D  Q:RC
+"RTN","RORUPD09",84,0)
+ . . S ADMIENS=IEN_","
+"RTN","RORUPD09",85,0)
+ . . ;--- Load necessary data elements
+"RTN","RORUPD09",86,0)
+ . . I $D(RORUPD("SR",RORFILE,"F"))>1  D  I TMP<0 D INCEC^RORUPDUT() Q
+"RTN","RORUPD09",87,0)
+ . . . S TMP=$$LOAD(ADMIENS)
+"RTN","RORUPD09",88,0)
+ . . . S TMP=$$GETDE^RORUPDUT(45,131)_$$GETDE^RORUPDUT(45,132)
+"RTN","RORUPD09",89,0)
+ . . . S LOCATION=$S(TMP'="":$$IEN^XUAF4(TMP),1:"")
+"RTN","RORUPD09",90,0)
+ . . ;--- Apply "before" rules
+"RTN","RORUPD09",91,0)
+ . . S RC=$$APLRULES^RORUPDUT(RORFILE,ADMIENS,"B",ADMDT,$G(LOCATION))
+"RTN","RORUPD09",92,0)
+ . . I RC  D INCEC^RORUPDUT(.RC)  Q
+"RTN","RORUPD09",93,0)
+ . . ;--- Apply "after" rules
+"RTN","RORUPD09",94,0)
+ . . S RC=$$APLRULES^RORUPDUT(RORFILE,ADMIENS,"A",ADMDT,$G(LOCATION))
+"RTN","RORUPD09",95,0)
+ . . I RC  D INCEC^RORUPDUT(.RC)  Q
+"RTN","RORUPD09",96,0)
+ ;
+"RTN","RORUPD09",97,0)
+ D CLRDES^RORUPDUT(RORFILE)
+"RTN","RORUPD09",98,0)
+ Q RC
+"RTN","RORUPD09",99,0)
+ ;
+"RTN","RORUPD09",100,0)
+ ;***** IMPLEMENTATION OF THE 'PTF' RULE
+"RTN","RORUPD09",101,0)
+PTFRULE(ICD) ;
+"RTN","RORUPD09",102,0)
+ N DATELMT,RC
+"RTN","RORUPD09",103,0)
+ S RC=0
+"RTN","RORUPD09",104,0)
+ F DATELMT=111,101:1:110,131:1:147  D  Q:RC
+"RTN","RORUPD09",105,0)
+ . S RC=+$D(^ROR(798.5,REGIEN,1,"B",+$G(RORVALS("DV",45,DATELMT,"I"))))
+"RTN","RORUPD09",106,0)
+ Q RC
+"RTN","RORUTL11")
+0^6^B4346474^B4209534
+"RTN","RORUTL11",1,0)
+RORUTL11 ;HCIOFO/SG - ACCESS AND SECURITY UTILITIES ;15 Aug 2013  11:31 AM
+"RTN","RORUTL11",2,0)
+ ;;1.5;CLINICAL CASE REGISTRIES;**13,14,15,17,18,20,19,21,22,24,27,25**;Feb 17, 2006;Build 9
+"RTN","RORUTL11",3,0)
+ ;
+"RTN","RORUTL11",4,0)
+ ;******************************************************************************
+"RTN","RORUTL11",5,0)
+ ;******************************************************************************
+"RTN","RORUTL11",6,0)
+ ;                 --- ROUTINE MODIFICATION LOG ---
+"RTN","RORUTL11",7,0)
+ ;        
+"RTN","RORUTL11",8,0)
+ ;PKG/PATCH    DATE        DEVELOPER    MODIFICATION
+"RTN","RORUTL11",9,0)
+ ;-----------  ----------  -----------  ----------------------------------------
+"RTN","RORUTL11",10,0)
+ ;ROR*1.5*13   DEC  2010   A SAUNDERS   Added tag VERSRV to return an associated
+"RTN","RORUTL11",11,0)
+ ;                                      version to the GUI during RPC call ROR
+"RTN","RORUTL11",12,0)
+ ;                                      GET M VERSION
+"RTN","RORUTL11",13,0)
+ ;ROR*1.5*14   APR  2011   A SAUNDERS   Updated version in tag VERSRV
+"RTN","RORUTL11",14,0)
+ ;
+"RTN","RORUTL11",15,0)
+ ;ROR*1.5*15   JUN 2011    C RAY        Updated version
+"RTN","RORUTL11",16,0)
+ ;
+"RTN","RORUTL11",17,0)
+ ;ROR*1.5*17   DEC 2011    C RAY        Updated version 
+"RTN","RORUTL11",18,0)
+ ;
+"RTN","RORUTL11",19,0)
+ ;ROR*1.5*18   MAY 2012    C RAY        Updated version 
+"RTN","RORUTL11",20,0)
+ ;
+"RTN","RORUTL11",21,0)
+ ;ROR*1.5*20   DEC 2012    C RAY        Updated version
+"RTN","RORUTL11",22,0)
+ ;
+"RTN","RORUTL11",23,0)
+ ;ROR*1.5*19   APR 2012    K GUPTA      Updated version
+"RTN","RORUTL11",24,0)
+ ;                                    
+"RTN","RORUTL11",25,0)
+ ;ROR*1.5*21   AUG 2013    T KOPP       Updated version
+"RTN","RORUTL11",26,0)
+ ;
+"RTN","RORUTL11",27,0)
+ ;ROR*1.5*22   FEB 2014    T KOPP       Updated version 
+"RTN","RORUTL11",28,0)
+ ;
+"RTN","RORUTL11",29,0)
+ ;ROR*1.5*24   DEC 2014    T KOPP       Updated version  
+"RTN","RORUTL11",30,0)
+ ;
+"RTN","RORUTL11",31,0)
+ ;ROR*1.5*27   FEB 2015    T KOPP       Updated version
+"RTN","RORUTL11",32,0)
+ ;
+"RTN","RORUTL11",33,0)
+ ;ROR*1.5*25   MAR 2015    T KOPP       Updated version
+"RTN","RORUTL11",34,0)
+ ;                  
+"RTN","RORUTL11",35,0)
+ ;******************************************************************************
+"RTN","RORUTL11",36,0)
+ ; This routine uses the following IAs:
+"RTN","RORUTL11",37,0)
+ ;
+"RTN","RORUTL11",38,0)
+ ; #2055   $$ROOT^DILFD (supported)
+"RTN","RORUTL11",39,0)
+ ; #10013  ENALL^DIK (supported)
+"RTN","RORUTL11",40,0)
+ ;         
+"RTN","RORUTL11",41,0)
+ ;******************************************************************************
+"RTN","RORUTL11",42,0)
+ Q
+"RTN","RORUTL11",43,0)
+ ;
+"RTN","RORUTL11",44,0)
+ ;***** REBUILDS THE "ACL" CROSS-REFERENCE (USER ACCESS)
+"RTN","RORUTL11",45,0)
+ ;
+"RTN","RORUTL11",46,0)
+ ; Return Values:
+"RTN","RORUTL11",47,0)
+ ;       <0  Error code
+"RTN","RORUTL11",48,0)
+ ;        0  Ok
+"RTN","RORUTL11",49,0)
+ ;
+"RTN","RORUTL11",50,0)
+RNDXACL() ;
+"RTN","RORUTL11",51,0)
+ N DA,DIK,REGIEN,ROOT
+"RTN","RORUTL11",52,0)
+ S ROOT=$$ROOT^DILFD(798.1,,1)  K @ROOT@("ACL")
+"RTN","RORUTL11",53,0)
+ S REGIEN=0
+"RTN","RORUTL11",54,0)
+ F  S REGIEN=$O(@ROOT@(REGIEN))  Q:'REGIEN  D
+"RTN","RORUTL11",55,0)
+ . S DIK=$$ROOT^DILFD(798.118,","_REGIEN_","),DIK(1)=".01^ACL"
+"RTN","RORUTL11",56,0)
+ . S DA(1)=REGIEN  D ENALL^DIK
+"RTN","RORUTL11",57,0)
+ Q 0
+"RTN","RORUTL11",58,0)
+ ;
+"RTN","RORUTL11",59,0)
+ ;***** CHECKS IF THE RPC CAN BE CALLED BY THE CURRENT USER
+"RTN","RORUTL11",60,0)
+ ;
+"RTN","RORUTL11",61,0)
+ ; RPCNAME       Name of the RPC
+"RTN","RORUTL11",62,0)
+ ;
+"RTN","RORUTL11",63,0)
+ ; [REGIEN]      Registry IEN
+"RTN","RORUTL11",64,0)
+ ;
+"RTN","RORUTL11",65,0)
+ ; [FLAGS]       Flags that control the execution (can be combined):
+"RTN","RORUTL11",66,0)
+ ;                 A  Administrator Only
+"RTN","RORUTL11",67,0)
+ ;                 I  IRM Only
+"RTN","RORUTL11",68,0)
+ ;
+"RTN","RORUTL11",69,0)
+ ; Return Values:
+"RTN","RORUTL11",70,0)
+ ;       <0  Error code
+"RTN","RORUTL11",71,0)
+ ;        0  Ok
+"RTN","RORUTL11",72,0)
+ ;       >0  Access denied
+"RTN","RORUTL11",73,0)
+ ;
+"RTN","RORUTL11",74,0)
+RPCHECK(RPCNAME,REGIEN,FLAGS) ;
+"RTN","RORUTL11",75,0)
+ N ACCESS,KEY,RC
+"RTN","RORUTL11",76,0)
+ Q:$G(DUZ)'>0 $$ERROR^RORERR(-40,,,,"DUZ")
+"RTN","RORUTL11",77,0)
+ S FLAGS=$G(FLAGS),REGIEN=+$G(REGIEN)
+"RTN","RORUTL11",78,0)
+ ;---
+"RTN","RORUTL11",79,0)
+ S (ACCESS,RC)=0
+"RTN","RORUTL11",80,0)
+ D  Q:ACCESS 0
+"RTN","RORUTL11",81,0)
+ . I REGIEN  Q:$D(^ROR(798.1,"ACL",DUZ,REGIEN))<10
+"RTN","RORUTL11",82,0)
+ . E  Q:$D(^ROR(798.1,"ACL",DUZ))<10
+"RTN","RORUTL11",83,0)
+ . I FLAGS["I"  Q:'$D(^XUSEC("ROR VA IRM",DUZ))
+"RTN","RORUTL11",84,0)
+ . I FLAGS["A"  S RC=1,KEY=""  D  Q:RC
+"RTN","RORUTL11",85,0)
+ . . F  S KEY=$O(^ROR(798.1,"ACL",DUZ,REGIEN,KEY))  Q:KEY=""  D  Q:'RC
+"RTN","RORUTL11",86,0)
+ . . . I KEY?1"ROR"1.E  S:KEY["ADMIN" RC=0
+"RTN","RORUTL11",87,0)
+ . S ACCESS=1
+"RTN","RORUTL11",88,0)
+ ;---
+"RTN","RORUTL11",89,0)
+ D ACVIOLTN^RORLOG(-91,$G(REGIEN),RPCNAME)
+"RTN","RORUTL11",90,0)
+ Q 1
+"RTN","RORUTL11",91,0)
+ ;
+"RTN","RORUTL11",92,0)
+ ;***** RETURNS SERVER VERSION
+"RTN","RORUTL11",93,0)
+ ;REMOTE PROCEDURE: ROR GET M VERSION
+"RTN","RORUTL11",94,0)
+ ;
+"RTN","RORUTL11",95,0)
+ ;The purpose of this RPC is to catch when the GUI executable has been
+"RTN","RORUTL11",96,0)
+ ;upgraded AND REQUIRES an associated M patch, but the M patch has not
+"RTN","RORUTL11",97,0)
+ ;been installed yet.
+"RTN","RORUTL11",98,0)
+ ;
+"RTN","RORUTL11",99,0)
+ ; VAL n.n.n represents the CCR package version and the m patch number that
+"RTN","RORUTL11",100,0)
+ ; contains the associated M changes that the GUI is expecting.
+"RTN","RORUTL11",101,0)
+ ;
+"RTN","RORUTL11",102,0)
+ ;NOTE TO CCR MAINTENANCE TEAM: For M changes made by the maintenance team,
+"RTN","RORUTL11",103,0)
+ ;the server version below should not be modified.  The only time the server
+"RTN","RORUTL11",104,0)
+ ;version should be modified is if the GUI was changed AND there were
+"RTN","RORUTL11",105,0)
+ ;associated M changes needed for it.
+"RTN","RORUTL11",106,0)
+ ;
+"RTN","RORUTL11",107,0)
+VERSRV(VAL) ;
+"RTN","RORUTL11",108,0)
+ S VAL="1.5.25"
+"RTN","RORUTL11",109,0)
+ Q
+"RTN","RORX013A")
+0^1^B79404657^B78520195
+"RTN","RORX013A",1,0)
+RORX013A ;HCIOFO/SG - DIAGNOSIS CODES (QUERY & SORT) ;6/21/06 2:24pm
+"RTN","RORX013A",2,0)
+ ;;1.5;CLINICAL CASE REGISTRIES;**1,13,19,21,25**;Feb 17, 2006;Build 9
+"RTN","RORX013A",3,0)
+ ;
+"RTN","RORX013A",4,0)
+ ; This routine uses the following IAs:
+"RTN","RORX013A",5,0)
+ ;
+"RTN","RORX013A",6,0)
+ ; #928          ACTIVE^GMPLUTL (controlled)
+"RTN","RORX013A",7,0)
+ ; #1554         POV^PXAPIIB (controlled)
+"RTN","RORX013A",8,0)
+ ; #1905         SELECTED^VSIT (controlled)
+"RTN","RORX013A",9,0)
+ ; #2977         GETFLDS^GMPLEDT3 (controlled)
+"RTN","RORX013A",10,0)
+ ; #3157         RPC^DGPTFAPI (supported)
+"RTN","RORX013A",11,0)
+ ; #3545         Access to the "AAD" cross-reference and the field 80 (private)
+"RTN","RORX013A",12,0)
+ ; #92           ^DGPT(IEN,0)  (controlled)
+"RTN","RORX013A",13,0)
+ ; #5747         $$CODEN^ICDEX, $$CODEC^ICDEX, $$VSTD^ICDEX (controlled)
+"RTN","RORX013A",14,0)
+ ; #6130         PTFICD^DGPTFUT
+"RTN","RORX013A",15,0)
+ ;
+"RTN","RORX013A",16,0)
+ ;******************************************************************************
+"RTN","RORX013A",17,0)
+ ;******************************************************************************
+"RTN","RORX013A",18,0)
+ ;                 --- ROUTINE MODIFICATION LOG ---
+"RTN","RORX013A",19,0)
+ ;        
+"RTN","RORX013A",20,0)
+ ;PKG/PATCH    DATE        DEVELOPER    MODIFICATION
+"RTN","RORX013A",21,0)
+ ;-----------  ----------  -----------  ----------------------------------------
+"RTN","RORX013A",22,0)
+ ;ROR*1.5*13   DEC 2010    A SAUNDERS   User can select specific patients,
+"RTN","RORX013A",23,0)
+ ;                                      clinics, or divisions for the report.
+"RTN","RORX013A",24,0)
+ ;ROR*1.5*19   FEB 2012    J SCOTT      Support for ICD-10 Coding System.
+"RTN","RORX013A",25,0)
+ ;ROR*1.5*21   SEP 2013    T KOPP       Add Utilization date range to the report
+"RTN","RORX013A",26,0)
+ ;                                      Add ICN to report, if requested
+"RTN","RORX013A",27,0)
+ ;ROR*1.5*25   OCT 2014    T KOPP       Added PTF ICD-10 support for 25 diagnoses
+"RTN","RORX013A",28,0)
+ ;                                      
+"RTN","RORX013A",29,0)
+ ;******************************************************************************
+"RTN","RORX013A",30,0)
+ ;******************************************************************************
+"RTN","RORX013A",31,0)
+ Q
+"RTN","RORX013A",32,0)
+ ;
+"RTN","RORX013A",33,0)
+ ;**** STORES THE ICD CODE
+"RTN","RORX013A",34,0)
+ ;
+"RTN","RORX013A",35,0)
+ ; PATIEN        Patient IEN (DFN)
+"RTN","RORX013A",36,0)
+ ; SOURCE        ICD source code ("I", "O", "PB")
+"RTN","RORX013A",37,0)
+ ; [ICDIEN]      IEN of the ICD descriptor in file #80
+"RTN","RORX013A",38,0)
+ ; DATE          Date when the code was entered
+"RTN","RORX013A",39,0)
+ ; [ICD]         ICD code
+"RTN","RORX013A",40,0)
+ ;
+"RTN","RORX013A",41,0)
+ ; Either the ICDIEN or the ICD parameter must be provided.
+"RTN","RORX013A",42,0)
+ ;
+"RTN","RORX013A",43,0)
+ICDSET(PATIEN,SOURCE,ICDIEN,DATE,ICD) ;
+"RTN","RORX013A",44,0)
+ Q:DATE'>0
+"RTN","RORX013A",45,0)
+ N TMP
+"RTN","RORX013A",46,0)
+ S ICDIEN=+$G(ICDIEN)
+"RTN","RORX013A",47,0)
+ I ICDIEN'>0  Q:$G(ICD)=""  D  Q:ICDIEN'>0
+"RTN","RORX013A",48,0)
+ . S ICDIEN=+$$CODEN^ICDEX(ICD,80)
+"RTN","RORX013A",49,0)
+ ;---
+"RTN","RORX013A",50,0)
+ Q:$$ICDGRCHK^RORXU008(.RORPTGRP,ICDIEN,RORICDL)
+"RTN","RORX013A",51,0)
+ ;---
+"RTN","RORX013A",52,0)
+ S TMP=+$G(@RORTMP@("PAT",PATIEN,ICDIEN))
+"RTN","RORX013A",53,0)
+ S:'TMP!(DATE<TMP) @RORTMP@("PAT",PATIEN,ICDIEN)=DATE_U_SOURCE
+"RTN","RORX013A",54,0)
+ S ^(SOURCE)=$G(@RORTMP@("PAT",PATIEN,ICDIEN,SOURCE))+1 ;naked reference: ^TMP($J,"RORTMP-n") from RORX013
+"RTN","RORX013A",55,0)
+ Q
+"RTN","RORX013A",56,0)
+ ;
+"RTN","RORX013A",57,0)
+ ;***** SEARCHES FOR INPATIENT DIAGNOSES
+"RTN","RORX013A",58,0)
+ ;
+"RTN","RORX013A",59,0)
+ ; PATIEN        Patient IEN (DFN)
+"RTN","RORX013A",60,0)
+ ;
+"RTN","RORX013A",61,0)
+ ; Return Values:
+"RTN","RORX013A",62,0)
+ ;       <0  Error code
+"RTN","RORX013A",63,0)
+ ;        0  Ok
+"RTN","RORX013A",64,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX013A",65,0)
+ ;
+"RTN","RORX013A",66,0)
+INPAT(PATIEN) ;
+"RTN","RORX013A",67,0)
+ N ADMDT,DISDT,I,IEN,NODE,RC,RORBUF,RORMSG,DIERR,TMP
+"RTN","RORX013A",68,0)
+ S NODE=$NA(^DGPT("AAD",+PATIEN))
+"RTN","RORX013A",69,0)
+ S RC=0
+"RTN","RORX013A",70,0)
+ ;--- Browse through the admissions
+"RTN","RORX013A",71,0)
+ S ADMDT=ROREDT1
+"RTN","RORX013A",72,0)
+ F  S ADMDT=$O(@NODE@(ADMDT),-1)  Q:ADMDT'>0  D  Q:RC
+"RTN","RORX013A",73,0)
+ . S IEN=""
+"RTN","RORX013A",74,0)
+ . F  S IEN=$O(@NODE@(ADMDT,IEN),-1)  Q:IEN'>0  D  Q:RC
+"RTN","RORX013A",75,0)
+ . . Q:+$G(^DGPT(IEN,0))'=PATIEN
+"RTN","RORX013A",76,0)
+ . . Q:$$PTF^RORXU001(IEN,"FP",,.DISDT)
+"RTN","RORX013A",77,0)
+ . . ;--- Skip invalid and/or incomplete admissions
+"RTN","RORX013A",78,0)
+ . . I DISDT'>0  D  Q:TMP!(DISDT'>0)
+"RTN","RORX013A",79,0)
+ . . . S TMP=$$CHKADM^RORXU001(PATIEN,ADMDT,.DISDT)
+"RTN","RORX013A",80,0)
+ . . ;--- Check if any appropriate admissions are left
+"RTN","RORX013A",81,0)
+ . . I DISDT<RORSDT  S RC=1  Q
+"RTN","RORX013A",82,0)
+ . . Q:DISDT'<ROREDT1
+"RTN","RORX013A",83,0)
+ . . ;--- Load and process the admission data
+"RTN","RORX013A",84,0)
+ . . K RORBUF  D RPC^DGPTFAPI(.RORBUF,IEN)
+"RTN","RORX013A",85,0)
+ . . I $G(RORBUF(0))<0  D  Q
+"RTN","RORX013A",86,0)
+ . . . D ERROR^RORERR(-57,,,,RORBUF(0),"RPC^DGPTFAPI")
+"RTN","RORX013A",87,0)
+ . . S TMP=$P($G(RORBUF(1)),U,3)
+"RTN","RORX013A",88,0)
+ . . D:TMP'="" ICDSET(PATIEN,"I",,DISDT,TMP)   ; ICD1
+"RTN","RORX013A",89,0)
+ . . D:$G(RORBUF(2))'=""                       ; ICD2 - ICD24
+"RTN","RORX013A",90,0)
+ . . . F I=1:1:24  S TMP=$P(RORBUF(2),U,I)  D:TMP'=""
+"RTN","RORX013A",91,0)
+ . . . . D ICDSET(PATIEN,"I",,DISDT,TMP)
+"RTN","RORX013A",92,0)
+ . . S TMP=+$$GET1^DIQ(45,IEN,80,"I",,"RORMSG")
+"RTN","RORX013A",93,0)
+ . . D:$G(DIERR) DBS^RORERR("RORMSG",-9,,,45,IEN)
+"RTN","RORX013A",94,0)
+ . . D:TMP>0 ICDSET(PATIEN,"I",TMP,DISDT)     ; PRINCIPAL DIAGNOSIS
+"RTN","RORX013A",95,0)
+ ;---
+"RTN","RORX013A",96,0)
+ Q $S(RC<0:RC,1:0)
+"RTN","RORX013A",97,0)
+ ;
+"RTN","RORX013A",98,0)
+ ;***** SEARCHES FOR OUTPATIENT DIAGNOSES
+"RTN","RORX013A",99,0)
+ ;
+"RTN","RORX013A",100,0)
+ ; PATIEN        Patient IEN (DFN)
+"RTN","RORX013A",101,0)
+ ;
+"RTN","RORX013A",102,0)
+ ; Return Values:
+"RTN","RORX013A",103,0)
+ ;       <0  Error code
+"RTN","RORX013A",104,0)
+ ;        0  Ok
+"RTN","RORX013A",105,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX013A",106,0)
+ ;
+"RTN","RORX013A",107,0)
+OUTPAT(PATIEN) ;
+"RTN","RORX013A",108,0)
+ N DATE,ICDIEN,RC,RORMSG,RORVPLST,TMP,VPIEN,VSIEN,VSIT
+"RTN","RORX013A",109,0)
+ D SELECTED^VSIT(PATIEN,RORSDT,ROREDT)
+"RTN","RORX013A",110,0)
+ ;--- Browse through the visits
+"RTN","RORX013A",111,0)
+ S (VSIEN,RC)=0
+"RTN","RORX013A",112,0)
+ F  S VSIEN=$O(^TMP("VSIT",$J,VSIEN))  Q:VSIEN=""  D  Q:RC<0
+"RTN","RORX013A",113,0)
+ . S TMP=+$O(^TMP("VSIT",$J,VSIEN,""))  Q:TMP'>0
+"RTN","RORX013A",114,0)
+ . S DATE=$P($G(^TMP("VSIT",$J,VSIEN,TMP)),U)  Q:DATE'>0
+"RTN","RORX013A",115,0)
+ . ;--- Get a list of V POV records
+"RTN","RORX013A",116,0)
+ . D POV^PXAPIIB(VSIEN,.RORVPLST)
+"RTN","RORX013A",117,0)
+ . ;--- Process the records
+"RTN","RORX013A",118,0)
+ . S (VPIEN,RC)=0
+"RTN","RORX013A",119,0)
+ . F  S VPIEN=$O(RORVPLST(VPIEN))  Q:VPIEN'>0  D  Q:RC
+"RTN","RORX013A",120,0)
+ . . S ICDIEN=+$P(RORVPLST(VPIEN),U)
+"RTN","RORX013A",121,0)
+ . . D:ICDIEN>0 ICDSET(PATIEN,"O",ICDIEN,DATE)
+"RTN","RORX013A",122,0)
+ Q $S(RC<0:RC,1:0)
+"RTN","RORX013A",123,0)
+ ;
+"RTN","RORX013A",124,0)
+ ;***** SEARCHES FOR PROBLEMS
+"RTN","RORX013A",125,0)
+ ;
+"RTN","RORX013A",126,0)
+ ; PATIEN        Patient IEN (DFN)
+"RTN","RORX013A",127,0)
+ ;
+"RTN","RORX013A",128,0)
+ ; Return Values:
+"RTN","RORX013A",129,0)
+ ;       <0  Error code
+"RTN","RORX013A",130,0)
+ ;        0  Ok
+"RTN","RORX013A",131,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX013A",132,0)
+ ;
+"RTN","RORX013A",133,0)
+PROBLEM(PATIEN) ;
+"RTN","RORX013A",134,0)
+ N DATE,GMPFLD,GMPORIG,GMPROV,GMPVAMC,ICDIEN,IEN,IS,RC,RORPLST,TMP
+"RTN","RORX013A",135,0)
+ ;--- Load a list of active problems
+"RTN","RORX013A",136,0)
+ D ACTIVE^GMPLUTL(PATIEN,.RORPLST)
+"RTN","RORX013A",137,0)
+ ;--- Browse through the problems
+"RTN","RORX013A",138,0)
+ S (GMPVAMC,GMPROV)=0
+"RTN","RORX013A",139,0)
+ S (IS,RC)=0
+"RTN","RORX013A",140,0)
+ F  S IS=$O(RORPLST(IS))  Q:IS=""  D  Q:RC
+"RTN","RORX013A",141,0)
+ . S IEN=+$G(RORPLST(IS,0))  Q:IEN'>0
+"RTN","RORX013A",142,0)
+ . K GMPFLD,GMPORIG  D GETFLDS^GMPLEDT3(IEN)
+"RTN","RORX013A",143,0)
+ . S ICDIEN=+$G(GMPFLD(.01))  Q:ICDIEN'>0
+"RTN","RORX013A",144,0)
+ . S DATE=$P($G(GMPFLD(.08)),U)
+"RTN","RORX013A",145,0)
+ . D:(DATE'<RORSDT)&(DATE<ROREDT1) ICDSET(PATIEN,"PB",ICDIEN,DATE)
+"RTN","RORX013A",146,0)
+ Q 0
+"RTN","RORX013A",147,0)
+ ;
+"RTN","RORX013A",148,0)
+ ;***** QUERIES THE REGISTRY
+"RTN","RORX013A",149,0)
+ ;
+"RTN","RORX013A",150,0)
+ ; FLAGS         Flags for the $$SKIP^RORXU005
+"RTN","RORX013A",151,0)
+ ;
+"RTN","RORX013A",152,0)
+ ; Return Values:
+"RTN","RORX013A",153,0)
+ ;       <0  Error code
+"RTN","RORX013A",154,0)
+ ;        0  Ok
+"RTN","RORX013A",155,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX013A",156,0)
+ ;
+"RTN","RORX013A",157,0)
+QUERY(FLAGS) ;
+"RTN","RORX013A",158,0)
+ N RORDOD        ; Date of death
+"RTN","RORX013A",159,0)
+ N ROREDT1       ; Day after the end date
+"RTN","RORX013A",160,0)
+ N RORLAST4      ; Last 4 digits of the current patient's SSN
+"RTN","RORX013A",161,0)
+ N RORPNAME      ; Name of the current patient
+"RTN","RORX013A",162,0)
+ N RORICN        ; ICN of patient (optional)
+"RTN","RORX013A",163,0)
+ N RORPTGRP      ; Temporary list of ICD groups
+"RTN","RORX013A",164,0)
+ N RORPTN        ; Number of patients in the registry
+"RTN","RORX013A",165,0)
+ N RORCDLIST     ; Flag to indicate whether a clinic or division list exists
+"RTN","RORX013A",166,0)
+ N RORCDSTDT     ; Start date for clinic/division utilization search
+"RTN","RORX013A",167,0)
+ N RORCDENDT     ; End date for clinic/division utilization search
+"RTN","RORX013A",168,0)
+ ;
+"RTN","RORX013A",169,0)
+ N CNT,ECNT,IEN,IENS,PATIEN,RC,SKIPEDT,SKIPSDT,TMP,UTEDT,UTIL,UTSDT,VA,VADM,XREFNODE
+"RTN","RORX013A",170,0)
+ ;--- Utilization date range
+"RTN","RORX013A",171,0)
+ D:$$PARAM^RORTSK01("PATIENTS","CAREONLY")
+"RTN","RORX013A",172,0)
+ . S UTSDT=$$PARAM^RORTSK01("DATE_RANGE_3","START")\1
+"RTN","RORX013A",173,0)
+ . S UTEDT=$$PARAM^RORTSK01("DATE_RANGE_3","END")\1
+"RTN","RORX013A",174,0)
+ . ;--- Combined date range
+"RTN","RORX013A",175,0)
+ . S SKIPSDT=$$DTMIN^RORUTL18(SKIPSDT,UTSDT)
+"RTN","RORX013A",176,0)
+ . S SKIPEDT=$$DTMAX^RORUTL18(SKIPEDT,UTEDT)
+"RTN","RORX013A",177,0)
+ S XREFNODE=$NA(^RORDATA(798,"AC",+RORREG))
+"RTN","RORX013A",178,0)
+ S RORPTN=$$REGSIZE^RORUTL02(+RORREG)  S:RORPTN<0 RORPTN=0
+"RTN","RORX013A",179,0)
+ S ROREDT1=$$FMADD^XLFDT(ROREDT\1,1)
+"RTN","RORX013A",180,0)
+ S (CNT,ECNT,RC)=0
+"RTN","RORX013A",181,0)
+ ;
+"RTN","RORX013A",182,0)
+ ;=== Set up Clinic/Division list parameters
+"RTN","RORX013A",183,0)
+ S RORCDLIST=$$CDPARMS^RORXU001(.RORTSK,.RORCDSTDT,.RORCDENDT)
+"RTN","RORX013A",184,0)
+ ;
+"RTN","RORX013A",185,0)
+ ;--- Browse through the registry records
+"RTN","RORX013A",186,0)
+ S IEN=0
+"RTN","RORX013A",187,0)
+ F  S IEN=$O(@XREFNODE@(IEN))  Q:IEN'>0  D  Q:RC<0
+"RTN","RORX013A",188,0)
+ . S TMP=$S(RORPTN>0:CNT/RORPTN,1:"")
+"RTN","RORX013A",189,0)
+ . S RC=$$LOOP^RORTSK01(TMP)  Q:RC<0
+"RTN","RORX013A",190,0)
+ . S IENS=IEN_",",CNT=CNT+1
+"RTN","RORX013A",191,0)
+ . ;--- Get patient DFN
+"RTN","RORX013A",192,0)
+ . S PATIEN=$$PTIEN^RORUTL01(IEN)  Q:PATIEN'>0
+"RTN","RORX013A",193,0)
+ . ;check for patient list and quit if not on list
+"RTN","RORX013A",194,0)
+ . I $D(RORTSK("PARAMS","PATIENTS","C")),'$D(RORTSK("PARAMS","PATIENTS","C",PATIEN)) Q
+"RTN","RORX013A",195,0)
+ . ;--- Check if the patient should be skipped
+"RTN","RORX013A",196,0)
+ . Q:$$SKIP^RORXU005(IEN,FLAGS,RORSDT,ROREDT)
+"RTN","RORX013A",197,0)
+ . ;
+"RTN","RORX013A",198,0)
+ . ;--- Check for Clinic or Division list and quit if not in list
+"RTN","RORX013A",199,0)
+ . I RORCDLIST,'$$CDUTIL^RORXU001(.RORTSK,PATIEN,RORCDSTDT,RORCDENDT) Q
+"RTN","RORX013A",200,0)
+ . ;
+"RTN","RORX013A",201,0)
+ . ;--- Check for any utilization in the corresponding date range
+"RTN","RORX013A",202,0)
+ . I $$PARAM^RORTSK01("PATIENTS","CAREONLY") D  Q:'UTIL
+"RTN","RORX013A",203,0)
+ . . K TMP  S TMP("ALL")=1
+"RTN","RORX013A",204,0)
+ . . S UTIL=+$$UTIL^RORXU003(UTSDT,UTEDT,PATIEN,.TMP)
+"RTN","RORX013A",205,0)
+ . ;
+"RTN","RORX013A",206,0)
+ . M RORPTGRP=RORIGRP("C")
+"RTN","RORX013A",207,0)
+ . ;
+"RTN","RORX013A",208,0)
+ . ;--- Inpatient codes
+"RTN","RORX013A",209,0)
+ . S RC=$$INPAT(PATIEN)
+"RTN","RORX013A",210,0)
+ . I RC  Q:RC<0  S ECNT=ECNT+RC
+"RTN","RORX013A",211,0)
+ . ;
+"RTN","RORX013A",212,0)
+ . ;--- Outpatient codes
+"RTN","RORX013A",213,0)
+ . S RC=$$OUTPAT(PATIEN)
+"RTN","RORX013A",214,0)
+ . I RC  Q:RC<0  S ECNT=ECNT+RC
+"RTN","RORX013A",215,0)
+ . ;
+"RTN","RORX013A",216,0)
+ . ;--- Problem list
+"RTN","RORX013A",217,0)
+ . S RC=$$PROBLEM(PATIEN)
+"RTN","RORX013A",218,0)
+ . I RC  Q:RC<0  S ECNT=ECNT+RC
+"RTN","RORX013A",219,0)
+ . ;
+"RTN","RORX013A",220,0)
+ . ;--- Skip the patient if no data has been found
+"RTN","RORX013A",221,0)
+ . Q:$D(@RORTMP@("PAT",PATIEN))<10
+"RTN","RORX013A",222,0)
+ . ;--- No ICD from some groups
+"RTN","RORX013A",223,0)
+ . I $D(RORPTGRP)>1  K @RORTMP@("PAT",PATIEN)  Q
+"RTN","RORX013A",224,0)
+ . ;
+"RTN","RORX013A",225,0)
+ . ;--- Get the patient's data
+"RTN","RORX013A",226,0)
+ . D VADEM^RORUTL05(PATIEN,1)
+"RTN","RORX013A",227,0)
+ . S RORPNAME=VADM(1),RORDOD=$P(VADM(6),U),RORLAST4=VA("BID")
+"RTN","RORX013A",228,0)
+ . I $$PARAM^RORTSK01("PATIENTS","ICN") S RORICN=$$ICN^RORUTL02(PATIEN)
+"RTN","RORX013A",229,0)
+ . ;
+"RTN","RORX013A",230,0)
+ . ;--- Calculate the patient's totals
+"RTN","RORX013A",231,0)
+ . S RC=$$TOTALS(PATIEN)
+"RTN","RORX013A",232,0)
+ . I RC  Q:RC<0  S ECNT=ECNT+RC
+"RTN","RORX013A",233,0)
+ ;---
+"RTN","RORX013A",234,0)
+ Q $S(RC<0:RC,1:ECNT)
+"RTN","RORX013A",235,0)
+ ;
+"RTN","RORX013A",236,0)
+ ;***** SORTS THE RESULTS AND COMPILES THE TOTALS
+"RTN","RORX013A",237,0)
+ ;
+"RTN","RORX013A",238,0)
+ ; Return Values:
+"RTN","RORX013A",239,0)
+ ;       <0  Error code
+"RTN","RORX013A",240,0)
+ ;        0  Ok
+"RTN","RORX013A",241,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX013A",242,0)
+ ;
+"RTN","RORX013A",243,0)
+SORT() ;
+"RTN","RORX013A",244,0)
+ N ICDIEN,TMP,TNC,TNDC
+"RTN","RORX013A",245,0)
+ ;---
+"RTN","RORX013A",246,0)
+ S ICDIEN=0,(TNC,TNDC)=0
+"RTN","RORX013A",247,0)
+ F  S ICDIEN=$O(@RORTMP@("ICD",ICDIEN))  Q:ICDIEN'>0  D
+"RTN","RORX013A",248,0)
+ . S TNC=TNC+$G(@RORTMP@("ICD",ICDIEN,"C"))
+"RTN","RORX013A",249,0)
+ . S TNDC=TNDC+1
+"RTN","RORX013A",250,0)
+ S @RORTMP@("ICD")=TNC_U_TNDC
+"RTN","RORX013A",251,0)
+ ;---
+"RTN","RORX013A",252,0)
+ Q 0
+"RTN","RORX013A",253,0)
+ ;
+"RTN","RORX013A",254,0)
+ ;***** CALCULATES INTERMEDIATE TOTALS
+"RTN","RORX013A",255,0)
+ ;
+"RTN","RORX013A",256,0)
+ ; PATIEN        Patient IEN (DFN)
+"RTN","RORX013A",257,0)
+ ;
+"RTN","RORX013A",258,0)
+ ; Return Values:
+"RTN","RORX013A",259,0)
+ ;       <0  Error code
+"RTN","RORX013A",260,0)
+ ;        0  Ok
+"RTN","RORX013A",261,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX013A",262,0)
+ ;
+"RTN","RORX013A",263,0)
+TOTALS(PATIEN) ;
+"RTN","RORX013A",264,0)
+ N CNT,ICD,ICDIEN,ICDVST,PNODE,RC,TMP
+"RTN","RORX013A",265,0)
+ S PNODE=$NA(@RORTMP@("PAT",PATIEN))
+"RTN","RORX013A",266,0)
+ S @PNODE=RORLAST4_U_RORPNAME_U_RORDOD_U_$G(RORICN)
+"RTN","RORX013A",267,0)
+ S ^("PAT")=$G(@RORTMP@("PAT"))+1 ;naked reference: ^TMP($J,"RORTMP-n") from RORX013
+"RTN","RORX013A",268,0)
+ ;
+"RTN","RORX013A",269,0)
+ S ICDIEN=0
+"RTN","RORX013A",270,0)
+ F  S ICDIEN=$O(@PNODE@(ICDIEN))  Q:ICDIEN'>0  D
+"RTN","RORX013A",271,0)
+ . S ICD=$P($G(@RORTMP@("ICD",ICDIEN)),U)
+"RTN","RORX013A",272,0)
+ . I ICD=""  D
+"RTN","RORX013A",273,0)
+ . . S ICD=$$CODEC^ICDEX(80,ICDIEN)
+"RTN","RORX013A",274,0)
+ . . S ICDVST=$$VSTD^ICDEX(ICDIEN)
+"RTN","RORX013A",275,0)
+ . . S:ICD="" ICD="UNKN"
+"RTN","RORX013A",276,0)
+ . . S:ICDVST="" ICDVST="Unknown ("_ICDIEN_")"
+"RTN","RORX013A",277,0)
+ . . S @RORTMP@("ICD",ICDIEN)=ICD_U_ICDVST
+"RTN","RORX013A",278,0)
+ . ;---
+"RTN","RORX013A",279,0)
+ . S CNT=0
+"RTN","RORX013A",280,0)
+ . F TMP="I","O","PB"  S CNT=CNT+$G(@PNODE@(ICDIEN,TMP))
+"RTN","RORX013A",281,0)
+ . S @PNODE@(ICDIEN,"C")=CNT
+"RTN","RORX013A",282,0)
+ . S ^("C")=$G(@RORTMP@("ICD",ICDIEN,"C"))+CNT ;naked reference: ^TMP($J,"RORTMP-n") from RORX013
+"RTN","RORX013A",283,0)
+ . S ^("P")=$G(@RORTMP@("ICD",ICDIEN,"P"))+1 ;naked reference: ^TMP($J,"RORTMP-n") from RORX013
+"RTN","RORX013A",284,0)
+ Q 0
+"RTN","RORX015A")
+0^2^B90387034^B96662849
+"RTN","RORX015A",1,0)
+RORX015A ;HOIFO/SG,VAC - OUTPATIENT PROCEDURES (QUERY & SORT) ;4/7/09 2:10pm
+"RTN","RORX015A",2,0)
+ ;;1.5;CLINICAL CASE REGISTRIES;**1,8,13,19,21,25**;Feb 17, 2006;Build 9
+"RTN","RORX015A",3,0)
+ ;
+"RTN","RORX015A",4,0)
+ ; This routine uses the following IAs:
+"RTN","RORX015A",5,0)
+ ;
+"RTN","RORX015A",6,0)
+ ; #1995         $$CODEN^ICPTCOD and $$CPT^ICPTCOD (supported)
+"RTN","RORX015A",7,0)
+ ; #2055         ROOT^DILFD
+"RTN","RORX015A",8,0)
+ ; #2056         GETS^DIQ
+"RTN","RORX015A",9,0)
+ ; #2546         GETCPT^SDOE
+"RTN","RORX015A",10,0)
+ ; #2548         Multiple APIs in SDQ routine (supported)
+"RTN","RORX015A",11,0)
+ ; #10103        FMADD^XLFDT (supported)
+"RTN","RORX015A",12,0)
+ ; #5747         $$CODEC^ICDEX, $$CODEN^ICDEX, $$VSTP^ICDEX (controlled)
+"RTN","RORX015A",13,0)
+ ; #6130         PTFICD^DGPTFUT
+"RTN","RORX015A",14,0)
+ ;
+"RTN","RORX015A",15,0)
+ ;******************************************************************************
+"RTN","RORX015A",16,0)
+ ;******************************************************************************
+"RTN","RORX015A",17,0)
+ ;                 --- ROUTINE MODIFICATION LOG ---
+"RTN","RORX015A",18,0)
+ ;        
+"RTN","RORX015A",19,0)
+ ;PKG/PATCH    DATE        DEVELOPER    MODIFICATION
+"RTN","RORX015A",20,0)
+ ;-----------  ----------  -----------  ----------------------------------------
+"RTN","RORX015A",21,0)
+ ;ROR*1.5*8    MAR 2010   V CARR        Modified to handle ICD9 filter for
+"RTN","RORX015A",22,0)
+ ;                                      'include' or 'exclude'.
+"RTN","RORX015A",23,0)
+ ;ROR*1.5*13   DEC 2010   A SAUNDERS    User can select specific patients,
+"RTN","RORX015A",24,0)
+ ;                                      clinics, or divisions for the report.
+"RTN","RORX015A",25,0)
+ ;ROR*1.5*19   FEB 2012   J SCOTT       Support for ICD-10 Coding System.
+"RTN","RORX015A",26,0)
+ ;ROR*1.5*21   SEP 2013   T KOPP        Added ICN as report column if
+"RTN","RORX015A",27,0)
+ ;                                      additional identifier option selected
+"RTN","RORX015A",28,0)
+ ;ROR*1.5*25   OCT 2014   T KOPP        Added PTF ICD-10 support for 25 diagnoses
+"RTN","RORX015A",29,0)
+ ;                                      
+"RTN","RORX015A",30,0)
+ ;******************************************************************************
+"RTN","RORX015A",31,0)
+ ;******************************************************************************
+"RTN","RORX015A",32,0)
+ Q
+"RTN","RORX015A",33,0)
+ ;
+"RTN","RORX015A",34,0)
+ ;***** SEARCHES FOR INPATIENT PROCEDURES
+"RTN","RORX015A",35,0)
+ ;
+"RTN","RORX015A",36,0)
+ ; PTIEN         Patient IEN (DFN)
+"RTN","RORX015A",37,0)
+ ;
+"RTN","RORX015A",38,0)
+ ; Return Values:
+"RTN","RORX015A",39,0)
+ ;       <0  Error code
+"RTN","RORX015A",40,0)
+ ;        0  Ok
+"RTN","RORX015A",41,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX015A",42,0)
+ ;
+"RTN","RORX015A",43,0)
+INPAT(PTIEN) ;
+"RTN","RORX015A",44,0)
+ N DATE,ERRCNT,IEN,IEN45,IENS,NODE,RC,RORBUF,RORIBUF,RORMSG,XREF,FLD
+"RTN","RORX015A",45,0)
+ S (ERRCNT,RC)=0
+"RTN","RORX015A",46,0)
+ S XREF=$$ROOT^DILFD(45,,1),XREF=$NA(@XREF@("B",PTIEN))
+"RTN","RORX015A",47,0)
+ S IEN45=0
+"RTN","RORX015A",48,0)
+ F  S IEN45=$O(@XREF@(IEN45))  Q:IEN45'>0  D
+"RTN","RORX015A",49,0)
+ . ;--- Surgical procedures
+"RTN","RORX015A",50,0)
+ . S NODE=$$ROOT^DILFD(45.01,","_IEN45_",",1)
+"RTN","RORX015A",51,0)
+ . S IEN=0
+"RTN","RORX015A",52,0)
+ . F  S IEN=$O(@NODE@(IEN))  Q:IEN'>0  D
+"RTN","RORX015A",53,0)
+ . . S IENS=IEN_","_IEN45_","  K RORBUF
+"RTN","RORX015A",54,0)
+ . . ;--- Load the data
+"RTN","RORX015A",55,0)
+ . . K RORMSG D GETS^DIQ(45.01,IENS,".01;","I","RORBUF","RORMSG")
+"RTN","RORX015A",56,0)
+ . . I $G(RORMSG("DIERR"))  D  S ERRCNT=ERRCNT+1
+"RTN","RORX015A",57,0)
+ . . . D DBS^RORERR("RORMSG",-99,,PTIEN,45.01,IENS)
+"RTN","RORX015A",58,0)
+ . . S DATE=$G(RORBUF(45.01,IENS,.01,"I"))
+"RTN","RORX015A",59,0)
+ . . Q:(DATE<RORSDT)!(DATE'<ROREDT1)
+"RTN","RORX015A",60,0)
+ . . ;--- Generate the output
+"RTN","RORX015A",61,0)
+ . . K RORIBUF
+"RTN","RORX015A",62,0)
+ . . D PTFICD^DGPTFUT(401,IEN45,IEN,.RORIBUF)
+"RTN","RORX015A",63,0)
+ . . S FLD="" F  S FLD=$O(RORIBUF(FLD)) Q:FLD=""  I $G(RORIBUF(FLD)) D
+"RTN","RORX015A",64,0)
+ . . . D PROCSET(PTIEN,"I",+RORIBUF(FLD),DATE)
+"RTN","RORX015A",65,0)
+ . ;--- Other procedures
+"RTN","RORX015A",66,0)
+ . S NODE=$$ROOT^DILFD(45.05,","_IEN45_",",1)
+"RTN","RORX015A",67,0)
+ . S IEN=0
+"RTN","RORX015A",68,0)
+ . F  S IEN=$O(@NODE@(IEN))  Q:IEN'>0  D
+"RTN","RORX015A",69,0)
+ . . S IENS=IEN_","_IEN45_","  K RORBUF
+"RTN","RORX015A",70,0)
+ . . ;--- Load the data
+"RTN","RORX015A",71,0)
+ . . K RORMSG D GETS^DIQ(45.05,IENS,".01","I","RORBUF","RORMSG")
+"RTN","RORX015A",72,0)
+ . . I $G(RORMSG("DIERR"))  D  S ERRCNT=ERRCNT+1
+"RTN","RORX015A",73,0)
+ . . . D DBS^RORERR("RORMSG",-99,,PTIEN,45.05,IENS)
+"RTN","RORX015A",74,0)
+ . . S DATE=$G(RORBUF(45.05,IENS,.01,"I"))
+"RTN","RORX015A",75,0)
+ . . Q:(DATE<RORSDT)!(DATE'<ROREDT1)
+"RTN","RORX015A",76,0)
+ . . ;--- Generate the output
+"RTN","RORX015A",77,0)
+ . . K RORIBUF
+"RTN","RORX015A",78,0)
+ . . D PTFICD^DGPTFUT(601,IEN45,IEN,.RORIBUF)
+"RTN","RORX015A",79,0)
+ . . S FLD="" F  S FLD=$O(RORIBUF(FLD)) Q:FLD=""  I $G(RORIBUF(FLD)) D
+"RTN","RORX015A",80,0)
+ . . . D PROCSET(PTIEN,"I",+RORIBUF(FLD),DATE)
+"RTN","RORX015A",81,0)
+ ;---
+"RTN","RORX015A",82,0)
+ Q $S(RC<0:RC,1:ERRCNT)
+"RTN","RORX015A",83,0)
+ ;
+"RTN","RORX015A",84,0)
+ ;***** CALL-BACK PROCEDURE FOR THE OUTPATIENT SEARCH
+"RTN","RORX015A",85,0)
+ ;
+"RTN","RORX015A",86,0)
+ ; PTIEN         Patient IEN (DFN)
+"RTN","RORX015A",87,0)
+ ;
+"RTN","RORX015A",88,0)
+OPSCAN(PTIEN) ;
+"RTN","RORX015A",89,0)
+ N CPTIEN,DATE,IEN,RORCPT,VDATE
+"RTN","RORX015A",90,0)
+ D GETCPT^SDOE(Y,"RORCPT")
+"RTN","RORX015A",91,0)
+ Q:$G(RORCPT)'>0
+"RTN","RORX015A",92,0)
+ S VDATE=+$P(Y0,U)
+"RTN","RORX015A",93,0)
+ ;---
+"RTN","RORX015A",94,0)
+ S IEN=0
+"RTN","RORX015A",95,0)
+ F  S IEN=$O(RORCPT(IEN))  Q:IEN'>0  D
+"RTN","RORX015A",96,0)
+ . S CPTIEN=+$P(RORCPT(IEN),U),DATE=+$P($G(RORCPT(IEN,12)),U)
+"RTN","RORX015A",97,0)
+ . D:CPTIEN>0 PROCSET(PTIEN,"O",CPTIEN,$S(DATE>0:DATE,1:VDATE))
+"RTN","RORX015A",98,0)
+ Q
+"RTN","RORX015A",99,0)
+ ;
+"RTN","RORX015A",100,0)
+ ;***** SEARCHES FOR OUTPATIENT PROCEDURES
+"RTN","RORX015A",101,0)
+ ;
+"RTN","RORX015A",102,0)
+ ; PTIEN         Patient IEN (DFN)
+"RTN","RORX015A",103,0)
+ ;
+"RTN","RORX015A",104,0)
+ ; Return Values:
+"RTN","RORX015A",105,0)
+ ;       <0  Error code
+"RTN","RORX015A",106,0)
+ ;        0  Ok
+"RTN","RORX015A",107,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX015A",108,0)
+ ;
+"RTN","RORX015A",109,0)
+OUTPAT(PTIEN) ;
+"RTN","RORX015A",110,0)
+ N QUERY
+"RTN","RORX015A",111,0)
+ D OPEN^SDQ(.QUERY)
+"RTN","RORX015A",112,0)
+ D INDEX^SDQ(.QUERY,"PATIENT/DATE","SET")
+"RTN","RORX015A",113,0)
+ D PAT^SDQ(.QUERY,PTIEN,"SET")
+"RTN","RORX015A",114,0)
+ D DATE^SDQ(.QUERY,RORSDT,ROREDT1,"SET")
+"RTN","RORX015A",115,0)
+ D SCANCB^SDQ(.QUERY,"D OPSCAN^RORX015A("_PTIEN_")","SET")
+"RTN","RORX015A",116,0)
+ D ACTIVE^SDQ(.QUERY,"TRUE","SET")
+"RTN","RORX015A",117,0)
+ D SCAN^SDQ(.QUERY,"FORWARD")
+"RTN","RORX015A",118,0)
+ D CLOSE^SDQ(.QUERY)
+"RTN","RORX015A",119,0)
+ Q 0
+"RTN","RORX015A",120,0)
+ ;
+"RTN","RORX015A",121,0)
+ ;**** STORES THE PROCEDURE CODE
+"RTN","RORX015A",122,0)
+ ;
+"RTN","RORX015A",123,0)
+ ; PTIEN         Patient IEN (DFN)
+"RTN","RORX015A",124,0)
+ ; SOURCE        CPT source code ("O" or "I")
+"RTN","RORX015A",125,0)
+ ; [IEN]         IEN of the procedure descriptor (file #81 or #80.1)
+"RTN","RORX015A",126,0)
+ ; DATE          Date when the code was entered
+"RTN","RORX015A",127,0)
+ ; [CODE]        Procedure code (CPT or ICD-9)
+"RTN","RORX015A",128,0)
+ ;
+"RTN","RORX015A",129,0)
+ ; Either the IEN or the CODE parameter must be provided.
+"RTN","RORX015A",130,0)
+ ;
+"RTN","RORX015A",131,0)
+PROCSET(PTIEN,SOURCE,IEN,DATE,CODE) ;
+"RTN","RORX015A",132,0)
+ Q:DATE'>0
+"RTN","RORX015A",133,0)
+ N TMP
+"RTN","RORX015A",134,0)
+ S IEN=+$G(IEN)
+"RTN","RORX015A",135,0)
+ ;---
+"RTN","RORX015A",136,0)
+ I IEN'>0  Q:$G(CODE)=""  D  Q:IEN'>0
+"RTN","RORX015A",137,0)
+ . I SOURCE="O"  S IEN=+$$CODEN^ICPTCOD(CODE) Q
+"RTN","RORX015A",138,0)
+ . I SOURCE="I"  S IEN=+$$CODEN^ICDEX(CODE,80.1) Q
+"RTN","RORX015A",139,0)
+ ;---
+"RTN","RORX015A",140,0)
+ I SOURCE="O",'$$PARAM^RORTSK01("CPTLST","ALL")  D  Q:'TMP
+"RTN","RORX015A",141,0)
+ . S TMP=$D(RORTSK("PARAMS","CPTLST","C",IEN))
+"RTN","RORX015A",142,0)
+ I SOURCE="I"  Q:$$ICDGRCHK^RORXU008(.RORPTGRP,IEN,RORICDL)
+"RTN","RORX015A",143,0)
+ ;---
+"RTN","RORX015A",144,0)
+ S TMP=+$G(@RORTMP@("PAT",PTIEN,SOURCE,IEN))
+"RTN","RORX015A",145,0)
+ S:'TMP!(DATE<TMP) @RORTMP@("PAT",PTIEN,SOURCE,IEN)=DATE
+"RTN","RORX015A",146,0)
+ S ^("C")=$G(@RORTMP@("PAT",PTIEN,SOURCE,IEN,"C"))+1 ;naked reference: ^TMP($J,"RORTMP-n") from RORX015
+"RTN","RORX015A",147,0)
+ Q
+"RTN","RORX015A",148,0)
+ ;
+"RTN","RORX015A",149,0)
+ ;***** QUERIES THE REGISTRY
+"RTN","RORX015A",150,0)
+ ;
+"RTN","RORX015A",151,0)
+ ; FLAGS         Flags for the $$SKIP^RORXU005
+"RTN","RORX015A",152,0)
+ ;
+"RTN","RORX015A",153,0)
+ ; Return Values:
+"RTN","RORX015A",154,0)
+ ;       <0  Error code
+"RTN","RORX015A",155,0)
+ ;        0  Ok
+"RTN","RORX015A",156,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX015A",157,0)
+ ;
+"RTN","RORX015A",158,0)
+QUERY(FLAGS) ;
+"RTN","RORX015A",159,0)
+ N ROREDT1       ; Day after the end date
+"RTN","RORX015A",160,0)
+ N RORPTGRP      ; Temporary list of ICD groups
+"RTN","RORX015A",161,0)
+ N RORPTN        ; Number of patients in the registry
+"RTN","RORX015A",162,0)
+ N RORCDLIST     ; Flag to indicate whether a clinic or division list exists
+"RTN","RORX015A",163,0)
+ N RORCDSTDT     ; Start date for clinic/division utilization search
+"RTN","RORX015A",164,0)
+ N RORCDENDT     ; End date for clinic/division utilization search
+"RTN","RORX015A",165,0)
+ ;
+"RTN","RORX015A",166,0)
+ N CNT,ECNT,IEN,IENS,MODE,PTIEN,RC,SKIP,SKIPEDT,SKIPSDT,TMP,UTEDT,UTSDT,XREFNODE
+"RTN","RORX015A",167,0)
+ N RCC,FLAG,UTIL
+"RTN","RORX015A",168,0)
+ S XREFNODE=$NA(^RORDATA(798,"AC",+RORREG))
+"RTN","RORX015A",169,0)
+ S ROREDT1=$$FMADD^XLFDT(ROREDT\1,1)
+"RTN","RORX015A",170,0)
+ S (CNT,ECNT,RC)=0,SKIPEDT=ROREDT,SKIPSDT=RORSDT
+"RTN","RORX015A",171,0)
+ S:$$PARAM^RORTSK01("PATIENTS","INPATIENT") MODE("I")=1
+"RTN","RORX015A",172,0)
+ S:$$PARAM^RORTSK01("PATIENTS","OUTPATIENT") MODE("O")=1
+"RTN","RORX015A",173,0)
+ ;--- Utilization date range
+"RTN","RORX015A",174,0)
+ D:$$PARAM^RORTSK01("PATIENTS","CAREONLY")
+"RTN","RORX015A",175,0)
+ . S UTSDT=$$PARAM^RORTSK01("DATE_RANGE_3","START")\1
+"RTN","RORX015A",176,0)
+ . S UTEDT=$$PARAM^RORTSK01("DATE_RANGE_3","END")\1
+"RTN","RORX015A",177,0)
+ . ;--- Combined date range
+"RTN","RORX015A",178,0)
+ . S SKIPSDT=$$DTMIN^RORUTL18(SKIPSDT,UTSDT)
+"RTN","RORX015A",179,0)
+ . S SKIPEDT=$$DTMAX^RORUTL18(SKIPEDT,UTEDT)
+"RTN","RORX015A",180,0)
+ ;--- Number of patients in the registry
+"RTN","RORX015A",181,0)
+ S RORPTN=$$REGSIZE^RORUTL02(+RORREG)  S:RORPTN<0 RORPTN=0
+"RTN","RORX015A",182,0)
+ ;
+"RTN","RORX015A",183,0)
+ ;=== Set up Clinic/Division list parameters
+"RTN","RORX015A",184,0)
+ S RORCDLIST=$$CDPARMS^RORXU001(.RORTSK,.RORCDSTDT,.RORCDENDT,1)
+"RTN","RORX015A",185,0)
+ ;
+"RTN","RORX015A",186,0)
+ ;=== Browse through the registry records
+"RTN","RORX015A",187,0)
+ S IEN=0
+"RTN","RORX015A",188,0)
+ S FLAG=$G(RORTSK("PARAMS","ICDFILT","A","FILTER"))
+"RTN","RORX015A",189,0)
+ F  S IEN=$O(@XREFNODE@(IEN))  Q:IEN'>0  D  Q:RC<0
+"RTN","RORX015A",190,0)
+ . S TMP=$S(RORPTN>0:CNT/RORPTN,1:"")
+"RTN","RORX015A",191,0)
+ . S RC=$$LOOP^RORTSK01(TMP)  Q:RC<0
+"RTN","RORX015A",192,0)
+ . S IENS=IEN_",",CNT=CNT+1
+"RTN","RORX015A",193,0)
+ . ;--- Get patient DFN
+"RTN","RORX015A",194,0)
+ . S PTIEN=$$PTIEN^RORUTL01(IEN)  Q:PTIEN'>0
+"RTN","RORX015A",195,0)
+ . ;--- Check for patient list and quit if not on list
+"RTN","RORX015A",196,0)
+ . I $D(RORTSK("PARAMS","PATIENTS","C")),'$D(RORTSK("PARAMS","PATIENTS","C",PTIEN)) Q
+"RTN","RORX015A",197,0)
+ . ;--- Check if the patient should be skipped
+"RTN","RORX015A",198,0)
+ . Q:$$SKIP^RORXU005(IEN,FLAGS,SKIPSDT,SKIPEDT)
+"RTN","RORX015A",199,0)
+ . ;--- Check if patient has passed the ICD Filter
+"RTN","RORX015A",200,0)
+ . S RCC=0
+"RTN","RORX015A",201,0)
+ . I FLAG'="ALL" D
+"RTN","RORX015A",202,0)
+ . . S RCC=$$ICD^RORXU010(PTIEN)
+"RTN","RORX015A",203,0)
+ . I (FLAG="INCLUDE")&(RCC=0) Q
+"RTN","RORX015A",204,0)
+ . I (FLAG="EXCLUDE")&(RCC=1) Q
+"RTN","RORX015A",205,0)
+ . ;--- End of ICD check
+"RTN","RORX015A",206,0)
+ . M RORPTGRP=RORIGRP("C")
+"RTN","RORX015A",207,0)
+ . ;
+"RTN","RORX015A",208,0)
+ . ;--- Check for Clinic or Division list and quit if not in list
+"RTN","RORX015A",209,0)
+ . I RORCDLIST,'$$CDUTIL^RORXU001(.RORTSK,PTIEN,RORCDSTDT,RORCDENDT) Q
+"RTN","RORX015A",210,0)
+ . ;
+"RTN","RORX015A",211,0)
+ . ;--- Inpatient codes (ICD)
+"RTN","RORX015A",212,0)
+ . I $G(MODE("I"))   D  I RC  Q:RC<0  S ECNT=ECNT+RC
+"RTN","RORX015A",213,0)
+ . . S RC=$$INPAT(PTIEN)
+"RTN","RORX015A",214,0)
+ . ;--- Outpatient codes (CPT)
+"RTN","RORX015A",215,0)
+ . I $G(MODE("O"))  D  I RC  Q:RC<0  S ECNT=ECNT+RC
+"RTN","RORX015A",216,0)
+ . . S RC=$$OUTPAT(PTIEN)
+"RTN","RORX015A",217,0)
+ . ;
+"RTN","RORX015A",218,0)
+ . ;--- If ICD codes from some groups have not been found,
+"RTN","RORX015A",219,0)
+ . ;--- then do not consider inpatient procedures at all
+"RTN","RORX015A",220,0)
+ . K:$D(RORPTGRP)>1 @RORTMP@("PAT",PTIEN,"I")
+"RTN","RORX015A",221,0)
+ . ;---
+"RTN","RORX015A",222,0)
+ . S SKIP=($D(@RORTMP@("PAT",PTIEN))<10)
+"RTN","RORX015A",223,0)
+ . S:RORPROC<0 SKIP='SKIP
+"RTN","RORX015A",224,0)
+ . ;
+"RTN","RORX015A",225,0)
+ . ;--- Check for any utilization in the corresponding date range
+"RTN","RORX015A",226,0)
+ . I 'SKIP  D:$$PARAM^RORTSK01("PATIENTS","CAREONLY")
+"RTN","RORX015A",227,0)
+ . . K TMP  S TMP("ALL")=1
+"RTN","RORX015A",228,0)
+ . . S UTIL=+$$UTIL^RORXU003(UTSDT,UTEDT,PTIEN,.TMP)
+"RTN","RORX015A",229,0)
+ . . S:'UTIL SKIP=1
+"RTN","RORX015A",230,0)
+ . ;
+"RTN","RORX015A",231,0)
+ . ;--- Skip the patient if not all search criteria have been met
+"RTN","RORX015A",232,0)
+ . I SKIP  K @RORTMP@("PAT",PTIEN)  Q
+"RTN","RORX015A",233,0)
+ . ;
+"RTN","RORX015A",234,0)
+ . ;--- Calculate the patient's totals
+"RTN","RORX015A",235,0)
+ . S RC=$$TOTALS(PTIEN)
+"RTN","RORX015A",236,0)
+ . I RC  Q:RC<0  S ECNT=ECNT+RC
+"RTN","RORX015A",237,0)
+ ;---
+"RTN","RORX015A",238,0)
+ Q $S(RC<0:RC,1:ECNT)
+"RTN","RORX015A",239,0)
+ ;
+"RTN","RORX015A",240,0)
+ ;***** SORTS THE RESULTS AND COMPILES THE TOTALS
+"RTN","RORX015A",241,0)
+ ;
+"RTN","RORX015A",242,0)
+ ; Return Values:
+"RTN","RORX015A",243,0)
+ ;       <0  Error code
+"RTN","RORX015A",244,0)
+ ;        0  Ok
+"RTN","RORX015A",245,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX015A",246,0)
+ ;
+"RTN","RORX015A",247,0)
+SORT() ;
+"RTN","RORX015A",248,0)
+ N IEN,SRC,TMP,TNC,TNDC
+"RTN","RORX015A",249,0)
+ ;---
+"RTN","RORX015A",250,0)
+ S (TNC,TNDC)=0
+"RTN","RORX015A",251,0)
+ F SRC="I","O"  D
+"RTN","RORX015A",252,0)
+ . S IEN=0
+"RTN","RORX015A",253,0)
+ . F  S IEN=$O(@RORTMP@("PROC",SRC,IEN))  Q:IEN'>0  D
+"RTN","RORX015A",254,0)
+ . . S TMP=$P($G(@RORTMP@("PROC",SRC,IEN)),U,2)
+"RTN","RORX015A",255,0)
+ . . S:TMP'="" @RORTMP@("PROC","B",TMP,SRC,IEN)=""
+"RTN","RORX015A",256,0)
+ . . S TNC=TNC+$G(@RORTMP@("PROC",SRC,IEN,"C"))
+"RTN","RORX015A",257,0)
+ . . S TNDC=TNDC+1
+"RTN","RORX015A",258,0)
+ S @RORTMP@("PROC")=TNC_U_TNDC
+"RTN","RORX015A",259,0)
+ ;---
+"RTN","RORX015A",260,0)
+ Q 0
+"RTN","RORX015A",261,0)
+ ;
+"RTN","RORX015A",262,0)
+ ;***** CALCULATES INTERMEDIATE TOTALS
+"RTN","RORX015A",263,0)
+ ;
+"RTN","RORX015A",264,0)
+ ; PTIEN         Patient IEN (DFN)
+"RTN","RORX015A",265,0)
+ ;
+"RTN","RORX015A",266,0)
+ ; Return Values:
+"RTN","RORX015A",267,0)
+ ;       <0  Error code
+"RTN","RORX015A",268,0)
+ ;        0  Ok
+"RTN","RORX015A",269,0)
+ ;       >0  Number of non-fatal errors
+"RTN","RORX015A",270,0)
+ ;
+"RTN","RORX015A",271,0)
+TOTALS(PTIEN) ;
+"RTN","RORX015A",272,0)
+ N CNT,CODE,IEN,NAME,PNODE,RC,SRC,TMP,VA,VADM
+"RTN","RORX015A",273,0)
+ S PNODE=$NA(@RORTMP@("PAT",PTIEN))
+"RTN","RORX015A",274,0)
+ ;--- Get and store the patient's data
+"RTN","RORX015A",275,0)
+ D VADEM^RORUTL05(PTIEN,1)
+"RTN","RORX015A",276,0)
+ S TMP=$S($$PARAM^RORTSK01("PATIENTS","ICN"):$$ICN^RORUTL02(PTIEN),1:"")
+"RTN","RORX015A",277,0)
+ S @PNODE=VA("BID")_U_VADM(1)_U_$$DATE^RORXU002(VADM(6)\1)_U_TMP
+"RTN","RORX015A",278,0)
+ S ^("PAT")=$G(@RORTMP@("PAT"))+1 ;naked reference: ^TMP($J,"RORTMP-n") from RORX015
+"RTN","RORX015A",279,0)
+ ;
+"RTN","RORX015A",280,0)
+ F SRC="I","O"  D
+"RTN","RORX015A",281,0)
+ . S IEN=0
+"RTN","RORX015A",282,0)
+ . F  S IEN=$O(@PNODE@(SRC,IEN))  Q:IEN'>0  D
+"RTN","RORX015A",283,0)
+ . . S CODE=$P($G(@RORTMP@("PROC",SRC,IEN)),U),NAME=""
+"RTN","RORX015A",284,0)
+ . . D:CODE=""
+"RTN","RORX015A",285,0)
+ . . . I SRC="O"  D
+"RTN","RORX015A",286,0)
+ . . . . S TMP=$$CPT^ICPTCOD(IEN)
+"RTN","RORX015A",287,0)
+ . . . . S:TMP'<0 CODE=$P(TMP,U,2),NAME=$P(TMP,U,3)
+"RTN","RORX015A",288,0)
+ . . . E  D
+"RTN","RORX015A",289,0)
+ . . . . ;S TMP=$$ICDOP^ICDCODE(IEN)
+"RTN","RORX015A",290,0)
+ . . . . ;S:TMP'<0 CODE=$P(TMP,U,2),NAME=$P(TMP,U,5)
+"RTN","RORX015A",291,0)
+ . . . . S CODE=$$CODEC^ICDEX(80.1,IEN)
+"RTN","RORX015A",292,0)
+ . . . . S NAME=$$VSTP^ICDEX(IEN)
+"RTN","RORX015A",293,0)
+ . . . S:CODE="" CODE="UNKN"
+"RTN","RORX015A",294,0)
+ . . . S:NAME="" NAME="Unknown ("_IEN_")"
+"RTN","RORX015A",295,0)
+ . . . S @RORTMP@("PROC",SRC,IEN)=CODE_U_NAME
+"RTN","RORX015A",296,0)
+ . . ;---
+"RTN","RORX015A",297,0)
+ . . S CNT=+$G(@PNODE@(SRC,IEN,"C"))
+"RTN","RORX015A",298,0)
+ . . S ^("C")=$G(@RORTMP@("PROC",SRC,IEN,"C"))+CNT ;naked reference: ^TMP($J,"RORTMP-n") from RORX015
+"RTN","RORX015A",299,0)
+ . . S ^("P")=$G(@RORTMP@("PROC",SRC,IEN,"P"))+1 ;naked reference: ^TMP($J,"RORTMP-n") from RORX015
+"RTN","RORX015A",300,0)
+ Q 0
+"RTN","RORXU010")
+0^5^B14122091^B16438309
+"RTN","RORXU010",1,0)
+RORXU010 ;HCOIFO/VC - REPORT MODIFICATON UTILITY ;4/16/09 2:54pm
+"RTN","RORXU010",2,0)
+ ;;1.5;CLINICAL CASE REGISTRIES;**8,19,25**;Feb 17, 2006;Build 9
+"RTN","RORXU010",3,0)
+ ;
+"RTN","RORXU010",4,0)
+ ;Routine builds the ^TMP($J,"RORFLTR" global array that includes
+"RTN","RORXU010",5,0)
+ ;ICD information from inpatient, outpatient and problem
+"RTN","RORXU010",6,0)
+ ;list data for the identified patient.
+"RTN","RORXU010",7,0)
+ ;
+"RTN","RORXU010",8,0)
+ ;The ICD information that is stored in the ^TMP($J,"RORFLTR"
+"RTN","RORXU010",9,0)
+ ;global array is then compared to ICD information stored in 
+"RTN","RORXU010",10,0)
+ ;the RORTSK local array which is established by the calling
+"RTN","RORXU010",11,0)
+ ;report routine.
+"RTN","RORXU010",12,0)
+ ;
+"RTN","RORXU010",13,0)
+ ;This routine returns a status flag indicating whether the
+"RTN","RORXU010",14,0)
+ ;patient should being included on the calling report.
+"RTN","RORXU010",15,0)
+ ;
+"RTN","RORXU010",16,0)
+ ;Format is:
+"RTN","RORXU010",17,0)
+ ;   ^TMP($J,"RORFLTR",PATIENT IEN,ICD FILE #,ICD IEN)=1
+"RTN","RORXU010",18,0)
+ ;
+"RTN","RORXU010",19,0)
+ ;The inputs are:
+"RTN","RORXU010",20,0)
+ ;   1)  PIEN - Patient's IEN in the registry file (required).
+"RTN","RORXU010",21,0)
+ ;              Specifically ^RORDATA(798.4,PIEN) and in the 
+"RTN","RORXU010",22,0)
+ ;              patient file ^DPT(PIEN).
+"RTN","RORXU010",23,0)
+ ;
+"RTN","RORXU010",24,0)
+ ;The return code is:
+"RTN","RORXU010",25,0)
+ ;       RC   - Flag indicating if patient should be retained.
+"RTN","RORXU010",26,0)
+ ;              1 - Patient should be retained for report.
+"RTN","RORXU010",27,0)
+ ;              0 - Patient should NOT be retained for report.
+"RTN","RORXU010",28,0)
+ ;
+"RTN","RORXU010",29,0)
+ ;ICD information is obtained from 3 different packages:
+"RTN","RORXU010",30,0)
+ ;   Registration package for patient inpatient diagnosis.
+"RTN","RORXU010",31,0)
+ ;   Patient Care Encounter package for patient outpatient diagnosis.
+"RTN","RORXU010",32,0)
+ ;   Problem List package for patient problem list diagnosis.
+"RTN","RORXU010",33,0)
+ ;   
+"RTN","RORXU010",34,0)
+ ;This routine uses the following IAs:
+"RTN","RORXU010",35,0)
+ ;
+"RTN","RORXU010",36,0)
+ ;#92       ^DGPT(  (controlled)
+"RTN","RORXU010",37,0)
+ ;#928      ACTIVE^GMPLUTL (controlled)
+"RTN","RORXU010",38,0)
+ ;#1554     POV^PXAPIIB (controlled)
+"RTN","RORXU010",39,0)
+ ;#1905     SELECTED^VSIT (controlled)
+"RTN","RORXU010",40,0)
+ ;#2977     GETFLDS^GMPLEDT3 (controlled)
+"RTN","RORXU010",41,0)
+ ;#3545     ^DGPT("AAD" (private)
+"RTN","RORXU010",42,0)
+ ;#6130     PTFICD^DGPTFUT
+"RTN","RORXU010",43,0)
+ ;
+"RTN","RORXU010",44,0)
+ ;******************************************************************************
+"RTN","RORXU010",45,0)
+ ;******************************************************************************
+"RTN","RORXU010",46,0)
+ ; --- ROUTINE MODIFICATION LOG ---
+"RTN","RORXU010",47,0)
+ ; 
+"RTN","RORXU010",48,0)
+ ;PKG/PATCH   DATE       DEVELOPER   MODIFICATION
+"RTN","RORXU010",49,0)
+ ;----------- ---------- ----------- ----------------------------------------
+"RTN","RORXU010",50,0)
+ ;ROR*1.5*8   MAR 2010   V CARR      Modified to handle ICD9 filter for
+"RTN","RORXU010",51,0)
+ ;                                   'include' or 'exclude'.
+"RTN","RORXU010",52,0)
+ ;ROR*1.5*13  DEC 2010   A SAUNDERS  User can select specific patients, 
+"RTN","RORXU010",53,0)
+ ;                                   clinics, or divisions for the report.
+"RTN","RORXU010",54,0)
+ ;ROR*1.5*19  FEB 2012   J SCOTT     Support for ICD-10 Coding System.
+"RTN","RORXU010",55,0)
+ ;ROR*1.5*19  FEB 2012   J SCOTT     Removed direct read of ^ICD9( global.
+"RTN","RORXU010",56,0)
+ ;ROR*1.5*19  FEB 2012   J SCOTT     Changed the screening of ICD codes from
+"RTN","RORXU010",57,0)
+ ;                                   external to internal values.
+"RTN","RORXU010",58,0)
+ ;ROR*1.5*19  FEB 2012   J SCOTT     Removed obsolete REG parameter from
+"RTN","RORXU010",59,0)
+ ;                                   ICD entry point.
+"RTN","RORXU010",60,0)
+ ;ROR*1.5*25  OCT 2014   T KOPP      Added PTF ICD-10 support for 25 diagnoses
+"RTN","RORXU010",61,0)
+ ; 
+"RTN","RORXU010",62,0)
+ ;******************************************************************************
+"RTN","RORXU010",63,0)
+ ;******************************************************************************
+"RTN","RORXU010",64,0)
+ Q
+"RTN","RORXU010",65,0)
+ ;
+"RTN","RORXU010",66,0)
+ICD(PIEN) ;Determine if patient is retained for report based on ICD information.
+"RTN","RORXU010",67,0)
+ ;
+"RTN","RORXU010",68,0)
+ K ^TMP($J,"RORFLTR",PIEN)
+"RTN","RORXU010",69,0)
+ N PATIEN,RORICDIEN
+"RTN","RORXU010",70,0)
+ S PATIEN=PIEN
+"RTN","RORXU010",71,0)
+ ;
+"RTN","RORXU010",72,0)
+ ;Gather INPATIENT ICD information from Registration package file #45 (PTF).
+"RTN","RORXU010",73,0)
+ N DATE,DGPTREF,ICD1,ICD2,FLDLOC,RORIBUF,FLD
+"RTN","RORXU010",74,0)
+ ;
+"RTN","RORXU010",75,0)
+ ;Browse through each inpatient date.
+"RTN","RORXU010",76,0)
+ S DATE=0
+"RTN","RORXU010",77,0)
+ F  S DATE=$O(^DGPT("AAD",PATIEN,DATE)) Q:DATE=""  D
+"RTN","RORXU010",78,0)
+ .;Browse through each PTF (#45) entry for an inpatient date.
+"RTN","RORXU010",79,0)
+ .S DGPTREF=0
+"RTN","RORXU010",80,0)
+ .F  S DGPTREF=$O(^DGPT("AAD",PATIEN,DATE,DGPTREF)) Q:DGPTREF=""  D
+"RTN","RORXU010",81,0)
+ ..;Extract ICD diagnosis codes.
+"RTN","RORXU010",82,0)
+ ..D PTFICD^DGPTFUT(701,DGPTREF,"",.RORIBUF)
+"RTN","RORXU010",83,0)
+ ..S FLD="" F  S FLD=$O(RORIBUF(FLD)) Q:FLD=""  I $G(RORIBUF(FLD)) D
+"RTN","RORXU010",84,0)
+ ... S ^TMP($J,"RORFLTR",PATIEN,80,+RORIBUF(FLD))=1
+"RTN","RORXU010",85,0)
+ ;
+"RTN","RORXU010",86,0)
+ ;Gather OUTPATIENT ICD information from Patient Care Encounter package.
+"RTN","RORXU010",87,0)
+ N VSIEN,TMP,RORVPLST,VPOVREF
+"RTN","RORXU010",88,0)
+ ;
+"RTN","RORXU010",89,0)
+ ;Get a list of all VISIT (#9000010) entries for the patient.
+"RTN","RORXU010",90,0)
+ D SELECTED^VSIT(PATIEN)
+"RTN","RORXU010",91,0)
+ ;Browse through each returned VISIT entry.
+"RTN","RORXU010",92,0)
+ S VSIEN=0
+"RTN","RORXU010",93,0)
+ F  S VSIEN=$O(^TMP("VSIT",$J,VSIEN)) Q:VSIEN=""  D
+"RTN","RORXU010",94,0)
+ .S TMP=+$O(^TMP("VSIT",$J,VSIEN,"")) Q:TMP'>0
+"RTN","RORXU010",95,0)
+ .;Get V POV (#9000010.07) entries for a specific VISIT entry.
+"RTN","RORXU010",96,0)
+ .D POV^PXAPIIB(VSIEN,.RORVPLST)
+"RTN","RORXU010",97,0)
+ .;Browse through each returned V POV entry.
+"RTN","RORXU010",98,0)
+ .S VPOVREF=""
+"RTN","RORXU010",99,0)
+ .F  S VPOVREF=$O(RORVPLST(VPOVREF)) Q:VPOVREF=""  D
+"RTN","RORXU010",100,0)
+ ..;Extract ICD diagnosis code.
+"RTN","RORXU010",101,0)
+ ..S RORICDIEN=$P(RORVPLST(VPOVREF),U,1)
+"RTN","RORXU010",102,0)
+ ..I RORICDIEN'="" S ^TMP($J,"RORFLTR",PATIEN,80,RORICDIEN)=1
+"RTN","RORXU010",103,0)
+ K ^TMP("VSIT",$J)
+"RTN","RORXU010",104,0)
+ ;
+"RTN","RORXU010",105,0)
+ ;Gather PROBLEM LIST ICD information from Problem List package.
+"RTN","RORXU010",106,0)
+ N RORPLST,PLSTREF,GMPVAMC,GMPROV,PROBNUM
+"RTN","RORXU010",107,0)
+ ;
+"RTN","RORXU010",108,0)
+ ;Get a list of all PROBLEM (#9000011) entries for the patient.
+"RTN","RORXU010",109,0)
+ D ACTIVE^GMPLUTL(PATIEN,.RORPLST)
+"RTN","RORXU010",110,0)
+ S (GMPVAMC,GMPROV)=0
+"RTN","RORXU010",111,0)
+ ;Browse through each returned PROBLEM entry.
+"RTN","RORXU010",112,0)
+ S PROBNUM=0
+"RTN","RORXU010",113,0)
+ F  S PROBNUM=$O(RORPLST(PROBNUM)) Q:PROBNUM=""  D
+"RTN","RORXU010",114,0)
+ .S PLSTREF=$G(RORPLST(PROBNUM,0))
+"RTN","RORXU010",115,0)
+ .Q:PLSTREF'>0
+"RTN","RORXU010",116,0)
+ .;Extract ICD diagnosis code.
+"RTN","RORXU010",117,0)
+ .K GMPFLD,GMPORIG
+"RTN","RORXU010",118,0)
+ .D GETFLDS^GMPLEDT3(PLSTREF)
+"RTN","RORXU010",119,0)
+ .S RORICDIEN=$P($G(GMPFLD(.01)),U,1)
+"RTN","RORXU010",120,0)
+ .I RORICDIEN'="" S ^TMP($J,"RORFLTR",PATIEN,80,RORICDIEN)=1
+"RTN","RORXU010",121,0)
+ .K GMPFLD,GMPORIG
+"RTN","RORXU010",122,0)
+ ;
+"RTN","RORXU010",123,0)
+COMPARE ;Determine if patient should be retained or not.
+"RTN","RORXU010",124,0)
+ ;
+"RTN","RORXU010",125,0)
+ ;Compare ICD data gathered for patient in ^TMP($J,"RORFLTR"
+"RTN","RORXU010",126,0)
+ ;with ICD data in RORTSK local array that was established from
+"RTN","RORXU010",127,0)
+ ;the calling routine.
+"RTN","RORXU010",128,0)
+ ;
+"RTN","RORXU010",129,0)
+ N A,B,STOP,X,Y,RC
+"RTN","RORXU010",130,0)
+ S A="PARAMS",B="ICDFILT",RC=0
+"RTN","RORXU010",131,0)
+ S X="",STOP="GO"
+"RTN","RORXU010",132,0)
+ F  S X=$O(RORTSK(A,B,"G",X)) Q:X=""  Q:STOP="STOP"  D
+"RTN","RORXU010",133,0)
+ .S Y=""
+"RTN","RORXU010",134,0)
+ .F  S Y=$O(RORTSK(A,B,"G",X,"C",Y)) Q:Y=""  Q:STOP="STOP"  D
+"RTN","RORXU010",135,0)
+ ..I $D(^TMP($J,"RORFLTR",PATIEN,80,Y))>0 D
+"RTN","RORXU010",136,0)
+ ...S RC=1,STOP="STOP"
+"RTN","RORXU010",137,0)
+ K ^TMP($J,"RORFLTR",PATIEN)
+"RTN","RORXU010",138,0)
+ Q RC
+"VER")
+8.0^22.0
+"BLD",9623,6)
+^26
+**END**
+**END**
+
