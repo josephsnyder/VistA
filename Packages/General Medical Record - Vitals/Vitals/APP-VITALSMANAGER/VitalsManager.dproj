@@ -1,0 +1,188 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{b13a3664-9bfb-443e-8436-499fbd12c17e}</ProjectGuid>
+    <MainSource>VitalsManager.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\..\bin\VitalsManager.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
+    <DCC_DcuOutput>..\..\bin\dcu_APP_VITALSMANAGER</DCC_DcuOutput>
+    <DCC_ObjOutput>..\..\bin\dcu_APP_VITALSMANAGER</DCC_ObjOutput>
+    <DCC_HppOutput>..\..\bin\dcu_APP_VITALSMANAGER</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6</DCC_ObjPath>
+    <DCC_IncludePath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6</DCC_IncludePath>
+    <DCC_Define>DISABLEQUALIFIERS;RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
+    <DCC_DcuOutput>..\..\bin\dcu_APP_VITALSMANAGER</DCC_DcuOutput>
+    <DCC_ObjOutput>..\..\bin\dcu_APP_VITALSMANAGER</DCC_ObjOutput>
+    <DCC_HppOutput>..\..\bin\dcu_APP_VITALSMANAGER</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6;C:\Users\joe.snyder\Work\OSEHRA\VistA\Packages\RPC Broker\BDK\Source</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6;C:\Users\joe.snyder\Work\OSEHRA\VistA\Packages\RPC Broker\BDK\Source</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6;C:\Users\joe.snyder\Work\OSEHRA\VistA\Packages\RPC Broker\BDK\Source</DCC_ObjPath>
+    <DCC_IncludePath>..\..\ORCTRL;..\..\CCR-Components\D6;..\..\ORPHEUSLITE\D6;C:\Users\joe.snyder\Work\OSEHRA\VistA\Packages\RPC Broker\BDK\Source</DCC_IncludePath>
+    <DCC_Define>DISABLEQUALIFIERS;DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject xmlns=""> <Delphi.Personality>   <Parameters>
+      <Parameters Name="RunParams">/NOCCOW</Parameters>
+      <Parameters Name="UseLauncher">False</Parameters>
+      <Parameters Name="LoadAllSymbols">True</Parameters>
+      <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+    </Parameters>
+    <Language>
+      <Language Name="RootDir">D:\AA\D6Projects\Vitals5031\VitalsManager-503\</Language>
+    </Language>
+    <VersionInfo>
+      <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+      <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+      <VersionInfo Name="MajorVer">5</VersionInfo>
+      <VersionInfo Name="MinorVer">0</VersionInfo>
+      <VersionInfo Name="Release">23</VersionInfo>
+      <VersionInfo Name="Build">8</VersionInfo>
+      <VersionInfo Name="Debug">False</VersionInfo>
+      <VersionInfo Name="PreRelease">False</VersionInfo>
+      <VersionInfo Name="Special">False</VersionInfo>
+      <VersionInfo Name="Private">False</VersionInfo>
+      <VersionInfo Name="DLL">False</VersionInfo>
+      <VersionInfo Name="Locale">1033</VersionInfo>
+      <VersionInfo Name="CodePage">1252</VersionInfo>
+    </VersionInfo>
+    <VersionInfoKeys>
+      <VersionInfoKeys Name="CompanyName">Department of Veterans Affairs</VersionInfoKeys>
+      <VersionInfoKeys Name="FileDescription">5.0 Patch GMRV*5*23</VersionInfoKeys>
+      <VersionInfoKeys Name="FileVersion">5.0.23.8</VersionInfoKeys>
+      <VersionInfoKeys Name="InternalName">Vitals Manager 5.0</VersionInfoKeys>
+      <VersionInfoKeys Name="LegalCopyright">© Department of Veterans Affairs 2005-2008</VersionInfoKeys>
+      <VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
+      <VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys>
+      <VersionInfoKeys Name="ProductName">Vitals Manager</VersionInfoKeys>
+      <VersionInfoKeys Name="ProductVersion">5.0.23.8</VersionInfoKeys>
+      <VersionInfoKeys Name="Comments">v. 08/11/09 15:00</VersionInfoKeys>
+      <VersionInfoKeys Name="VAReleaseDate">October 2002</VersionInfoKeys>
+      <VersionInfoKeys Name="VANamespace">GMRV</VersionInfoKeys>
+      <VersionInfoKeys Name="VASourceInformation">Developed by the Department of Veterans Affairs</VersionInfoKeys>
+    </VersionInfoKeys>
+    <Source>
+      <Source Name="MainSource">VitalsManager.dpr</Source>
+    </Source>
+    <Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="C:\Users\joe.snyder\Downloads\OR-3_SEQ-273_PAT-296_SRC\OR_SRC_CREATION\Packages\XWB_D10.bpl">File C:\Users\joe.snyder\Downloads\OR-3_SEQ-273_PAT-296_SRC\OR_SRC_CREATION\Packages\XWB_D10.bpl not found</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages>
+  </Delphi.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="VitalsManager.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\ROR\fROR_PCall.pas">
+      <Form>RPCErrorForm</Form>
+    </DCCReference>
+    <DCCReference Include="..\ROR\uROR_RPCBroker.pas" />
+    <DCCReference Include="..\VitalsCommon\fGMV_AboutDlg.pas">
+      <Form>frmGMV_AboutDlg</Form>
+    </DCCReference>
+    <DCCReference Include="..\VitalsCommon\fGMV_AddVCQ.pas">
+      <Form>frmGMV_AddVCQ</Form>
+    </DCCReference>
+    <DCCReference Include="..\VitalsCommon\fGMV_RPCLog.pas">
+      <Form>frmGMV_RPCLog</Form>
+    </DCCReference>
+    <DCCReference Include="..\VitalsCommon\fGMV_Splash.pas">
+      <Form>frmGMV_Splash</Form>
+    </DCCReference>
+    <DCCReference Include="..\VitalsCommon\fGMV_TimeOutManager.pas">
+      <Form>frmGMV_TimeOutManager</Form>
+    </DCCReference>
+    <DCCReference Include="..\VITALSCOMMON\mGMV_DefaultSelector.pas">
+      <Form>frDefaultSelector</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\VitalsCommon\mGMV_EditTemplate.pas">
+      <Form>fraGMV_EditTemplate</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\VitalsCommon\mGMV_PrinterSelector.pas">
+      <Form>frGMV_PrinterSelector</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\VitalsCommon\uGMV_FileEntry.pas" />
+    <DCCReference Include="..\VITALSCOMMON\uGMV_Log.pas" />
+    <DCCReference Include="..\VITALSCOMMON\uGMV_RPC_Names.pas" />
+    <DCCReference Include="..\VitalsCommon\uGMV_Setup.pas" />
+    <DCCReference Include="..\VitalsCommon\uGMV_User.pas" />
+    <DCCReference Include="..\VitalsCommon\uGMV_VitalTypes.pas" />
+    <DCCReference Include="..\VitalsDataEntry\fGMV_Qualifiers.pas">
+      <Form>frmGMV_Qualifiers</Form>
+    </DCCReference>
+    <DCCReference Include="..\VitalsDataEntry\mGMV_Lookup.pas">
+      <Form>fraGMV_Lookup</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\VitalsDataEntry\uGMV_QualifyBox.pas" />
+    <DCCReference Include="..\VitalsDataEntry\uGMV_Template.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_Common.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_Const.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_CRC32.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_Engine.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_EXEVersion.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_GlobalVars.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_Utils.pas" />
+    <DCCReference Include="..\VitalsUtils\uGMV_VersionInfo.pas" />
+    <DCCReference Include="fGMV_AddEditQualifier.pas">
+      <Form>frmGMV_AddEditQualifier</Form>
+    </DCCReference>
+    <DCCReference Include="fGMV_DeviceSelector.pas">
+      <Form>frmGMV_DeviceSelector</Form>
+    </DCCReference>
+    <DCCReference Include="fGMV_Manager.pas">
+      <Form>frmGMV_Manager</Form>
+    </DCCReference>
+    <DCCReference Include="fGMV_NewTemplate.pas">
+      <Form>frmGMV_NewTemplate</Form>
+    </DCCReference>
+    <DCCReference Include="mGMV_SystemParameters.pas">
+      <Form>fraSystemParameters</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="mGMV_VitalHiLo.pas">
+      <Form>fraVitalHiLo</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+  </ItemGroup>
+</Project>

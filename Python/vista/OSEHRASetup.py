@@ -572,7 +572,7 @@ def setupStrepTest(VistA):
   VistA.wait("Do you really")
   VistA.write("Y")
 
-def registerVitalsCPRS(VistA):
+def registerVitalsCPRS(VistA,vitalsManagerVersion):
   # Register the DLL versions for Vitals and the executable version for
   # CPRS through the XPAR Menu.  This information should match the versions
   # that will be used during testing.
@@ -586,7 +586,7 @@ def registerVitalsCPRS(VistA):
   VistA.wait(PROMPT,60)
   VistA.write('D EN^XPAR(\"SYS\",\"GMV DLL VERSION\",GMVDLL,1)')
   VistA.wait(PROMPT,60)
-  VistA.write('S GMVGUI=\"VITALSMANAGER.EXE:5.0.26.1\"')
+  VistA.write('S GMVGUI=\"VITALSMANAGER.EXE:'+vitalsManagerVersion+'\"')
   VistA.wait(PROMPT,60)
   VistA.write('D EN^XPAR(\"SYS\",\"GMV GUI VERSION\",GMVGUI,1)')
 

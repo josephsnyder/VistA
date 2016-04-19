@@ -113,7 +113,7 @@ OSEHRASetup.addDivision(VistA,'VISTA MEDICAL CENTER',"6101","6100")
 OSEHRASetup.setupStrepTest(VistA)
 
 #Register the Vitals DLL and GUI Versions within the XPAR Menu
-OSEHRASetup.registerVitalsCPRS(VistA)
+OSEHRASetup.registerVitalsCPRS(VistA,"${TEST_VISTA_SETUP_VITALSMANAGER_VERSION}")
 
 OSEHRASetup.signonZU(VistA,"SM1234","SM1234!!")
 
