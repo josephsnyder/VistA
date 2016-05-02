@@ -1,0 +1,106 @@
+#---------------------------------------------------------------------------
+# Copyright 2012 The Open Source Electronic Health Record Agent
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#---------------------------------------------------------------------------
+import sys,os,re,time
+sys.path = ['@VISTA_SOURCE_DIR@/Python/vista']+['@VISTA_BINARY_DIR@/Testing/Comply/'] + sys.path
+from OSEHRAHelper import ConnectToMUMPS,PROMPT
+from ParseCSVforPackagePrefixes import FindPackagePrefixes
+
+def acquireListing(VistA, pkgPrefixLst):
+  # %RFIRST on Cache
+  # %FL on GT.M
+  if VistA.type == 'cache':
+    VistA.write("D ^%RFIRST")
+    for prefix in pkgPrefixLst:
+      VistA.wait('Routine')
+      VistA.write(prefix + '*')
+    VistA.wait('Routine')
+    VistA.write('')
+    index = VistA.multiwait(['Find [Rr]outines',VistA.prompt])
+    if index == 1:
+      return []
+    VistA.write('')
+    VistA.wait('on or before')
+    VistA.write('')
+    VistA.wait('Device')
+    VistA.write(';;9999')
+    VistA.wait('Parameters')
+    VistA.write('')
+    index = VistA.multiwait([VistA.prompt, "already exists"])
+    if index == 1:
+      VistA.write("Y")
+      VistA.wait(PROMPT)
+    return re.findall("([A-Z0-9]+).INT", VistA.lastconnection)
+  else:
+    VistA.write("D ^%FL")
+    for prefix in pkgPrefixLst:
+      VistA.wait('Routine:')
+      VistA.write(prefix + '*')
+    VistA.wait('Routine')
+    VistA.write("")
+    VistA.wait('Output device')
+    VistA.write("")
+    VistA.wait(PROMPT)
+    returnArray = []
+    prefix = '[A-Z0-9]+$|^'.join(pkgPrefixLst)
+    prefix += '[A-Z0-9]+$'
+    for line in VistA.lastconnection.splitlines():
+      if(re.match("^"+prefix, line)):
+        returnArray.append(re.match("^"+prefix, line).group(0))
+    return returnArray
+
+VistA=ConnectToMUMPS("@LOGFILENAME@","@VISTA_CACHE_INSTANCE@","@VISTA_CACHE_NAMESPACE@")
+if ('@VISTA_CACHE_USERNAME@' and '@VISTA_CACHE_PASSWORD@'):
+  VistA.login('@VISTA_CACHE_USERNAME@','@VISTA_CACHE_PASSWORD@')
+if VistA.type=='cache':
+  try:
+    VistA.ZN('@VISTA_CACHE_NAMESPACE@')
+  except IndexError,no_namechange:
+    pass
+
+if '@TEST_VISTA_COVERAGE@'=='ON':
+  VistA.wait(PROMPT)
+  VistA.startCoverage(@TEST_VISTA_COVERAGE_SUBSET@)
+VistA.wait(PROMPT)
+VistA.write("W $T(^COMPLY)")
+index = VistA.multiwait([VistA.prompt, "CHECK FOR COMPLIANCE"])
+if index == 0:
+  import ComplyGlobalImport
+  import ComplyRoutineImport
+VistA.write('K ^XUTL("XQ",$J)')
+pkgPrefixLst = FindPackagePrefixes('@package_file_name@',
+                                   os.path.join('@VISTA_SOURCE_DIR@',
+                                                'Packages.csv'))
+rtnListing = acquireListing(VistA,pkgPrefixLst)
+print rtnListing
+for rtnName in rtnListing:
+  VistA.write('D ^COMPLY')
+  VistA.wait('DEVICE')
+  VistA.write('')
+  if VistA.type == 'cache':
+    VistA.wait("Right Margin")
+    VistA.write("")
+  VistA.wait("Package Entry Point")
+  VistA.write(rtnName)
+  VistA.wait('EXCLUDE FROM PROCESSING')
+  VistA.write('')
+  VistA.wait('STACK DEPTH')
+  VistA.write('1')
+  VistA.wait('PRINT ALL ERRORS')
+  VistA.write('Y')
+  VistA.wait(PROMPT)
+if '@TEST_VISTA_COVERAGE@'=='ON':
+  VistA.stopCoverage(os.path.normpath("@LOGFILENAME@"))
+VistA.write('h')

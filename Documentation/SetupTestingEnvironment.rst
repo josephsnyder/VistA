@@ -116,6 +116,31 @@ There are a large amount of options that are shown after the first
 configuration, this document will walk through the options, explain what each
 will do, and show variables that will appear after selecting the options.
 
+Comply Testing
+``````````````
+
+.. figure:: http://code.osehra.org/content/named/SHA1/ef8576-complyOption.png
+  :align: center
+  :alt: Highlighted Variable for starting Comply testing
+
+An additional Standards checker is available using a slightly adapted tool
+created by Chris Richardson.  Setting the TEST_VISTA_COMPLY option to be true
+will run the Comply program on the routines within the VistA instance.
+
+The script for the Comply testing using the prefixes of each package to
+generate a list of routines to execute Comply on.  Each run of Comply will only
+check for errors in the stack depth of 1, limiting it to only the original
+routine.
+
+
+OSEHRA Modifications
+'''''''''''''''''''''
+
+OSEHRA has made a few modifications to the Comply program in order to run it on
+both GT.M and Cache.  The modifications were made  in the COMRSEL and COMSTORE
+routines and these modifications are labeled with a comment which marks the
+start and end of the OSEHRA changes.
+
 XINDEX Testing
 ``````````````
 

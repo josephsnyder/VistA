@@ -1,5 +1,5 @@
 #---------------------------------------------------------------------------
-# Copyright 2011 The Open Source Electronic Health Record Agent
+# Copyright 2016 The Open Source Electronic Health Record Alliance
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,36 +27,22 @@ if VistA.type=='cache':
   except IndexError,no_namechange:
     pass
 VistA.wait(PROMPT)
-VistA.write('D ^%RI')
+VistA.write('D ^%GI')
 if VistA.type=='GTM':
-  VistA.wait('Formfeed delimited <No>?')
-  VistA.write('No')
   VistA.wait('Input device: <terminal>:')
-  VistA.write('${RoutineImportFile}')
-  VistA.wait('Output directory :')
-  VistA.write('${RoutineImportDir}/')
+  VistA.write('${GlobalImportFile}')
+  VistA.wait('OK')
+  VistA.write('Y')
   VistA.wait(PROMPT, ${TEST_VISTA_FRESH_ROUTINE_IMPORT_TIMEOUT})
   VistA.write('H')
 else:
   VistA.wait('Device:')
-  #set the device to be routines.ro file
-  VistA.write('${RoutineImportFile}')
-  VistA.wait('=>')
+  #set the device to be the .GO file
+  VistA.write('${GlobalImportFile}')
+  VistA.wait('Parameters')
   #just use default
   VistA.write('')
-  index = VistA.multiwait(['No =>',"Routine Input Option"])
-  if index ==0:
-    #we need to Override the routines
-    VistA.write('YES')
-    VistA.wait('<0>')
-    VistA.write('')
-    VistA.wait('Routine Input Option:')
-  VistA.write('All Routines')
-  VistA.wait('No =>')
-  VistA.write('YES')
-  VistA.wait('Yes =>')
-  VistA.write('')
-  VistA.wait('Yes =>')
-  VistA.write('')
+  VistA.wait_re('Input [oO]ption:')
+  VistA.write('A')
   VistA.wait(PROMPT, ${TEST_VISTA_FRESH_ROUTINE_IMPORT_TIMEOUT})
   VistA.write('h')

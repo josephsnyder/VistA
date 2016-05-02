@@ -72,6 +72,48 @@ function(ReportXINDEXResult PACKAGE_NAME PACKAGES_DIR VENDOR_NAME GREP_EXEC OUTP
    endif()
 endfunction()
 
+
+function(ReportComplyResult PACKAGE_NAME OUTPUT)
+   set(FAILURE_CONDITION "^\\<\\*\\*")
+   #
+   # Start a exception list for the following Comply errors
+   #
+   # 2E:   First Line Does Not Meet Standard Field Count
+   # 2V:   Missing Version Identification Line
+   # 3F:   Program Line Exceeds 80 Characters
+   # 3H3:  Routine Segment Too Long
+   # 3H2:  Block Too Long
+   # 4D:   XECUTE Command Found
+   # 5A:   Control Command Found After the First Command
+   #
+
+   set(COMPLY_EXCEPTIONS "2E" "2V" "3F" "3H3" "4C" "4D" "5A" )
+   set(test_passed TRUE)
+  foreach (line ${OUTPUT})
+        # the XINDEX will always check the integrity of the routine using checksum
+        if(line MATCHES "CURRENT ROUTINE =[A-Z0-9%]+")
+          string(REGEX MATCH "[A-Z0-9%]+$" routine_name "${line}")
+          message("${routine_name} in package ${PACKAGE_NAME}")
+        elseif(line MATCHES ${FAILURE_CONDITION})
+          # also assume the file name is ${PACKAGE_NAME}.${routinename}
+
+          string(REGEX MATCH " ([A-Z0-9]+) " error_code "${line}")
+          string(STRIP ${error_code} error_code)
+          list(FIND COMPLY_EXCEPTIONS ${error_code} findResult)
+          if(${findResult} STREQUAL "-1")
+            message("${line}")
+            set(test_passed FALSE)
+          endif()
+        endif()
+     endforeach()
+     if(test_passed)
+       string(REPLACE ";" "\n" OUTPUT "${OUTPUT}")
+       message("${PACKAGE_NAME} Passed:\n${OUTPUT}")
+     else()
+       message(FATAL_ERROR "${PACKAGE_NAME} has Comply Errors")
+     endif()
+endfunction()
+
 # Define a function for parsing and reporting munit output results
 function(ReportUnitTestResult PACKAGE_NAME DIRNAME OUTPUT)
    set(test_passed TRUE)

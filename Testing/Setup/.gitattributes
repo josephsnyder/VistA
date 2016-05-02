@@ -1,0 +1,4 @@
+*.GO           -whitespace
+*.go           -whitespace
+*.RO           -whitespace
+*.ro           -whitespace

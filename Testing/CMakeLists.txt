@@ -181,6 +181,30 @@ if(TEST_VISTA_XINDEX)
 endif()
 
 #-----------------------------------------------------------------------------#
+##### SECTION TO SETUP THE COMPLY TESTING` #####
+#-----------------------------------------------------------------------------#
+
+option(TEST_VISTA_COMPLY "Run XINDEX on every routine in every package" ON)
+if(TEST_VISTA_COMPLY)
+  FindPackages(${VISTA_SOURCE_DIR})
+  #Configures the python script with the name of the routine
+  set(RoutineImportFile "${CMAKE_CURRENT_SOURCE_DIR}/Setup/COM3050518.RO")
+  set(GlobalImportFile "${CMAKE_CURRENT_SOURCE_DIR}/Setup/COM3050519.GO")
+  set(logfile "${TEST_VISTA_OUTPUT_DIR}/COMPLYRoutineImport.log")
+  set(RoutineImportDir ${TEST_VISTA_GTM_ROUTINE_DIR})
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Setup/RoutineImport.py.in"  "${VISTA_BINARY_DIR}/Testing/Comply/ComplyRoutineImport.py")
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Setup/giGlobalImport.py.in" "${VISTA_BINARY_DIR}/Testing/Comply/ComplyGlobalImport.py")
+  foreach(package_file_name ${PACKAGES})
+    #Configures the CMAKE testing
+    set(LOGFILENAME "${TEST_VISTA_OUTPUT_DIR}/COMPLY_${package_file_name}Test.log")
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ComplyScript.cmake.in ${VISTA_BINARY_DIR}/Testing/Comply/${package_file_name}Test.cmake @ONLY)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ComplyScript.py.in ${VISTA_BINARY_DIR}/Testing/Comply/${package_file_name}Test.py @ONLY)
+    #Creates the command that will be called for the Test
+    add_test(Comply_${package_file_name} ${CMAKE_COMMAND} -P ${VISTA_BINARY_DIR}/Testing/Comply/${package_file_name}Test.cmake)
+  endforeach()
+endif()
+
+#-----------------------------------------------------------------------------#
 ##### SECTION TO RUN UNIT TESTING #####
 #-----------------------------------------------------------------------------#
 OPTION(TEST_VISTA_MUNIT "Run Automated Unit Testing" OFF)
