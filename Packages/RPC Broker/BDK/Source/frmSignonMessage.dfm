@@ -1,9 +1,9 @@
 object frmSignonMsg: TfrmSignonMsg
   Left = 194
   Top = 16
-  Width = 766
-  Height = 630
   Caption = 'Signon Message'
+  ClientHeight = 596
+  ClientWidth = 758
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frmSignonMsg: TfrmSignonMsg
     Left = 0
     Top = 0
     Width = 758
-    Height = 562
+    Height = 555
     Align = alClient
     BevelInner = bvLowered
     BevelOuter = bvNone
@@ -35,9 +35,9 @@ object frmSignonMsg: TfrmSignonMsg
       Left = 4
       Top = 4
       Width = 750
-      Height = 554
+      Height = 547
       Align = alClient
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Fixedsys'
@@ -45,9 +45,7 @@ object frmSignonMsg: TfrmSignonMsg
       URLDetect = True
       HideScrollBars = False
       Lines.Strings = (
-        
-          '1234567891123456789212345678931234567894123456789512345678961234' +
-          '5678971234567898      '#13)
+        '')
       ParentFont = False
       ReadOnly = True
       ScrollBars = ssVertical
@@ -56,7 +54,7 @@ object frmSignonMsg: TfrmSignonMsg
   end
   object Panel2: TPanel
     Left = 0
-    Top = 562
+    Top = 555
     Width = 758
     Height = 41
     Align = alBottom
@@ -70,8 +68,6 @@ object frmSignonMsg: TfrmSignonMsg
       Height = 25
       Caption = '&Close'
       Default = True
-      TabOrder = 0
-      OnClick = BitBtn1Click
       Glyph.Data = {
         BE060000424DBE06000000000000360400002800000024000000120000000100
         0800000000008802000000000000000000000001000000010000000000000000
@@ -129,6 +125,8 @@ object frmSignonMsg: TfrmSignonMsg
         030303030000000000000303030303030303030303030C131313130C13030303
         0313}
       NumGlyphs = 2
+      TabOrder = 0
+      OnClick = BitBtn1Click
     end
   end
 end

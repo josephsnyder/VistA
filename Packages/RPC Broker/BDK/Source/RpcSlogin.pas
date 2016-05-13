@@ -3,9 +3,15 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Joel Ivey
-	Description: Silent Login functionality.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+  Unit: RpcSlogin Silent Login functionality.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
+
+{ **************************************************
+  Changes in v1.1.50 (JLI 9/1/2011) XWB*1.1*50
+  1. Updates to support SSH.
+************************************************** }
 
 unit RpcSLogin;
 

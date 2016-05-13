@@ -1,0 +1,43 @@
+package SharedRPCBroker_RXE3;
+
+{$R *.res}
+{$R '@SOURCE@/SharedRPCBroker_RXE3.otares'}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'VistA SharedBroker Components'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  XWB_RXE3;
+
+contains
+  SharedRPCBroker in '@SOURCE@/SharedRPCBroker.pas',
+  RPCSharedBrokerSessionMgr1_TLB in '@SOURCE@/RPCSharedBrokerSessionMgr1_TLB.pas',
+  SharedRPCBrokerSink in '@SOURCE@/SharedRPCBrokerSink.pas',
+  RPCSharedBrokerSessionMgr1_TLB_SRB in '@SOURCE@/RPCSharedBrokerSessionMgr1_TLB_SRB.pas';
+
+end.

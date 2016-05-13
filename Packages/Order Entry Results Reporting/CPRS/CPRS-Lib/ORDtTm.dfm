@@ -17,13 +17,32 @@ object ORfrmDtTm: TORfrmDtTm
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object TxtDateSelected: TLabel
+    Left = 110
+    Top = 181
+    Width = 80
+    Height = 13
+    Caption = 'TxtDateSelected'
+    Visible = False
+  end
   object bvlFrame: TBevel
-    Left = 8
-    Top = 8
+    Left = -3
+    Top = 6
     Width = 302
     Height = 221
     Shape = bsFrame
     Style = bsRaised
+  end
+  object Label1: TLabel
+    Left = 20
+    Top = 181
+    Width = 200
+    Height = 13
+    AutoSize = False
+    Caption = 
+      'Date calendar selector. Use the page up and down buttons to cycl' +
+      'e through the months.'
+    Visible = False
   end
   object lblDate: TPanel
     Left = 18
@@ -36,11 +55,11 @@ object ORfrmDtTm: TORfrmDtTm
     Color = clWindow
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 0
     object bvlRButton: TBevel
       Left = 160
       Top = 0
@@ -121,7 +140,7 @@ object ORfrmDtTm: TORfrmDtTm
     Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
@@ -201,16 +220,6 @@ object ORfrmDtTm: TORfrmDtTm
     Caption = 'Cancel'
     TabOrder = 8
     OnClick = cmdCancelClick
-  end
-  object calSelect: TORCalendar
-    Left = 18
-    Top = 38
-    Width = 192
-    Height = 160
-    StartOfWeek = 0
-    TabOrder = 0
-    UseCurrentDate = False
-    OnChange = calSelectChange
   end
   object cmdToday: TButton
     Left = 18

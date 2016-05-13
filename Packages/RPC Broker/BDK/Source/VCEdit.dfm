@@ -1,9 +1,9 @@
 object frmVCEdit: TfrmVCEdit
   Left = 197
   Top = 197
-  Width = 411
-  Height = 166
   Caption = 'Change VISTA Verify Code'
+  ClientHeight = 132
+  ClientWidth = 403
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -71,8 +71,6 @@ object frmVCEdit: TfrmVCEdit
     Width = 75
     Height = 25
     Caption = '&OK'
-    TabOrder = 3
-    OnClick = btnOKClick
     Glyph.Data = {
       BE060000424DBE06000000000000360400002800000024000000120000000100
       0800000000008802000000000000000000000001000000010000000000000000
@@ -130,6 +128,8 @@ object frmVCEdit: TfrmVCEdit
       0303030303030303030303030303030303030303030303030303030303030303
       0303}
     NumGlyphs = 2
+    TabOrder = 3
+    OnClick = btnOKClick
   end
   object btnCancel: TBitBtn
     Left = 312
@@ -137,16 +137,18 @@ object frmVCEdit: TfrmVCEdit
     Width = 75
     Height = 25
     Caption = '&Cancel'
-    TabOrder = 4
     Kind = bkCancel
+    NumGlyphs = 2
+    TabOrder = 4
   end
   object btnHelp: TBitBtn
     Left = 312
     Top = 96
     Width = 75
     Height = 25
+    Kind = bkHelp
+    NumGlyphs = 2
     TabOrder = 5
     OnClick = btnHelpClick
-    Kind = bkHelp
   end
 end

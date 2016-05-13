@@ -1,12 +1,12 @@
 object frmSignon: TfrmSignon
   Left = 115
   Top = 114
-  Width = 779
-  Height = 580
   HelpContext = 1
   ActiveControl = accessCode
   Anchors = [akTop]
   Caption = 'VISTA Sign-on'
+  ClientHeight = 546
+  ClientWidth = 771
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,6 +19,9 @@ object frmSignon: TfrmSignon
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
+  DesignSize = (
+    771
+    546)
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -37,51 +40,63 @@ object frmSignon: TfrmSignon
       Width = 749
       Height = 397
       Align = alClient
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'Courier New'
       Font.Style = [fsBold]
       URLDetect = True
       Lines.Strings = (
-        
-          '1234567890123456789012345678901234567890123456789012345678901234' +
-          '5678901234567890                                                ' +
-          '                                   '#13
-        
-          '         1         2         3         4         5         6    ' +
-          '     7         8'#13
-        
-          '                                                                ' +
-          '                   '#13
-        '   http://vaww.isc-sf.domain.ext'#13
-        'a                 '#13
-        'b'#13
-        'c                 '#13
-        'd'#13
-        'e                 '#13
-        'f'#13
-        'g                 '#13
-        'h'#13
-        'i                 '#13
-        'j'#13
-        'k                 '#13
-        'l'#13
-        'm                 '#13
-        'n'#13
-        'o                 '#13
-        
-          'p                                                               ' +
-          '   '#13
-        'q                 '#13
-        'r'#13
-        's                 '#13
-        't'#13
-        'u                 '#13
-        'v'#13
-        'w                 '#13
-        'x'#13
-        'y                 '#13)
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        ''
+        '')
       ParentFont = False
       ReadOnly = True
       ScrollBars = ssVertical
@@ -90,12 +105,15 @@ object frmSignon: TfrmSignon
   end
   object Panel7: TPanel
     Left = 0
-    Top = 409
+    Top = 402
     Width = 771
     Height = 144
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    DesignSize = (
+      771
+      144)
     object Image1: TImage
       Left = 8
       Top = 8
@@ -408,6 +426,9 @@ object frmSignon: TfrmSignon
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 0
+      DesignSize = (
+        349
+        118)
       object Label1: TLabel
         Left = 24
         Top = 16
@@ -480,9 +501,6 @@ object frmSignon: TfrmSignon
         Font.Height = -13
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-        OnClick = btnOkClick
         Glyph.Data = {
           BE060000424DBE06000000000000360400002800000024000000120000000100
           0800000000008802000000000000000000000001000000010000000000000000
@@ -541,7 +559,10 @@ object frmSignon: TfrmSignon
           0303}
         Margin = 2
         NumGlyphs = 2
+        ParentFont = False
         Spacing = -1
+        TabOrder = 2
+        OnClick = btnOkClick
         IsControl = True
       end
       object btnCancel: TBitBtn
@@ -556,10 +577,6 @@ object frmSignon: TfrmSignon
         Font.Height = -13
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ModalResult = 2
-        ParentFont = False
-        TabOrder = 3
-        OnClick = btnCancelClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -578,8 +595,12 @@ object frmSignon: TfrmSignon
           3333333333333333333888330000333333333333333333333333333333333333
           0000}
         Margin = 2
+        ModalResult = 2
         NumGlyphs = 2
+        ParentFont = False
         Spacing = -1
+        TabOrder = 3
+        OnClick = btnCancelClick
         IsControl = True
       end
       object cbxChangeVerifyCode: TCheckBox
@@ -610,6 +631,8 @@ object frmSignon: TfrmSignon
     LogIn.Mode = lmAVCodes
     LogIn.PromptDivision = False
     OldConnectionOnly = False
+    UseSecureConnection = secureNone
+    SSHHide = False
     Left = 16
     Top = 24
   end

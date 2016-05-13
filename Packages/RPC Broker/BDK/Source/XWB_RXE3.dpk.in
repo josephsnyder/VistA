@@ -1,0 +1,63 @@
+package XWB_RXE3;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'VistA RPC Broker Runtime Package'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  rtl;
+
+contains
+  Xwbut1 in '@SOURCE@/Xwbut1.pas' {in '@SOURCE@/Xwbut1.pas'},
+  XlfSid in '@SOURCE@/XlfSid.pas',
+  Hash in '@SOURCE@/Hash.pas' {in '@SOURCE@/Hash.pas'},
+  Loginfrm in '@SOURCE@/Loginfrm.pas' {in '@SOURCE@/Loginfrm.pas'},
+  MFunStr in '@SOURCE@/MFunStr.pas' {in '@SOURCE@/Mfunstr.pas'},
+  Rpcberr in '@SOURCE@/Rpcberr.pas' {in '@SOURCE@/Rpcberr.pas'},
+  Rpcconf1 in '@SOURCE@/Rpcconf1.pas' {in '@SOURCE@/Rpcconf1.pas'},
+  RpcNet in '@SOURCE@/RpcNet.pas' {in '@SOURCE@/Rpcnet.pas'},
+  seldiv in '@SOURCE@/seldiv.pas' {in '@SOURCE@/SelDiv.pas'},
+  Sgnoncnf in '@SOURCE@/Sgnoncnf.pas' {in '@SOURCE@/Sgnoncnf.pas'},
+  Splvista in '@SOURCE@/Splvista.pas' {in '@SOURCE@/Splvista.pas'},
+  Trpcb in '@SOURCE@/Trpcb.pas' {in '@SOURCE@/Trpcb.pas'},
+  VCEdit in '@SOURCE@/VCEdit.pas' {in '@SOURCE@/Vcedit.pas'},
+  Wsockc in '@SOURCE@/Wsockc.pas' {in '@SOURCE@/WSockc.pas'},
+  frmSignonMessage in '@SOURCE@/frmSignonMessage.pas' {in '@SOURCE@/frmSignonMessage.pas'},
+  RpcSLogin in '@SOURCE@/RpcSLogin.pas' {in '@SOURCE@/Rpcslogin.pas'},
+  XWBRich20 in '@SOURCE@/XWBRich20.PAS',
+  AddServer in '@SOURCE@/AddServer.pas' {frmAddServer},
+  fRPCBErrMsg in '@SOURCE@/fRPCBErrMsg.pas' {frmErrMsg},
+  fDebugInfo in '@SOURCE@/fDebugInfo.pas' {frmDebugInfo},
+  fSgnonDlg in '@SOURCE@/fSgnonDlg.pas' {frmSignonDialog},
+  CCOWRPCBroker in '@SOURCE@/CCOWRPCBroker.pas',
+  CCOW_const in '@SOURCE@/CCOW_const.pas',
+  VERGENCECONTEXTORLib_TLB in '@SOURCE@/VERGENCECONTEXTORLib_TLB.pas',
+  fPlinkpw in '@SOURCE@/fPlinkpw.pas' {fPlinkPassword},
+  fSSHUsername in '@SOURCE@/fSSHUsername.pas' {SSHUsername};
+
+end.

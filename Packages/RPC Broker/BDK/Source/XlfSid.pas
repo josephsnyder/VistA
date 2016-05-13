@@ -1,15 +1,21 @@
-unit XlfSid;
 { **************************************************************
 	Package: XWB - Kernel RPCBroker
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
 	Description: Contains TRPCBroker and related components.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+  Unit: XlfSid Thread or Process security in Windows.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
+{ **************************************************
+  Changes in v1.1.50 (JLI 9/1/2011) XWB*1.1*50
+  1. None.
+************************************************** }
+unit XlfSid;
+
 //*******************************************************
-//These functions get thier data from the Thread
+//These functions get their data from the Thread
 // or Process security ID in Windows.
 // GetNTLogonUser returns the Domain\Username that
 //  authtcated the user/

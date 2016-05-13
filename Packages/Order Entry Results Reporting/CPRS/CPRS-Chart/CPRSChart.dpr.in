@@ -1,14 +1,11 @@
 program CPRSChart;
 
-
-
-
-
 uses
   ShareMem,
   Forms,
   WinHelpViewer,
   ORSystem,
+  Windows, 
   fPage in '@SOURCE@\fPage.pas' {frmPage},
   fHSplit in '@SOURCE@\fHSplit.pas' {frmHSplit},
   fHP in '@SOURCE@\fHP.pas' {frmHP},
@@ -320,45 +317,57 @@ uses
   fCombatVet in '@SOURCE@\fCombatVet.pas' {frmCombatVet},
   fOCMonograph in '@SOURCE@\Orders\fOCMonograph.pas' {frmOCMonograph},
   fCSRemaining in '@SOURCE@\Orders\fCSRemaining.pas' {frmCSRemaining},
-  Wcrypt2 in '@BUILD_DELPHI_XuDigSig_DIR@\Wcrypt2.pas',
-  WinSCard in '@BUILD_DELPHI_XuDigSig_DIR@\WinSCard.pas',
-  XlfMime in '@BUILD_DELPHI_XuDigSig_DIR@\XlfMime.pas',
-  XlfHex in '@SOURCE@\XuDigSig\XlfHex.pas',
-  XuDsigConst in '@SOURCE@\XuDigSig\XuDsigConst.pas',
-  XuDsigS in '@SOURCE@\XuDigSig\XuDsigS.pas',
-  XuDsigU in '@SOURCE@\XuDigSig\XuDsigU.pas',
-  fPINPrompt in '@SOURCE@\XuDigSig\fPINPrompt.pas',
   fProbFreetext in '@SOURCE@\fProbFreetext.pas' {frmProbFreetext},
-  mImgText in '@SOURCE@\mImgText.pas' {fraImgText},
-  uHelpManager in '@SOURCE@\uHelpManager.pas';
+  mImgText in '@SOURCE@\mImgText.pas' {fraImgText: TFrame},
+  uHelpManager in '@SOURCE@\uHelpManager.pas',
+  mColumnTree in '@SOURCE@\mColumnTree.pas' {ColumnTreeFrame: TFrame},
+  mDrawers in '@SOURCE@\mDrawers.pas' {fraDrawers: TFrame},
+  mRadioListView in '@SOURCE@\mRadioListView.pas' {RadioLVFrame: TFrame},
+  mTreeGrid in '@SOURCE@\mTreeGrid.pas' {TreeGridFrame: TFrame},
+  oPKIEncryption in '@SOURCE@\..\PKI\oPKIEncryption.pas',
+  fPKIPINPrompt in '@SOURCE@\..\PKI\fPKIPINPrompt.pas' {fPKIPINPrompt},
+  oPKIEncryptionCertificate in '@SOURCE@\..\PKI\oPKIEncryptionCertificate.pas',
+  oPKIEncryptionData in '@SOURCE@\..\PKI\oPKIEncryptionData.pas',
+  oPKIEncryptionDataDEAOrder in '@SOURCE@\..\PKI\oPKIEncryptionDataDEAOrder.pas',
+  oPKIEncryptionEngine in '@SOURCE@\..\PKI\oPKIEncryptionEngine.pas',
+  oPKIEncryptionEx in '@SOURCE@\..\PKI\oPKIEncryptionEx.pas',
+  oPKIEncryptionSignature in '@SOURCE@\..\PKI\oPKIEncryptionSignature.pas',
+  oPKIServiceEngine in '@SOURCE@\..\PKI\oPKIServiceEngine.pas',
+  Wcrypt2 in '@SOURCE@\..\PKI\wcrypt2.pas',
+  WinSCard in '@SOURCE@\..\PKI\winSCard.pas',
+  XlfMime in '@SOURCE@\..\PKI\XlfMime.pas';
+  
+  //XlfHex in '@SOURCE@\XuDigSig\XlfHex.pas',
+  //XuDsigConst in '@SOURCE@\XuDigSig\XuDsigConst.pas',
+  //XuDsigS in '@SOURCE@\XuDigSig\XuDsigS.pas',
+  //XuDsigU in '@SOURCE@\XuDigSig\XuDsigU.pas',
+  //fPINPrompt in '@SOURCE@\XuDigSig\fPINPrompt.pas';
 
 {$R '@SOURCE@\CPRSChart.tlb'}
 
 {$R '@SOURCE@\CPRSChart.res'}
+{$SetPEFlags IMAGE_FILE_RELOCS_STRIPPED}
 
-begin
-  if not UpdateSelf then                          // only start if not copying new version
+begin                    
+  if not BorlandDLLVersionOK then exit;         // Exit immediately if old or missing BORLNDMM.DLL
+//    RegisterCPRSTypeLibrary;                      // will halt program if /regserver or /unregserver param
+  Application.Initialize;
+
+  frmSplash := nil;
+  if ParamSearch('SPLASH') <> 'OFF' then
   begin
-    if not BorlandDLLVersionOK then exit;         // Exit immediately if old or missing BORLNDMM.DLL
-    RegisterCPRSTypeLibrary;                      // will halt program if /regserver or /unregserver param
-    Application.Initialize;
-
-    frmSplash := nil;
-    if ParamSearch('SPLASH') <> 'OFF' then
-    begin
-      frmSplash := TfrmSplash.Create(nil);  // show splash screen
-      frmSplash.Show;                               //         "
-      frmSplash.Refresh;                            //         "
-    end;
-    Application.Title := 'CPRS - Patient Chart';
-    Application.HelpFile := 'help\cprs.htm';
-    Application.CreateForm(TdmodShared, dmodShared);
-    Application.CreateForm(TfrmFrame, frmFrame);
-    Application.CreateForm(TfrmSearchStop, frmSearchStop);
-    Application.CreateForm(TfrmProbFreetext, frmProbFreetext);
-    if assigned(frmSplash) then
-      frmSplash.Free;                               // close & free splash screen
-
-    Application.Run;
+    frmSplash := TfrmSplash.Create(nil);  // show splash screen
+    frmSplash.Show;                               //         "
+    frmSplash.Refresh;                            //         "
   end;
+  Application.Title := 'CPRS - Patient Chart';
+  Application.HelpFile := 'help\cprs.htm';
+  Application.CreateForm(TdmodShared, dmodShared);
+  Application.CreateForm(TfrmFrame, frmFrame);
+  Application.CreateForm(TfrmSearchStop, frmSearchStop);
+  Application.CreateForm(TfrmProbFreetext, frmProbFreetext);
+  if assigned(frmSplash) then
+    frmSplash.Free;                               // close & free splash screen
+
+  Application.Run;
 end.

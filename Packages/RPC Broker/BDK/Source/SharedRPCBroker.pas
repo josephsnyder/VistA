@@ -4,7 +4,7 @@
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Kevin Meldrum, Travis Hilton, Joel Ivey
 	Description: Describes TSharedRPCBroker class.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
 unit SharedRPCBroker;

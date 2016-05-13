@@ -8,6 +8,7 @@ uses
 
 type
   TfrmSearchStop = class(TfrmAutoSz)
+    amgrMain: TVA508AccessibilityManager;
     btnSearchStop: TButton;
     lblSearchStatus: TStaticText;
     procedure btnSearchStopClick(Sender: TObject);

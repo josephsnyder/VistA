@@ -1,9 +1,9 @@
 object SSHUsername: TSSHUsername
   Left = 234
   Top = 119
-  Width = 300
-  Height = 151
   Caption = 'Enter SSH username'
+  ClientHeight = 113
+  ClientWidth = 284
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

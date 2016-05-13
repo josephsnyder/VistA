@@ -1,9 +1,9 @@
 object frmDebugInfo: TfrmDebugInfo
   Left = 255
   Top = 107
-  Width = 329
-  Height = 217
   Caption = 'RPCBroker Debug Info'
+  ClientHeight = 183
+  ClientWidth = 321
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

@@ -5,7 +5,7 @@
 	Developers: Kevin Meldrum, Travis Hilton, Joel Ivey
 	Description: Provides Event Sink for 
 	             RPCSharedBrokerSessionMgr1.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
 unit SharedRPCBrokerSink;

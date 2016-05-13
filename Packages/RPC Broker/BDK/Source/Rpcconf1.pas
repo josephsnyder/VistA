@@ -3,14 +3,18 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Raul Mendoza, Joel Ivey
-	Description: Server selection dialog.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+  Unit: Rpcconf1 server selection dialog.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
-{**************************************************
- p13 - added an OnDestroy event to release the
-        help file.  - REM (4/25/00)
-**************************************************}
+{ **************************************************
+  Changes in v1.1.50 (JLI 9/8/2004) XWB*1.1*50
+  1. Update string types for host and outcome
+
+  Changes in v1.1.13 (REM 4/25/2000) XWB*1.1*13
+  1. Added an OnDestroy event to release the help file.
+************************************************** }
 unit Rpcconf1;
 
 interface
@@ -87,13 +91,16 @@ end;
 {: Library function to obtain an IP address, given a server name }
 function GetServerIP(ServerName: String): String;
 var
-   host,outcome: PChar;
+//   host,outcome: PChar;  // JLI 090804
+   host,outcome: PAnsiChar;  // JLI 090804
 begin
   TaskInstance := LibOpen;
   if not IsIPAddress(ServerName) then
   begin
-    outcome := StrAlloc(256);
-    host := StrAlloc(length(ServerName) + 1);
+//    outcome := StrAlloc(256);  // JLI 090804
+//    host := StrAlloc(length(ServerName) + 1);  // JLI 090804
+    outcome := PAnsiChar(StrAlloc(256));  // JLI 090804
+    host := PAnsiChar(StrAlloc(length(ServerName) + 1));  // JLI 090804
     StrPCopy(host, ServerName);
     LibGetHostIP1(TaskInstance, host, outcome);
     Result := StrPas(outcome);

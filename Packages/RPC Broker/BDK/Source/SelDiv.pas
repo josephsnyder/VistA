@@ -3,18 +3,20 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
-	Description: Handles Division selection for multidivision
-	             users.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+  Unit: SelDiv handles Division selection for multidivision users.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
-{**************************************************
+{ **************************************************
+  Changes in v1.1.13 (DCM 5/24/2000) XWB*1.1*13
+  1. Silent Login, allows for silent log-in functionality.
+************************************************** }
+
+{------------------------------------------------------------------------------
 This will ONLY be invoked when user has more than one division to select from
 in NEW Person file.  If user only has one division, that division will be used;
 else it will default to whatever is in the Kernel Site Parameter file.
-
-XWB*1.1*13, Silent Login, allows for silent log-in functionality - DCM
-last updated: 5/24/00
 ------------------------------------------------------------------------------}
 
 

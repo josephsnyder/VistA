@@ -1,0 +1,5 @@
+*.ridl -whitespace
+*.jss  -whitespace
+*.JSS  -whitespace
+*.ini  -whitespace
+*.bat  -whitespace

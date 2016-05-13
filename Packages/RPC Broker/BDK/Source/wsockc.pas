@@ -2,111 +2,34 @@
 	Package: XWB - Kernel RPCBroker
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
-	Developers: Danila Manapsal, Don Craven, Joel Ivey
-	Description: manages Winsock connections and creates/parses
-	             messages
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008)
+	Developers: Danila Manapsal, Don Craven, Raul Mendoza, Joel Ivey,
+	Description: Contains TRPCBroker and related components.
+  Unit: Wsockc manages Winsock connections and creates/parses messages.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
+{ **************************************************
+  Changes in v1.1.13 (JLI 8/23/2000) XWB*1.1*13
+  1. Made changes to cursor dependent on current curson being crDefault so
+     that the application can set it to a different cursor for long or
+     repeated processes without the cursor 'flashing' repeatedly.
+
+  Changes in v1.1.8 (REM 6/18/1999) XWB*1.1*8
+  1. Update version 'BrokerVer'
+
+  Changes in v1.1.6 (DPC 6/7/1999) XWB*1.1*6
+  1. In tCall function, made changing cursor to hourglass conditional:
+     don't do it if XWB IM HERE  RPC is being invoked.
+
+  Changes in v1.1.4 (DCM 9/18/1998) XWB*1.1*4
+  1. Changed the inet_addr line in NetStart to longint. Reason: true 64 bit
+     types in Delphi 4
+  2. Changed the hSocket line in NetStart to @. Reason: incompatible types
+     when recompiling
+  3. In NetStop, if socket <= 0, restore the default cursor. Reason: gave the
+     impression of a busy process after the Kernel login process times out.
+************************************************** }
 unit Wsockc;
-{
-  Changes in v1.1.13 (JLI -- 8/23/00) -- XWB*1.1*13
-    Made changes to cursor dependent on current cursor being crDefault so
-       that the application can set it to a different cursor for long or
-       repeated processes without the cursor 'flashing' repeatedly.
-
-  Changes in v1.1.8 (REM -- 6/18/99) -- XWB*1.1*8
-    Update version 'BrokerVer'.
-
-  Changes in v1.1.6 (DPC -- 6/7/99) -- XWB*1.1*6
-    In tCall function, made changing cursor to hourglass conditional:
-    don't do it if XWB IM HERE  RPC is being invoked.
-
-  Changes in V1.1.4 (DCM - 9/18/98)-XWB*1.1*4
-  1.  Changed the ff line in NetStart from:
-      if inet_addr(PChar(Server)) <> INADDR_NONE then
-      to
-      if inet_addr(PChar(Server)) <> longint(INADDR_NONE) then
-  Reason:  true 64 bit types in Delphi 4
-  2.  Changed the ff line in NetStart from:
-      $else
-      hSocket := accept(hSocketListen, DHCPHost, AddrLen);{ -- returns new socket
-      to
-      $else
-      hSocket := accept(hSocketListen, @DHCPHost, @AddrLen);{ -- returns new socket
-  Reason:  Incompatible types when recompiling
-  3. In NetStop, if socket <= 0, restore the default cursor.
-  Reason:  Gave the impression of a busy process after the Kernel login
-      process timesout.
-
-  Changes in V1.1T3  [Feb 5, 1997]
-  1. Connect string now includes workstation name. This is used by kernel
-     security.
-  2. Code is 32bit compliant for Delphi 2.0
-  3. A great majority of PChars changed to default string (ansi-string)
-  4. Reading is done in 32k chunks during a loop.  Intermediate data is
-     buffered into a string.  At the end, a PChar is allocated and
-     returned to maintain compatibility with the original broker interface.
-     It is expected that shortly this will change once the broker component
-     changes its usage of tcall to expect a string return.  Total read
-     can now exceed 32K up to workstation OS limits.
-  5. Creation of Hostent and Address structures has been streamlined.
-
-  Changes in V1.0T12
-  1. Inclusion of hSocket as a parameter on most API calls
-
-
-  Changes in V1.0T11
-  1. Reference parameter type is included. i.e. $J will be evaluated rather
-  than sending "$J".
-  2. Fully integrated with the TRPCB component interface.
-  3. This low level module is now called from an intermediate DLL.
-
-  Changes in V1.0T10
-  1. Fixed various memory leaks.
-
-  Changes in V1.0T9
-  1. Supports word processing fields.
-  2. Added a new exception type EBrokerError.  This is raised when errors occur
-  in NetCall, NetworkConnect, and NetworkDisconnect
-
-  Changes in V1.0T8
-  1. Fix a problem in BuildPar in the case of a single list parameter with many
-     entries.
-  2. List parameters (arrays) can be large up to 65520 bytes
-  3. Introduction of sCallV and tCallV which use the Delphi Pascal open array
-     syntax (sCallFV and tCallV developed by Kevin Meldrum)
-  4. A new brokerDataRec type, null has been introduced to represent M calls
-     with no parameters, i.e. D FUN^LIB().
-  5. If you want to send a null parameter "", i.e. D FUN^LIB(""), Value
-  should be set to ''.
-  6. Fixed bug where a single ^ passed to sCall would generate error (confused
-  as a global reference.
-  7. Fixed a bug where a first position dot (.) in a literal parameter would
-  cause an error at the server end.
-  8. Fixed a bug where null strings (as white space in a memo box for example)
-  would not be correctly received at the server.
-
-  Changes in V1.0T7
-  1. Procedure NetworkConnect has been changed to Function NetworkConnect
-     returning BOOL
-  2. global variable IsConnected (BOOL) can be used to determine connection
-     state
-  3. Function cRight has been fixed to preserve head pointer to input PChar
-     string
-  4. New message format which includes length calculations for input parameters
-
-   *******************************************************************
-  A 32-bit high level interface to the Winsock API in Delphi Pascal.
-
-  This implementation allows communications between Delphi forms and
-  DHCP back end servers through the use of the DHCP Request Broker.
-
-  Usage: Put wsock in your Uses clause of your Delphi form.  See additional
-  specs for Request Broker message formats, etc.
-  Programmer: Enrique Gomez - VA San Francisco ISC - April 1995
-}
-
 
 interface
 
@@ -132,7 +55,8 @@ type
     // 060919 added to support multiple brokers with both old and new type connections
     Prefix: String;
 //    NetBlockingHookVar: Function(): Bool; export;
-    function NetCall(hSocket: integer; imsg: string): PChar;
+//    function NetCall(hSocket: integer; imsg: AnsiString): PChar; // JLI O90705
+    function NetCall(hSocket: integer; imsg: String): PChar; // JLI O90705
     function tCall(hSocket: integer; api, apVer: String; Parameters: TParams;
              var Sec, App: PChar; TimeOut: integer): PChar;
     function cRight( z: PChar;  n: longint): PChar;
@@ -146,7 +70,7 @@ type
     function VarPack(n: string): string;
     function NetStart(ForegroundM: boolean; Server: string; ListenerPort: integer;
                   var hSocket: integer): integer;
-    function NetworkConnect(ForegroundM: boolean; Server: string; ListenerPort, 
+    function NetworkConnect(ForegroundM: boolean; Server: string; ListenerPort,
         TimeOut: integer): Integer;
     function libSynGetHostIP(s: string): string;
     function libNetCreate (lpWSData : TWSAData) : integer;
@@ -160,12 +84,12 @@ type
     constructor Create;
 
     procedure NetError(Action: string; ErrType: integer);
-function NetStart1(ForegroundM: boolean; Server: string; ListenerPort: integer; 
+function NetStart1(ForegroundM: boolean; Server: string; ListenerPort: integer;
     var hSocket: integer): Integer; virtual;
     function BuildPar1(hSocket: integer; api, RPCVer: string; const Parameters:
         TParams): String; virtual;
     property CountWidth: Integer read FCountWidth write FCountWidth;
-    property IsBackwardsCompatible: Boolean read FIsBackwardsCompatible write 
+    property IsBackwardsCompatible: Boolean read FIsBackwardsCompatible write
         FIsBackwardsCompatible;
     property OldConnectionOnly: Boolean read FOldConnectionOnly write
         FOldConnectionOnly;
@@ -189,7 +113,7 @@ Const
  DHCP_NAME = 'BROKERSERVER';
  M_DEBUG = True;
  M_NORMAL = False;
- BrokerVer = '1.108';
+ BrokerVer = '1.160';
  Buffer64K = 65520;
  Buffer32K = 32767;
  Buffer24K = 24576;
@@ -270,7 +194,7 @@ begin
     Ex1 := Exception.Create('In generation of message to server, call to SPack with Length of string of '+IntToStr(r)+' chars which exceeds max of 255 chars');
     Raise Ex1;
   end;
-//  t := Byte(r);               
+//  t := Byte(r);
   Result := Char(r) + Str;
 end;
 
@@ -290,7 +214,8 @@ end;
 
 function TXWBWinsock.libSynGetHostIP(s: string): string;
 var
-   HostName: PChar;
+//   HostName: PChar;   // JLI 090804
+   HostName: PAnsiChar;   // JLI 090804
    HostAddr: TSockAddr;
    TCPResult: PHostEnt;
    test: longint;
@@ -310,7 +235,7 @@ begin
      ChangeCursor := False;
    if ChangeCursor then
      Screen.Cursor := crHourGlass;
-   HostName := StrNew(PChar(s));
+   HostName := StrNew(PAnsiChar(AnsiString(s)));
    test := inet_addr(HostName);
    if test > INADDR_ANY then
       begin
@@ -385,7 +310,7 @@ begin
      result := StrPack(x + n + '^' + s,5);
 end;
 
-function TXWBWinsock.NetworkConnect(ForegroundM: boolean; Server: string; 
+function TXWBWinsock.NetworkConnect(ForegroundM: boolean; Server: string;
     ListenerPort, TimeOut: integer): Integer;
 var
    status: integer;
@@ -661,10 +586,11 @@ begin
      if Now > (NetTimerStart + TimeOut) then WSACancelBlockingCall;
 end;
 
-function TXWBWinsock.NetCall(hSocket: integer; imsg: string): PChar;
+function TXWBWinsock.NetCall(hSocket: integer; imsg: String): PChar; // JLI 090805
 var
 //  I: Integer;
-  BufSend, BufRecv, BufPtr: PChar;
+//  BufSend, BufRecv, BufPtr: PChar;
+  BufSend, BufRecv, BufPtr: PAnsiChar;
   sBuf: string;
   OldTimeOut: integer;
   BytesRead, BytesLeft, BytesTotal: longint;
@@ -679,7 +605,7 @@ begin
      HookTimeOut := 0;
      WSASetBlockingHook(@NetBlockingHook);
      NetCallPending := True;
-     BufRecv := StrAlloc(Buffer32k);
+     BufRecv := PAnsiChar(StrAlloc(Buffer32k));
      NetTimerStart := Now;
      BytesRead := recv(hSocket, BufRecv^, Buffer32k, 0);
      if BytesRead > 0 then
@@ -699,12 +625,13 @@ begin
 
   { -- send message length + message to server }
 
-  BufRecv := StrAlloc(Buffer32k);
+//  BufRecv := StrAlloc(Buffer32k);  // JLI 090805
+  BufRecv := PAnsiChar(StrAlloc(Buffer32k));
   try    // BufRecv
-    if Prefix = '[XWB]' then
-      BufSend := StrNew(PChar({Prefix +} imsg))  //;     //moved in P14
-    else
-      BufSend := StrNew(PChar({Prefix +} imsg));
+//    if Prefix = '[XWB]' then
+//      BufSend := StrNew(PChar({Prefix +} imsg))  //;     //moved in P14
+//      BufSend := StrNew(PAnsiChar({Prefix +} imsg))  //;     //moved in P14
+      BufSend := StrNew(PAnsiChar(AnsiString(imsg)));
     try  // BufSend
       Result := PChar('');
       while BadXfer and (TryNumber < 4) do
@@ -713,7 +640,8 @@ begin
         NetTimerStart := Now;
         TryNumber := TryNumber + 1;
         BadXfer := False;
-        SocketError := send(hSocket, BufSend^, StrLen(BufSend), 0);
+//        SocketError := send(hSocket, BufSend^, StrLen(BufSend), 0);
+        SocketError := send(hSocket, BufSend^,StrLen(BufSend),0);
         if SocketError = SOCKET_ERROR then
           NetError('send', 0);
         BufRecv[0] := #0;
@@ -782,9 +710,11 @@ begin
 
     { -- if there was on error on the server, display the error code }
 
-    if Result[0] = #24 then
+    if AnsiChar(Result[0]) = #24 then
     begin
-      xString := StrPas(@Result[1]);
+//      xString := StrPas(@Result[1]);     // JLI 090804
+      xString := String(Result);           // JLI 090804
+      xString := Copy(xString,2,Length(xString)); // JLI 090804
 //      StrDispose(BufRecv);
       NetError(xString, XWB_M_REJECT);
   //    NetCall := #0;
@@ -831,12 +761,17 @@ Var
   LocalName, workstation, pDHCPName: string;
   y, tmp, upArrow, rAccept, rLost: string;
   tmpPchar: PChar;
-  pLocalname: array [0..255] of char;
+//  pLocalname: array [0..255] of char;  // JLI 090804
+  pLocalname: array [0..255] of AnsiChar;  // JLI 090804
   r: integer;
   HostBuf,DHCPBuf: PHostEnt;
   lin: TLinger;
-  s_lin: array [0..3] of char absolute lin;
+//  s_lin: array [0..3] of char absolute lin;  // JLI 090804
+  s_lin: array [0..3] of AnsiChar absolute lin;  // JLI 090804
   ChangeCursor: Boolean;
+//  IntegerVal: Integer;
+//  AnsiServer: AnsiString;
+//  LengthCount: Integer;
 begin
 { ForegroundM is a boolean value, TRUE means the M handling process is
   running interactively a pointer rather than passing address length
@@ -875,13 +810,17 @@ begin
     workstation := string(HostBuf.h_name);
 
     { -- establish HostEnt and Address structure for remote machine }
-    if inet_addr(PChar(Server)) <> longint(INADDR_NONE) then
+//    if inet_addr(PChar(Server)) <> longint(INADDR_NONE) then   // JLI 090804
+    if inet_addr(PAnsiChar(AnsiString(Server))) <> longint(INADDR_NONE) then  // debug JLI 090805
+
     begin
-      DHCPHost.sin_addr.S_addr := inet_addr(PChar(Server));
+      DHCPHost.sin_addr.S_addr := inet_addr(PAnsiChar(AnsiString(Server)));
       DHCPBuf := gethostbyaddr(@DHCPHost.sin_addr.S_addr,sizeof(DHCPHost),PF_INET);
     end
     else
-        DHCPBuf := gethostbyname(PChar(Server)); { --  info for DHCP system}
+//        DHCPBuf := gethostbyname(PChar(Server)); { --  info for DHCP system}  // JLI 090804
+        DHCPBuf := gethostbyname(PAnsiChar(AnsiString(Server))); { --  info for DHCP system}  // JLI 090804
+
 
     If DHCPBuf = nil Then
     begin
@@ -889,7 +828,8 @@ begin
 //            NetError ('Error Identifying Remote Host ' + Server,0);
 //            NetStart := 10001;
 //            exit;
-      DHCPHost.sin_addr.S_addr := inet_addr(PChar(Server));
+//      DHCPHost.sin_addr.S_addr := inet_addr(PChar(Server));  // JLI 090804
+      DHCPHost.sin_addr.S_addr := inet_addr(PAnsiChar(AnsiString(Server)));  // JLI 090804
       pDHCPName := 'UNKNOWN';
     end
     else
@@ -981,7 +921,9 @@ begin
     end;
 }  // remove debug mode from client
 
-    tmpPChar := NetCall(hSocket, PChar(y));                {eg 11-1-96}
+//    tmpPChar := NetCall(hSocket, PChar(y));                {eg 11-1-96} // JLI 090805
+//    tmpPChar := NetCall(hSocket, PAnsiChar(AnsiString(y)));
+    tmpPChar := NetCall(hSocket, y);
     tmp := tmpPchar;
     StrDispose(tmpPchar);
     if CompareStr(tmp, rlost) = 0 then
@@ -1053,11 +995,13 @@ Var
   LocalName, t, workstation, pDHCPName: string;
   x, y, tmp,RPCVersion, upArrow, rAccept, rLost: string;
   tmpPchar: PChar;
-  pLocalname: array [0..255] of char;
+//  pLocalname: array [0..255] of char;  // JLI 090804
+  pLocalname: array [0..255] of AnsiChar;  // JLI 090804
   LocalPort, AddrLen, hSocketListen,r: integer;
   HostBuf,DHCPBuf: PHostEnt;
   lin: TLinger;
-  s_lin: array [0..3] of char absolute lin;
+//  s_lin: array [0..3] of char absolute lin;  // JLI 090804
+  s_lin: array [0..3] of AnsiChar absolute lin;  // JLI 090804
   ChangeCursor: Boolean;
 begin
   Prefix := '{XWB}';
@@ -1099,13 +1043,16 @@ begin
     workstation := string(HostBuf.h_name);
 
     { -- establish HostEnt and Address structure for remote machine }
-    if inet_addr(PChar(Server)) <> longint(INADDR_NONE) then
+//    if inet_addr(PChar(Server)) <> longint(INADDR_NONE) then   // JLI 090804
+    if inet_addr(PAnsiChar(AnsiString(Server))) <> longint(INADDR_NONE) then  // JLI 090804
     begin
-      DHCPHost.sin_addr.S_addr := inet_addr(PChar(Server));
+//      DHCPHost.sin_addr.S_addr := inet_addr(PChar(Server));   // JLI 090804
+      DHCPHost.sin_addr.S_addr := inet_addr(PAnsiChar(AnsiString(Server)));  // JLI 090804
       DHCPBuf := gethostbyaddr(@DHCPHost.sin_addr.S_addr,sizeof(DHCPHost),PF_INET);
     end
     else
-        DHCPBuf := gethostbyname(PChar(Server)); { --  info for DHCP system}
+//        DHCPBuf := gethostbyname(PChar(Server)); { --  info for DHCP system}  // JLI 090804
+        DHCPBuf := gethostbyname(PAnsiChar(AnsiString(Server))); { --  info for DHCP system}  // JLI 090804
 
     If DHCPBuf = nil Then
     begin
@@ -1113,7 +1060,8 @@ begin
 //            NetError ('Error Identifying Remote Host ' + Server,0);
 //            NetStart := 10001;
 //            exit;
-      DHCPHost.sin_addr.S_addr := inet_addr(PChar(Server));
+//      DHCPHost.sin_addr.S_addr := inet_addr(PChar(Server));  // JLI 090804
+      DHCPHost.sin_addr.S_addr := inet_addr(PAnsiChar(AnsiString(Server)));  // JLI 090804
       pDHCPName := 'UNKNOWN';
     end
     else
@@ -1271,7 +1219,8 @@ procedure TXWBWinsock.NetStop(hSocket: integer);
 Var
   tmp: string;
   lin: TLinger;
-  s_lin: array [0..3] of char absolute lin;
+//  s_lin: array [0..3] of char absolute lin;  // JLI 090804
+  s_lin: array [0..3] of AnsiChar absolute lin;  // JLI 090804
   ChangeCursor: Boolean;
   tmpPChar: PChar;
   Str: String;
@@ -1328,7 +1277,8 @@ end;
 procedure TXWBWinsock.CloseSockSystem(hSocket: integer; s: string);
 var
    lin: TLinger;
-   s_lin: array [0..3] of char absolute lin;
+//   s_lin: array [0..3] of char absolute lin;  // JLI 090804
+   s_lin: array [0..3] of AnsiChar absolute lin;  // JLI 090804
 begin
      lin.l_onoff := 1;
      lin.l_linger := 0;
@@ -1346,10 +1296,10 @@ end;
 
 function TXWBWinsock.GetServerPacket(hSocket: integer): string;
 var
-   s,sb: PChar;
+   s,sb: PAnsiChar;
    buflen: integer;
 begin
-     s := StrAlloc(1);
+     s := AnsiStrAlloc(1);
      s[0] := #0;
      buflen := recv(hSocket, s^, 1, 0); {get length of segment}
      if buflen = SOCKET_ERROR Then   // 040720 code added to check for the timing problem if initial attempt to read during connection fails
@@ -1360,7 +1310,7 @@ begin
      if buflen = SOCKET_ERROR then
        NetError( 'recv',0);
      buflen := ord(s[0]);
-     sb := StrAlloc(buflen+1);
+     sb := AnsiStrAlloc(buflen+1);
      sb[0] := #0;
      buflen := recv(hSocket, sb^, buflen, 0); {get security segment}
      if buflen = SOCKET_ERROR Then
@@ -1409,55 +1359,56 @@ begin
         if WSAIsBlocking = True then WSACancelBlockingCall;  // JLI 021210
   end;
   Case r of
-        WSAEINTR           : x := 'WSAEINTR';
-        WSAEBADF           : x := 'WSAEINTR';
-        WSAEFAULT          : x := 'WSAEFAULT';
-        WSAEINVAL          : x := 'WSAEINVAL';
-        WSAEMFILE          : x := 'WSAEMFILE';
-        WSAEWOULDBLOCK     : x := 'WSAEWOULDBLOCK';
-        WSAEINPROGRESS     : x := 'WSAEINPROGRESS';
-        WSAEALREADY        : x := 'WSAEALREADY';
-        WSAENOTSOCK        : x := 'WSAENOTSOCK';
-        WSAEDESTADDRREQ    : x := 'WSAEDESTADDRREQ';
-        WSAEMSGSIZE        : x := 'WSAEMSGSIZE';
-        WSAEPROTOTYPE      : x := 'WSAEPROTOTYPE';
-        WSAENOPROTOOPT     : x := 'WSAENOPROTOOPT';
-        WSAEPROTONOSUPPORT : x := 'WSAEPROTONOSUPPORT';
-        WSAESOCKTNOSUPPORT : x := 'WSAESOCKTNOSUPPORT';
-        WSAEOPNOTSUPP      : x := 'WSAEOPNOTSUPP';
-        WSAEPFNOSUPPORT    : x := 'WSAEPFNOSUPPORT';
-        WSAEAFNOSUPPORT    : x := 'WSAEAFNOSUPPORT';
-        WSAEADDRINUSE      : x := 'WSAEADDRINUSE';
-        WSAEADDRNOTAVAIL   : x := 'WSAEADDRNOTAVAIL';
-        WSAENETDOWN        : x := 'WSAENETDOWN';
-        WSAENETUNREACH     : x := 'WSAENETUNREACH';
-        WSAENETRESET       : x := 'WSAENETRESET';
-        WSAECONNABORTED    : x := 'WSAECONNABORTED';
-        WSAECONNRESET      : x := 'WSAECONNRESET';
-        WSAENOBUFS         : x := 'WSAENOBUFS';
-        WSAEISCONN         : x := 'WSAEISCONN';
-        WSAENOTCONN        : x := 'WSAENOTCONN';
-        WSAESHUTDOWN       : x := 'WSAESHUTDOWN';
-        WSAETOOMANYREFS    : x := 'WSAETOOMANYREFS';
-        WSAETIMEDOUT       : x := 'WSAETIMEDOUT';
-        WSAECONNREFUSED    : x := 'WSAECONNREFUSED';
-        WSAELOOP           : x := 'WSAELOOP';
-        WSAENAMETOOLONG    : x := 'WSAENAMETOOLONG';
-        WSAEHOSTDOWN       : x := 'WSAEHOSTDOWN';
-        WSAEHOSTUNREACH    : x := 'WSAEHOSTUNREACH';
-        WSAENOTEMPTY       : x := 'WSAENOTEMPTY';
-        WSAEPROCLIM        : x := 'WSAEPROCLIM';
-        WSAEUSERS          : x := 'WSAEUSERS';
-        WSAEDQUOT          : x := 'WSAEDQUOT';
-        WSAESTALE          : x := 'WSAESTALE';
-        WSAEREMOTE         : x := 'WSAEREMOTE';
-        WSASYSNOTREADY     : x := 'WSASYSNOTREADY';
-        WSAVERNOTSUPPORTED : x := 'WSAVERNOTSUPPORTED';
-        WSANOTINITIALISED  : x := 'WSANOTINITIALISED';
-        WSAHOST_NOT_FOUND  : x := 'WSAHOST_NOT_FOUND';
-        WSATRY_AGAIN       : x := 'WSATRY_AGAIN';
-        WSANO_RECOVERY     : x := 'WSANO_RECOVERY';
-        WSANO_DATA         : x := 'WSANO_DATA';
+        WSAEINTR           : x := 'WSAEINTR - Interrupted function call.';
+        WSAEBADF           : x := 'WSAEINTR - File handle is not valid.';
+        WSAEACCES          : x := 'WXAEACCES - Permission denied.';
+        WSAEFAULT          : x := 'WSAEFAULT - Bad address.';
+        WSAEINVAL          : x := 'WSAEINVAL - Invalid argument.';
+        WSAEMFILE          : x := 'WSAEMFILE - Too many open files.';
+        WSAEWOULDBLOCK     : x := 'WSAEWOULDBLOCK - Resource temporarily unavailable.';
+        WSAEINPROGRESS     : x := 'WSAEINPROGRESS - Operation now in progress.';
+        WSAEALREADY        : x := 'WSAEALREADY - Operation already in progress.';
+        WSAENOTSOCK        : x := 'WSAENOTSOCK - Socket operation on nonsocket.';
+        WSAEDESTADDRREQ    : x := 'WSAEDESTADDRREQ - Destination address required.';
+        WSAEMSGSIZE        : x := 'WSAEMSGSIZE - Message too long.';
+        WSAEPROTOTYPE      : x := 'WSAEPROTOTYPE - Protocol wrong type for socket.';
+        WSAENOPROTOOPT     : x := 'WSAENOPROTOOPT - Bad protocol option.';
+        WSAEPROTONOSUPPORT : x := 'WSAEPROTONOSUPPORT - Protocol not supported.';
+        WSAESOCKTNOSUPPORT : x := 'WSAESOCKTNOSUPPORT - Socket type not supported.';
+        WSAEOPNOTSUPP      : x := 'WSAEOPNOTSUPP - Operation not supported.';
+        WSAEPFNOSUPPORT    : x := 'WSAEPFNOSUPPORT - Protocol family not supported.';
+        WSAEAFNOSUPPORT    : x := 'WSAEAFNOSUPPORT - Address family not supported by protocol family.';
+        WSAEADDRINUSE      : x := 'WSAEADDRINUSE - Address already in use.';
+        WSAEADDRNOTAVAIL   : x := 'WSAEADDRNOTAVAIL - Cannot assign requested address.';
+        WSAENETDOWN        : x := 'WSAENETDOWN - Network is down.';
+        WSAENETUNREACH     : x := 'WSAENETUNREACH - Network is unreachable.';
+        WSAENETRESET       : x := 'WSAENETRESET - Network dropped connection on reset.';
+        WSAECONNABORTED    : x := 'WSAECONNABORTED - Software caused connection abort.';
+        WSAECONNRESET      : x := 'WSAECONNRESET - Connection reset by peer.';
+        WSAENOBUFS         : x := 'WSAENOBUFS - No buffer space available.';
+        WSAEISCONN         : x := 'WSAEISCONN - Socket is already connected.';
+        WSAENOTCONN        : x := 'WSAENOTCONN - Socket is not connected.';
+        WSAESHUTDOWN       : x := 'WSAESHUTDOWN - Cannot send after socket shutdown.';
+        WSAETOOMANYREFS    : x := 'WSAETOOMANYREFS - Too many references.';
+        WSAETIMEDOUT       : x := 'WSAETIMEDOUT - Connection timed out.';
+        WSAECONNREFUSED    : x := 'WSAECONNREFUSED - Connection refused.';
+        WSAELOOP           : x := 'WSAELOOP - Cannot translate name.';
+        WSAENAMETOOLONG    : x := 'WSAENAMETOOLONG - Name too long.';
+        WSAEHOSTDOWN       : x := 'WSAEHOSTDOWN - Host is down.';
+        WSAEHOSTUNREACH    : x := 'WSAEHOSTUNREACH - No route to host.';
+        WSAENOTEMPTY       : x := 'WSAENOTEMPTY - Directory not empty.';
+        WSAEPROCLIM        : x := 'WSAEPROCLIM - Too many processes.';
+        WSAEUSERS          : x := 'WSAEUSERS - User quota exceeded.';
+        WSAEDQUOT          : x := 'WSAEDQUOT - Disk quota exceeded.';
+        WSAESTALE          : x := 'WSAESTALE - Stale file handle reference.';
+        WSAEREMOTE         : x := 'WSAEREMOTE - Item is remote.';
+        WSASYSNOTREADY     : x := 'WSASYSNOTREADY - Network subsystem is unavailable.';
+        WSAVERNOTSUPPORTED : x := 'WSAVERNOTSUPPORTED - Winsock.dll version out of range.';
+        WSANOTINITIALISED  : x := 'WSANOTINITIALISED - Successful WSAStartup not yet performed.';
+        WSAHOST_NOT_FOUND  : x := 'WSAHOST_NOT_FOUND - Host not found.';
+        WSATRY_AGAIN       : x := 'WSATRY_AGAIN - Nonauthoritative host not found.';
+        WSANO_RECOVERY     : x := 'WSANO_RECOVERY - This is a nonrecoverable error.';
+        WSANO_DATA         : x := 'WSANO_DATA - Valid name, no data record of requested type.';
 
         XWB_NO_HEAP        : x := 'Insufficient Heap';
         XWB_M_REJECT       : x := 'M Error - Use ^XTER';
@@ -1479,6 +1430,7 @@ begin
         XWB_NullRpcVer     : x := 'RpcVersion cannot be empty.' + #13 + 'Default is 0 (zero).';
         else x := IntToStr(r);
   end;
+  if r = 0 then x := 'No error code returned';
   s := 'Error encountered.' + chr(13)+chr(10) + 'Function was: ' + Action + chr(13)+chr(10) + 'Error was: ' + x;
   BrokerError := EBrokerError.Create(s);
   BrokerError.Action := Action;
@@ -1552,7 +1504,7 @@ begin
 
   {if sin.Count-1 > 0 then} num := sin.Count-1;   //  JLI 040608 to correct handling of empty arrays
 //  if sin.Count-1 > 0 then num := sin.Count-1;
-    
+
 
   if {num} sin.Count > 0 then     //  JLI 040608 to correct handling of empty arrays
 //  if num > 0 then
@@ -1593,7 +1545,8 @@ Var
   LocalHost: TSockAddr;
   LocalName, workstation: string;
   upArrow, rAccept, rLost: string;
-  pLocalname: array [0..255] of char;
+  //pLocalname: array [0..255] of char;    // HGW 130716 p60
+  pLocalname: PAnsiChar;
   LocalPort, AddrLen, hSocketListen: integer;
   HostBuf: PHostEnt;
   lin: TLinger;
@@ -1741,6 +1694,4 @@ begin
 end;
 
 end.
-
-
 

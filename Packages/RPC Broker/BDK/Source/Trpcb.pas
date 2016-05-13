@@ -2,58 +2,38 @@
 	Package: XWB - Kernel RPCBroker
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
-	Developers: Danila Manapsal, Don Craven, Joel Ivey
+	Developers: Danila Manapsal, Don Craven, Raul Mendoza, Joel Ivey,
 	Description: Contains TRPCBroker and related components.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+  Unit: Tbrpc RPC broker.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
-{*
-  Adding use of SSH tunneling as command line option (or property)
-     It appears that tunneling with Attachmate Reflection will be
-     used within the VA.  However, code for the use of Plink.exe
-     for ssh tunneling is also provided to permit secure connections
-     for those using VistA outside of the VA.
+{ **************************************************
+  Changes in v1.1.50 (JLI 6/24/2008) XWB*1.1*50
+  1. Adding use of SSH tunneling as command line option (or property). It
+     appears that tunneling with Attachmate Reflection will be used within
+     the VA.  However, code for the use of Plink.exe for SSH tunneling is
+     also provided to permit secure connections for those using VistA
+     outside of the VA.
+  2. Correct RPC Version to version 50.
 
-  for SSH Tunneling using Attachmate Reflection
-    SSH set as commandline option or as a property
-           (set to Attachmate Reflection) will
-           also be set to true if either of the following
-           command line parameters are set.
-    SSHPort=portnumber to specify a particular port number
-                       if not specified, it will use the port
-                       number for the remote server.
-    SSHUser=username for remote server
-                         if not specified, user will be prompted
+  Changes in v1.1.31 (DCM ) XWB*1.1*31
+  1. Added new read only property BrokerVersion to TRPCBroker which should
+     contain the version number for the RPCBroker (or SharedRPCBroker) in
+     use.
 
+  Changes in v1.1.13 (JLI 4/24/2001) XWB*1.1*13
+  1. More silent login code; deleted obsolete lines
 
+  Changes in v1.1.8 (REM 7/13/1999) XWB*1.1*8
+  1. Check for Multi-Division users.
 
-  for SSH tunneling with Plink.exe
-    UsePlink set as command line option or as a property
-           (set to Plink).
-    SSHPort=portnumber
-*}
+  Changes in v1.1.6 (DPC 4/99) XWB*1.1*6
+  1. Polling to support terminating orphaned server jobs.
 
-{**************************************************
-This is the hierarchy of things:
-   TRPCBroker contains
-      TParams, which contains
-         array of TParamRecord each of which contains
-                  TMult
-
-v1.1*4 Silent Login changes (DCM) 10/22/98
-
-1.1*6 Polling to support terminating arphaned server jobs. (P6)
-      == DPC 4/99
-
-1.1*8 Check for Multi-Division users. (P8) - REM 7/13/99
-
-1.1*13 More silent login code; deleted obsolete lines (DCM) 9/10/99  // p13
-LAST UPDATED: 5/24/2001   // p13  JLI
-
-1.1*31 Added new read only property BrokerVersion to TRPCBroker which
-       should contain the version number for the RPCBroker
-       (or SharedRPCBroker) in use.
-**************************************************}
+  Changes in v1.1.4 (DCM 10/22/98) XWB*1.1*4
+  1. Silent Login changes.
+************************************************** }
 unit Trpcb;
 
 interface
@@ -86,7 +66,7 @@ TRpcVersion = string[255];         //to use TRpcVersionProperty editor use this 
 
 TRPCBroker = class;
 TVistaLogin = class;
-// p13 
+// p13
 TLoginMode = (lmAVCodes, lmAppHandle, lmNTToken);
 TShowErrorMsgs = (semRaise, semQuiet);  // p13
 TOnLoginFailure = procedure (VistaLogin: TVistaLogin) of object; //p13
@@ -289,6 +269,7 @@ protected
   FListenerPort: integer;
   FParams: TParams;
   FResults: TStrings;
+  FOnCallResultStr: String;
   FRemoteProcedure: TRemoteProc;
   FRpcVersion: TRpcVersion;
   FServer: TServer;
@@ -314,6 +295,7 @@ protected
   FCCOWLogonVpid: String;
   FCCOWLogonVpidValue: String;
   FWasUserDefined: Boolean;
+  FOnRPCCall: TNotifyEvent;
   // end of values from CCOWRPCBroker
   // values for handling SSH tunnels
   FUseSecureConnection: TSecure;
@@ -366,6 +348,7 @@ public
   property    BrokerVersion: String read FBrokerVersion;
   property IsNewStyleConnection: Boolean read FIsNewStyleConnection;
   property    SecurityPhrase: String read FSecurityPhrase write FSecurityPhrase;  // BSE JLI 060130
+  property    OnCallResultStr: String read FOnCallResultStr;
   // brought in from CCOWRPCBroker
   function GetCCOWtoken(Contextor: TContextorControl): string;
   function IsUserCleared: Boolean;
@@ -401,10 +384,11 @@ published
   property    ShowErrorMsgs: TShowErrorMsgs read FShowErrorMsgs write FShowErrorMsgs default semRaise;
   property    LogIn: TVistaLogIn read FLogIn write FLogin; // SetLogIn;
   property    IsBackwardCompatibleConnection: Boolean read
-      FIsBackwardCompatibleConnection write FIsBackwardCompatibleConnection 
+      FIsBackwardCompatibleConnection write FIsBackwardCompatibleConnection
       default True;
-  property    OldConnectionOnly: Boolean read FOldConnectionOnly write 
+  property    OldConnectionOnly: Boolean read FOldConnectionOnly write
       FOldConnectionOnly;
+  property    OnRPCCall: TNotifyEvent read FOnRPCCall write FOnRPCCall;
   // 080624 added property to permit app to set secure connection if desired
 //  property    UseSecureConnection: Boolean read FUseSecureConnection write
 //      FUseSecureConnection;
@@ -993,8 +977,6 @@ begin
             ShowMessage(Str1 + Str2 + Str3);
           end;
 
-
-
           CheckSSH;
           if not (FUseSecureConnection = secureNone) then
           begin
@@ -1235,6 +1217,13 @@ begin
     Sec := nil;
     StrDispose(App);
     App := nil;
+    if assigned(FOnRPCCall) then
+    begin
+    	Result := Value;
+    	if Result = nil then Result := StrNew('');
+        self.FOnCallResultStr := Result;
+    	FOnRPCCall(self);
+    end;
     if ClearParameters then ClearParameters := True;    //prepare for next call
   end;
   Result := Value;
@@ -1406,17 +1395,25 @@ begin
     if not ConnectingBroker.FKernelLogIn then
     begin
       if ConnectingBroker.FLogin <> nil then     //the user.  vistalogin contains login info
-      begin
         blnsignedon := SilentLogin(ConnectingBroker);    // RpcSLogin unit
-        if not blnSignedOn then
+      if not blnSignedOn then
+      begin
+        if not (ConnectingBroker.Contextor = nil) then
         begin     //Switch back to Kernel Login
           ConnectingBroker.FKernelLogIn := true;
           ConnectingBroker.Login.Mode := lmAVCodes;
-          if not (CCOWtoken = '') then
-            ConnectingBroker.Contextor := nil; // token didn't work turn off UserContext
+          // set Contextor in Broker nil so it won't try to set token, etc.
+          ConnectingBroker.Contextor := nil;
+        end
+        else
+        begin
+          TXWBWinsock(ConnectingBroker.XWBWinsock).NetworkDisconnect(ConnectingBroker.FSocket);
         end;
-      end;
+      end
+      else
+        GetBrokerInfo(ConnectingBroker);
     end;
+
     if ConnectingBroker.FKernelLogIn then
     begin   //p13
       CCOWToken := '';  //  061201 JLI if can't sign on with Token clear it so can get new one
@@ -1468,18 +1465,7 @@ begin
       if Assigned(OldExceptionHandler) then
         Application.OnException := OldExceptionHandler;
     end;   //if kernellogin
-{                                                 // p13  following section for silent signon
-    if not ConnectingBroker.FKernelLogIn then
-      if ConnectingBroker.FLogin <> nil then     //the user.  vistalogin contains login info
-        blnsignedon := SilentLogin(ConnectingBroker);    // RpcSLogin unit
-}
-    if not blnsignedon then
-    begin
-      ConnectingBroker.FLogin.FailedLogin(ConnectingBroker.FLogin);
-      TXWBWinsock(ConnectingBroker.XWBWinsock).NetworkDisconnect(ConnectingBroker.FSocket);
-    end
-    else
-      GetBrokerInfo(ConnectingBroker);
+                                                 // p13  following section for silent signon
   finally
     //reset the Broker
     with ConnectingBroker do
@@ -1789,7 +1775,7 @@ Function ShowApplicationAndFocusOK(anApplication: TApplication): boolean;
 var
   j: integer;
   Stat2: set of (sWinVisForm,sWinVisApp,sIconized);
-//  hFGWnd: THandle;
+  hFGWnd: THandle;
 begin
   Stat2 := []; {sWinVisForm,sWinVisApp,sIconized}
 

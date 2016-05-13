@@ -1,0 +1,254 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{04df2be6-ad05-4641-9226-818a8ad927f5}</ProjectGuid>
+        <MainSource>XWB_RXE3.dpk</MainSource>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <DCC_DependencyCheckOutputName>C:\Documents and Settings\All Users\Documents\RAD Studio\5.0\Bpl\XWB_R2007.bpl</DCC_DependencyCheckOutputName>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>14.3</ProjectVersion>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <RuntimeOnlyPackage>true</RuntimeOnlyPackage>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_Description>VistA RPC Broker Runtime Package</DCC_Description>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+        <GenDll>true</GenDll>
+        <VerInfo_Release>50</VerInfo_Release>
+        <VerInfo_Keys>CompanyName=Dept of Veterans Affairs, VHA, OI, SD&amp;D;FileDescription=TRPCBroker component;FileVersion=1.1.50.1;InternalName=;LegalCopyright=(c) 1996-2008;LegalTrademarks=;OriginalFilename=;ProductName=TRPCBroker;ProductVersion=1.1.50;Comments=</VerInfo_Keys>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <GenPackage>true</GenPackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <Icon_MainIcon>@SOURCE@/XWB_R2007_Icon.ico</Icon_MainIcon>
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <Icon_MainIcon>@SOURCE@/XWB_R2007_Icon.ico</Icon_MainIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <Version>7.0</Version>
+        <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+        <DCC_DebugInformation>False</DCC_DebugInformation>
+        <DCC_WriteableConstants>True</DCC_WriteableConstants>
+        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_DcuOutput>Dcu\$(Configuration)</DCC_DcuOutput>
+        <DCC_ObjOutput>Dcu\$(Configuration)</DCC_ObjOutput>
+        <DCC_HppOutput>Dcu\$(Configuration)</DCC_HppOutput>
+        <DCC_DcpOutput>Dcp\$(Configuration)</DCC_DcpOutput>
+        <DCC_BplOutput>Bpl</DCC_BplOutput>
+        <DCC_UnitSearchPath>@SOURCE@;$(BDS)/lib/;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_ResourcePath>@SOURCE@;$(BDS)/lib/;$(DCC_ResourcePath)</DCC_ResourcePath>
+        <DCC_ObjPath>@SOURCE@;$(BDS)/lib/;$(DCC_ObjPath)</DCC_ObjPath>
+        <DCC_IncludePath>@SOURCE@;$(BDS)/lib/;$(DCC_IncludePath)</DCC_IncludePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Version>7.0</Version>
+        <DCC_AssertionsAtRuntime>False</DCC_AssertionsAtRuntime>
+        <DCC_DebugInformation>False</DCC_DebugInformation>
+        <DCC_WriteableConstants>True</DCC_WriteableConstants>
+        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DcuOutput>Dcu\$(Configuration)</DCC_DcuOutput>
+        <DCC_ObjOutput>Dcu\$(Configuration)</DCC_ObjOutput>
+        <DCC_HppOutput>Dcu\$(Configuration)</DCC_HppOutput>
+        <DCC_DcpOutput>Dcp\$(Configuration)</DCC_DcpOutput>
+        <DCC_BplOutput>Bpl</DCC_BplOutput>
+        <DCC_UnitSearchPath>@SOURCE@;$(BDS)/lib/;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_ResourcePath>@SOURCE@;$(BDS)/lib/;$(DCC_ResourcePath)</DCC_ResourcePath>
+        <DCC_ObjPath>@SOURCE@;$(BDS)/lib/;$(DCC_ObjPath)</DCC_ObjPath>
+        <DCC_IncludePath>@SOURCE@;$(BDS)/lib/;$(DCC_IncludePath)</DCC_IncludePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.50.1;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Parameters>
+                    <Parameters Name="UseLauncher">False</Parameters>
+                    <Parameters Name="LoadAllSymbols">True</Parameters>
+                    <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+                </Parameters>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">1</VersionInfo>
+                    <VersionInfo Name="Release">50</VersionInfo>
+                    <VersionInfo Name="Build">1</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName">Dept of Veterans Affairs, VHA, OI, SD&amp;D</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileDescription">TRPCBroker component</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileVersion">1.1.50.1</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright">(c) 1996-2008</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName">TRPCBroker</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductVersion">1.1.50</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k170.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp170.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k170.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp170.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+                <Source>
+                    <Source Name="MainSource">XWB_RXE3.dpk</Source>
+                </Source>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="@SOURCE@/vcl.dcp"/>
+        <DCCReference Include="@SOURCE@/rtl.dcp"/>
+        <DCCReference Include="@SOURCE@/Xwbut1.pas">
+            <Form>in &apos;Xwbut1.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/XlfSid.pas"/>
+        <DCCReference Include="@SOURCE@/Hash.pas">
+            <Form>in &apos;Hash.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/Loginfrm.pas">
+            <Form>in &apos;Loginfrm.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/MFunStr.pas">
+            <Form>in &apos;Mfunstr.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/Rpcberr.pas">
+            <Form>in &apos;Rpcberr.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/Rpcconf1.pas">
+            <Form>in &apos;Rpcconf1.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/RpcNet.pas">
+            <Form>in &apos;Rpcnet.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/seldiv.pas">
+            <Form>in &apos;SelDiv.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/Sgnoncnf.pas">
+            <Form>in &apos;Sgnoncnf.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/Splvista.pas">
+            <Form>in &apos;Splvista.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/Trpcb.pas">
+            <Form>in &apos;Trpcb.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/VCEdit.pas">
+            <Form>in &apos;Vcedit.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/Wsockc.pas">
+            <Form>in &apos;WSockc.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/frmSignonMessage.pas">
+            <Form>in &apos;frmSignonMessage.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/RpcSLogin.pas">
+            <Form>in &apos;Rpcslogin.pas&apos;</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/XWBRich20.PAS"/>
+        <DCCReference Include="@SOURCE@/AddServer.pas">
+            <Form>frmAddServer</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/fRPCBErrMsg.pas">
+            <Form>frmErrMsg</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/fDebugInfo.pas">
+            <Form>frmDebugInfo</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/fSgnonDlg.pas">
+            <Form>frmSignonDialog</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/CCOWRPCBroker.pas"/>
+        <DCCReference Include="@SOURCE@/CCOW_const.pas"/>
+        <DCCReference Include="@SOURCE@/VERGENCECONTEXTORLib_TLB.pas"/>
+        <DCCReference Include="@SOURCE@/fPlinkpw.pas">
+            <Form>fPlinkPassword</Form>
+        </DCCReference>
+        <DCCReference Include="@SOURCE@/fSSHUsername.pas">
+            <Form>SSHUsername</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+</Project>

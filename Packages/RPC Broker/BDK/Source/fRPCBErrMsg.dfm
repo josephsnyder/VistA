@@ -1,9 +1,9 @@
 object frmErrMsg: TfrmErrMsg
   Left = 325
   Top = 293
-  Width = 376
-  Height = 215
   Caption = 'Error Encountered'
+  ClientHeight = 181
+  ClientWidth = 368
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

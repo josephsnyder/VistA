@@ -1,9 +1,9 @@
 object SelDivForm: TSelDivForm
   Left = 368
   Top = 193
-  Width = 445
-  Height = 213
   Caption = 'Select Division'
+  ClientHeight = 179
+  ClientWidth = 437
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,9 @@ object SelDivForm: TSelDivForm
   Font.Style = [fsBold]
   OldCreateOrder = True
   OnCreate = FormCreate
+  DesignSize = (
+    437
+    179)
   PixelsPerInch = 96
   TextHeight = 20
   object DivLabel1: TLabel
@@ -42,9 +45,6 @@ object SelDivForm: TSelDivForm
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 1
-    OnClick = btnOKClick
     Glyph.Data = {
       BE060000424DBE06000000000000360400002800000024000000120000000100
       0800000000008802000000000000000000000001000000010000000000000000
@@ -102,6 +102,9 @@ object SelDivForm: TSelDivForm
       0303030303030303030303030303030303030303030303030303030303030303
       0303}
     NumGlyphs = 2
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnOKClick
   end
   object btnCancel: TBitBtn
     Left = 168
@@ -115,10 +118,11 @@ object SelDivForm: TSelDivForm
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    Kind = bkCancel
+    NumGlyphs = 2
     ParentFont = False
     TabOrder = 2
     OnClick = btnCancelClick
-    Kind = bkCancel
   end
   object btnHelp: TBitBtn
     Left = 336
@@ -131,10 +135,11 @@ object SelDivForm: TSelDivForm
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    Kind = bkHelp
+    NumGlyphs = 2
     ParentFont = False
     TabOrder = 3
     OnClick = btnHelpClick
-    Kind = bkHelp
   end
   object DivListBox: TListBox
     Left = 16
@@ -147,7 +152,6 @@ object SelDivForm: TSelDivForm
     Font.Height = -13
     Font.Name = 'System'
     Font.Style = [fsBold]
-    ItemHeight = 16
     ParentFont = False
     Sorted = True
     TabOrder = 0

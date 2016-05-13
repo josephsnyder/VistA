@@ -13,10 +13,11 @@ inherited frmODBBank: TfrmODBBank
   object Splitter1: TSplitter [0]
     Left = 0
     Top = 0
-    Width = 692
+    Width = 684
     Height = 2
     Cursor = crVSplit
     Align = alTop
+    ExplicitWidth = 537
   end
   object pnlComments: TPanel [1]
     Left = 12
@@ -62,6 +63,10 @@ inherited frmODBBank: TfrmODBBank
     Top = 503
     Width = 449
     Height = 59
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Visible = False
     ExplicitLeft = 4
     ExplicitTop = 503
@@ -71,7 +76,7 @@ inherited frmODBBank: TfrmODBBank
   object pgeProduct: TPageControl [3]
     Left = 0
     Top = 2
-    Width = 692
+    Width = 684
     Height = 497
     ActivePage = TabDiag
     Align = alTop
@@ -80,21 +85,17 @@ inherited frmODBBank: TfrmODBBank
     object TabInfo: TTabSheet
       Caption = 'Patient Information'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object edtInfo: TCaptionRichEdit
         Left = 0
         Top = 0
-        Width = 684
+        Width = 676
         Height = 469
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Courier New'
         Font.Style = []
         ParentFont = False
@@ -121,7 +122,7 @@ inherited frmODBBank: TfrmODBBank
       object pnlFields: TPanel
         Left = 0
         Top = 145
-        Width = 684
+        Width = 676
         Height = 210
         Hint = 'Data entered into these fields apply to the entire order.'
         Align = alTop
@@ -133,7 +134,7 @@ inherited frmODBBank: TfrmODBBank
         object lblDiagComment: TOROffsetLabel
           Left = 0
           Top = 128
-          Width = 62
+          Width = 46
           Height = 15
           Caption = 'Comment'
           Font.Charset = DEFAULT_CHARSET
@@ -254,6 +255,7 @@ inherited frmODBBank: TfrmODBBank
           Sorted = False
           SynonymChars = '<>'
           TabOrder = 0
+          Text = ''
           OnChange = cboUrgencyChange
           OnExit = cboUrgencyExit
           CharsNeedMatch = 1
@@ -306,6 +308,7 @@ inherited frmODBBank: TfrmODBBank
           Sorted = False
           SynonymChars = '<>'
           TabOrder = 1
+          Text = ''
           OnChange = cboSurgeryChange
           OnClick = cboSurgeryClick
           CharsNeedMatch = 1
@@ -317,6 +320,7 @@ inherited frmODBBank: TfrmODBBank
           Height = 74
           Style = orcsSimple
           AutoSelect = True
+          Caption = ''
           Color = clWindow
           DropDownCount = 8
           ItemHeight = 13
@@ -329,6 +333,7 @@ inherited frmODBBank: TfrmODBBank
           Sorted = False
           SynonymChars = '<>'
           TabOrder = 2
+          Text = ''
           OnChange = cboReasonsChange
           OnEnter = cboReasonsEnter
           OnExit = cboReasonsExit
@@ -339,6 +344,12 @@ inherited frmODBBank: TfrmODBBank
           Top = 144
           Width = 525
           Height = 60
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 4
           OnChange = memDiagCommentChange
         end
@@ -346,7 +357,7 @@ inherited frmODBBank: TfrmODBBank
       object pnlSelect: TPanel
         Left = 0
         Top = 35
-        Width = 684
+        Width = 676
         Height = 110
         Align = alTop
         BevelEdges = []
@@ -354,7 +365,7 @@ inherited frmODBBank: TfrmODBBank
         TabOrder = 1
         object pnlDiagnosticTests: TGroupBox
           Left = 266
-          Top = 0
+          Top = 3
           Width = 256
           Height = 110
           Caption = 'Diagnostic Tests'
@@ -400,7 +411,6 @@ inherited frmODBBank: TfrmODBBank
             Width = 21
             Height = 21
             BevelOuter = bvNone
-            Caption = 'Select collection time'
             TabOrder = 5
             TabStop = True
             object cmdImmedColl: TSpeedButton
@@ -411,7 +421,7 @@ inherited frmODBBank: TfrmODBBank
               Align = alClient
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
-              Font.Height = -16
+              Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = [fsBold]
               Glyph.Data = {
@@ -426,6 +436,8 @@ inherited frmODBBank: TfrmODBBank
               ParentShowHint = False
               ShowHint = False
               OnClick = cmdImmedCollClick
+              ExplicitLeft = 5
+              ExplicitTop = -9
             end
           end
           object calCollTime: TORDateBox
@@ -444,6 +456,7 @@ inherited frmODBBank: TfrmODBBank
             OnEnter = calCollTimeEnter
             DateOnly = False
             RequireTime = False
+            Caption = ''
           end
           object cboAvailTest: TORComboBox
             Left = 13
@@ -473,6 +486,7 @@ inherited frmODBBank: TfrmODBBank
             SynonymChars = '<>'
             TabOrder = 0
             TabStop = True
+            Text = ''
             OnClick = cboAvailTestSelect
             OnEnter = cboAvailTestEnter
             OnExit = cboAvailTestExit
@@ -506,6 +520,7 @@ inherited frmODBBank: TfrmODBBank
             Sorted = False
             SynonymChars = '<>'
             TabOrder = 1
+            Text = ''
             OnChange = cboCollTypeChange
             OnClick = cboCollTypeClick
             OnEnter = cboCollTypeEnter
@@ -523,7 +538,7 @@ inherited frmODBBank: TfrmODBBank
             DropDownCount = 8
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ItemHeight = 13
@@ -538,6 +553,7 @@ inherited frmODBBank: TfrmODBBank
             Sorted = False
             SynonymChars = '<>'
             TabOrder = 2
+            Text = ''
             OnChange = cboCollTimeChange
             OnEnter = cboCollTimeEnter
             CharsNeedMatch = 1
@@ -548,9 +564,16 @@ inherited frmODBBank: TfrmODBBank
             Width = 165
             Height = 21
             Color = clBtnFace
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
             ReadOnly = True
             TabOrder = 3
             OnEnter = txtImmedCollEnter
+            Caption = ''
           end
         end
         object pnlBloodComponents: TGroupBox
@@ -638,6 +661,7 @@ inherited frmODBBank: TfrmODBBank
             SynonymChars = '<>'
             TabOrder = 0
             TabStop = True
+            Text = ''
             OnEnter = cboAvailCompEnter
             OnExit = cboAvailCompExit
             OnMouseClick = cboAvailCompSelect
@@ -686,6 +710,7 @@ inherited frmODBBank: TfrmODBBank
             Sorted = False
             SynonymChars = '<>'
             TabOrder = 2
+            Text = ''
             OnChange = cboModifiersChange
             OnEnter = cboModifiersEnter
             CharsNeedMatch = 1
@@ -706,13 +731,14 @@ inherited frmODBBank: TfrmODBBank
             OnEnter = calWantTimeEnter
             DateOnly = False
             RequireTime = False
+            Caption = ''
           end
         end
       end
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 684
+        Width = 676
         Height = 35
         Align = alTop
         Caption = ' Personal Quick Orders'
@@ -730,8 +756,14 @@ inherited frmODBBank: TfrmODBBank
           Height = 21
           Style = orcsDropDown
           AutoSelect = True
+          Caption = ''
           Color = clWindow
           DropDownCount = 8
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
           ItemHeight = 13
           ItemTipColor = clWindow
           ItemTipEnable = True
@@ -739,10 +771,12 @@ inherited frmODBBank: TfrmODBBank
           LongList = True
           LookupPiece = 0
           MaxLength = 0
+          ParentFont = False
           Pieces = '2'
           Sorted = False
           SynonymChars = '<>'
           TabOrder = 0
+          Text = ''
           OnClick = cboQuickClick
           CharsNeedMatch = 1
         end
@@ -750,7 +784,7 @@ inherited frmODBBank: TfrmODBBank
       object pnlSelectedTests: TGroupBox
         Left = 0
         Top = 355
-        Width = 684
+        Width = 676
         Height = 109
         Align = alTop
         Caption = 'Selected Components and Tests'
@@ -800,6 +834,7 @@ inherited frmODBBank: TfrmODBBank
           TabStop = False
           ViewStyle = vsReport
           OnClick = lvSelectionListClick
+          AutoSize = False
           Caption = 'lvSelectionList'
         end
         object btnRemove: TButton
@@ -836,23 +871,20 @@ inherited frmODBBank: TfrmODBBank
     end
     object TabResults: TTabSheet
       Caption = 'Lab Results'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object edtResults: TCaptionRichEdit
         Left = 0
         Top = 0
-        Width = 684
+        Width = 676
         Height = 469
         Align = alClient
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
+        Font.Height = -12
         Font.Name = 'Courier New'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Caption = ''
       end
     end
   end
@@ -860,6 +892,10 @@ inherited frmODBBank: TfrmODBBank
     Left = 455
     Top = 503
     Width = 75
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     TabOrder = 2
     Visible = False
     ExplicitLeft = 455
@@ -870,6 +906,10 @@ inherited frmODBBank: TfrmODBBank
     Left = 455
     Top = 541
     Width = 52
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     TabOrder = 3
     ExplicitLeft = 455
     ExplicitTop = 541
@@ -880,15 +920,30 @@ inherited frmODBBank: TfrmODBBank
     Top = 513
     Width = 409
     Height = 49
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     TabOrder = 1
     ExplicitLeft = 8
     ExplicitTop = 513
     ExplicitWidth = 409
     ExplicitHeight = 49
+    inherited imgMessage: TImage
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+    end
     inherited memMessage: TRichEdit
       Left = 42
       Top = 5
       Width = 360
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      Font.Height = -11
       ExplicitLeft = 42
       ExplicitTop = 5
       ExplicitWidth = 360
@@ -1009,13 +1064,15 @@ inherited frmODBBank: TfrmODBBank
         'Status = stsDefault')
       (
         'Component = calCollTime'
-        'Status = stsDefault')
+        'Text = Collection Date/Time. Press the enter key to access.'
+        'Status = stsOK')
       (
         'Component = pnlCollTimeButton'
         'Status = stsDefault')
       (
         'Component = calWantTime'
-        'Status = stsDefault'))
+        'Text = Wanted Date/Time. Press the enter key to access.'
+        'Status = stsOK'))
   end
   object dlgLabCollTime: TORDateTimeDlg
     FMDateTime = 2980923.000000000000000000

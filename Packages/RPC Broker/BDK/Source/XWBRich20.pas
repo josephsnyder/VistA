@@ -3,10 +3,17 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Joel Ivey
-	Description: Provides a RichEdit Component with ability
-	             to recognize a URL within the RichEdit control.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+	Unit: XWBRich20 provides a RichEdit Component with ability
+        to recognize a URL within the RichEdit control.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
+
+{ **************************************************
+  Changes in v1.1.50 (JLI 9/1/2011) XWB*1.1*50
+  1. None.
+************************************************** }
+
 {: Unit XWBRich20
    Based on the article "Detect URLS in the RichEdit Control" by
    Elias J. Ongpoy in 'Delphi Developer Newsletter', May 2001
@@ -293,7 +300,7 @@ type
 
 implementation
 
-uses Printers, Consts, ComStrs, ActnList, StdActns, ShellAPI, Types;
+uses Printers, Consts, ComStrs, ActnList, StdActns, ShellAPI;
 
 type
   PFontHandles = ^TFontHandles;

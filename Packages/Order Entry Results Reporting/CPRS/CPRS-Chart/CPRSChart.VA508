@@ -16419,7 +16419,7 @@ object ORfrmDtTm: TORfrmDtTm
 object ORfrmDateRange: TORfrmDateRange
 25
 object frmBase508Form: TfrmBase508Form
-object amgrMain: TVA508AccessibilityManager
+inherited amgrMain: TVA508AccessibilityManager
 Data = (
 (
 'Component = frmBase508Form'
@@ -30447,7 +30447,7 @@ object ORfrmDtTm: TORfrmDtTm
 object ORfrmDateRange: TORfrmDateRange
 25
 object frmBase508Form: TfrmBase508Form
-object amgrMain: TVA508AccessibilityManager
+inherited amgrMain: TVA508AccessibilityManager
 Data = (
 (
 'Component = frmBase508Form'
@@ -44475,7 +44475,7 @@ object ORfrmDtTm: TORfrmDtTm
 object ORfrmDateRange: TORfrmDateRange
 25
 object frmBase508Form: TfrmBase508Form
-object amgrMain: TVA508AccessibilityManager
+inherited amgrMain: TVA508AccessibilityManager
 Data = (
 (
 'Component = frmBase508Form'

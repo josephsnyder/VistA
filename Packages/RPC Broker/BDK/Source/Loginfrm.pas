@@ -3,21 +3,24 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
-	Description: Code supportin Login form.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+  Unit: Loginfrm code supporting Login form.
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
-{**************************************************
-ver. 1.1.4  1/6/99 (DCM)
+{ **************************************************
+  Changes in v1.1.47 (JLI 6/17/2008) XWB*1.1*47
+  1. Changes to LoginfrmSignonBroker to resolve authentication errors.
 
-XWB*1.1*4 adds a  try-except block in SetUpSignOn to close
-login form when the server job times out.  Also adds a try-
-except block in btnOkClick in order to cancel the action
-if the server job times out. Danila
+  Changes in v1.1.11 (DCM 9/13/1999) XWB*1.1*11
+  1. Deleted obsolete code.
 
-ver. 1.1.11 9/13/99
-XWB*1.1*11 deleted obsolete code.  DCM (9/13/99)
-**********************************************************}
+  Changes in v1.1.4 (DCM 1/6/1999) XWB*1.1*4
+  1. Added a try-except block in SetUpSignOn to close
+     login form when the server job times out.  Also added a
+     try-except block in btnOkClick to cancel the action if the
+     server job times out.
+************************************************** }
 unit Loginfrm;
 
 interface          
@@ -130,28 +133,40 @@ begin
            //   end of addition 051219  JLI
       Call;
     end;
-    except                  {P4}
-      frmSignon.Free;    {P4}  // Release  jli 041104
-      exit;                 {P4}
+    except
+    // JLI 090424 line containign frmSignon.Free below commented
+    //            out, since this is freed in Authenticate User
+    //            and results in an Access Violation
+    // JLI 090424  frmSignon.Free;    {P4}  // Release  jli 041104
+    // JLI 090424 added next line
+      on error: Exception do
+      begin
+//        ShowMessage('Exception: '+error.message);
+        Raise;
+//      exit;
+      end;                 {P4}
     end;                    {P4}
-    lblServer.Caption := LoginfrmSignonBroker.Results[0];
-    lblVolume.Caption := LoginfrmSignonBroker.Results[1];
-    lblUCI.Caption    := LoginfrmSignonBroker.Results[2];
-    lblPort.Caption   := LoginfrmSignonBroker.Results[3];
-    intDeviceLock   := 0;
-    if LoginfrmSignonBroker.Results.Count > 5 then    //Server sent single signon info.
-      if LoginfrmSignonBroker.Results[5] = '1' then   //Signon not needed
-        Result := False
-      else
-        Result := True;
-    LoginfrmSignonBroker.Login.IsProductionAccount := False;
-    LoginfrmSignonBroker.Login.DomainName := '';
-    if LoginfrmSignonBroker.Results.Count > 7 then
-    begin
-      LoginfrmSignonBroker.Login.DomainName := LoginfrmSignonBroker.Results[6];
-      if LoginfrmSignonBroker.Results[7] = '1' then
-        LoginfrmSignonBroker.Login.IsProductionAccount := True;
-    end;
+    if LoginfrmSignonBroker.RPCBError = '' then // JLI 090428
+    begin                                       // JLI 090428
+      lblServer.Caption := LoginfrmSignonBroker.Results[0];
+      lblVolume.Caption := LoginfrmSignonBroker.Results[1];
+      lblUCI.Caption    := LoginfrmSignonBroker.Results[2];
+      lblPort.Caption   := LoginfrmSignonBroker.Results[3];
+      intDeviceLock   := 0;
+      if LoginfrmSignonBroker.Results.Count > 5 then    //Server sent single signon info.
+        if LoginfrmSignonBroker.Results[5] = '1' then   //Signon not needed
+          Result := False
+        else
+          Result := True;
+      LoginfrmSignonBroker.Login.IsProductionAccount := False;
+      LoginfrmSignonBroker.Login.DomainName := '';
+      if LoginfrmSignonBroker.Results.Count > 7 then
+      begin
+        LoginfrmSignonBroker.Login.DomainName := LoginfrmSignonBroker.Results[6];
+        if LoginfrmSignonBroker.Results[7] = '1' then
+          LoginfrmSignonBroker.Login.IsProductionAccount := True;
+      end;
+    end;                // JLI 090428
   end;
 end;
 

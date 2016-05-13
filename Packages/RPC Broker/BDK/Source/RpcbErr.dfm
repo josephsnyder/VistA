@@ -75,15 +75,17 @@ object frmRpcbError: TfrmRpcbError
     Top = 200
     Width = 81
     Height = 27
-    TabOrder = 0
     Kind = bkOK
+    NumGlyphs = 2
+    TabOrder = 0
   end
   object BitBtn3: TBitBtn
     Left = 304
     Top = 200
     Width = 81
     Height = 27
-    TabOrder = 1
     Kind = bkHelp
+    NumGlyphs = 2
+    TabOrder = 1
   end
 end

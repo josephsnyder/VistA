@@ -1,0 +1,178 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{3c6648ee-2dc8-460e-a8fb-25a62198b304}</ProjectGuid>
+        <MainSource>ORDateLibXE3.dpk</MainSource>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+        <DCC_DependencyCheckOutputName>Bpl\ORDateLibXE3.bpl</DCC_DependencyCheckOutputName>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>14.4</ProjectVersion>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <GenPackage>true</GenPackage>
+        <GenDll>true</GenDll>
+        <DesignOnlyPackage>true</DesignOnlyPackage>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+        <DCC_RangeChecking>true</DCC_RangeChecking>
+        <DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_Description>CPRS Date/Time Dialogs</DCC_Description>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <Version>7.0</Version>
+        <DCC_DebugInformation>False</DCC_DebugInformation>
+        <DCC_WriteableConstants>True</DCC_WriteableConstants>
+        <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>True</DCC_RangeChecking>
+        <DCC_GenerateStackFrames>True</DCC_GenerateStackFrames>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_DcuOutput>Dcu\$(Configuration)</DCC_DcuOutput>
+        <DCC_ObjOutput>Dcu\$(Configuration)</DCC_ObjOutput>
+        <DCC_HppOutput>Dcu\$(Configuration)</DCC_HppOutput>
+        <DCC_DcpOutput>Dcp\$(Configuration)</DCC_DcpOutput>
+        <DCC_BplOutput>Bpl</DCC_BplOutput>
+        <DCC_UnitSearchPath>Dcp\$(Configuration);Dcu\$(Configuration);..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_ResourcePath>Dcp\$(Configuration);Dcu\$(Configuration);;..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_ResourcePath)</DCC_ResourcePath>
+        <DCC_ObjPath>Dcp\$(Configuration);Dcu\$(Configuration);;..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_ObjPath)</DCC_ObjPath>
+        <DCC_IncludePath>Dcp\$(Configuration);Dcu\$(Configuration);;..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_IncludePath)</DCC_IncludePath>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <Version>7.0</Version>
+        <DCC_DebugInformation>False</DCC_DebugInformation>
+        <DCC_WriteableConstants>True</DCC_WriteableConstants>
+        <DCC_IntegerOverflowCheck>True</DCC_IntegerOverflowCheck>
+        <DCC_RangeChecking>True</DCC_RangeChecking>
+        <DCC_GenerateStackFrames>True</DCC_GenerateStackFrames>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_DcuOutput>Dcu\$(Configuration)</DCC_DcuOutput>
+        <DCC_ObjOutput>Dcu\$(Configuration)</DCC_ObjOutput>
+        <DCC_HppOutput>Dcu\$(Configuration)</DCC_HppOutput>
+        <DCC_DcpOutput>Dcp\$(Configuration)</DCC_DcpOutput>
+        <DCC_BplOutput>Bpl</DCC_BplOutput>
+        <DCC_UnitSearchPath>Dcp\$(Configuration;Dcu\$(Configuration););..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_ResourcePath>Dcp\$(Configuration);Dcu\$(Configuration);;..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_ResourcePath)</DCC_ResourcePath>
+        <DCC_ObjPath>Dcp\$(Configuration);Dcu\$(Configuration);;..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_ObjPath)</DCC_ObjPath>
+        <DCC_IncludePath>Dcp\$(Configuration);Dcu\$(Configuration);;..\VA\Dcp\$(Configuration);..\VA\Dcu\$(Configuration);..\..\BDK\Source\Dcp\$(Configuration);..\..\BDK\Source\Dcu\$(Configuration);@SOURCE@;$(BDS)/lib/;$(DCC_IncludePath)</DCC_IncludePath>
+    </PropertyGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Parameters>
+                    <Parameters Name="UseLauncher">False</Parameters>
+                    <Parameters Name="LoadAllSymbols">True</Parameters>
+                    <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+                </Parameters>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">ORDateLibXE3.dpk</Source>
+                </Source>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)/bin/CodeGear.Delphi.Targets"/>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="@SOURCE@\ORDateLibXE3.res"/>
+        <DCCReference Include="ORDtTm.dcr"/>
+        <DCCReference Include="ORDtTmRng.dcr"/>
+        <DCCReference Include="vclsmp.dcp"/>
+        <DCCReference Include="vcl.dcp"/>
+        <DCCReference Include="tee.dcp"/>
+        <DCCReference Include="ORCtrlLibXE3.dcp"/>
+        <DCCReference Include="XWB_RXE3.dcp"/>
+        <DCCReference Include="@SOURCE@\ORDtTmCal.pas"/>
+        <DCCReference Include="@SOURCE@\ORDtTm.pas"/>
+        <DCCReference Include="@SOURCE@\ORDtTmRng.pas"/>
+        <DCCReference Include="@SOURCE@\ORNet.pas"/>
+        <DCCReference Include="@SOURCE@\ORFn.pas"/>
+        <DCCReference Include="@SOURCE@\OR2006Compatibility.pas">
+            <Form>frm2006Compatibility</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

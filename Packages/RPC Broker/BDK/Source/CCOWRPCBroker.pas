@@ -2,32 +2,30 @@
 	Package: XWB - Kernel RPCBroker
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
-	Developers: Danila Manapsal, Don Craven, Joel Ivey
+	Developers: Danila Manapsal, Don Craven, Joel Ivey, Herlan Westra
 	Description: Contains TRPCBroker and related components.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008)
+  Unit: CCOWRPCBroker Authenticates user using CCOW
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
-{**************************************************
-This is the hierarchy of things:
-   TRPCBroker contains
-      TParams, which contains
-         array of TParamRecord each of which contains
-                  TMult
+{ **************************************************
+  Changes in v1.1.50 (HGW 8/1/2013) XWB*1.1*50
+  1. Correct RPC Version to version 50
 
-v1.1*4 Silent Login changes (DCM) 10/22/98
+  Changes in v1.1.31 (DCM ) XWB*1.1*31
+  1. Added new read only property BrokerVersion to TRPCBroker which
+     should contain the version number for the RPCBroker
+     (or SharedRPCBroker) in use.
 
-1.1*6 Polling to support terminating arphaned server jobs. (P6)
-      == DPC 4/99
+  Changes in v1.1.13 (JLI  5/24/2001) XWB*1.1*13
+  1. More silent login code; deleted obsolete lines (DCM 9/10/99)
 
-1.1*8 Check for Multi-Division users. (P8) - REM 7/13/99
+  Changes in v1.1.8 (REM 7/13/1999) XWB*1.1*8
+  1. Check for Multi-Division users.
 
-1.1*13 More silent login code; deleted obsolete lines (DCM) 9/10/99  // p13
-LAST UPDATED: 5/24/2001   // p13  JLI
-
-1.1*31 Added new read only property BrokerVersion to TRPCBroker which
-       should contain the version number for the RPCBroker
-       (or SharedRPCBroker) in use.
-**************************************************}
+  Changes in v1.1.6 (DPC 4/1999) XWB*1.1*6
+  1. Polling to support terminating orphaned server jobs.
+************************************************** }
 unit CCOWRPCBroker;
 
 interface
@@ -47,7 +45,7 @@ uses
 const
   NoMore: boolean = False;
   MIN_RPCTIMELIMIT: integer = 30;
-  CURRENT_RPC_VERSION: String = 'XWB*1.1*36T1';
+  CURRENT_RPC_VERSION: String = 'XWB*1.1*50';
 
 type
 
@@ -344,7 +342,6 @@ begin
      //CCOW end
    //CCOW Start                                // p13  following section for silent signon
   if not ConnectingBroker.FKernelLogIn then
-  begin
     if ConnectingBroker.FLogin <> nil then     //the user.  vistalogin contains login info
     begin
       blnsignedon := SilentLogin(ConnectingBroker);    // RpcSLogin unit
@@ -352,11 +349,8 @@ begin
       begin     //Switch back to Kernel Login
         ConnectingBroker.FKernelLogIn := true;
         ConnectingBroker.Login.Mode := lmAVCodes;
-        if not (CCOWtoken = '') then
-          ConnectingBroker.Contextor := nil; // token didn't work turn off UserContext
       end;
     end;
-  end;
    //CCOW end
 
   if ConnectingBroker.FKernelLogIn then

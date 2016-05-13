@@ -26,7 +26,8 @@ procedure LoadRPCData(Dest: TStrings; ID: Integer);
 function DottedIPStr: string;
 procedure CallRPCWhenIdle(CallProc: TORIdleCallProc; Msg: String);
 function ShowRPCList: Boolean;
-
+procedure SetRPCFlaged(value: string);
+function GetRPCFlaged: String;
 procedure EnsureBroker;
 
 (*
@@ -56,6 +57,7 @@ var
   uShowRPCs: Boolean;
   uBaseContext: string = '';
   uCurrentContext: string = '';
+  fRPCFlaged: String;
 
 { private procedures and functions ---------------------------------------------------------- }
 
@@ -107,43 +109,58 @@ begin
     begin
       Param[i].PType := literal;
       case VType of
-      vtInteger:    Param[i].Value := IntToStr(VInteger);
-      vtBoolean:    Param[i].Value := BoolChar[VBoolean];
-      vtChar:       if VChar = #0 then
-                      Param[i].Value := ''
-                    else
-                      Param[i].Value := VChar;
-      //vtExtended:   Param[i].Value := FloatToStr(VExtended^);
-      vtExtended:   begin
-                      TmpExt := VExtended^;
-                      if(abs(TmpExt) < 0.0000000000001) then TmpExt := 0;
-                      Param[i].Value := FloatToStr(TmpExt);
-                    end;
-      vtString:     with Param[i] do
-                    begin
-                      Value := VString^;
-                      if (Length(Value) > 0) and (Value[1] = #1) then
-                      begin
-                        Value := Copy(Value, 2, Length(Value));
-                        PType := reference;
-                      end;
-                    end;
-      vtPChar:      Param[i].Value := StrPas(VPChar);
-      vtPointer:    if VPointer = nil
-                      then ClearParameters := True {Param[i].PType := null}
-                      else raise Exception.Create('Pointer type must be nil.');
-      vtObject:     if VObject is TStrings then SetList(TStrings(VObject), i);
-      vtAnsiString: with Param[i] do
-                    begin
-                      Value := string(VAnsiString);
-                      if (Length(Value) > 0) and (Value[1] = #1) then
-                      begin
-                        Value := Copy(Value, 2, Length(Value));
-                        PType := reference;
-                      end;
-                    end;
-      vtInt64:      Param[i].Value := IntToStr(VInt64^);
-        else raise Exception.Create('Unable to pass parameter type to Broker.');
+            vtInteger:  Param[i].Value := IntToStr(VInteger);
+            vtBoolean:  Param[i].Value := BoolChar[VBoolean];
+               vtChar:  if VChar = #0 then
+                          Param[i].Value := ''
+                        else
+                          Param[i].Value := String(VChar);
+           vtExtended:  begin
+                          TmpExt := VExtended^;
+                          if(abs(TmpExt) < 0.0000000000001) then TmpExt := 0;
+                          Param[i].Value := FloatToStr(TmpExt);
+                        end;
+             vtString:  with Param[i] do
+                        begin
+                          Value := String(ShortString(VString^));
+                          if (Length(Value) > 0) and (Value[1] = #1) then
+                          begin
+                            Value := Copy(Value, 2, Length(Value));
+                            PType := reference;
+                          end;
+                        end;
+            vtPointer:  if VPointer = nil then
+                          ClearParameters := True {Param[i].PType := null}
+                        else
+                          raise Exception.Create('Pointer type must be nil.');
+              vtPChar:  Param[i].Value := String(AnsiChar(VPChar));
+             vtObject:  if VObject is TStrings then
+                          SetList(TStrings(VObject), i);
+           vtWideChar:  if VChar = #0 then
+                          Param[i].Value := ''
+                        else
+                          Param[i].Value := String(VWideChar);
+         vtAnsiString:  with Param[i] do
+                        begin
+                          Value := string(VAnsiString);
+                          if (Length(Value) > 0) and (Value[1] = #1) then
+                          begin
+                            Value := Copy(Value, 2, Length(Value));
+                            PType := reference;
+                          end;
+                        end;
+              vtInt64:  Param[i].Value := IntToStr(VInt64^);
+      vtUnicodeString:  with Param[i] do
+                        begin
+                          Value := String(VUnicodeString);
+                          if (Length(Value) > 0) and (Value[1] = #1) then
+                          begin
+                            Value := Copy(Value, 2, Length(Value));
+                            PType := reference;
+                          end;
+                        end;
+      else
+        raise Exception.Create('RPC: ' + String(RemoteProcedure) + ' Unable to pass parameter type ' + IntToStr(VType) + ' to Broker.');
       end; {case}
     end; {for}
   end; {with}
@@ -178,10 +195,12 @@ procedure CallBrokerInContext;
 var
   AStringList: TStringList;
   i, j: Integer;
-  x, y: string;
+  x, y, RunString: string;
+  RPCStart, RPCStop, fFrequency: TLargeInteger;
+  dt : TDateTime;
 begin
-  RPCLastCall := RPCBrokerV.RemoteProcedure + ' (CallBroker begin)';
-  if uShowRPCs then StatusText(RPCBrokerV.RemoteProcedure);
+  RPCLastCall := String(RPCBrokerV.RemoteProcedure) + ' (CallBroker begin)';
+  if uShowRPCs then StatusText(String(RPCBrokerV.RemoteProcedure));
   with RPCBrokerV do if not Connected then  // happens if broker connection is lost
   begin
     ClearResults := True;
@@ -194,7 +213,8 @@ begin
     uCallList.Delete(0);
   end;
   AStringList := TStringList.Create;
-  AStringList.Add(RPCBrokerV.RemoteProcedure);
+  AStringList.Add(String(RPCBrokerV.RemoteProcedure));
+  AStringList.Add('');   //add to the second line
   if uCurrentContext <> uBaseContext then
     AStringList.Add('Context: ' + uCurrentContext);
   AStringList.Add(' ');
@@ -223,7 +243,9 @@ begin
   end; {with...for}
   //RPCBrokerV.Call;
   try
+    QueryPerformanceCounter(RPCStart);
     RPCBrokerV.Call;
+    QueryPerformanceCounter(RPCStop);
   except
     // The broker erroneously sets connected to false if there is any error (including an
     // error on the M side). It should only set connection to false if there is no connection.
@@ -253,12 +275,17 @@ begin
       if not RPCBrokerV.Connected then Application.Terminate;
     end;
   end;
+  RunString := 'Ran at:' + FormatDateTime('hh:nn:ss.z a/p', now);
+  QueryPerformanceFrequency(fFrequency);
+  dt := ((MSecsPerSec * (RPCStop - RPCStart)) div fFrequency) / MSecsPerSec / SecsPerDay;
+  RunString := RunString + #13#10 + 'Run time:' + FormatDateTime('hh:nn:ss.z', dt);
+  AStringList[1] := RunString;
   AStringList.Add(' ');
   AStringList.Add('Results -----------------------------------------------------------------');
   FastAddStrings(RPCBrokerV.Results, AStringList);
   uCallList.Add(AStringList);
   if uShowRPCs then StatusText('');
-  RPCLastCall := RPCBrokerV.RemoteProcedure + ' (completed)';
+  RPCLastCall := String(RPCBrokerV.RemoteProcedure) + ' (completed)';
 end;
 
 procedure CallBroker;
@@ -467,16 +494,16 @@ var
   //WSAData: TWSAData;       // structure to hold startup information
   HostEnt: PHostEnt;       // pointer to Host Info structure (see WinSock 1.1, page 60)
   IPAddr: PInAddr;         // pointer to IP address in network order (4 bytes)
-  LocalName: array[0..255] of Char;  // buffer for the name of the client machine
+  LocalName: array[0..255] of AnsiChar;  // buffer for the name of the client machine
 begin
   Result := 'No IP Address';
   // ensure the Winsock DLL has been loaded (should be if there is a broker connection)
   //if WSAStartup(WINSOCK1_1, WSAData) <> SUCCESS then Exit;
   //try
     // get the name of the client machine
-    if gethostname(LocalName, SizeOf(LocalName) - 1) <> SUCCESS then Exit;
+    if gethostname(@LocalName, SizeOf(LocalName) - 1) <> SUCCESS then Exit;
     // get information about the client machine (contained in a record of type THostEnt)
-    HostEnt := gethostbyname(LocalName);
+    HostEnt := gethostbyname(@LocalName);
     if HostEnt = nil then Exit;
     // get a pointer to the four bytes that contain the IP address
     // Dereference HostEnt to get the THostEnt record.  In turn, dereference the h_addr_list
@@ -485,7 +512,7 @@ begin
     IPAddr := PInAddr(HostEnt^.h_addr_list^);
     // Dereference IPAddr (which is a PChar typecast as PInAddr) to get the 4 bytes that need
     // to be passed to inet_ntoa.  A string with the IP address in dotted format is returned.
-    Result := inet_ntoa(IPAddr^);
+    Result := String(AnsiString(inet_ntoa(IPAddr^)));
   //finally
     // causes the reference counter in Winsock (set by WSAStartup, above) to be decremented
     //WSACleanup;
@@ -506,6 +533,16 @@ function ShowRPCList: Boolean;
 begin
   if uShowRPCS then Result := True
   else Result := False;
+end;
+
+procedure SetRPCFlaged(value: string);
+begin
+  fRPCFlaged := value;
+end;
+
+function GetRPCFlaged: String;
+begin
+  result := fRPCFlaged;
 end;
 
 

@@ -5,7 +5,7 @@
 	Developers: Joel Ivey
 	Description: Type library for use with uSharedBroker1 in
 	             building RPCSharedBrokerSessionMgr1.exe.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Current Release: Version 1.1 Patch 50
 *************************************************************** }
 
 unit RPCSharedBrokerSessionMgr1_TLB_SRB;

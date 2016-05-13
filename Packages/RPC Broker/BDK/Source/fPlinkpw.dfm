@@ -1,9 +1,9 @@
 object fPlinkPassword: TfPlinkPassword
   Left = 234
   Top = 119
-  Width = 300
-  Height = 151
   Caption = 'Enter Plink Password'
+  ClientHeight = 113
+  ClientWidth = 284
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
