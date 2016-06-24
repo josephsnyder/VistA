@@ -16,6 +16,7 @@
 import os
 import sys
 import re
+from docx import Document
 from datetime import datetime
 from LoggerManager import logger
 
@@ -160,6 +161,9 @@ class PatchInfoParser(object):
   ASSOCIATED_PATCH_SECTION_REGEX = re.compile("^ {%d,%d}\(v\)" %
                                               (ASSOCIATED_PATCH_START_INDEX,
                                                ASSOCIATED_PATCH_START_INDEX))
+  DSS_DOCX_ASSOCIATED_PATCH_START_REGEX= re.compile("Pre-install Instructions")
+  DSS_DOCX_ASSOCIATED_PATCH_SECTION_REGEX= re.compile("If the Released version of the patch")
+  DSS_DOCX_PATCH_NAME = re.compile("KIDS Build: ")
 
   def __init__(self):
     pass
@@ -228,11 +232,38 @@ class PatchInfoParser(object):
     setPatchInfoFromInstallName(patchInfo.installName,
                                 patchInfo)
     return patchInfo
+
+  def parseKIDSDocxInfoFile(self, infoFile):
+    logger.debug("Parsing Docx Info file %s" % infoFile)
+    patchInfo = PatchInfo()
+    assert os.path.exists(infoFile)
+    patchInfo.kidsInfoPath = infoFile
+    inputFile = Document(infoFile)
+    for para in inputFile.paragraphs:
+      text = para.text.rstrip(" \r\n")
+      if len(text) == 0:
+        continue
+      """ subject part are treated as end of parser section for now"""
+      if self.SUBJECT_PART_START_REGEX.search(text):
+        break;
+      """ find out the dep patch info """
+      ret = self.DSS_DOCX_PATCH_NAME.search(text)
+      if ret:
+        patchInfo.installName = str(convertToInstallName(text[13:].strip()))
+        continue
+      ret = self.DSS_DOCX_ASSOCIATED_PATCH_SECTION_REGEX.search(text)
+      if ret:
+        self.parseAssociatedPart(text.strip(), patchInfo)
+        continue
+    if patchInfo.installName == None: return None
+    setPatchInfoFromInstallName(patchInfo.installName,
+                                patchInfo)
+    return patchInfo
   """ parsing the associated KIDS build part """
   def parseAssociatedPart(self, infoString, patchInfo):
-    pos = infoString.find("<<= must be installed BEFORE")
+    pos = infoString.find("has not been installed, then do so now.")
     if pos >=0:
-      installName = convertToInstallName(infoString[3:pos].strip())
+      installName = convertToInstallName(infoString[36:pos].strip())
       patchInfo.depKIDSBuild.add(installName)
     else:
       logger.warn(infoString)

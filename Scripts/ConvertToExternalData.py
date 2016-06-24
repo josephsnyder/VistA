@@ -39,6 +39,7 @@ VALID_GLOBAL_FILE_SUFFIX_LIST = (".GBLs", ".GBL")
 VALID_ROUTINE_IMPORT_FILE_SUFFIX_LIST = (".RSA", "rsa", ".RO", ".ro")
 VALID_HEADER_FILE_SUFFIX_LIST = (".json",".JSON")
 VALID_SHA1_FILE_SUFFIX_LIST = (".SHA1",".sha1")
+VALID_DOCX_FILE_SUFFIX_LIST = (".DOCX",".docx")
 
 VALID_KIDS_BUILD_HEADER_SUFFIX_LIST = tuple(
   [x+y for x in VALID_KIDS_BUILD_SUFFIX_LIST for y in VALID_HEADER_FILE_SUFFIX_LIST]
@@ -58,6 +59,9 @@ VALID_GLOBAL_SHA1_SUFFIX_LIST = tuple(
 
 VALID_ROUTINE_SHA1_SUFFIX_LIST = tuple(
   [x+y for x in VALID_ROUTINE_IMPORT_FILE_SUFFIX_LIST for y in VALID_SHA1_FILE_SUFFIX_LIST]
+)
+VALID_ROUTINE_DOCX_SUFFIX_LIST = tuple(
+  [x for x in VALID_DOCX_FILE_SUFFIX_LIST]
 )
 
 """
@@ -96,6 +100,9 @@ def isValidGlobalSha1Suffix(fileName):
 def isValidRoutineSha1Suffix(fileName):
   return fileName.endswith(VALID_ROUTINE_SHA1_SUFFIX_LIST)
 
+def isValidPatchInfoDocxSuffix(fileName):
+  return fileName.endswith(VALID_ROUTINE_DOCX_SUFFIX_LIST)
+
 def isValidCSVSuffix(fileName):
   return fileName.endswith(VALID_CSV_FILE_SUFFIX_LIST)
 
@@ -105,7 +112,8 @@ def isValidPatchDataSuffix(fileName, includeExternalExt=False):
               isValidGlobalFileSuffix(fileName) or
               isValidRoutineFileSuffix(fileName) or
               isValidCSVSuffix(fileName)        or
-              isValidPythonSuffix(fileName)
+              isValidPythonSuffix(fileName) or
+              isValidPatchInfoDocxSuffix(fileName)
             )
   if includeExternalExt:
     isValid = isValid or (isValidKIDSBuildHeaderSuffix(fileName) or
@@ -119,7 +127,7 @@ def isValidPatchDataSuffix(fileName, includeExternalExt=False):
 def isValidPatchRelatedFiles(absFileName, checkExternalExt=False):
   fileName = os.path.basename(absFileName)
   # ignore files that starts with .
-  if fileName.startswith('.'):
+  if fileName.startswith('.') or fileName.startswith('~'):
     return False
   # ignore symlink files as well
   try:

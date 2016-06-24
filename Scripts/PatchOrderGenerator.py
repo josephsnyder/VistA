@@ -61,6 +61,7 @@ from ConvertToExternalData import isValidPatchRelatedFiles
 from ConvertToExternalData import isValidGlobalFileSuffix
 from ConvertToExternalData import isValidGlobalSha1Suffix
 from ConvertToExternalData import isValidPythonSuffix
+from ConvertToExternalData import isValidPatchInfoDocxSuffix
 from KIDSAssociatedFilesMapping import getAssociatedInstallName
 
 """
@@ -75,6 +76,7 @@ class PatchOrderGenerator(object):
     self._kidsBuildFileDict = dict() # all the kids files name->[path,sha1path]
     self._kidsInstallNameSha1Dict = dict() # install name -> sha1
     self._kidsInfoFileList = [] # all kids info file under vista patches dir
+    self._kidsDocxInfoFileList = [] # All docx files found in patches dir
     self._csvOrderFileList = [] # all csv order file under vista patches dir
     self._globalFilesSet = set() # all global file under vista patches dir
     self._patchInfoDict = dict() #install name -> patchInfo
@@ -111,6 +113,7 @@ class PatchOrderGenerator(object):
     self.__getAllKIDSBuildInfoAndOtherFileList__(patchDir)
     self.__parseAllKIDSBuildFilesList__()
     self.__parseAllKIDSInfoFilesList__()
+    self.__parseAllKIDSDocxInfoFilesList__()
     self.__generateMissKIDSInfoSet__()
     self.__addMissKIDSInfoPatch__()
     self.__handlePatchAssociatedFiles__()
@@ -181,6 +184,10 @@ class PatchOrderGenerator(object):
           self.__addKidsBuildFileToDict__(kidsFileName, absFilename,
                                           KIDS_BUILD_FILE_TYPE_SHA1)
           continue
+        """ Handle docx info files """
+        if isValidPatchInfoDocxSuffix(fileName):
+          self._kidsDocxInfoFileList.append(absFilename)
+          continue
         """ Handle KIDS Info/Sha1 files """
         if ( isValidPatchInfoSuffix(fileName) or
              isValidPatchInfoSha1Suffix(fileName) ):
@@ -205,6 +212,7 @@ class PatchOrderGenerator(object):
 
     logger.info("Total # of KIDS Builds are %d" % len(self._kidsBuildFileDict))
     logger.info("Total # of KIDS Info are %d" % len(self._kidsInfoFileList))
+    logger.info("Total # of KIDS DOCX Info are %d" % len(self._kidsDocxInfoFileList))
     logger.info("Total # of Global files are %d" % len(self._globalFilesSet))
     logger.info("Total # of Python files are %d" % len(self._pythonScriptList))
     logger.info("Total # of CSV files are %d" % len(self._csvOrderFileList))
@@ -262,15 +270,70 @@ class PatchOrderGenerator(object):
                   depList])
                 logger.info("%s: %s" % (installName,
                   self._kidsDepBuildDict[installName]))
+              else:
+                self._kidsDepBuildDict[installName] = set([])
 
     logger.debug("%s" % sorted(self._kidsInstallNameDict.keys()))
     logger.info("Total # of install name %d" % len(self._kidsInstallNameDict))
+    logger.info("Total list of installs  %s" % self._kidsInstallNameDict)
 
   """ parse all the KIDS info files, update patchInfoDict, missKidsBuildDict"""
   def __parseAllKIDSInfoFilesList__(self):
     kidsParser = PatchInfoParser()
     for kidsInfoFile in self._kidsInfoFileList:
       patchInfo = kidsParser.parseKIDSInfoFile(kidsInfoFile)
+      if not patchInfo:
+        logger.debug("invalid kids info file %s" % kidsInfoFile)
+        self._invalidInfoFileSet.add(kidsInfoFile)
+        continue
+      """ only add to list for info that is related to a Patch"""
+      installName = patchInfo.installName
+      if installName not in self._kidsInstallNameDict:
+        logger.warn("no KIDS file related to %s" % patchInfo)
+        if installName in self._missKidsBuildDict:
+          logger.warn("duplicated kids install name")
+          if kidsInfoFile != self._missKidsBuildDict[installName].kidsInfoPath:
+            logger.warn("duplicated kids info file name %s" % kidsInfoFile)
+          continue
+        self._missKidsBuildDict[installName] = patchInfo
+        continue
+      patchInfo.kidsFilePath = self._kidsInstallNameDict[installName]
+      assert patchInfo.kidsFilePath
+      """ update PatchInfo kidsSha1 and kidsSha1Path """
+      if installName in self._kidsInstallNameSha1Dict:
+        sha1Path = self._kidsInstallNameSha1Dict[installName]
+        patchInfo.kidsSha1Path = sha1Path
+        patchInfo.kidsSha1 = readSha1SumFromSha1File(sha1Path)
+      if installName in self._patchInfoDict:
+        logger.warn("duplicated installName %s, %s, %s" %
+                     (installName, self._patchInfoDict[installName],
+                     kidsInfoFile))
+      """ merge the dependency if needed, also
+          put extra dependency into optional set """
+      if installName in self._kidsDepBuildDict:
+        infoDepSet = set()
+        kidsDepSet = set()
+        if patchInfo.depKIDSBuild:
+          infoDepSet = patchInfo.depKIDSBuild
+        if self._kidsDepBuildDict[installName]:
+          kidsDepSet = self._kidsDepBuildDict[installName]
+        diffSet = kidsDepSet ^ infoDepSet
+        if len(diffSet):
+          logger.info("Merging kids dependencies %s" % installName)
+          logger.debug("kids build set is %s" % kidsDepSet)
+          logger.debug("info build set is %s" % infoDepSet)
+          logger.warning("difference set: %s" % diffSet)
+          patchInfo.depKIDSBuild = infoDepSet | kidsDepSet
+          patchInfo.optionalDepSet = infoDepSet - kidsDepSet
+        else:
+          patchInfo.depKIDSBuild = infoDepSet
+      self._patchInfoDict[installName] = patchInfo
+
+  """ parse all the KIDS info files, update patchInfoDict, missKidsBuildDict"""
+  def __parseAllKIDSDocxInfoFilesList__(self):
+    kidsParser = PatchInfoParser()
+    for kidsInfoFile in self._kidsDocxInfoFileList:
+      patchInfo = kidsParser.parseKIDSDocxInfoFile(kidsInfoFile)
       if not patchInfo:
         logger.debug("invalid kids info file %s" % kidsInfoFile)
         self._invalidInfoFileSet.add(kidsInfoFile)
@@ -495,6 +558,7 @@ class PatchOrderGenerator(object):
     logger.info("Total # of leftover global files: %s" %
                 len(self._globalFilesSet))
     logger.debug(self._globalFilesSet)
+    logger.info(self._patchDependencyDict)
   """ update PatchInfo custom installer """
   def __updateCustomInstaller__(self):
     for pythonScript in self._pythonScriptList:
