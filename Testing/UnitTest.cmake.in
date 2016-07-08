@@ -22,10 +22,10 @@ SetVendorArgsConfig(vendor_args "@VENDOR_NAME@" "@VISTA_CACHE_NAMESPACE@"
 set(MUNIT_PATCH_DIR "@VISTA_SOURCE_DIR@/Testing/Setup/Patches/MUnit")
 set(PATCH_INSTALL_SCRIPT "@VISTA_SOURCE_DIR@/Scripts/PatchSequenceApply.py")
 set(LOG_DIR "@UNITTEST_LOG_DIR@")
-list(APPEND vendor_args -p "${MUNIT_PATCH_DIR}" -l "${LOG_DIR}" -i -n "all")
-execute_process(COMMAND "@PYTHON_EXECUTABLE@" "@VISTA_SOURCE_DIR@/Scripts/PatchSequenceApply.py" ${vendor_args}
-                RESULT_VARIABLE retCode
-                OUTPUT_VARIABLE output)
+#list(APPEND vendor_args -p "${MUNIT_PATCH_DIR}" -l "${LOG_DIR}" -i -n "all")
+#execute_process(COMMAND "@PYTHON_EXECUTABLE@" "@VISTA_SOURCE_DIR@/Scripts/PatchSequenceApply.py" ${vendor_args}
+#                RESULT_VARIABLE retCode
+#                OUTPUT_VARIABLE output)
 if(retCode)
   message(ERROR "Installing Patches Errors: ${output}")
 endif()
