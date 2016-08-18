@@ -51,6 +51,13 @@ ASKDIR
 SLASH(DIR)
  I $E(DIR,$L(DIR))?1(1"/",1"\") Q 1
  E  U $P W "Output directory must end in a slash!" Q 0
+WRITEHDR(VAL) ; Writes out the date/time in the header
+ N Y
+ I VAL=47 Q $ZDATE($HOROLOG,"DD-MON-YEAR 12:60:SS")
+ I VAL=0 D  Q Y ; Cache date time
+ . N MLIST S MLIST=" JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC"
+ . S Y=$TR($ZDATE($HOROLOG,2,MLIST)," ","-")_" "_$ZTIME($H)
+ Q 0
 DUMPALL
  D FILES
  D GLOBALS
@@ -88,30 +95,43 @@ GLOBALS
  Q
 GLOBAL(G) ; Dump global G
  N IO S IO=$$OPENGBL(G)
- I $D(@G)#10 D WRITE(IO,G)
+ I $D(@G)#10 D
+ . D WRITE(IO,G)
  D VISIT(IO,$NAME(FILES(G)),G)
  D CLOSE(IO)
  Q
 VISIT(IO,F,G) ; Visit node G and recurse
  N DF S DF=$D(@F)
- I DF#10 S IO=$$OPENFILE(F)
- I DF<10 D DUMP(IO,G)
- E       D FOLLOW(IO,F,G)
- I DF#10 D CLOSE(IO)
+ I DF#10 D
+ . S IO=$$OPENFILE(F)
+ I DF<10 D
+ . D DUMP(IO,G)
+ E       D
+ . D FOLLOW(IO,F,G)
+ I DF#10 D
+ . D CLOSE(IO)
+ I DF="10" D
+ . U IO W "^ZZEMPTY=1"
  Q
 FOLLOW(IO,F,G) ; Follow children of node G
  N I S I="" F  S I=$O(@G@(I)) Q:I=""  D
  . N NG,DG S NG=$NAME(@G@(I)),DG=$D(@NG)
- . I DG#10 D WRITE(IO,NG)
- . I DG<10 Q
+ . I DG#10 D
+ . . D WRITE(IO,NG)
+ . I DG<10 D
+ . . Q
  . N NF S NF=$NAME(@F@(I))
- . I $D(@NF) D VISIT(IO,NF,NG)
- . E         D DUMP(IO,NG)
+ . I $D(@NF) D
+ . . D VISIT(IO,NF,NG)
+ . E         D
+ . . D DUMP(IO,NG)
  Q
 DUMP(IO,G) ; Dump everything under node G, excluding G itself
- N R,LR
+ N R,LR,D
+ S D=0
  S R=$S(G["(":$E(G,1,$L(G)-1)_",",1:G_"("),LR=$L(R)
- F  S G=$Q(@G) Q:G=""  Q:$L(G)<LR  Q:$E(G,1,LR)'=R  D WRITE(IO,G)
+ F  S G=$Q(@G) Q:G=""  Q:$L(G)<LR  Q:$E(G,1,LR)'=R  D WRITE(IO,G) S D=1
+ W:D'=1 "^ZZEMPTY=1"
  Q
 FILENAME(N) ; Return FileMan file name
  Q $P(^DIC(N,0),"^")
@@ -125,14 +145,14 @@ OPENGBL(G)
  N IO S IO=$$HOSTPATH($E(G,2,$L(G)))
  U $P W IO,!
  D OPEN(IO)
- U IO W G,!,"ZWR",!
+ U IO W G,!,$$WRITEHDR(+$SY)_" ZWR",!
  Q IO
 OPENFILE(F)
  N IO S IO=$$HOSTFILE(F)
  U $P W IO,!
  D OPEN(IO)
  ;U $P W " ",F,!
- U IO W $$FILENAME(@F),!,"ZWR",!
+ U IO W $$FILENAME(@F),!,$$WRITEHDR(+$SY)_" ZWR",!
  Q IO
 OPEN(IO)
  ;U $P W "OPEN ",IO,!
