@@ -51,6 +51,13 @@ ASKDIR
 SLASH(DIR)
  I $E(DIR,$L(DIR))?1(1"/",1"\") Q 1
  E  U $P W "Output directory must end in a slash!" Q 0
+WRITEHDR(VAL) ; Writes out the date/time in the header
+ N Y
+ I VAL=47 Q $ZDATE($HOROLOG,"DD-MON-YEAR 12:60:SS")
+ I VAL=0 D  Q Y ; Cache date time
+ . N MLIST S MLIST=" JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC"
+ . S Y=$TR($ZDATE($HOROLOG,2,MLIST)," ","-")_" "_$ZTIME($P($HOROLOG,",",2))
+ Q 0
 DUMPALL
  D FILES
  D GLOBALS
@@ -84,12 +91,13 @@ FILE(N)
 GLOBALS
  N G
  X CONFIG("GLOBALS")
- F G="^ROUTINE","^TMP","^UTILITY","^XUTL","^%ZOSF","^XTMP","^DISV" K GLOBALS(G)
+ F G="^ROUTINE","^TMP","^UTILITY","^XUTL","^%ZOSF","^XTMP","^DISV","^ZZEMPTY" K GLOBALS(G)
  Q
 GLOBAL(G) ; Dump global G
  N IO S IO=$$OPENGBL(G)
  I $D(@G)#10 D WRITE(IO,G)
  D VISIT(IO,$NAME(FILES(G)),G)
+ I $D(@G)=10 U IO W "^ZZEMPTY=1"
  D CLOSE(IO)
  Q
 VISIT(IO,F,G) ; Visit node G and recurse
@@ -125,14 +133,14 @@ OPENGBL(G)
  N IO S IO=$$HOSTPATH($E(G,2,$L(G)))
  U $P W IO,!
  D OPEN(IO)
- U IO W G,!,"ZWR",!
+ U IO W "OSEHRA ZGO Export: "_G,!,$$WRITEHDR(+$SY)_" ZWR",!
  Q IO
 OPENFILE(F)
  N IO S IO=$$HOSTFILE(F)
  U $P W IO,!
  D OPEN(IO)
  ;U $P W " ",F,!
- U IO W $$FILENAME(@F),!,"ZWR",!
+ U IO W "OSEHRA ZGO Export: "_$$FILENAME(@F),!,$$WRITEHDR(+$SY)_" ZWR",!
  Q IO
 OPEN(IO)
  ;U $P W "OPEN ",IO,!
