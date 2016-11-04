@@ -53,6 +53,8 @@ if(TEST_VISTA_FRESH)
   endif()
   set(TEST_VISTA_FRESH_GTM_GLOBALS_DAT "" CACHE FILEPATH " Path to the GT.M database.dat")
 
+  # Add a switch to determine which Global import is used:
+  option(TEST_VISTA_FRESH_GTM_USE_MUPIP "Check for MUPIP load, uncheck for slower OSEHRA load")
   list(APPEND freshinfo TEST_VISTA_SETUP_UCI_NAME)
   list(APPEND freshinfo TEST_VISTA_SETUP_VOLUME_SET)
   list(APPEND freshinfo TEST_VISTA_FRESH_GTM_ROUTINE_DIR)

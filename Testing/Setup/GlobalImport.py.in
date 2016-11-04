@@ -27,7 +27,7 @@ if VistA.type=='cache':
   except IndexError,no_namechange:
     pass
 VistA.wait(PROMPT)
-if VistA.type=='cache': # for GT.M. it is imported via "mupip load"
+if (VistA.type=='cache') or ("${TEST_VISTA_FRESH_GTM_USE_MUPIP}" == "OFF"): # for GT.M. it is imported via "mupip load"
   VistA.write('D LIST^ZGI("${VISTA_BINARY_DIR}/globals.lst")')
   VistA.wait(PROMPT, ${TEST_VISTA_FRESH_GLOBALS_IMPORT_TIMEOUT})
 VistA.write('D ^ZTMGRSET')

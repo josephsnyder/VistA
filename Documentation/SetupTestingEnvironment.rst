@@ -313,8 +313,8 @@ TEST_VISTA_FRESH_M_DIR                       Path to VistA-M directory          
 TEST_VISTA_FRESH_CACHE_DAT_EMPTY             Path to an empty CACHE.dat                            N/A
 TEST_VISTA_FRESH_CACHE_DAT_VISTA           Path to CACHE.dat that holds VistA                      N/A
 TEST_VISTA_FRESH_GTM_GLOBALS_DAT                          N/A                           Path to the database.dat with VistA
-TEST_VISTA_FRESH_GTM_ROUTINE_DIR                          N/A                           Path to folder that contains VistA
-                                                                                        routines
+TEST_VISTA_FRESH_GTM_ROUTINE_DIR                          N/A                           Path to folder that contains VistA routines
+TEST_VISTA_FRESH_GTM_USE_MUPIP                            N/A                           ON to use MUPIP to load Globals 
 TEST_VISTA_SETUP_UCI_NAME                                 N/A                           UCI name of VistA isntance
 ========================================   ==========================================   =======================================
 

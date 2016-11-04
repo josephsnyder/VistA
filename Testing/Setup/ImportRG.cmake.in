@@ -95,7 +95,7 @@ foreach(RoutineImportFile ${ImportRoutines})
 endforeach()
 
 message(STATUS "Importing globals...")
-if("@VENDOR_NAME@" STREQUAL "GTM")
+if(("@VENDOR_NAME@" STREQUAL "GTM") AND ("@TEST_VISTA_FRESH_GTM_USE_MUPIP@" STREQUAL "ON"))
   file(STRINGS "@VISTA_BINARY_DIR@/globals.lst" allGlobalFiles)
   set(importLogFile "@VISTA_BINARY_DIR@/Testing/Log/GlobalImport0.log")
   file(REMOVE ${importLogFile})
