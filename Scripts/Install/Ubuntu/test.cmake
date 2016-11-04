@@ -48,6 +48,8 @@ TEST_VISTA_FRESH_GLOBALS_IMPORT_TIMEOUT:STRING=3600
 TEST_VISTA_FRESH_GTM_GLOBALS_DAT:FILEPATH=$ENV{basedir}/g
 #Path to the Routines folder within GT.M
 TEST_VISTA_FRESH_GTM_ROUTINE_DIR:PATH=$ENV{basedir}/r
+# Use the MUPIP load to import Globals
+TEST_VISTA_FRESH_GTM_USE_MUPIP:BOOL=ON
 #Use Python to test VistA via roll and scroll
 TEST_VISTA_FUNCTIONAL_RAS:BOOL=ON
 #Use Python and Sikuli to test Vitals and CPRS

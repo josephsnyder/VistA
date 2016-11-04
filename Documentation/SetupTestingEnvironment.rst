@@ -292,6 +292,12 @@ from the latest import.  The other GT.M specific variable is the
 TEST_VISTA_SETUP_UCI_NAME which is used during the configuring of the VistA
 instance.
 
+Additionally, you can select which type of import will be used on
+the GT.M system via the TEST_VISTA_SETUP_USE_MUPIP variable.  Selecting this
+option will attempt to use the ``mupip`` tool to import the globals for the
+instance.  Leaving it unselected will use the slower ZGI routine written by
+OSEHRA
+
 .. figure:: http://code.osehra.org/content/named/SHA1/f90b6a3d-cmakeGUIFreshcalloutconfigureGTM.png
    :align: center
    :alt: The CMake-GUI on Linux/GTM after configuration.
@@ -313,8 +319,8 @@ TEST_VISTA_FRESH_M_DIR                       Path to VistA-M directory          
 TEST_VISTA_FRESH_CACHE_DAT_EMPTY             Path to an empty CACHE.dat                            N/A
 TEST_VISTA_FRESH_CACHE_DAT_VISTA           Path to CACHE.dat that holds VistA                      N/A
 TEST_VISTA_FRESH_GTM_GLOBALS_DAT                          N/A                           Path to the database.dat with VistA
-TEST_VISTA_FRESH_GTM_ROUTINE_DIR                          N/A                           Path to folder that contains VistA
-                                                                                        routines
+TEST_VISTA_FRESH_GTM_ROUTINE_DIR                          N/A                           Path to folder that contains VistA routines
+TEST_VISTA_FRESH_GTM_USE_MUPIP                            N/A                           ON to use MUPIP to load Globals 
 TEST_VISTA_SETUP_UCI_NAME                                 N/A                           UCI name of VistA isntance
 ========================================   ==========================================   =======================================
 
