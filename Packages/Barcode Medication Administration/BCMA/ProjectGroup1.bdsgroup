@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <PersonalityInfo>
+    <Option>
+      <Option Name="Personality">Default.Personality</Option>
+      <Option Name="ProjectType"></Option>
+      <Option Name="Version">1.0</Option>
+      <Option Name="GUID">{A6646152-7052-435C-9D3E-3E3EEC7BA4E2}</Option>
+    </Option>
+  </PersonalityInfo>
+  <Default.Personality>
+
+    <Projects>
+      <Projects Name="BCMA.exe">BCMA.bdsproj</Projects>
+      <Projects Name="Borland.bpl">..\OR_SRC_CREATION\CPRS-Lib\Borland.bdsproj</Projects>
+      <Projects Name="Targets">BCMA.exe Borland.bpl</Projects>
+    </Projects>
+    <Dependencies/>
+  </Default.Personality>
+</BorlandProject>

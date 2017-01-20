@@ -43,8 +43,16 @@ endif()
 
 if(BUILD_DELPHI)
   include(Delphi)
-  add_subdirectory("Packages/RPC Broker/BDK" BDK)
-  add_subdirectory("Packages/Order Entry Results Reporting/CPRS" CPRS)
+  option(BUILD_DELPHI_CPRS "Select this option to build CPRS" OFF)
+  option(BUILD_DELPHI_BCMA "Select this option to build BCMA" OFF)
+  if(BUILD_DELPHI_CPRS)
+    add_subdirectory("Packages/RPC Broker/BDK" BDK)
+    add_subdirectory("Packages/Order Entry Results Reporting/CPRS" CPRS)
+  endif()
+  if(BUILD_DELPHI_BCMA)
+    add_subdirectory("Packages/Barcode Medication Administration/BCMA" BCMA)
+    add_subdirectory("Packages/Barcode Medication Administration/OrderCom" OrderCom)
+  endif()
 endif()
 
 #-----------------------------------------------------------------------------#
