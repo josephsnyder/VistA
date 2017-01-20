@@ -1,0 +1,374 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6C64321C-1B81-4BB2-82E3-8FE29CAC4D04}</ProjectGuid>
+        <MainSource>BCMA.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>14.4</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UsePackage>VCL50;VistABroker;VCLX50;vcl;rtl;vcldb;VclSmp;tee;vclx;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+        <DCC_Alignment>1</DCC_Alignment>
+        <DCC_BplOutput>$(DELPHI)\Bpl</DCC_BplOutput>
+        <DCC_DcuOutput>.\DCU</DCC_DcuOutput>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_F>false</DCC_F>
+        <DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
+        <DCC_N>true</DCC_N>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_UnitSearchPath>$(DELPHI)\Lib\Debug;$(DELPHI)\Source\Toolsapi;C:\Program Files (x86)\Vista\BDK32\D2006;C:\Program Files (x86)\Vista\BDK32\Source;C:\Program Files (x86)\Vista\BDK32_P50\Source_x;C:\Program Files (x86)\Vista\BDK32_P50T4\D2006_x;C:\Program Files (x86)\Vista\BDK32_P50T4\Source_x;@SOURCE@\..\..\Order Entry Results Reporting\CPRS\VA;@SOURCE@\..\..\Order Entry Results Reporting\CPRS\VA\VA508Accessibility;@SOURCE@\..\..\Order Entry Results Reporting\CPRS\CPRS-Lib;C:\Program Files (x86)\EHS;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <VerInfo_Keys>CompanyName=Department Of Veterans Affairs;FileDescription=Bar Code Medication Administration;FileVersion=3.0.83.42;InternalName=BCMA;LegalCopyright=U.S. Department Of Veterans Affairs, 2016;LegalTrademarks=U.S. Department Of Veterans Affairs, 2016;OriginalFilename=BCMA;ProductName=Bar Code Medication Administration;ProductVersion=3.0.83;Comments=Developed with Borland Developer Studio 2006;ReleaseDate=2016;SpecialBuild=;PrivateBuild=</VerInfo_Keys>
+        <DCC_S>false</DCC_S>
+        <VerInfo_Release>83</VerInfo_Release>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <VerInfo_Build>42</VerInfo_Build>
+        <DCC_MapFile>1</DCC_MapFile>
+        <DCC_K>false</DCC_K>
+        <VerInfo_MajorVer>3</VerInfo_MajorVer>
+        <DCC_UNSAFE_TYPE>true</DCC_UNSAFE_TYPE>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;FMX.Pickers;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_E>false</DCC_E>
+        <DCC_Define>MSF_ON;DEBUGLOG_OFF;TEST_OFF;ACTIVECTRL_OFF;MOB2_OFF;CAS_DDPE_TEST_OFF;CAS_DDPE_RST;CAS_DDPE_DEBUG_OFF;R1224198;INC984066;ZZ_RPC_LOG_OFF;CAS_508_DEBUG_OFF;$(DCC_Define)</DCC_Define>
+        <DCC_UNSAFE_CODE>true</DCC_UNSAFE_CODE>
+        <DCC_MinStackSize>24576</DCC_MinStackSize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <Icon_MainIcon>@SOURCE@/BCMA_Icon.ico</Icon_MainIcon>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <Icon_MainIcon>@SOURCE@/BCMA_Icon.ico</Icon_MainIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="VHA_Objects.pas"/>
+        <DCCReference Include="BCMA_Common.pas"/>
+        <DCCReference Include="BCMA_Objects.pas"/>
+        <DCCReference Include="BCMA_Main.pas">
+            <Form>frmMain</Form>
+        </DCCReference>
+        <DCCReference Include="Debug.pas">
+            <Form>frmDebug</Form>
+        </DCCReference>
+        <DCCReference Include="Report.pas">
+            <Form>frmReport</Form>
+        </DCCReference>
+        <DCCReference Include="ReportRequest.pas">
+            <Form>frmReportRequest</Form>
+        </DCCReference>
+        <DCCReference Include="FAboutDlg.pas">
+            <Form>AboutDlg</Form>
+        </DCCReference>
+        <DCCReference Include="MultipleDrugs.pas">
+            <Form>frmMultipleDrugs</Form>
+        </DCCReference>
+        <DCCReference Include="PRNEffectiveness.pas">
+            <Form>frmPRNEffectiveness</Form>
+        </DCCReference>
+        <DCCReference Include="MultOrder.pas">
+            <Form>frmMultOrder</Form>
+        </DCCReference>
+        <DCCReference Include="MissingDose.pas">
+            <Form>frmMissingDose</Form>
+        </DCCReference>
+        <DCCReference Include="Instructor.pas">
+            <Form>frmInstructor</Form>
+        </DCCReference>
+        <DCCReference Include="MultipleOrderedDrugs.pas">
+            <Form>frmMultipleOrderedDrugs</Form>
+        </DCCReference>
+        <DCCReference Include="MedLog.pas">
+            <Form>frmMedLog</Form>
+        </DCCReference>
+        <DCCReference Include="SelectReason.pas">
+            <Form>frmSelectReason</Form>
+        </DCCReference>
+        <DCCReference Include="InputQry.pas">
+            <Form>frmInputQry</Form>
+        </DCCReference>
+        <DCCReference Include="BCMA_Startup.pas"/>
+        <DCCReference Include="BCMA_Util.pas"/>
+        <DCCReference Include="Splash.pas">
+            <Form>frmSplash</Form>
+        </DCCReference>
+        <DCCReference Include="BCMA_IV.pas">
+            <Form>fraIV</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="WardStock.pas">
+            <Form>frmWardStock</Form>
+        </DCCReference>
+        <DCCReference Include="Options.pas">
+            <Form>frmOptions</Form>
+        </DCCReference>
+        <DCCReference Include="BCMA_OrderMan.pas">
+            <Form>frmCPRSOrderManager</Form>
+        </DCCReference>
+        <DCCReference Include="BCMA_Timeout.pas">
+            <Form>frmTimeOut</Form>
+        </DCCReference>
+        <DCCReference Include="fPrint.pas">
+            <Form>frmPrint</Form>
+        </DCCReference>
+        <DCCReference Include="fFractional.pas">
+            <Form>frmFractional</Form>
+        </DCCReference>
+        <DCCReference Include="fPRNMedLog.pas">
+            <Form>frmPRNMedLog</Form>
+        </DCCReference>
+        <DCCReference Include="uIVUtilities.pas"/>
+        <DCCReference Include="uCCOW.pas"/>
+        <DCCReference Include="fPrintPtSelect.pas">
+            <Form>frmPrintPtSelect</Form>
+        </DCCReference>
+        <DCCReference Include="fPtConfirmation.pas">
+            <Form>frmPtConfirmation</Form>
+        </DCCReference>
+        <DCCReference Include="fEdtMedLogAdminSelect.pas">
+            <Form>frmEditMedLogAdminSelect</Form>
+        </DCCReference>
+        <DCCReference Include="fEditMedLog.pas">
+            <Form>frmEditMedLog</Form>
+        </DCCReference>
+        <DCCReference Include="fDateTimePicker.pas">
+            <Form>frmDateTimePicker</Form>
+        </DCCReference>
+        <DCCReference Include="fCoverSheet.pas">
+            <Form>frmCoverSheet</Form>
+        </DCCReference>
+        <DCCReference Include="oCoverSheet.pas"/>
+        <DCCReference Include="oInterfaces.pas"/>
+        <DCCReference Include="stabSort.pas"/>
+        <DCCReference Include="fGivenMRRs.pas">
+            <Form>frmGivenMRRs</Form>
+        </DCCReference>
+        <DCCReference Include="fScanWristband.pas">
+            <Form>frmScanWristband</Form>
+        </DCCReference>
+        <DCCReference Include="fPtSelect.pas">
+            <Form>frmPtSelect</Form>
+        </DCCReference>
+        <DCCReference Include="fUnableToScan.pas">
+            <Form>frmUnableToScan</Form>
+        </DCCReference>
+        <DCCReference Include="fMedTherapyMedSelection.pas">
+            <Form>frmMedTherapyMedSelection</Form>
+        </DCCReference>
+        <DCCReference Include="oReport.pas"/>
+        <DCCReference Include="uFiveRights.pas">
+            <Form>frmFiveRights</Form>
+        </DCCReference>
+        <DCCReference Include="fDspMemo.pas">
+            <Form>frmDspMemo</Form>
+        </DCCReference>
+        <DCCReference Include="fLegend.pas">
+            <Form>frmLegend</Form>
+        </DCCReference>
+        <DCCReference Include="ScanIV.pas">
+            <Form>frmScanIV</Form>
+        </DCCReference>
+        <DCCReference Include="fSelectInjection.pas">
+            <Form>frmSelectInjection</Form>
+        </DCCReference>
+        <DCCReference Include="fWitness.pas">
+            <Form>frmWitness</Form>
+        </DCCReference>
+        <DCCReference Include="fPrtClinicSel.pas">
+            <Form>frmPrtClinicSel</Form>
+        </DCCReference>
+        <DCCReference Include="c:\d2006\Imports\BcmaOrderCom_TLB.pas"/>
+        <DCCReference Include="uOrderMgr.pas"/>
+        <DCCReference Include="..\ZZZ\fZZ_EventLog.pas">
+            <Form>frmEventLog</Form>
+        </DCCReference>
+        <DCCReference Include="..\ZZZ\uZZ_DescribedItem.pas"/>
+        <DCCReference Include="..\ZZZ\uZZ_RPCEvent.pas"/>
+        <DCCReference Include="..\ZZZ\uZZ_ChangeLog.pas"/>
+        <DCCReference Include="..\ZZZ\uZZ_VersionInfo.pas"/>
+        <DCCReference Include="mVitals.pas">
+            <Form>fraVitals</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="CAS_DDPE\fCAS_Log.pas">
+            <Form>frmCAS_Log</Form>
+        </DCCReference>
+        <DCCReference Include="CAS_DDPE\uCASC_Log.pas"/>
+        <DCCReference Include="..\BCMA_Common\frmALMap.pas">
+            <Form>frmALMapEdit</Form>
+        </DCCReference>
+        <DCCReference Include="..\BCMA_Common\uCAS_UU.pas"/>
+        <DCCReference Include="..\BCMA_Common\uCAS_ALUtils.pas"/>
+        <DCCReference Include="..\ZZZ\fInfo.pas">
+            <Form>frmInfo</Form>
+        </DCCReference>
+        <DCCReference Include="..\BCMA_Common\uCAS_Utils.pas"/>
+        <None Include="ModelSupport_BCMA\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_Objects\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fPrint\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fEdtMedLogAdminSelect\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\WardStock\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fDateTimePicker\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fPRNMedLog\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fMedTherapyMedSelection\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fDspMemo\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\Instructor\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\MultipleDrugs\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\Report\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\mVitals\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_IV\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_Main\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\InputQry\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\VHA_Objects\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fFractional\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fPrintPtSelect\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fScanWristband\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fCoverSheet\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\MedLog\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\FAboutDlg\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\oReport\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fEditMedLog\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fUnableToScan\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\Options\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fPtSelect\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\ReportRequest\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\uCCOW\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\uIVUtilities\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_Util\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\MultipleOrderedDrugs\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\ScanIV\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_Startup\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\MissingDose\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\stabSort\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fPtConfirmation\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\Splash\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fGivenMRRs\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\Debug\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_Timeout\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\PRNEffectiveness\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_OrderMan\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\BCMA_Common\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\uFiveRights\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\oInterfaces\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\SelectReason\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\oCoverSheet\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\MultOrder\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\default.txvpck"/>
+        <None Include="ModelSupport_BCMA\BCMA\default.txvpck"/>
+        <None Include="BCMA.todo"/>
+        <None Include="ModelSupport_BCMA\BCMA_Main\default.txvpck"/>
+        <None Include="ModelSupport_BCMA\BCMA_Objects\default.txvpck"/>
+        <None Include="ModelSupport_BCMA\BCMA_Common\default.txvpck"/>
+        <None Include="ModelSupport_BCMA\fLegend\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fSelectInjection\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fWitness\default.txaPackage"/>
+        <None Include="ModelSupport_BCMA\fPrtClinicSel\default.txaPackage"/>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">BCMA.dpr</Source>
+                </Source>
+                <Language>
+                    <Language Name="ProjectLang">$00000409</Language>
+                </Language>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">3</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">83</VersionInfo>
+                    <VersionInfo Name="Build">42</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName">Department Of Veterans Affairs</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileDescription">Bar Code Medication Administration</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileVersion">3.0.83.42</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName">BCMA</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalCopyright">U.S. Department Of Veterans Affairs, 2016</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalTrademarks">U.S. Department Of Veterans Affairs, 2016</VersionInfoKeys>
+                    <VersionInfoKeys Name="OriginalFilename">BCMA</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductName">Bar Code Medication Administration</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductVersion">3.0.83</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments">Developed with Borland Developer Studio 2006</VersionInfoKeys>
+                    <VersionInfoKeys Name="ReleaseDate">2016</VersionInfoKeys>
+                    <VersionInfoKeys Name="SpecialBuild"/>
+                    <VersionInfoKeys Name="PrivateBuild"/>
+                </VersionInfoKeys>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

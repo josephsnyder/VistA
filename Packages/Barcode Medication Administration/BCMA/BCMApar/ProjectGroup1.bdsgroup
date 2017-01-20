@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <PersonalityInfo>
+    <Option>
+      <Option Name="Personality">Default.Personality</Option>
+      <Option Name="ProjectType"></Option>
+      <Option Name="Version">1.0</Option>
+      <Option Name="GUID">{E8088A91-723D-4F28-8022-89501519DEA5}</Option>
+    </Option>
+  </PersonalityInfo>
+  <Default.Personality>
+
+    <Projects>
+      <Projects Name="BCMApar.exe">..\..\PSB3_OP32_SRC\BCMAPar\BCMApar.bdsproj</Projects>
+      <Projects Name="Targets">BCMApar.exe BCMApar.exe</Projects>
+    </Projects>
+    <Dependencies/>
+  </Default.Personality>
+</BorlandProject>

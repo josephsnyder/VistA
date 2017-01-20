@@ -1,0 +1,32 @@
+
+NOTE: bcma.dsk is obsolete, circa 2008.  It contains old references to MSF_FULL.  Delete it from project directory.
+
+
+Clinic Orders: Retain and display previous prefix and search entries for this user.
+
+Create new user parameter to capture last mode used (Inpatient or Clinic) for report purposes.
+
+If no patient is selected (bcma_patient.ien = ''), Print by Patient is disabled and report dialog will default to Ward or Clinic, based on user parameter that indicates last mode used. 
+
+
+HR/HA Witness Required:
+
+•	If administration is Cancelled, discard witness data.
+•	Edit Med Log will not provide ability to edit Witness data associated with an administration.
+•	Witness signs-on near the beginning of administration work flow, after Nurse Verify logic.
+•	Ensure that witness audit data gets sent to CPRS, and displays in CPRS Med Log.
+
+Unit Dose/IVP/IVPB:
+•	An administration includes an orderable item that is flagged as a “2” for “High Risk/High Alert Drug” in Drug File (#50).
+•	Only action that requires a witness is Given.
+•	Actions that DO NOT require a witness: Held/Refused/Missing Dose/Removed/Not Given.
+
+Large Volume IV’s:
+•	An IV bag has one or more additives or solutions that are flagged as a “2” for “High Risk/High Alert Drug” in Drug File (#50).
+•	The initial action of Infusing of an available IV bag. (Only once per Available bag)
+•	Take Action on Bag does NOT require a witness for actions taken on an IV bag such as Stopped, Completed, or Infusing to reinfuse an IV bag.
+•	Actions that DO NOT require a witness: Held/Refused/Missing Dose.
+
+
+Add Clinic printer parameter in BCMA Parameters and BCMA.
+
