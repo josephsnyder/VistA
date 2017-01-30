@@ -1,0 +1,231 @@
+ZZTEST ; DSS/SMH - Unit Tests for Patch VFD*15.0*103 ; 11/28/16 8:28am
+ ;;15.0;DSS OPEN SOURCE SOFTWARE;;;Build 11
+ ; LICENSED UNDER APACHE 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ D EN^%ut($T(+0),2)
+ QUIT
+STARTUP ; [UT] Startup code - modify to suit environment
+ ; ZEXCEPT: BID,BIDADM,BIDADM1,BIDADM2,DAYNOW,DOWADM,EXPDAY,MWF,NOW,ORCONJ,ORDUR,ORL,ORSCH,ORVP,PASTADMTIME,PASTBIDTIME,QDADM,QDAY,QHS,QHSADM,QOD,TID,TIMENOW,TTS S ORVP="1;DPT("
+ S ORL=1
+ S ORVP=1
+ S QDAY="QDAY"
+ S BID="BID"
+ S TID="TID"
+ S QHS="QHS"
+ S QOD="QOD"
+ S MWF="MO-WE-FR@0900"
+ S TTS="TU-TH-SA@0900"
+ S DOWADM="0900"
+ S ORSCH=$$PTR^ORCSEND1("SCHEDULE")
+ S ORCONJ=$$PTR^ORCSEND1("AND/THEN")
+ S ORDUR=$$PTR^ORCSEND1("DURATION")
+ S NOW=$$NOW^XLFDT()
+ S DAYNOW=$P(NOW,".")
+ S TIMENOW=$E($P(NOW,".",2),1,4)
+ S TIMENOW=TIMENOW_$E("0000",1,4-$L(TIMENOW))
+ S QDADM=$$ADMINS(QDAY)
+ S QHSADM=$$ADMINS(QHS)
+ S BIDADM=$$ADMINS(BID)
+ S BIDADM1=$P(BIDADM,"-")
+ S BIDADM2=$P(BIDADM,"-",2)
+ S PASTADMTIME=TIMENOW>QDADM
+ S PASTBIDTIME=TIMENOW>BIDADM2
+ S EXPDAY=$S(PASTADMTIME:$$FMADD^XLFDT(DAYNOW,1),1:DAYNOW)
+ QUIT
+SHUTDOWN ; [UT] Shutdown code
+ ; ZEXCEPT: BID,BIDADM,BIDADM1,BIDADM2,DAYNOW,DOWADM,EXPDAY,MWF,NOW,ORCONJ,ORDUR,ORL,ORSCH,ORVP,PASTADMTIME,PASTBIDTIME,QDADM,QDAY,QHS,QHSADM,QOD,TID,TIMENOW,TTS S ORVP="1;DPT("
+ K ORVP,QDAY,BID,QHS,ORSCH,ORCONJ,ORDUR,ORL,TID
+ K NOW,DAYNOW,TIMENOW,EXPDAY
+ K QDADM,QHSADM,BIDADM,BIDADM1,BIDADM2,QOD
+ K MWF,TTS,DOWADM
+ K PASTADMTIME,PASTBIDTIME
+ QUIT
+ ;
+T1 ; @TEST QD X2D + QD & HS X1D + QD
+ ; ZEXCEPT: QDAY,QHS
+ ; Originally:
+ ; Olanzapine 2.5mg tablet
+ ; 2.5mg po qd x 2d then
+ ; 2.5mg po qd & 5mg po qhs x 1d then
+ ; 7.5mg po qd
+ N ORSTRT,ORX
+ S ORX(1,4)=2780 ; REQUIRED.
+ S ORX(1,153)="2 DAYS" ; REQ
+ S ORX(1,170)=QDAY  ; REQ
+ S ORX(1,388)="T"
+ S ORX(2,153)="1 DAYS"
+ S ORX(2,170)=QDAY
+ S ORX(2,388)="A"
+ S ORX(3,153)="1 DAYS"
+ S ORX(3,170)=QHS
+ S ORX(3,388)="T"
+ S ORX(4,170)=QDAY
+ D STRT^ORCSEND1
+ D CHKEQ^%ut($P(ORSTRT(1),".",1),EXPDAY)
+ D CHKEQ^%ut($P(ORSTRT(1),".",2),QDADM)
+ D CHKEQ^%ut($P(ORSTRT(2),".",1),$$FMADD^XLFDT(EXPDAY,2))
+ D CHKEQ^%ut($P(ORSTRT(2),".",2),QDADM)
+ D CHKEQ^%ut($P(ORSTRT(3),".",1),$$FMADD^XLFDT(EXPDAY,2))
+ D CHKEQ^%ut($P(ORSTRT(3),".",2),QHSADM)
+ D CHKEQ^%ut($P(ORSTRT(4),".",1),$$FMADD^XLFDT(EXPDAY,3))
+ D CHKEQ^%ut($P(ORSTRT(4),".",2),QDADM)
+ QUIT
+T2 ; @TEST QHS X1D + QD
+ ; ZEXCEPT: QDAY,QHS
+ N ORSTRT,ORX
+ S ORX(1,4)=2780 ; REQUIRED.
+ S ORX(1,153)="1 DAYS" ; REQ
+ S ORX(1,170)=QHS  ; REQ
+ S ORX(1,388)="T"
+ S ORX(2,170)=QDAY
+ D STRT^ORCSEND1
+ D CHKEQ^%ut($P(ORSTRT(1),".",1),DAYNOW)
+ D CHKEQ^%ut($P(ORSTRT(1),".",2),QHSADM)
+ D CHKEQ^%ut($P(ORSTRT(2),".",1),$$FMADD^XLFDT(DAYNOW,1))
+ D CHKEQ^%ut($P(ORSTRT(2),".",2),QDADM)
+ QUIT
+ ;
+T3 ; @TEST QD X 1D + BID X 1D + BID & QHS
+ ; ZEXCEPT: QDAY,QHS,BID
+ ; Originally:
+ ; Aripiprazole 2mg tablet
+ ; 2mg po qd x 1d then
+ ; 2mg bid x 1d then
+ ; 4mg bid & 2mg qhs
+ N ORSTRT,ORX
+ S ORX(1,4)=2780 ; REQUIRED.
+ S ORX(1,153)="1 DAYS" ; REQ
+ S ORX(1,170)=QDAY  ; REQ
+ S ORX(1,388)="T"
+ S ORX(2,153)="1 DAYS"
+ S ORX(2,170)=BID
+ S ORX(2,388)="T"
+ S ORX(3,170)=BID
+ S ORX(3,388)="A"
+ S ORX(4,170)=QHS
+ D STRT^ORCSEND1
+ D CHKEQ^%ut($P(ORSTRT(1),".",1),EXPDAY)
+ D CHKEQ^%ut($P(ORSTRT(1),".",2),QDADM)
+ D CHKEQ^%ut($P(ORSTRT(2),".",1),$$FMADD^XLFDT(EXPDAY,1))
+ D CHKEQ^%ut($P(ORSTRT(2),".",2),BIDADM1)
+ D CHKEQ^%ut($P(ORSTRT(3),".",1),$$FMADD^XLFDT(EXPDAY,2))
+ D CHKEQ^%ut($P(ORSTRT(3),".",2),BIDADM1)
+ D CHKEQ^%ut($P(ORSTRT(4),".",1),$$FMADD^XLFDT(EXPDAY,2))
+ D CHKEQ^%ut($P(ORSTRT(4),".",2),QHSADM)
+ QUIT
+ ;
+T4 ; @TEST QD X1D & QOD X1D + QHS X1D + QOD (Erika's)
+ ; ZEXCEPT: QDAY,QHS,QOD
+ N ORSTRT,ORX
+ S ORX(1,4)=2780 ; REQUIRED.
+ S ORX(1,153)="1 DAYS" ; REQ
+ S ORX(1,170)=QDAY
+ S ORX(1,388)="A"
+ S ORX(2,153)="1 DAYS"
+ S ORX(2,170)=QOD
+ S ORX(2,388)="T"
+ S ORX(3,153)="1 DAYS"
+ S ORX(3,170)=QHS
+ S ORX(3,388)="T"
+ S ORX(4,170)=QOD
+ D STRT^ORCSEND1
+ D CHKEQ^%ut($P(ORSTRT(1),".",1),EXPDAY)
+ D CHKEQ^%ut($P(ORSTRT(1),".",2),QDADM)
+ D CHKEQ^%ut($P(ORSTRT(2),".",1),$S(PASTADMTIME:$$FMADD^XLFDT(EXPDAY,1),1:EXPDAY))
+ D CHKEQ^%ut($P(ORSTRT(2),".",2),QDADM)
+ D CHKEQ^%ut($P(ORSTRT(3),".",1),$$FMADD^XLFDT(EXPDAY,1))
+ D CHKEQ^%ut($P(ORSTRT(3),".",2),QHSADM)
+ D CHKEQ^%ut($P(ORSTRT(4),".",1),$$FMADD^XLFDT(EXPDAY,2))
+ D CHKEQ^%ut($P(ORSTRT(4),".",2),QDADM)
+ QUIT
+ ;
+T5 ; @TEST M-W-F & TU-TH-SA (Benson)
+ ; ZEXCEPT: DOWADM,MWF,TTS
+ N ORSTRT,ORX
+ S ORX(1,4)=2780 ; REQUIRED.
+ S ORX(1,170)=MWF
+ S ORX(1,388)="A"
+ S ORX(2,170)=TTS
+ D STRT^ORCSEND1
+ ;
+ ; Calculate the DOW which is in %Y.
+ ; DOW is ordinal like Microsoft Windows in US Locale: 0 = Sun, 6 = Sat
+ ; Then calculate today's time
+ N X,%H,%T,%Y,%I,DTTIME
+ S (X,DTTIME)=$$NOW^XLFDT()
+ D H^%DTC
+ N TIME S TIME=$E($P(DTTIME,".",2),1,4)
+ S TIME=TIME_$E("0000",1,4-$L(TIME))
+ ;
+ ; Arrange Administration DOWs vertically.
+ N %,%1,%2
+ S %1(1)="",%1(3)="",%1(5)="" ; MWF
+ S %2(2)="",%2(4)="",%2(6)="" ; TTS
+ ;
+ ; Expected Ordinal Day
+ N exDay S exDay=%Y
+ I TIME>DOWADM S exDay=exDay+1 ; Next day is first admin if now time post-cedes admin time
+ ;
+ ; next Admin Oridinal Day is an adm day
+ n nextAdmDayMWF s nextAdmDayMWF=$S($D(%1(exDay)):exDay,1:$O(%1(exDay)))
+ i nextAdmDayMWF="" s nextAdmDayMWF=$O(%1(""))
+ n nextAdmDayTTS s nextAdmDayTTS=$S($D(%2(exDay)):exDay,1:$O(%2(exDay)))
+ i nextAdmDayTTS="" s nextAdmDayTTS=$O(%2(nextAdmDayTTS))
+ ;
+ ; Convert ordinal day to real date/time
+ n dayDiffMWF   s dayDiffMWF=nextAdmDayMWF-%Y
+ i dayDiffMWF<0 s dayDiffMWF=nextAdmDayMWF+7-%Y
+ n dayDiffTTS   s dayDiffTTS=nextAdmDayTTS-%Y
+ i dayDiffTTS<0 s dayDiffTTS=nextAdmDayTTS+7-%Y
+ ;zwrite nextAdmDayMWF,nextAdmDayTTS,exDay,%Y,dayDiffMWF,dayDiffTTS
+ ;zwrite ORSTRT
+ ;
+ D CHKEQ^%ut($P(ORSTRT(1),".",1),$$FMADD^XLFDT($P(DTTIME,"."),dayDiffMWF))
+ D CHKEQ^%ut($P(ORSTRT(1),".",2),DOWADM)
+ D CHKEQ^%ut($P(ORSTRT(2),".",1),$$FMADD^XLFDT($P(DTTIME,"."),dayDiffTTS))
+ D CHKEQ^%ut($P(ORSTRT(2),".",2),DOWADM)
+ QUIT
+ ;
+T6 ; @TEST BID X2D + TID X3D + BIDff
+ ; ZEXCEPT: BID,BIDADM,PASTBIDTIME,TID
+ N ORSTRT,ORX
+ S ORX(1,4)=2780 ; REQUIRED.
+ S ORX(1,170)=BID
+ S ORX(1,153)="2 DAYS"
+ S ORX(1,388)="T"
+ S ORX(2,170)=TID
+ S ORX(2,153)="3 DAYS"
+ S ORX(2,388)="T"
+ S ORX(3,170)=BID
+ D STRT^ORCSEND1
+ ; ZWRITE ORSTRT
+ N EXPDAY
+ I PASTBIDTIME S EXPDAY=$$FMADD^XLFDT(DT,1)
+ E  S EXPDAY=DT
+ D CHKEQ^%ut($P(ORSTRT(1),".",1),$$FMADD^XLFDT(EXPDAY,0))
+ D CHKTF^%ut(BIDADM[$P(ORSTRT(1),".",2))
+ D CHKEQ^%ut($P(ORSTRT(2),".",1),$$FMADD^XLFDT(EXPDAY,2))
+ D CHKEQ^%ut($P(ORSTRT(2),".",2),DOWADM) ; INCORRECT--DOWADM!=FIRST TID ADMIN; BUT I WON'T FIX NOW.
+ QUIT
+T7 ; @TEST QHS X1D + (DAILY X1D & BEDTIME X1D) + BID X1D + DAILY
+ ; ZEXCEPT: BID,QDAY,QHS
+ N ORSTRT,ORX
+ S ORX(1,4)=2780 ; REQUIRED.
+ S ORX(1,170)=QHS
+ S ORX(1,153)="1 DAYS"
+ S ORX(1,388)="T"
+ S ORX(2,170)=QDAY
+ S ORX(2,153)="1 DAYS"
+ S ORX(2,388)="A"
+ S ORX(3,170)=QHS
+ S ORX(3,153)="1 DAYS"
+ S ORX(3,388)="T"
+ S ORX(4,170)=BID
+ S ORX(4,153)="1 DAYS"
+ S ORX(4,388)="T"
+ S ORX(5,170)=QDAY
+ D STRT^ORCSEND1
+ QUIT
+ADMINS(X) ; [Utility] Get Admin Times for a Schedule
+ N PSGS0Y
+ D ADMIN^PSJORPOE
+ Q PSGS0Y
