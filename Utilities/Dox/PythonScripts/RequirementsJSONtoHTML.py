@@ -18,7 +18,8 @@ def createArgParser():
     parser.add_argument('outDir', help='path to the output web page directory')
     return parser
 
-fieldList = ["Name",'Id','Description',"BFFLink",'New Service Request','Type']
+fieldList = ["Name",'Id','Description',"BFFLink",'New Service Request','Type', 'Date Updated', "Recently Updated"]
+searchColumnList = ["Name",'Id','Description',"BFFLink",'New Service Request']
 allReqs = []
 reqSummary=[]
 def getReqHTMLLink(reqID, reqEntry, **kargs):
@@ -30,8 +31,12 @@ def convertBFFLinks(linkList, reqEntry, **kargs):
         for entry in linkList:
           returnList.append('<a href="%s-%s.html">%s</a>' % (entry.replace('/','_'),"Req", entry))
         return returnList
-def convertNSRLinks(linkEntry, reqEntry, **kargs):
-        return '<a href="%s-%s.html">%s</a>' % (linkEntry.split(":")[0],"Req", linkEntry)
+def convertNSRLinks(linkList, reqEntry, **kargs):
+        returnList = []
+        for entry in linkList:
+          returnList.append('<a href="%s-%s.html">%s</a>' % (entry.split(":")[0],"Req", entry))
+        return returnList
+        #return '<a href="%s-%s.html">%s</a>' % (linkEntry.split(":")[0],"Req", linkEntry)
 
 summary_list_fields = [
     ('name', None, None),
@@ -39,7 +44,9 @@ summary_list_fields = [
     ('description', None, None),
     ('BFFlink', None, convertBFFLinks),
     ('NSRLink', None, convertNSRLinks),
-    ('type', None, None)
+    ('type', None, None),
+    ('dateUpdated', None, None),
+    ('recentUpdate', None, None)
 ]
 class RequirementsConverter:
     def __init__(self, outDir):
@@ -115,13 +122,13 @@ class RequirementsConverter:
             tName = "%s-%s" % (listName.replace(' ', '_'), pkgName.replace(' ', '_'))
             useAjax = False #useAjaxDataTable(len(inputJson))
             columnNames = fieldList
-            searchColumns = fieldList
+            searchColumns = searchColumnList
             if useAjax:
                 ajaxSrc = '%s_array.txt' % pkgName
                 outputLargeDataListTableHeader(output, ajaxSrc, tName,
                                                 columnNames, searchColumns)
             else:
-                outputDataListTableHeader(output, tName, columnNames, searchColumns)
+                outputDataListTableHeader(output, tName, columnNames, searchColumns, hideColumnNames=['Recently Updated'])
             output.write("<body id=\"dt_example\">")
             output.write("""<div id="container" style="width:80%">""")
 
@@ -159,7 +166,7 @@ class RequirementsConverter:
                           output.write("</ul></td>")
                         # Otherwise, write it out as is
                         else:
-                          if pkgName in reqSummary[idx]:
+                          if pkgName in str(reqSummary[idx]):
                             output.write("<td class='disabled'>%s</td>\n" %  reqSummary[idx])
                           else:
                             output.write("<td>%s</td>\n" %  reqSummary[idx])
@@ -180,15 +187,19 @@ class RequirementsConverter:
             output.write ("</body></html>\n")
 
     def findNSRValues(self,d,nsrSummary):
-      NSRVal = d["NSRLink"].split(":")[0]
-      if not (NSRVal in nsrSummary):
-        nsrSummary[NSRVal] = []
-      if not (d in nsrSummary[NSRVal]):
-        nsrSummary[NSRVal].append(d)
+      if "NSRLink" in d:
+        for entry in d["NSRLink"]:
+          NSRVal = entry.split(":")[0]
+          if not (NSRVal in nsrSummary):
+            nsrSummary[NSRVal] = []
+          if not (d in nsrSummary[NSRVal]):
+            nsrSummary[NSRVal].append(d)
+      else:
+        nsrSummary["NO NSR"].append(d)
       return nsrSummary
 
     def _generateRequirementsSummaryPage(self, inputJson):
-        nsrSummary = {}
+        nsrSummary = {"NO NSR":[]}
         for key in inputJson.keys():
           self._generateRequirementsSummaryPageImpl(inputJson, 'Requirement List', key, False)
           for bffEntry in inputJson[key]:
