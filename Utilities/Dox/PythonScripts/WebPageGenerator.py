@@ -550,20 +550,20 @@ class WebPageGenerator:
 # Template method to generate the web pages
 #===============================================================================
     def generateWebPage(self):
-        self.generateIndexHtmlPage()
-        self.generatePackageNamespaceGlobalMappingPage()
-        if self._hasDot and self._dotPath:
-            self.generatePackageDependenciesGraph()
-            self.generatePackageDependentsGraph()
-        self.generateGlobalNameIndexPage()
-        self.generateIndividualGlobalPage()
-        self.generateGlobalFileNoIndexPage()
-        self.generateFileManSubFileIndexPage()
-        self.generatePackageIndexPage()
+        #self.generateIndexHtmlPage()
+        #self.generatePackageNamespaceGlobalMappingPage()
+        #if self._hasDot and self._dotPath:
+        #    self.generatePackageDependenciesGraph()
+        #    self.generatePackageDependentsGraph()
+        #self.generateGlobalNameIndexPage()
+        #elf.generateIndividualGlobalPage()
+        #self.generateGlobalFileNoIndexPage()
+        #self.generateFileManSubFileIndexPage()
+        #elf.generatePackageIndexPage()
         self.generatePackagePackageInteractionDetail()
-        self.generateIndividualPackagePage()
-        self.generateRoutineRelatedPages()
-        self.copyFilesToOutputDir()
+        #self.generateIndividualPackagePage()
+        #self.generateRoutineRelatedPages()
+        #self.copyFilesToOutputDir()
 #===============================================================================
 # Method to generate the index.html page
 #===============================================================================
@@ -1116,9 +1116,20 @@ class WebPageGenerator:
         referencedFileManFiles = set()
         dbCallRoutines = set()
         dbCallFileManFiles = set()
+        callerRPCS = []
         if routineDepDict and depPackage in routineDepDict:
             callerRoutines = routineDepDict[depPackage][0]
             calledRoutines = routineDepDict[depPackage][1]
+            for routine in callerRoutines:
+              routine._rpcEntry=[]
+              externalRefs = routine.getExternalReference()
+              for calledRtn in calledRoutines:
+                rpcInfo = self.__getRpcReferences__(calledRtn.getName())
+                if rpcInfo:
+                  for RPCentry in rpcInfo:
+                    if (calledRtn.getName(), RPCentry["tag"]) in externalRefs:
+                      routine._rpcEntry.append(RPCentry)
+                      callerRPCS.append(RPCentry["ien"])
         if globalDepDict and depPackage in globalDepDict:
             referredRoutines = globalDepDict[depPackage][0]
             referredGlobals = globalDepDict[depPackage][1]
@@ -1128,17 +1139,31 @@ class WebPageGenerator:
         if dbCallDepDict and depPackage in dbCallDepDict:
             dbCallRoutines = dbCallDepDict[depPackage][0]
             dbCallFileManFiles = dbCallDepDict[depPackage][1]
+            print dbCallRoutines
+            print dbCallFileManFiles
+            for routine in dbCallRoutines:
+              routine._rpcEntry=[]
+              externalRefs = routine.getFilemanDbCallGlobals()
+              for refGlobal in dbCallFileManFiles:
+                rpcInfo = self.__getRpcReferences__(calledRtn.getName())
+                if rpcInfo:
+                  for RPCentry in rpcInfo:
+                    if (routine.getName(), RPCentry["tag"]) in externalRefs:
+                      routine._rpcEntry.append(RPCentry)
+                      callerRPCS.append(RPCentry["ien"])
         totalCalledHtml = "<span class=\"comment\">%d</span>" % len(callerRoutines)
         totalCallerHtml = "<span class=\"comment\">%d</span>" % len(calledRoutines)
+        totalCallerRPCHtml = "<span class=\"comment\">%d</span>" % len(callerRPCS)
         totalReferredRoutineHtml = "<span class=\"comment\">%d</span>" % len(referredRoutines)
         totalReferredGlobalHtml = "<span class=\"comment\">%d</span>" % len(referredGlobals)
         totalReferredFileManFilesHtml = "<span class=\"comment\">%d</span>" % len(referredFileManFiles)
         totalReferencedFileManFilesHtml = "<span class=\"comment\">%d</span>" % len(referencedFileManFiles)
         totalDbCallRoutinesHtml = "<span class=\"comment\">%d</span>" % len(dbCallRoutines)
         totalDbCallFileManFilesHtml = "<span class=\"comment\">%d</span>" % len(dbCallFileManFiles)
-        summaryHeader = "Summary:<BR> Total %s routine(s) in %s called total %s routine(s) in %s" % (totalCalledHtml,
+        summaryHeader = "Summary:<BR> Total %s routine(s) in %s called total %s routine(s) (%s by RPC entry points) in %s" % (totalCalledHtml,
                                                                                                packageHyperLink,
                                                                                                totalCallerHtml,
+                                                                                               totalCallerRPCHtml,
                                                                                                depPackageHyperLink)
         summaryHeader += "<BR> Total %s routine(s) in %s accessed total %s global(s) in %s" % (totalReferredRoutineHtml,
                                                                                              packageHyperLink,
@@ -1148,7 +1173,7 @@ class WebPageGenerator:
                                                                                              packageHyperLink,
                                                                                              totalReferencedFileManFilesHtml,
                                                                                              depPackageHyperLink)
-        summaryHeader += "<BR> Total %s routine(s) in %s accesed via fileman db call to total %s fileman file(s) in %s" % (totalDbCallRoutinesHtml,
+        summaryHeader += "<BR> Total %s routine(s) in %s accessed via fileman db call to total %s fileman file(s) in %s" % (totalDbCallRoutinesHtml,
                                                                                              packageHyperLink,
                                                                                              totalDbCallFileManFilesHtml,
                                                                                              depPackageHyperLink)
@@ -1871,11 +1896,18 @@ class WebPageGenerator:
             for index in range(numOfRow):
                 outputFile.write("<tr>")
                 for i in range(totalCol):
+                    icrHTML = ''
                     position = index * totalCol + i
                     if position < totalNumRoutine:
                         displayName = sortedItemList[position]
+                        if "_rpcEntry" in dir(displayName):
+                          for entry in displayName._rpcEntry:
+                            icrHTML += "<a href='http://code.osehra.org/vivian/files/8994/8994-%s.html'>*</a>" % entry["ien"]
+                          del(displayName._rpcEntry)
                         if nameFunc: displayName = nameFunc(displayName)
-                        outputFile.write("<td class=\"indexkey\"><a class=\"e1\" href=\"%s\">%s</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>"
+                        outputFile.write("<td class=\"indexkey\">")
+                        if icrHTML: outputFile.write(icrHTML)
+                        outputFile.write("<a class=\"e1\" href=\"%s\">%s</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>"
                                    % (htmlMappingFunc(sortedItemList[position]),
                                       displayName))
                 outputFile.write("</tr>\n")
