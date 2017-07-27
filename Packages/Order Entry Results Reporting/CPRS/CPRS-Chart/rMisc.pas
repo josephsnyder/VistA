@@ -3,7 +3,7 @@ unit rMisc;
 interface
 
 uses SysUtils, Windows, Classes, Forms, Controls, ComCtrls, Grids, ORFn, ORNet,
-    Menus, Contnrs, StrUtils;
+    Menus, Contnrs, StrUtils, rCore;
 
 const
   MAX_TOOLITEMS = 30;
@@ -18,6 +18,14 @@ type
     SubMenuID: string;
     MenuItem: TMenuItem;
   end;
+
+  TDLL_Return_Type = (DLL_Success, DLL_Missing, DLL_VersionErr);
+
+  TDllRtnRec = Record
+   DLL_HWND: HMODULE;
+   Return_Type: TDLL_Return_Type;
+   Return_Message: String;
+  End;
 
 var
   uToolMenuItems: TObjectList = nil;
@@ -38,6 +46,7 @@ type
 
   SettingSizeArray = array of integer;
 
+function ClientVersion(const AFileName: string): string;
 function DetailPrimaryCare(const DFN: string): TStrings;  //*DFN*
 procedure GetToolMenu;
 procedure ListSymbolTable(Dest: TStrings);
@@ -55,8 +64,9 @@ function VistaCommonFilesDirectory: string;
 function DropADir(DirName: string): string;
 function RelativeCommonFilesDirectory: string;
 function FindDllDir(DllName: string): string;
-function LoadDll(DllName: string): HMODULE;
+function LoadDll(DllName: string): TDllRtnRec;
 function DllVersionCheck(DllName: string; DLLVersion: string): string;
+function GetMOBDLLName(): string;
 
 procedure SaveUserBounds(AControl: TControl);
 procedure SaveUserSizes(SizingList: TStringList);
@@ -85,6 +95,26 @@ uses TRPCB, fOrders, math, Registry;
 
 var
   uBounds, uWidths, uColumns: TStringList;
+
+function ClientVersion(const AFileName: string): string;
+var
+  ASize, AHandle: DWORD;
+  Buf: string;
+  FileInfoPtr: Pointer; //PVSFixedFileInfo;
+begin
+  Result := '';
+  ASize:=GetFileVersionInfoSize(PChar(AFileName), AHandle);
+  if ASize > 0 then
+  begin
+    SetLength(Buf, ASize);
+    GetFileVersionInfo(PChar(AFileName), AHandle, ASize, Pointer(Buf));
+    VerQueryValue(Pointer(Buf), '\', FileInfoPtr, ASize);
+    with TVSFixedFileInfo(FileInfoPtr^) do Result := IntToStr(HIWORD(dwFileVersionMS)) + '.' +
+                                                     IntToStr(LOWORD(dwFileVersionMS)) + '.' +
+                                                     IntToStr(HIWORD(dwFileVersionLS)) + '.' +
+                                                     IntToStr(LOWORD(dwFileVersionLS));
+  end;
+end;
 
 function DetailPrimaryCare(const DFN: string): TStrings;  //*DFN*
 begin
@@ -653,21 +683,48 @@ begin
 
 end;
 
-function LoadDll(DllName: string): HMODULE;
+function LoadDll(DllName: string): TDllRtnRec;
 var
-  LibName: string;
+  LibName, TmpStr, HelpTxt: string;
 begin
   LibName := FindDllDir(DllName);
-  if LibName = '' then begin
-    Result := LoadLibrary(PWideChar(DllName));
-  end else begin
-    Result := LoadLibrary(PWideChar(LibName));
-  end;
+  if LibName = '' then
+    Result.DLL_HWND := LoadLibrary(PWideChar(DllName))
+  else
+    Result.DLL_HWND := LoadLibrary(PWideChar(LibName));
+
+  if Result.DLL_HWND <> 0 then
+  Begin
+    //DLL exist
+    Result.Return_Type := DLL_Success;
+    //Now check for the version string
+    TmpStr := DllVersionCheck(DllName, ClientVersion(LibName));
+    if Piece(TmpStr, U, 1) = '-1' then begin
+     Result.Return_Message := StringReplace(Piece(TmpStr, U, 2), '#13', CRLF, [rfReplaceAll]);
+     //DLL version mismatch
+     Result.Return_Type := DLL_VersionErr;
+    end else
+     Result.Return_Message := '';
+  End else begin
+    Result.Return_Type := DLL_Missing;
+    HelpTxt := GetUserParam('OR CPRS HELP DESK TEXT');
+    if Trim(HelpTxt) <> '' then
+     HelpTxt := CRLF+CRLF+'Please contact ' + HelpTxt + ' to obtain this file.';
+    tmpStr:= 'File must be located in one of these directories:' +CRLF+ ApplicationDirectory +CRLF+
+    RelativeCommonFilesDirectory +CRLF+ VistaCommonFilesDirectory;
+    Result.Return_Message := DllName+' was not found. ' + HelpTxt +CRLF+CRLF+ tmpStr;
+   end;
 end;
 
 function DllVersionCheck(DllName: string; DLLVersion: string): string;
 begin
   Result := sCallV('ORUTL4 DLL', [DllName, DllVersion]);
+end;
+
+
+function GetMOBDLLName(): string;
+begin
+  Result := GetUserParam('OR MOB DLL NAME');
 end;
 
 initialization

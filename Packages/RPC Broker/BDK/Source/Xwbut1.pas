@@ -4,26 +4,41 @@
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
 	Description: Contains TRPCBroker and related components.
-  Unit: Xwbut1 contains utilities used by the BDK.
-	Current Release: Version 1.1 Patch 50
+  Unit: XWBut1 contains utilities used by the BDK.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
 { **************************************************
-  Changes in v1.1.47 (JLI 6/17/2008) XWB*1.1*47
+  Changes in v1.1.65 (HGW 08/05/2015) XWB*1.1*65
+  1. Added REG_IAM Key for obtaining Identity and Access Management (IAM)
+     Secure Token Service (STS) URL from Windows registry.
+
+  Changes in v1.1.60 (HGW 05/08/2014) XWB*1.1*60
+  1. Change to set access permissions when reading from or writing
+     to Windows registry.
+  2. Fixed deletion of key values (was trying to delete a key).
+
+  Changes in v1.1.47 (JLI 06/17/2008) XWB*1.1*47
   1. Deleted unused code.
 ************************************************** }
 
-unit Xwbut1;
+unit XWBut1;
 
 interface
 
-Uses
-Sysutils, Classes, Messages, WinProcs, IniFiles,
-Dialogs, Registry;
+uses
+  {System}
+  System.Sysutils, System.Classes, System.IniFiles,
+  {System.Win}
+  System.Win.Registry,
+  {WinApi}
+  WinApi.Messages, WinProcs,
+  {Vcl}
+  Vcl.Dialogs;
 
 const
   xwb_ConnectAction = wm_User + 200;
-  IniFile = 'VISTA.INI';
+  IniFile = 'VISTA.INI';    // This is no longer used.
   BrokerSection = 'RPCBroker';
   BrokerServerSection = 'RPCBroker_Servers';
   TAB = #9;
@@ -36,6 +51,7 @@ const
     HKCC = HKEY_CURRENT_CONFIG;
     HKDD = HKEY_DYN_DATA;
     {Keys}
+    REG_IAM = 'Software\Vista\Common\IAM';
     REG_BROKER = 'Software\Vista\Broker';
     REG_VISTA  = 'Software\Vista';
     REG_SIGNON = 'Software\Vista\Signon';
@@ -66,18 +82,16 @@ implementation
 ------------------------------------------------------------------}
 Function BuildSect(s1: string; s2: string): string;
 var
-//   s, x: string[100];  // JLI 090804  no real reason for the array
   s, x: String;  // JLI 090804
 begin
-     if s2 <> '' then
-          s := s1 + s2
-     else
-         s := s1;
-
-     x := IntToStr(length(s));
-     if length(x) = 1 then x := '00' + x;
-     if length(x) = 2 then x := '0' + x;
-     Result := x + s;
+  if s2 <> '' then
+    s := s1 + s2
+  else
+    s := s1;
+  x := IntToStr(length(s));
+  if length(x) = 1 then x := '00' + x;
+  if length(x) = 2 then x := '0' + x;
+  Result := x + s;
 end;
 
 
@@ -101,23 +115,24 @@ begin
     WholeList.LoadFromFile(GetHostsPath + '\HOSTS');  {read in the file}
     for I := 0 to WholeList.Count - 1 do
     begin
-        S := WholeList[I];
-        {ignore lines that start with '#' and empty lines}
-        if (Copy(S,1,1) <> '#') and (Length(S) > 0) then
-        begin
-           while Pos(TAB, S) > 0 do              //Convert tabs to spaces
-              S[Pos(TAB, S)] := ' ';
-           IP := Copy(S,1,pos(' ', S)-1);  {get IP addr}
-           {parse out Host name}
-           SpacePos := Length(IP) + 1;
-           while Copy(S,SpacePos,1) = ' ' do inc(SpacePos);
-           HostName := Copy(S,SpacePos,255);
-           if pos(' ',HostName) > 0 then
-              HostName := Copy(HostName,1,pos(' ',HostName)-1);
-           if pos('#',HostName) > 0 then
-              HostName := Copy(HostName,1,pos('#',HostName)-1);
-           HostList.Add(HostName+'   [' + IP + ']');
-        end{if};
+      S := WholeList[I];
+      {ignore lines that start with '#' and empty lines}
+      if (Copy(S,1,1) <> '#') and (Length(S) > 0) then
+      begin
+        while Pos(TAB, S) > 0 do              //Convert tabs to spaces
+          S[Pos(TAB, S)] := ' ';
+        IP := Copy(S,1,pos(' ', S)-1);  {get IP addr}
+        {parse out Host name}
+        SpacePos := Length(IP) + 1;
+        while Copy(S,SpacePos,1) = ' ' do
+          inc(SpacePos);
+        HostName := Copy(S,SpacePos,255);
+        if pos(' ',HostName) > 0 then
+          HostName := Copy(HostName,1,pos(' ',HostName)-1);
+        if pos('#',HostName) > 0 then
+          HostName := Copy(HostName,1,pos('#',HostName)-1);
+        HostList.Add(HostName+'   [' + IP + ']');
+      end{if};
     end{for};
   finally
     WholeList.Free;
@@ -162,14 +177,14 @@ begin
   GetWindowsDirectory(pchWinDir, SizeOf(pchWinDir));
   DhcpIni := TIniFile.Create(IniFile);
   Result := DhcpIni.ReadString(BrokerSection, Value, 'Could not find!');
-  if Result = 'Could not find!' then begin
-     if ((Value <> 'Installing') and (GetIniValue('Installing','0') <> '1')) then
-        {during Broker install Installing=1 so warnings should not display}
-     begin
-        DhcpIni.WriteString(BrokerSection, Value, Default);   {Creates vista.ini
-                                                               if necessary}
-     end;
-     Result := Default;
+  if Result = 'Could not find!' then
+  begin
+    {during Broker install Installing=1 so warnings should not display}
+    if ((Value <> 'Installing') and (GetIniValue('Installing','0') <> '1')) then
+    begin
+      DhcpIni.WriteString(BrokerSection, Value, Default);
+    end;
+    Result := Default;
   end;
   DhcpIni.Free;
 end;
@@ -199,9 +214,9 @@ begin
   x := Length(st);
   st := IntToStr(x);
   if length(st) < 3 then
-     Result := '0' + st
+    Result := '0' + st
   else
-      Result := st;
+    Result := st;
 end;
 
 {Function to retrieve a data value from the Windows Registry.
@@ -211,10 +226,11 @@ var
   Registry: TRegistry;
 begin
   Result := '';
-  Registry := TRegistry.Create;
+  Registry := TRegistry.Create(KEY_READ);
   try
     Registry.RootKey := Root;
-    if Registry.OpenKeyReadOnly(Key) then
+    Registry.Access := KEY_READ; //p60
+    if Registry.OpenKey(Key, False) then
     begin
       Result := Registry.ReadString(Name);
       Registry.CloseKey;
@@ -225,42 +241,41 @@ begin
 end;
 
 {Function to set a data value into the Windows Registry.
-If Key or Name does not exist, it is created.}
+If Key or Name does not exist, it is created.
+p60 - Change to set high-level access to Windows registry}
 procedure  WriteRegData(Root: HKEY; Key, Name, Value : string);
 var
   Registry: TRegistry;
 begin
-  Registry := TRegistry.Create;
+  Registry := TRegistry.Create(KEY_WRITE); //p60
   try
     Registry.RootKey := Root;
+    Registry.Access := KEY_WRITE; //p60
     if Registry.OpenKey(Key, True) then
-    begin
       Registry.WriteString(Name, Value);
-      Registry.CloseKey;
-    end;
+    Registry.CloseKey;
   finally
     Registry.Free;
   end;
 end;
 
-{Procedure to delete a data value into the Windows Registry.}
+{Procedure to delete a data value into the Windows Registry.
+p60 - Change to set high-level access to Windows registry}
 procedure  DeleteRegData(Root: HKEY; Key, Name : string);
 var
   Registry: TRegistry;
 begin
-  Registry := TRegistry.Create;
+  Registry := TRegistry.Create(KEY_WRITE); //p60
   try
     Registry.RootKey := Root;
+    Registry.Access := KEY_WRITE; //p60
     if Registry.OpenKey(Key, True) then
-    begin
       Registry.DeleteValue(Name);
-      Registry.CloseKey;
-    end;
+    Registry.CloseKey;
   finally
     Registry.Free;
   end;
 end;
-
 
 {Returns string value from registry.  If value is '', then Default
 value is filed in Registry and Default is returned.}
@@ -283,10 +298,11 @@ var
   i         : integer;
 begin
   RegNames := TStringlist.Create;
-  Registry  := TRegistry.Create;
+  Registry  := TRegistry.Create(KEY_READ); //p60
   try
     Registry.RootKey := Root;
-    if Registry.OpenKeyReadOnly(Key) then
+    Registry.Access := KEY_READ; //p60
+    if Registry.OpenKey(Key, False) then
     begin
       Registry.GetValueNames(RegNames);
       for i := 0 to (RegNames.Count - 1) do
@@ -307,11 +323,12 @@ var
   ReturnedNames : TStringList;
 begin
   RegNames.Clear;
-  Registry  := TRegistry.Create;
+  Registry  := TRegistry.Create(KEY_READ); //p60
   ReturnedNames := TStringList.Create;
   try
     Registry.RootKey := Root;
-    if Registry.OpenKeyReadOnly(Key) then
+    Registry.Access := KEY_READ; //p60
+    if Registry.OpenKey(Key, False) then
     begin
       Registry.GetValueNames(ReturnedNames);
       RegNames.Assign(ReturnedNames);

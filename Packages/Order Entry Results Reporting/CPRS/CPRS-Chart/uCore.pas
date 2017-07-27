@@ -20,6 +20,7 @@ type
     FNoOrdering:      Boolean;
     FEnableVerify:    Boolean;
     FDTIME:           Integer;
+    FActOneStep:      Boolean;
     FCountDown:       Integer;
     FCurrentPrinter:  string;
     FNotifyAppsWM:    Boolean;
@@ -52,6 +53,7 @@ type
     property OrderRole:       Integer read FOrderRole;
     property NoOrdering:      Boolean read FNoOrdering;
     property EnableVerify:    Boolean read FEnableVerify;
+    property EnableActOneStep: Boolean read FActOneStep;
     property DTIME:           Integer read FDTIME;
     property CountDown:       Integer read FCountDown;
     property PtMsgHang:       Integer read FPtMsgHang;
@@ -89,7 +91,7 @@ type
     FLocation:   Integer;                        // IEN in Hosp Loc if inpatient
     FWardService: string;
     FSpecialty:  Integer;                        // IEN of the treating specialty if inpatient
-    FSpecialtySvc: string;                       // treating specialty service if inpatient                                                                               
+    FSpecialtySvc: string;                       // treating specialty service if inpatient
     FAdmitTime:  TFMDateTime;                    // Admit date/time if inpatient
     FSrvConn:    Boolean;                        // True if patient is service connected
     FSCPercent:  Integer;                        // Per Cent Service Connection
@@ -102,12 +104,22 @@ type
     FDateDied: TFMDateTime;                      // Date of Patient Death (<=0 or still alive)
     FDateDiedLoaded: boolean;                    // Used to determine of DateDied has been loaded
     FCombatVet : TCombatVet;                     // Object Holding CombatVet Data
+    FVAAData: TStringList;                       // Holds raw insurance information
+    FMHVData: TStringList;                       // Holds raw MyHealthyVet information
     procedure SetDFN(const Value: string);
     function GetDateDied: TFMDateTime;
     function GetCombatVet: TCombatVet;       // *DFN*
+    function GetPtIsVAA: boolean;
+    function GetPtIsMHV: boolean;
   public
-    procedure Clear;
+    constructor Create;
     destructor Destroy; override;
+
+    procedure Clear;
+    //procedure RefreshVAAStatus;
+    //procedure RefreshMHVStatus;
+    procedure GetVAAInformation(var aSubscriberName: string; aReportText: TStrings);
+
     property DFN:              string      read FDFN write SetDFN;  //*DFN*
     property ICN:              string      read FICN;
     property Name:             string      read FName;
@@ -133,6 +145,8 @@ type
     property InProvider:        string     read FInProvider;
     property MHTC:             string      read FMHTC;
     property CombatVet:        TCombatVet  read GetCombatVet;
+    property PtIsMHV:          boolean     read GetPtIsMHV;
+    property PtIsVAA:          boolean     read GetPtIsVAA;
   end;
 
   TEncounter = class(TObject, IORNotifier)
@@ -262,6 +276,7 @@ type
     //AlertData: string;
     RecordID: string;
     HighLightSection: String;
+    Data: TStringList;
   end;
 
   TNotifications = class
@@ -278,11 +293,12 @@ type
     function GetIndOrderDisplay: Boolean;
     function GetRecordID: string;
     function GetText: string;
+    function GetData: TStringList;
     procedure SetIndOrderDisplay(Value: Boolean);
   public
     constructor Create;
     destructor Destroy; override;
-    procedure Add(const ADFN: string; AFollowUp: Integer; const ARecordID: string; AHighLightSection : string = '');  //*DFN*  CB
+    procedure Add(const ADFN: string; AFollowUp: Integer; const ARecordID: string; AHighLightSection : string; AData : TStringList);  //*DFN*  CB
     procedure Clear;
     procedure Next;
     procedure Prior;
@@ -294,6 +310,7 @@ type
     property AlertData: string read GetAlertData;
     property RecordID: string  read GetRecordID;
     property Text:     string  read GetText;
+    property Data:     TStringList  read GetData;
     property HighLightSection: String read GetHighLightSection; //cb
     property IndOrderDisplay:  Boolean read GetIndOrderDisplay write SetIndOrderDisplay;
   end;
@@ -729,6 +746,7 @@ begin
   FAutoSave      := UserInfo.AutoSave;
   FInitialTab    := UserInfo.InitialTab;
   FUseLastTab    := UserInfo.UseLastTab;
+  //FActOneStep    := UserInfo.EnableActOneStep;
   if(URLMonHandle = 0) then
     FWebAccess := FALSE
   else
@@ -754,6 +772,20 @@ end;
 
 { TPatient methods ------------------------------------------------------------------------- }
 
+constructor TPatient.Create;
+begin
+  FMHVData := TStringList.Create;
+  FVAAData := TStringList.Create;
+end;
+
+destructor TPatient.Destroy;
+begin
+  FreeAndNil(FCombatVet);
+  FreeAndNil(FVAAData);
+  FreeAndNil(FMHVData);
+  inherited;
+end;
+
 procedure TPatient.Clear;
 { clears all fields in the Patient object }
 begin
@@ -778,13 +810,9 @@ begin
   FPrimProv     := '';
   FAttending    := '';
   FMHTC         := '';
+  FMHVData.Clear;
+  FVAAData.Clear;
   FreeAndNil(FCombatVet);
-end;
-
-destructor TPatient.Destroy;
-begin
-  FreeAndNil(FCombatVet);
-  inherited;
 end;
 
 function TPatient.GetCombatVet: TCombatVet;
@@ -804,6 +832,54 @@ begin
   Result := FDateDied;
 end;
 
+function TPatient.GetPtIsMHV: Boolean;
+begin
+  //if FMHVData.Count = 0 then
+  //  RefreshMHVStatus;
+  if FMHVData.Count > 0 then
+    Result := FMHVData[0] <> '0'
+  else
+    Result := False;
+end;
+
+function TPatient.GetPtIsVAA: Boolean;
+begin
+  //if FVAAData.Count = 0 then
+  //  RefreshVAAStatus;
+  if FVAAData.Count > 0 then
+    Result := FVAAData[0] <> '0'
+  else
+    Result := False;
+end;
+
+procedure TPatient.GetVAAInformation(var aSubscriberName: string; aReportText: TStrings);
+begin
+  if GetPtIsVAA then
+    try
+      aSubscriberName := Piece(FVAAData[12], ':', 1) + ': ' + Trim(Piece(FVAAData[12], ':', 2));
+      aReportText.Text := FVAAData.Text;
+      aReportText.Delete(0);
+    except
+      aSubscriberName := 'Error in VAA information';
+      aReportText.Clear;
+    end
+  else
+    begin
+      aSubscriberName := '';
+      aReportText.Clear;
+    end;
+end;
+
+{procedure TPatient.RefreshMHVStatus;
+begin
+  GetMHVData(FDFN, FMHVData);
+end;
+
+procedure TPatient.RefreshVAAStatus;
+begin
+  GetVAAData(FDFN, FVAAData);
+end;
+}
 procedure TPatient.SetDFN(const Value: string);  //*DFN*
 { selects a patient and sets up the Patient object for the patient }
 var
@@ -836,7 +912,9 @@ begin
   FAttending  := PtSelect.Attending;
   FAssociate  := PtSelect.Associate;
   FInProvider := PtSelect.InProvider;
-  FMHTC       := PtSelect.MHTC
+  FMHTC       := PtSelect.MHTC;
+  // RefreshVAAStatus;
+  //RefreshMHVStatus;
 end;
 
 { TEncounter ------------------------------------------------------------------------------- }
@@ -1463,7 +1541,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TNotifications.Add(const ADFN: string; AFollowUp: Integer; const ARecordID: string; AHighLightSection : string = '');  //*DFN*
+procedure TNotifications.Add(const ADFN: string; AFollowUp: Integer; const ARecordID: string; AHighLightSection : string; AData : TStringList);  //*DFN*
 var
   NotifyItem: TNotifyItem;
 begin
@@ -1471,6 +1549,10 @@ begin
   NotifyItem.DFN := ADFN;
   NotifyItem.FollowUp := AFollowUp;
   NotifyItem.RecordID := ARecordId;
+  NotifyItem.Data := TStringList.Create;
+//  AData.Assign(NotifyItem.Data);
+  NotifyItem.Data.Assign(AData);
+
   If AHighLightSection <> '' then NotifyItem.HighLightSection := AHighLightSection;
   FList.Add(NotifyItem);
   FActive := True;
@@ -1480,7 +1562,11 @@ procedure TNotifications.Clear;
 var
   i: Integer;
 begin
-  with FList do for i := 0 to Count - 1 do with TNotifyItem(Items[i]) do Free;
+  with FList do for i := 0 to Count - 1 do with TNotifyItem(Items[i]) do
+  begin
+    TNotifyItem(Items[i]).Data.Free;
+    Free;
+  end;
   FList.Clear;
   FActive := False;
   FCurrentIndex := -1;
@@ -1515,6 +1601,11 @@ begin
   if FNotifyItem <> nil
     then Result := Piece(Piece(FNotifyItem.RecordID, U, 1 ), ':', 2)
     else Result := '';
+end;
+
+function TNotifications.GetData: TStringList;
+begin
+  if FNotifyItem <> nil then Result := FNotifyItem.Data else Result := nil;
 end;
 
 function TNotifications.GetHighLightSection: String; //CB

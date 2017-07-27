@@ -1,16 +1,16 @@
 object frmSignon: TfrmSignon
-  Left = 180
-  Top = 178
+  Left = 115
+  Top = 114
   HelpContext = 1
   ActiveControl = accessCode
   Anchors = [akTop]
-  Caption = 'VISTA Sign-on'
-  ClientHeight = 542
-  ClientWidth = 763
+  Caption = 'VistA Sign-on'
+  ClientHeight = 546
+  ClientWidth = 771
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -16
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = True
@@ -20,19 +20,25 @@ object frmSignon: TfrmSignon
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    763
-    542)
+    771
+    546)
   PixelsPerInch = 96
-  TextHeight = 13
-  object pnlUpper: TPanel
-    Left = 5
-    Top = 0
+  TextHeight = 20
+  object Panel1: TPanel
+    Left = 8
+    Top = 3
     Width = 761
     Height = 409
     Alignment = taLeftJustify
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelInner = bvLowered
     BorderWidth = 4
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     object introText: TXWBRichEdit
       Left = 6
@@ -42,60 +48,10 @@ object frmSignon: TfrmSignon
       Align = alClient
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -15
+      Font.Height = -13
       Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      URLDetect = True
+      Font.Style = []
       Lines.Strings = (
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
-        ''
         ''
         ''
         ''
@@ -123,24 +79,18 @@ object frmSignon: TfrmSignon
       TabOrder = 0
     end
   end
-  object pnlLower: TPanel
+  object Panel7: TPanel
     Left = 0
-    Top = 398
-    Width = 763
+    Top = 402
+    Width = 771
     Height = 144
     Align = alBottom
     BevelOuter = bvNone
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
     TabOrder = 1
     DesignSize = (
-      763
+      771
       144)
-    object imgVA: TImage
+    object Image1: TImage
       Left = 8
       Top = 8
       Width = 117
@@ -300,45 +250,45 @@ object frmSignon: TfrmSignon
         88888888888888888000}
       Stretch = True
     end
-    object bvlStatus: TBevel
+    object Bevel1: TBevel
       Left = 0
       Top = 118
-      Width = 763
+      Width = 771
       Height = 26
       Align = alBottom
       Style = bsRaised
-      ExplicitTop = 113
+      ExplicitTop = 102
     end
-    object bvlServer: TBevel
+    object Bevel2: TBevel
       Left = 4
       Top = 120
-      Width = 250
+      Width = 269
       Height = 20
       Anchors = [akLeft, akBottom]
     end
-    object bvlVolume: TBevel
-      Left = 260
+    object Bevel3: TBevel
+      Left = 276
       Top = 120
-      Width = 183
+      Width = 155
       Height = 20
       Anchors = [akLeft, akBottom]
     end
-    object bvlUCI: TBevel
-      Left = 449
+    object Bevel4: TBevel
+      Left = 434
       Top = 120
-      Width = 168
+      Width = 125
       Height = 20
       Anchors = [akLeft, akBottom]
     end
-    object bvlPort: TBevel
-      Left = 623
+    object Bevel5: TBevel
+      Left = 561
       Top = 120
-      Width = 137
+      Width = 198
       Height = 20
       Anchors = [akLeft, akBottom]
     end
-    object ttlServer: TLabel
-      Left = 4
+    object Label3: TLabel
+      Left = 8
       Top = 122
       Width = 43
       Height = 16
@@ -351,8 +301,8 @@ object frmSignon: TfrmSignon
       Font.Style = []
       ParentFont = False
     end
-    object ttlVolume: TLabel
-      Left = 264
+    object Label4: TLabel
+      Left = 279
       Top = 122
       Width = 49
       Height = 16
@@ -365,9 +315,9 @@ object frmSignon: TfrmSignon
       Font.Style = []
       ParentFont = False
     end
-    object ttlUCI: TLabel
-      Left = 454
-      Top = 122
+    object Label5: TLabel
+      Left = 437
+      Top = 124
       Width = 25
       Height = 16
       Anchors = [akLeft, akBottom]
@@ -379,8 +329,8 @@ object frmSignon: TfrmSignon
       Font.Style = []
       ParentFont = False
     end
-    object ttlPort: TLabel
-      Left = 638
+    object Label6: TLabel
+      Left = 564
       Top = 122
       Width = 27
       Height = 16
@@ -394,12 +344,11 @@ object frmSignon: TfrmSignon
       ParentFont = False
     end
     object lblServer: TLabel
-      Left = 64
+      Left = 55
       Top = 122
-      Width = 47
+      Width = 5
       Height = 16
       Anchors = [akLeft, akBottom]
-      Caption = 'Server'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -408,12 +357,11 @@ object frmSignon: TfrmSignon
       ParentFont = False
     end
     object lblVolume: TLabel
-      Left = 328
+      Left = 333
       Top = 122
-      Width = 53
+      Width = 5
       Height = 16
       Anchors = [akLeft, akBottom]
-      Caption = 'Volume'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -422,12 +370,11 @@ object frmSignon: TfrmSignon
       ParentFont = False
     end
     object lblUCI: TLabel
-      Left = 494
+      Left = 466
       Top = 122
-      Width = 26
+      Width = 5
       Height = 16
       Anchors = [akLeft, akBottom]
-      Caption = 'UCI'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -436,12 +383,11 @@ object frmSignon: TfrmSignon
       ParentFont = False
     end
     object lblPort: TLabel
-      Left = 678
+      Left = 595
       Top = 122
-      Width = 29
+      Width = 5
       Height = 16
       Anchors = [akLeft, akBottom]
-      Caption = 'Port'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -449,8 +395,8 @@ object frmSignon: TfrmSignon
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object pnlCode: TPanel
-      Left = 414
+    object Panel8: TPanel
+      Left = 422
       Top = 0
       Width = 349
       Height = 118
@@ -460,7 +406,7 @@ object frmSignon: TfrmSignon
       DesignSize = (
         349
         118)
-      object ttlAccessCode: TLabel
+      object Label1: TLabel
         Left = 24
         Top = 16
         Width = 97
@@ -474,7 +420,7 @@ object frmSignon: TfrmSignon
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object ttlVerifyCode: TLabel
+      object Label2: TLabel
         Left = 35
         Top = 56
         Width = 86
@@ -655,16 +601,15 @@ object frmSignon: TfrmSignon
     ClearParameters = True
     ClearResults = True
     Connected = False
-    ListenerPort = 9500
+    ListenerPort = 9300
     RpcVersion = '0'
-    Server = 'NXT-Server'
+    Server = 'BROKERSERVER'
     KernelLogIn = True
     LogIn.Mode = lmAVCodes
     LogIn.PromptDivision = False
-    OldConnectionOnly = False
     UseSecureConnection = secureNone
     SSHHide = False
-    Left = 16
-    Top = 24
+    Left = 168
+    Top = 75
   end
 end

@@ -62,7 +62,7 @@ implementation
 
 {-------------------------------------------------------------------------------
   Procedure:   ShowBrokerSearch
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   ReturnIndex: Integer; ReturnRichEdit: TRichedit;
                ReturnLabel: TStaticText
@@ -87,7 +87,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.btnOkClick
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   Sender: TObject
   Result:      None
@@ -104,7 +104,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.btnSearchClick
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   Sender: TObject
   Result:      None
@@ -152,7 +152,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.CloneRPCList
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:
   Result:      None
@@ -179,7 +179,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.FormCreate
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   Sender: TObject
   Result:      None
@@ -195,7 +195,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.FormDestroy
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   Sender: TObject
   Result:      None
@@ -212,7 +212,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.FormResize
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   Sender: TObject
   Result:      None
@@ -225,7 +225,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.ResultListSelectItem
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   Sender: TObject; Item: TListItem; Selected: Boolean
   Result:      None
@@ -285,7 +285,7 @@ end;
 
 {-------------------------------------------------------------------------------
   Procedure:   TfrmBokerSearch.SearchTermChange
-  Author:      ZZZZZZBELLC
+  Author:      DNS   BELLC
   DateTime:    2013.08.12
   Arguments:   Sender: TObject
   Result:      None

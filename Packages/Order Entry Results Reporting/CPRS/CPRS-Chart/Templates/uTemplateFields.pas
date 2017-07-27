@@ -600,7 +600,7 @@ begin
           if(assigned(Entry)) then
           begin
             NewTxt := Entry.GetControlText(CtrlID, TRUE, FoundEntry, FALSE);
-            if FoundEntry and (NewTxt = '') then{(Trim(NewTxt) = '') then //CODE ADDED BACK IN - ZZZZZZBELLC}
+            if FoundEntry and (NewTxt = '') then{(Trim(NewTxt) = '') then //CODE ADDED BACK IN - DNS   BELLC}
               Result := TRUE;
           end;
           if FoundEntry then break;
@@ -1935,7 +1935,7 @@ begin
         end;
       end
       else
-      //!!!!!! CODE ADDED BACK IN - ZZZZZZBELLC !!!!!!
+      //!!!!!! CODE ADDED BACK IN - DNS   BELLC !!!!!!
       if(Ctrl is TEdit) then
         Result := TEdit(Ctrl).Text
       else
@@ -1949,7 +1949,7 @@ begin
       if(Ctrl is TORDateCombo) then
         Result := TORDateCombo(Ctrl).Text + ':' + FloatToStr(TORDateCombo(Ctrl).FMDate)
       else
-     {!!!!!! THIS HAS BEEN REMOVED AS IT CAUSED PROBLEMS WITH REMINDER DIALOGS - ZZZZZZBELLC !!!!!!
+     {!!!!!! THIS HAS BEEN REMOVED AS IT CAUSED PROBLEMS WITH REMINDER DIALOGS - DNS   BELLC !!!!!!
       if(Ctrl is TORDateBox) then begin
         if TORDateBox(Ctrl).IsValid then
          Result := TORDateBox(Ctrl).Text
@@ -1957,7 +1957,7 @@ begin
          Result := '';
       end else
       }
-      //!!!!!! CODE ADDED BACK IN - ZZZZZZBELLC !!!!!!
+      //!!!!!! CODE ADDED BACK IN - DNS   BELLC !!!!!!
       if(Ctrl is TORDateBox) then
         Result := TORDateBox(Ctrl).Text
       else
@@ -1986,7 +1986,7 @@ begin
         end;
       end
       else
-     {!!!!!! THIS HAS BEEN REMOVED AS IT CAUSED PROBLEMS WITH REMINDER DIALOGS - ZZZZZZBELLC !!!!!!
+     {!!!!!! THIS HAS BEEN REMOVED AS IT CAUSED PROBLEMS WITH REMINDER DIALOGS - DNS   BELLC !!!!!!
       if(Ctrl is TEdit) then
         Result := TEdit(Ctrl).Text
       else }

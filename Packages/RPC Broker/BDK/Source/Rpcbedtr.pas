@@ -4,9 +4,20 @@
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
 	Description: Property Editors for TRPCBroker component.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+  Unit: RpcbEdtr
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
+{ **************************************************
+  Changes in v1.1.65 (HGW 08/05/2015) XWB*1.1*65
+  1. None.
+
+  Changes in v1.1.60 (HGW 03/27/2014) XWB*1.1*60
+  1. None
+
+  Changes in v1.1.50 (JLI 09/01/2011) XWB*1.1*50
+  1. None
+************************************************** }
 unit RpcbEdtr;
 
 {$I IISBase.inc}
@@ -22,8 +33,7 @@ uses
   DsgnIntf,
   {$ENDIF}
   Forms, Graphics, Messages, SysUtils,
-  WinProcs, WinTypes,
-  Trpcb; //P14 -- pack split
+  WinProcs, WinTypes, Trpcb; //P14 -- pack split
 
 
 type
@@ -62,10 +72,10 @@ end;
 
 
 {------ TRpcVersion property editor ------}
-   {This property editor checks to make sure that RpcVersion is not eimpty.
+   {This property editor checks to make sure that RpcVersion is not empty.
     If it is, it stuffs '0' (default).}
 
-(*TRpcVersionProperty = class(TStringProperty)
+TRpcVersionProperty = class(TStringProperty)
 private
   { Private declarations }
 protected
@@ -73,7 +83,7 @@ protected
 public
   { Public declarations }
   procedure SetValue(const Value: string); override;
-end;*)
+end;
 
 
 procedure Register;
@@ -83,7 +93,7 @@ implementation
 
 
 uses
-  XWBut1, MFunStr, {TRPCB,} Hash, RpcbErr; //P14 -- pack split
+  XWBut1, MFunStr, XWBHash, RpcbErr;
 
 function TRemoteProcProperty.GetAttributes;
 begin
@@ -133,13 +143,13 @@ end;
 
 procedure TServerProperty.GetValues(Proc: TGetStrProc);
 var
-  sl: TStringList;
+  ServerList: TStringList;
   I: integer;
 begin
-  sl := TStringList.Create;
-  GetHostList(sl);
-  for I := 0 to sl.Count - 1 do Proc(sl[I]);
-  sl.Free;
+  ServerList := TStringList.Create;
+  GetHostList(ServerList);
+  for I := 0 to ServerList.Count - 1 do Proc(ServerList[I]);
+  ServerList.Free;
 end;
 
 procedure TServerProperty.SetValue(const Value: string);
@@ -147,7 +157,7 @@ begin
   SetStrValue(Piece(Value,'   [',1));  {get just the  name}
 end;
 
-(*procedure TRpcVersionProperty.SetValue(const Value: string);
+procedure TRpcVersionProperty.SetValue(const Value: string);
 begin
 {
   try
@@ -165,13 +175,14 @@ begin
     ShowMessage('RPCVersion cannot be empty.  Default is 0 (zero).');
     SetStrValue('0');
   end;
-end;*)
+end;
 
 procedure Register;
 begin
   RegisterPropertyEditor(TypeInfo(TRemoteProc),nil,'',TRemoteProcProperty);
   RegisterPropertyEditor(TypeInfo(TServer),nil,'',TServerProperty);
-//  RegisterPropertyEditor(TypeInfo(TRpcVersion),nil,'',TRpcVersionProperty);
+  RegisterPropertyEditor(TypeInfo(TRpcVersion),nil,'',TRpcVersionProperty);
 end;
 
 end.
+

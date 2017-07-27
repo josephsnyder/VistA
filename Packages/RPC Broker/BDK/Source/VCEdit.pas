@@ -2,20 +2,40 @@
 	Package: XWB - Kernel RPCBroker
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
-	Developers: Danila Manapsal, Don Craven, Joel Ivey
-	Description: Verify Code edit dialog.
-	Current Release: Version 1.1 Patch 40 (January 7, 2005))
+	Developers: Danila Manapsal, Don Craven, Joel Ivey, Herlan Westra
+	Description: Contains TRPCBroker and related components.
+  Unit: VCEdit Verify Code edit dialog.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
+{ **************************************************
+  Changes in v1.1.65 (HGW 08/05/2015) XWB*1.1*65
+  1. Changed TVCEdit.ChangeVCKnowOldVC so that if old verify code was less
+     than eight digits, box would not be greyed out (manually enter old VC).
+     This is because using SSO, old VC is not entered in login form.
+  2. Added procedure btnCancelClick to continue with login if user chooses
+     to cancel changing verify code.
+
+  Changes in v1.1.60 (HGW 11/20/2013) XWB*1.1*60
+  1. Fixed process to change VC. VC change did not work if lowercase chars
+     were used in the new verify code. GUI was case-sensitive, but VistA is not.
+
+  Changes in v1.1.50 (JLI 09/01/2011) XWB*1.1*50
+  1. None.
+************************************************** }
 unit VCEdit;
 
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons,
-  {Broker units}
-  Trpcb, Hash;
+  {System}
+  SysUtils, Classes,
+  {WinApi}
+  Windows, Messages,
+  {VA}
+  Trpcb, XWBHash,
+  {Vcl}
+  Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons;
 
 type
   TVCEdit = class(TComponent)
@@ -36,8 +56,6 @@ type
       property RPCBroker : TRPCBroker read FRPCBroker write FRPCBroker;
   end;
 
-
-
   TfrmVCEdit = class(TForm)
     lblOldVC: TLabel;
     lblNewVC: TLabel;
@@ -52,6 +70,7 @@ type
     procedure btnHelpClick(Sender: TObject);
     procedure edtNewVCExit(Sender: TObject);
     procedure edtOldVCChange(Sender: TObject);
+    procedure btnCancelClick(Sender: TObject);
   protected
     { Private declarations }
     FVCEdit : TVCEdit;   //Links form to instance of VCEdit.
@@ -98,10 +117,10 @@ var
 begin
   Result := False;
   Reason := '';
-  if UpperCase(OldVerify) = UpperCase(NewVerify1) then
+  if OldVerify = NewVerify1 then
     Reason := 'The new code is the same as the current one.'
   else
-  if UpperCase(NewVerify1) <> UpperCase(NewVerify2) then
+  if NewVerify1 <> NewVerify2 then
     Reason := 'The confirmation code does not match.';
   if Reason = '' then
   try
@@ -111,9 +130,9 @@ begin
       CreateContext('XUS SIGNON');
       RemoteProcedure := 'XUS CVC';
       Param[0].PType := literal;
-      Param[0].Value := Encrypt(UpperCase(OldVerify))
-                        + U + Encrypt(UpperCase(NewVerify1))
-                        + U + Encrypt(UpperCase(NewVerify2)) ;
+      Param[0].Value := Encrypt(OldVerify)
+                        + U + Encrypt(NewVerify1)
+                        + U + Encrypt(NewVerify2) ;
       Call;
       Reason := '';
       if Results[0] = '0' then
@@ -152,6 +171,8 @@ function TVCEdit.ChangeVCKnowOldVC(strOldVC : string) : Boolean;
 begin
   FOldVC := strOldVC;
   FOldVCSet := True;
+  if Length(FOldVC) < 8 then
+    FOldVCSet := False;
   Result := ChangeVC;
   FOldVCSet := False;  // set it back to false in case we come in again
 end;
@@ -207,6 +228,9 @@ procedure TfrmVCEdit.btnOKClick(Sender: TObject);
 begin
   with FVCEdit do
   begin
+    edtOldVC.Text := AnsiUpperCase(edtOldVC.Text);     //p60
+    edtNewVC.Text := AnsiUpperCase(edtNewVC.Text);     //p60
+    edtConfirmVC.Text := AnsiUpperCase(edtConfirmVC.Text);     //p60
     if edtOldVC.Text = edtNewVC.Text then
     begin
       NoChange('The new code is the same as the current one.');
@@ -237,9 +261,9 @@ begin
     begin
       RemoteProcedure := 'XUS CVC';
       Param[0].PType := literal;
-      Param[0].Value := Encrypt(UpperCase(edtOldVC.Text))
-                        + U + Encrypt(UpperCase(edtNewVC.Text))
-                        + U + Encrypt(UpperCase(edtConfirmVC.Text)) ;
+      Param[0].Value := Encrypt(edtOldVC.Text)
+                        + U + Encrypt(edtNewVC.Text)
+                        + U + Encrypt(edtConfirmVC.Text) ;
       Call;
       if Results[0] = '0' then
       begin
@@ -257,6 +281,16 @@ begin
         edtNewVC.SetFocus;
       end;
     end;
+  end{with};
+end;
+
+procedure TfrmVCEdit.btnCancelClick(Sender: TObject);
+begin
+  with FVCEdit do
+  begin
+    edtOldVC.Text := AnsiUpperCase(edtOldVC.Text);     //p65
+    NoChange('You chose to cancel the change.');
+    ModalResult := mrOK;  //result
   end{with};
 end;
 

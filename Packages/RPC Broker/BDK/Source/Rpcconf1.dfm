@@ -2,35 +2,47 @@ object rpcConfig: TrpcConfig
   Left = 421
   Top = 329
   HelpContext = 4
+  Anchors = [akTop]
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Connect To'
-  ClientHeight = 157
-  ClientWidth = 428
+  ClientHeight = 139
+  ClientWidth = 358
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -11
   Font.Name = 'System'
   Font.Style = []
   OldCreateOrder = True
   Position = poScreenCenter
+  Scaled = False
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    428
-    157)
+    358
+    139)
   PixelsPerInch = 96
   TextHeight = 16
   object cboServer: TComboBox
-    Left = 8
-    Top = 16
-    Width = 416
-    Height = 24
+    Left = 5
+    Top = 10
+    Width = 351
+    Height = 21
     Hint = 'Choose a Server Name'
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Style = csDropDownList
     Anchors = [akLeft, akTop, akRight]
     DropDownCount = 6
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
@@ -38,53 +50,31 @@ object rpcConfig: TrpcConfig
     OnDblClick = cboServerClick
     OnExit = cboServerExit
   end
-  object Panel2: TPanel
-    Left = 0
-    Top = 133
-    Width = 428
+  object TPanelAddress: TPanel
+    Left = 5
+    Top = 80
+    Width = 346
     Height = 24
-    Align = alBottom
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -9
+    Font.Name = 'System'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
-    object Panel3: TPanel
-      Left = 185
-      Top = 1
-      Width = 95
-      Height = 22
-      Align = alLeft
-      Alignment = taLeftJustify
-      BevelInner = bvLowered
-      BevelOuter = bvNone
-      BorderWidth = 1
-      Caption = 'Port:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object pnlPort: TPanel
-        Left = 34
-        Top = 2
-        Width = 59
-        Height = 18
-        Align = alRight
-        BevelOuter = bvLowered
-        Caption = '99999'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-      end
-    end
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 184
+      Width = 265
       Height = 22
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
       Align = alLeft
       Alignment = taLeftJustify
       BevelInner = bvLowered
@@ -93,22 +83,27 @@ object rpcConfig: TrpcConfig
       Caption = 'Address:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -15
+      Font.Height = -9
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 1
-      object Panel4: TPanel
-        Left = 64
+      TabOrder = 0
+      object pnlAddress: TPanel
+        Left = 56
         Top = 2
-        Width = 118
+        Width = 207
         Height = 18
+        Margins.Left = 2
+        Margins.Top = 2
+        Margins.Right = 2
+        Margins.Bottom = 2
         Align = alRight
+        Alignment = taLeftJustify
         BevelOuter = bvLowered
         Caption = '255.255.255.255'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -9
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
@@ -117,16 +112,20 @@ object rpcConfig: TrpcConfig
     end
   end
   object btnOk: TBitBtn
-    Left = 21
-    Top = 96
-    Width = 85
-    Height = 26
+    Left = 7
+    Top = 48
+    Width = 84
+    Height = 28
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akLeft, akBottom]
     Caption = '&OK'
     Default = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -9
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     Glyph.Data = {
@@ -194,15 +193,19 @@ object rpcConfig: TrpcConfig
     IsControl = True
   end
   object btnCancel: TBitBtn
-    Left = 124
-    Top = 96
-    Width = 85
-    Height = 26
+    Left = 95
+    Top = 48
+    Width = 84
+    Height = 28
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akLeft, akBottom]
     Caption = '&Cancel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -9
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     Kind = bkCancel
@@ -215,23 +218,151 @@ object rpcConfig: TrpcConfig
     IsControl = True
   end
   object btnHelp: TBitBtn
-    Left = 226
-    Top = 96
-    Width = 85
-    Height = 25
+    Left = 183
+    Top = 48
+    Width = 84
+    Height = 28
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akRight, akBottom]
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
     Kind = bkHelp
     NumGlyphs = 2
+    ParentFont = False
     TabOrder = 4
+    OnClick = btnHelpClick
   end
   object btnNew: TButton
-    Left = 327
-    Top = 96
-    Width = 85
-    Height = 25
+    Left = 270
+    Top = 48
+    Width = 84
+    Height = 28
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akRight, akBottom]
     Caption = '&New'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -9
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 5
     OnClick = btnNewClick
+  end
+  object TPanelSSHUsername: TPanel
+    Left = 5
+    Top = 108
+    Width = 346
+    Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'System'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 6
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 128
+      Height = 22
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
+      Align = alLeft
+      Alignment = taLeftJustify
+      BevelInner = bvLowered
+      BevelOuter = bvNone
+      BorderWidth = 1
+      Caption = 'Port:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object pnlPort: TPanel
+        Left = 56
+        Top = 2
+        Width = 70
+        Height = 18
+        Margins.Left = 2
+        Margins.Top = 2
+        Margins.Right = 2
+        Margins.Bottom = 2
+        Align = alRight
+        Alignment = taLeftJustify
+        BevelOuter = bvLowered
+        Caption = '99999'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        OnClick = pnlPortClick
+      end
+    end
+    object Panel2: TPanel
+      Left = 146
+      Top = 1
+      Width = 199
+      Height = 22
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
+      Align = alRight
+      Alignment = taLeftJustify
+      Anchors = [akLeft, akTop, akBottom]
+      BevelInner = bvLowered
+      BevelOuter = bvNone
+      BorderWidth = 1
+      Caption = 'SSHUsername:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -9
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      object pnlSSHUsername: TPanel
+        Left = 96
+        Top = 2
+        Width = 101
+        Height = 18
+        Margins.Left = 2
+        Margins.Top = 2
+        Margins.Right = 2
+        Margins.Bottom = 2
+        Align = alRight
+        Alignment = taLeftJustify
+        BevelOuter = bvLowered
+        Caption = 'xxxVISTA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -9
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
   end
 end

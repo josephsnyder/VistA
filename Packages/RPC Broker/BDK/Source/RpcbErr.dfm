@@ -1,89 +1,132 @@
 object frmRpcbError: TfrmRpcbError
   Left = 187
   Top = 278
+  Anchors = [akTop]
   BorderStyle = bsDialog
   Caption = 'Error!'
-  ClientHeight = 227
-  ClientWidth = 393
+  ClientHeight = 157
+  ClientWidth = 278
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -7
   Font.Name = 'MS Sans Serif'
   Font.Style = [fsBold]
   OldCreateOrder = True
   Position = poScreenCenter
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  PixelsPerInch = 120
   TextHeight = 13
   object Bevel1: TBevel
-    Left = 8
-    Top = 8
-    Width = 377
-    Height = 177
+    Left = 5
+    Top = 5
+    Width = 266
+    Height = 113
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
   end
   object Label1: TLabel
-    Left = 72
-    Top = 24
+    Left = 31
+    Top = 15
     Width = 41
     Height = 13
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Alignment = taRightJustify
     Caption = 'Action:'
   end
   object Symbol: TImage
-    Left = 16
-    Top = 16
-    Width = 41
-    Height = 41
+    Left = 10
+    Top = 10
+    Width = 27
+    Height = 27
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
   end
   object Label2: TLabel
-    Left = 79
-    Top = 48
+    Left = 38
+    Top = 30
     Width = 34
     Height = 13
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Alignment = taRightJustify
     Caption = 'Code:'
   end
   object Label3: TLabel
-    Left = 16
-    Top = 80
+    Left = 10
+    Top = 51
     Width = 55
     Height = 13
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'Message:'
   end
   object lblAction: TLabel
-    Left = 120
-    Top = 24
+    Left = 77
+    Top = 15
     Width = 5
     Height = 13
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
   end
   object lblCode: TLabel
-    Left = 120
-    Top = 48
+    Left = 77
+    Top = 30
     Width = 5
     Height = 13
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
   end
   object lblMessage: TLabel
-    Left = 80
-    Top = 80
-    Width = 289
-    Height = 97
+    Left = 51
+    Top = 51
+    Width = 220
+    Height = 63
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     AutoSize = False
   end
   object BitBtn1: TBitBtn
-    Left = 200
-    Top = 200
-    Width = 81
-    Height = 27
-    TabOrder = 0
+    Left = 96
+    Top = 128
+    Width = 80
+    Height = 30
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Kind = bkOK
+    NumGlyphs = 2
+    TabOrder = 0
   end
   object BitBtn3: TBitBtn
-    Left = 304
-    Top = 200
-    Width = 81
-    Height = 27
-    TabOrder = 1
+    Left = 194
+    Top = 128
+    Width = 80
+    Height = 30
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Kind = bkHelp
+    NumGlyphs = 2
+    TabOrder = 1
   end
 end

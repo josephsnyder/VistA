@@ -1,9 +1,10 @@
 object frmDebugInfo: TfrmDebugInfo
   Left = 255
   Top = 107
-  Width = 329
-  Height = 217
+  Anchors = [akTop]
   Caption = 'RPCBroker Debug Info'
+  ClientHeight = 180
+  ClientWidth = 316
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,20 +13,20 @@ object frmDebugInfo: TfrmDebugInfo
   Font.Style = []
   FormStyle = fsStayOnTop
   OldCreateOrder = False
-  PixelsPerInch = 96
+  PixelsPerInch = 120
   TextHeight = 13
   object lblDebugInfo: TLabel
-    Left = 44
+    Left = 43
     Top = 16
-    Width = 233
-    Height = 105
+    Width = 230
+    Height = 103
     AutoSize = False
   end
   object btnOK: TButton
-    Left = 123
-    Top = 144
-    Width = 75
-    Height = 25
+    Left = 121
+    Top = 142
+    Width = 74
+    Height = 24
     Caption = '&OK'
     Default = True
     ModalResult = 1

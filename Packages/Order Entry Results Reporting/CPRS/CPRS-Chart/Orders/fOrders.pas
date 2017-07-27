@@ -2736,6 +2736,13 @@ begin
           ViewAlertedOrders('', STS_FIXED, '',  False, True, 'Lapsed (never processed) Orders - ALL SERVICES');
           UpdateIndOrderAlerts();
         end;
+      NF_RTC_CANCEL_ORDERS:
+        begin
+          ViewAlertedOrders('', STS_DISCONTINUED, 'CLINIC SCHEDULING', False, True, 'Cancel Appointment Request orders');
+//          ;Notifications.IndOrderDisplay := True;
+//          ;ViewAlertedOrders('', STS_FIXED, '',  False, True, 'Cancel Appointment Request orders: ');
+//          ;UpdateIndOrderAlerts();
+        end;
     else mnuViewUnsignedClick(Self);
     end;
 end;

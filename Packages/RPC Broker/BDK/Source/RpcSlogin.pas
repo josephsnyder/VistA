@@ -3,50 +3,61 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Joel Ivey
-	Description: Silent Login functionality.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+  Unit: RpcSLogin Silent Login functionality.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
+{ **************************************************
+  Changes in v1.1.65 (HGW 11/17/2016) XWB*1.1*65
+  1. Added new Silent Login mode for Identity and Access Management (IAM)
+     Single Sign-On (lmSSOi).
+  2. In function SilentLogin, ASOSKIP (Param[1]) is set to 1 to disable
+     Client Agent (ClAgent.exe) callback (deprecated).
+  3. Commented out (but did not yet remove) login mode lmNTToken, as it
+     was not fully implemented.
+
+  Changes in v1.1.60 (HGW 12/18/2013) XWB*1.1*60
+  1. None.
+
+  Changes in v1.1.50 (JLI 09/01/2011) XWB*1.1*50
+  1. Updates to support SSH.
+************************************************** }
 unit RpcSLogin;
 
 interface
 
-Uses
-Sysutils, Classes, Messages, WinProcs, IniFiles,
-Dialogs, Registry,
-trpcb{, ccowrpcbroker};
+{$I IISBase.inc}
 
-
-{------ TVistaSession------}     //hold attributes of a session {p13}
-{TVistaSession = class(TObject)
-private
-  FServerIPAddress: string;
-  FDateTimeLogin: String;
-  FPollingInterval: integer;
-public
-  property ServerIPAddresss: String;
-  property DateTimeLogin: String;
-  property PollingInterval (BAT): integer;
-  procedure CreateHandle;
-  function  ValidateHandle;
-end; }
+uses
+  {System}
+  SysUtils, Classes, IniFiles, Registry, AnsiStrings,
+  {WinApi}
+  Messages, WinProcs,
+  {VA}
+  Trpcb,
+  {Vcl}
+  Dialogs;
 
 function SilentLogIn(SLBroker: TRPCBroker): boolean;
 procedure GetUserInfo(ConnectedBroker: TRPCBroker);
 procedure GetSessionInfo(ConnectedBroker: TRPCBroker);
-// 080620 added WindowType argument to StartProgSLogin with SW_NORMAL as default
-// to allow SSH startup to specify a minimized window
-//procedure StartProgSLogin(const ProgLine: String; ConnectedBroker: TRPCBroker);
 procedure StartProgSLogin(const ProgLine: String; ConnectedBroker: TRPCBroker; WindowType: Integer = SW_SHOWNORMAL);
 function CheckCmdLine(SLBroker: TRPCBroker): Boolean;
 
 implementation
 
-uses wsockc, loginfrm, rpcberr, seldiv, hash;
+uses
+  {VA}
+  Wsockc, Loginfrm, RpcbErr, SelDiv, XWBHash;
 
-//validate a/v codes
+{------------------------ ValidAVCodes ---------------------------
+    Authenticate user with Access/Verify Codes or ASO token using
+    an RPC call to 'XUS AV CODE'
+------------------------------------------------------------------}
 function ValidAVCodes(SLBroker: TRPCBroker): boolean;
 begin
+  Result := False;
   try
     with SLBroker do
     begin
@@ -57,6 +68,7 @@ begin
       if Results[0] > '0' then
       begin
         Login.DUZ := Results[0];
+        Login.PromptDivision := True;
         Result := True;
       end
       else
@@ -70,9 +82,13 @@ begin
   except
     raise
   end;
-end;
+end; //function ValidAVCodes
 
-//validate application Handle
+
+{------------------------ ValidAppHandle -------------------------
+    Authenticate user with Application Handle (CCOW Token)
+    using an RPC call to 'XUS AV CODE'
+------------------------------------------------------------------}
 function ValidAppHandle(SLBroker: TRPCBroker): boolean;
 begin
   Result := False;
@@ -83,11 +99,10 @@ begin
       Param[0].PType := literal;
       RemoteProcedure := 'XUS AV CODE';
       Call;
-//      if StrToInt(SLBroker.Results[0]) > 0 then // JLI 050510
-//      if Pos(SLBroker.Results[0][1],'123456789') > 0 then
       if Pos(Copy(SLBroker.Results[0],1,1),'123456789') > 0 then
       begin
         Login.DUZ := Results[0];
+        Login.PromptDivision := False;
         Result := True;
       end
       else if Results[2] = '1' then Login.ErrorText := 'Expired Verify Code' //vcode needs changing;
@@ -97,19 +112,73 @@ begin
   except
     raise
   end;
-end;
+end; //function ValidAppHandle
 
-function ValidNTToken(SLBroker: TRPCBroker): boolean;
+
+{------------------------ ValidNTToken ---------------------------
+    Authenticate user with NT Kerberos token (not implemented)
+------------------------------------------------------------------}
+//function ValidNTToken(SLBroker: TRPCBroker): boolean;
+//begin
+//  Result := False;
+//end; //function ValidNTToken
+
+
+{------------------------ ValidSSOiToken -------------------------
+    Authenticate user with STS SAML Token from IAM using
+    an RPC call to 'XUS ESSO VALIDATE'
+------------------------------------------------------------------}
+function ValidSSOiToken(SLBroker: TRPCBroker): boolean;
+var
+  I,iStart,iEnd: integer;
+  uToken: String;
+  iTokenLength: Integer;
 begin
   Result := False;
-end;
+  try
+    with SLBroker do
+    begin
+      uToken := Login.LogInHandle;
+      iTokenLength := Length(uToken);
+      RemoteProcedure := 'XUS ESSO VALIDATE';
+      Param[0].PType := global;
+      with Param[0] do
+      begin
+        I :=0;
+        iEnd := 0;
+        while (iEnd < iTokenLength) do
+        begin
+          //Build Param[0] global, 200 chars per node
+          iStart := (I * 200) + 1;
+          iEnd := iStart + 199;
+          Mult[IntToStr(I)] := AnsiMidStr(uToken, iStart, 200);
+          I := I + 1;
+        end;
+      end;
+      Call;
+      if Results[0] > '0' then
+      begin
+        Login.DUZ := Results[0];
+        Login.PromptDivision := True;
+        Result := True;
+      end
+      else
+      begin
+        Result := False;
+        if Results[2] = '1' then Login.ErrorText := 'Expired Verify Code' //vcode needs changing;
+        else if Results[0] = '0' then Login.ErrorText :='Invalid 2-Factor Authentication' //no valid DUZ returned;
+        else Login.ErrorText := Results[3];
+      end;
+    end;
+  except
+    raise
+  end;
+end; //function ValidSSOiToken
 
-{IF 2, PASS CONTROL TO AUTHENTICATION PROXY - WHAT DOES IT NEED? }
 
-{:
-This function is used to initiate a silent login with the RPCBroker.  It uses the information
-stored in the Login property of the TRPCBroker to make the connection.
-}
+{------------------------ SilentLogIn -------------------------
+    Authenticate user with credentials passed as parameters.
+------------------------------------------------------------------}
 function SilentLogIn(SLBroker: TRPCBroker): boolean;
 begin
   Result := False;
@@ -117,6 +186,10 @@ begin
   try
     with SLBroker do begin
       RemoteProcedure := 'XUS SIGNON SETUP';
+      Param[0].Value := '';      //No AppHandle for silent login
+      Param[0].PType := literal;
+      Param[1].Value := '1';     //Disable Client Agent callback
+      Param[1].PType := literal;
       Call;
       SLBroker.Login.IsProductionAccount := False;
       SLBroker.Login.DomainName := '';
@@ -133,21 +206,20 @@ begin
           GetUserInfo(SLBroker);
           exit;
         end;
-      if Login.Mode = lmAVCodes then //Access & Verify codes authentication
+      if Login.Mode = lmSSOi then                         //STS SAML token authentication
+        if ValidSSOiToken(SLBroker) then Result := True;
+      if Login.Mode = lmAVCodes then                      //Access & Verify codes authentication
         if ValidAVCodes(SLBroker) then Result := True;
       if Login.Mode = lmAppHandle then
         if ValidAppHandle(SLBroker)then Result := True;
-      if Login.Mode = lmNTToken then
-          if ValidNTToken(SLBroker) then Result := True;
-//      if Result and (not (SLBroker is TCCOWRPCBroker)) then
-      IF Result and (SLBroker.Contextor = nil) then
+      if Result and (SLBroker.Contextor = nil) and not (Login.Mode = lmSSOi) then
       begin
         //determine if user is multidivisional - makes calls to Seldiv.
         LogIn.MultiDivision := MultDiv(SLBroker);
         if not LogIn.MultiDivision then
           begin
-          Result := True;
-          exit;
+            Result := True;
+            exit;
           end;
         if LogIn.PromptDivision then
           Result := SelectDivision(LogIn.DivList, SLBroker)
@@ -161,23 +233,26 @@ begin
         if not Result then
           exit;
       end;
-      if Result then
-        GetUserInfo(SLBroker);
     end;
   except
     exit;
   end;
-end;
+end; //function SilentLogIn
 
-procedure GetUserInfo(ConnectedBroker: TRPCBroker); //get info for TVistaUser;
+
+{------------------------ GetUserInfo -------------------------
+    Get information for TVistaUser class (Tobject) using
+    RPC 'XUS GET USER INFO'
+------------------------------------------------------------------}
+procedure GetUserInfo(ConnectedBroker: TRPCBroker);
 begin
   with ConnectedBroker do
   begin
     try
-    RemoteProcedure := 'XUS GET USER INFO';
-    Call;
-    if Results.Count > 0 then
-      with ConnectedBroker.User do
+      RemoteProcedure := 'XUS GET USER INFO';
+      Call;
+      if Results.Count > 0 then
+        with ConnectedBroker.User do
         begin
         DUZ := Results[0];
         Name := Results[1];
@@ -189,17 +264,22 @@ begin
         DTime := Results[7];
         if Results.Count > 8 then
           Vpid := Results[8]
-         else
+        else
           Vpid := '';
         end;
     except
     end;
   end;
-end;
+end; //procedure GetUserInfo
 
-procedure GetSessionInfo(ConnectedBroker: TRPCBroker); //get info for TVistaSession;
+
+{------------------------ GetSessionInfo -------------------------
+    Get information for TVistaSession class (Tobject) using
+    RPC 'XUS GET SESSION INFO'
+------------------------------------------------------------------}
+procedure GetSessionInfo(ConnectedBroker: TRPCBroker);
 begin
-  with ConnectedBroker do   //get info for TVistaSession;
+  with ConnectedBroker do
   begin
     try
     RemoteProcedure := 'XWB GET SESSION INFO';
@@ -216,23 +296,25 @@ begin
     except
     end;
     end;
-end;
+end; //procedure GetSessionInfo
 
-{:
-This procedure can be used to start a second application and pass on the command line the data
-which would be needed to initiate a silent login using a LoginHandle value.  It is assumed that
-the command line would be read using the CheckCmdLine procedure or one similar to it as the form
-for the new application was loaded.  This procedure can also be used to start a non-RPCBroker 
-application. If the value for ConnectedBroker is nil, the application specified in ProgLine 
-will be started and any command line included in ProgLine will be passed to the application.
-}
+
+{------------------------ StartProgSLogin -------------------------
+    This procedure can be used to start a second application and pass on the
+    command line the data which would be needed to initiate a silent login
+    using a LoginHandle value.  It is assumed that the command line would be
+    read using the CheckCmdLine procedure or one similar to it as the form
+    for the new application was loaded.  This procedure can also be used to
+    start a non-RPCBroker application. If the value for ConnectedBroker is nil,
+    the application specified in ProgLine will be started and any command line
+    included in ProgLine will be passed to the application.
+------------------------------------------------------------------}
 procedure StartProgSLogin(const ProgLine: String; ConnectedBroker: TRPCBroker; WindowType: Integer = SW_SHOWNORMAL);
 var
   StartupInfo: TStartupInfo;
   ProcessInfo: TProcessInformation;
   AppHandle: String;
   CmndLine: String;
-  //
   currHandle1: THandle;
 begin
   currHandle1 := GetCurrentProcess;
@@ -241,15 +323,6 @@ begin
   begin
     cb := SizeOf(TStartupInfo);
     dwFlags := STARTF_USESHOWWINDOW;
-// 080620 - removed code specific to SSH, replaced with new
-//          parameter to specify window type with default of
-//          SW_SHOWNORMAL
-{  
-    wShowWindow := SW_SHOWNORMAL;
-    // 080618 following added to minimize SSH command box
-    if (Pos('SSH2',ProgLine) = 1) then
-      wShowWindow := SW_SHOWMINIMIZED;
-}
     WShowWindow := WindowType;
   end;
   CmndLine := ProgLine;
@@ -257,25 +330,26 @@ begin
   begin
     AppHandle := GetAppHandle(ConnectedBroker);
     CmndLine := CmndLine + ' s='+ConnectedBroker.Server + ' p='
-                         + IntToStr(ConnectedBroker.ListenerPort) + ' h=' 
+                         + IntToStr(ConnectedBroker.ListenerPort) + ' h='
                          + AppHandle + ' d=' + ConnectedBroker.User.Division;
   end;
   CreateProcess(nil, PChar(CmndLine), nil, nil, False,
       NORMAL_PRIORITY_CLASS, nil, nil, StartupInfo, ProcessInfo);
-  // 080618 following added to handle closing of command box for SSH
   CommandBoxProcessHandle := ProcessInfo.hProcess;
   CommandBoxThreadHandle := ProcessInfo.hThread;
-  // 080618 make broker window active again, so user can type immediately
   SetActiveWindow(currHandle1);
-end;
+end; //procedure StartProgSLogin
 
-{:
-This procedure can be used to check whether the command line contains information on the broker 
-settings and can setup for a Silent Login using the LoginHandle value passed from another application.  
-This procedure would normally be called within the code associated with FormCreate event.  It assumes
-the Server, ListenerPort, Division, and LoginHandle values (if present) are indicated by s=, p=, d=, and
-h=, respectively.  The argument is a reference to the TRPCBroker instance to be used.
-}
+
+{------------------------ CheckCmdLine --------------------------
+    This function can be used to check whether the command line contains
+    information on the broker settings and can setup for a Silent Login using
+    the LoginHandle value passed from another application. This procedure
+    would normally be called within the code associated with FormCreate event.
+    It assumes the Server, ListenerPort, Division, and LoginHandle values
+    (if present) are indicated by s=, p=, d=, and h=, respectively.  The
+    argument is a reference to the TRPCBroker instance to be used.
+------------------------------------------------------------------}
 function CheckCmdLine(SLBroker: TRPCBroker): Boolean;
 var
  j: Integer;
@@ -310,8 +384,7 @@ begin
     if Connected then
       Result := True;
   end;    // with SLBroker
-end;
-
+end; //function CheckCmdLine
 
 end.
 

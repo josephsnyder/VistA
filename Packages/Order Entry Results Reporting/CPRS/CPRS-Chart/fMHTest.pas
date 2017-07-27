@@ -158,7 +158,7 @@ const
 var
  MHDLLName: string;
 
-procedure LoadMHDLL;
+function LoadMHDLL: TDllRtnRec;
 //var
 //  MHPath: string;
 
@@ -169,7 +169,8 @@ begin
       ShowMessage(DLL_PARAM);
  //    exit;
     end else begin
-      MHDLLHandle := LoadDll(MHDLLName);
+      Result := LoadDll(MHDLLName);
+      MHDLLHandle := Result.DLL_HWND;
     end;
 //    MHPath := GetProgramFilesPath + SHARE_DIR + MHDLLName;
 //    MHDLLHandle := LoadLibrary(PChar(MHPath));

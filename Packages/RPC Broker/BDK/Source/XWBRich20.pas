@@ -1,13 +1,33 @@
-{$WARN UNSAFE_CODE OFF}
 { **************************************************************
 	Package: XWB - Kernel RPCBroker
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
-	Developers: Joel Ivey
-	Description: Provides a RichEdit Component with ability
-	             to recognize a URL within the RichEdit control.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Developers: Joel Ivey, Herlan Westra
+	Description: Contains TRPCBroker and related components.
+	Unit: XWBRich20 provides a RichEdit Component with ability
+        to recognize a URL within the RichEdit control.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
+
+{ **************************************************
+  Changes in v1.1.65 (HGW 08/05/2015) XWB*1.1*65
+  1. None.
+
+  Changes in v1.1.60 (HGW 01/07/2014) XWB*1.1*60
+  1. Symbol 'AnsiLowerCaseFileName' is deprecated, used AnsiLowerCase instead
+  2. Symbol 'FT_WHOLEWORD' is deprecated, used CommDlg.FR_WHOLEWORD instead
+  3. Symbol 'FT_MATCHCASE' is deprecated, used CommDlg.FR_MATCHCASE instead
+
+  Changes in v1.1.50 (JLI 09/01/2011) XWB*1.1*50
+  1. None.
+************************************************** }
+
+//TODO - Currently uses Windows Riched20.dll from Windows 98 (Rich Edit 2.0).
+//       Upgrade to Msftedit.dll (Rich Edit 4.1) to work with 64-bit platforms.
+//TODO - Investigate assembler code changes needed to work with 64-bit platforms.
+
+unit XWBRich20;
+
 {: Unit XWBRich20
    Based on the article "Detect URLS in the RichEdit Control" by
    Elias J. Ongpoy in 'Delphi Developer Newsletter', May 2001
@@ -16,10 +36,15 @@
    recognize a URL within the RichEdit control.
 }
 
-unit XWBRich20;
 interface
-uses Messages, Windows, SysUtils, Classes, Controls, Forms,
-  Menus, Graphics, StdCtrls, RichEdit, ToolWin, ImgList, ExtCtrls, ComCtrls;
+
+uses
+  {System}
+  SysUtils, Classes, UITypes, Types,
+  {WinApi}
+  Messages, Windows, RichEdit, CommDlg,
+  {Vcl}
+  Controls, Forms, Menus, Graphics, StdCtrls, ToolWin, ImgList, ExtCtrls, ComCtrls;
 
 type
   TXWBCustomRichEdit = class;
@@ -147,10 +172,8 @@ type
     FRichEditStrings: TStrings;
     FMemStream: TMemoryStream;
     FOnSelChange: TNotifyEvent;
-
     FHideSelection: Boolean;
     FURLDetect: Boolean;      // for URL Detect Property
-
     FModified: Boolean;
     FDefaultConverter: TConversionClass;
     FOnResizeRequest: TRichEditResizeEvent;
@@ -168,7 +191,6 @@ type
     procedure SetHideScrollBars(Value: Boolean);
     procedure SetHideSelection(Value: Boolean);
     procedure SetURLDetect(Value: boolean);
-    
     procedure SetPlainText(Value: Boolean);
     procedure SetRichEditStrings(Value: TStrings);
     procedure SetDefAttributes(Value: TXWBTextAttributes);
@@ -193,10 +215,7 @@ type
     procedure SetSelLength(Value: Integer); override;
     procedure SetSelStart(Value: Integer); override;
     property HideSelection: Boolean read FHideSelection write SetHideSelection default True;
-    
-// New Property - URL Detect
     property URLDetect : boolean read FURLDetect write SetURLDetect default FALSE;
-
     property HideScrollBars: Boolean read FHideScrollBars
       write SetHideScrollBars default True;
     property Lines: TStrings read FRichEditStrings write SetRichEditStrings;
@@ -294,8 +313,11 @@ type
 
 implementation
 
-uses 
-  UITypes, Types, Printers, Consts, ComStrs, ActnList, StdActns, ShellAPI, CommDlg;
+uses
+  {WinApi}
+  ShellAPI,
+  {Vcl}
+  Printers, Consts, ComStrs, ActnList, StdActns;
 
 type
   PFontHandles = ^TFontHandles;
@@ -1157,7 +1179,7 @@ var
   Ext: string;
   Convert: PConversionFormat;
 begin
-  Ext := AnsiLowerCase(ExtractFileExt(Filename));
+  Ext := AnsiLowerCase(ExtractFileExt(Filename)); //p60
   System.Delete(Ext, 1, 1);
   Convert := ConversionFormatList;
   while Convert <> nil do
@@ -1182,8 +1204,7 @@ var
   Ext: string;
   Convert: PConversionFormat;
 begin
-//  Ext := AnsiLowerCaseFileName(ExtractFileExt(Filename)); xe3 fix
-  Ext := AnsiLowerCase(ExtractFileExt(Filename));
+  Ext := AnsiLowerCase(ExtractFileExt(Filename)); //p60
   System.Delete(Ext, 1, 1);
   Convert := ConversionFormatList;
   while Convert <> nil do
@@ -1344,10 +1365,8 @@ begin
   // RichEd20 does not pass the WM_RBUTTONUP message to defwndproc,
   // so we get no WM_CONTEXTMENU message.  Simulate message here.
   if Win32MajorVersion < 5 then
-{$WARN UNSAFE_CAST OFF}
     Perform(WM_CONTEXTMENU, Handle, LParam(PointToSmallPoint(
       ClientToScreen(SmallPointToPoint(Message.Pos)))));
-{$WARN UNSAFE_CAST ON}
   inherited;
 end;
 
@@ -1653,10 +1672,8 @@ begin
     cpMax := cpMin + Length;
   end;
   Flags := 0;
-//  if stWholeWord in Options then Flags := Flags or FT_WHOLEWORD; xe3 fix
-  if stWholeWord in Options then Flags := Flags or CommDlg.FR_WHOLEWORD;
-//  if stMatchCase in Options then Flags := Flags or FT_MATCHCASE; xe3 fix
-  if stMatchCase in Options then Flags := Flags or CommDlg.FR_MATCHCASE;
+  if stWholeWord in Options then Flags := Flags or CommDlg.FR_WHOLEWORD; //p60
+  if stMatchCase in Options then Flags := Flags or CommDlg.FR_MATCHCASE; //p60
   Find.lpstrText := PChar(SearchStr);
   Result := SendMessage(Handle, EM_FINDTEXT, Flags, LongInt(@Find));
 end;
@@ -1668,8 +1685,7 @@ begin
   New(NewRec);
   with NewRec^ do
   begin
-//    Extension := AnsiLowerCaseFileName(Ext);  xe3 fix
-    Extension := AnsiLowerCase(Ext);
+    Extension := AnsiLowerCase(Ext); //p60
     ConversionClass := AClass;
     Next := ConversionFormatList;
   end;
@@ -1681,7 +1697,6 @@ class procedure TXWBCustomRichEdit.RegisterConversionFormat(const AExtension: st
 begin
   AppendConversionFormat(AExtension, AConversionClass);
 end;
-{$WARN UNSAFE_CODE ON}
 
 end.
 

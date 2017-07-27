@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Controls, Forms, uConst, rConsults,
   rOrders, ORFn, Dialogs, ORCtrls, stdCtrls, strUtils, fODBase, fODMedOIFA,
-  VA508AccessibilityRouter, ORNet, DateUtils, TRPCb;
+  VA508AccessibilityRouter, ORNet, DateUtils, rMisc, TRPCb;
 
 type
   EOrderDlgFail = class(Exception);
@@ -76,7 +76,7 @@ function AllowActionOnIMO(AnEvtTyp: char): boolean;
 function IMOActionValidation(AnId: string; var IsIMOOD: boolean; var x: string; AnEventType: char): boolean;
 function IMOTimeFrame: TFMDateTime;
 procedure ShowOneStepAdmin;
-procedure LoadMOBDLL;
+function LoadMOBDLL: TDllRtnRec;
 procedure UnloadMOBDLL;
 function IsMOBDLLVersionOK: Boolean;
 
@@ -116,10 +116,10 @@ implementation
 
 uses fODDiet, fODMisc, fODGen, fODMedIn, fODMedOut, fODText, fODConsult, fODProc, fODRad,
      fODLab, fodBBank, fODMeds, fODMedIV, fODVitals, fODAuto, (*fODAllgy,*) fOMNavA, rCore, uCore, fFrame,
-     fEncnt, fEffectDate, fOMVerify, fOrderSaveQuick, fOMSet, rMisc, uODBase, rODMeds,
+     fEncnt, fEffectDate, fOMVerify, fOrderSaveQuick, fOMSet,  uODBase, rODMeds,
      fLkUpLocation, fOrdersPrint, fOMAction, fARTAllgy, fOMHTML, fOrders, rODBase,
      fODChild, fMeds, rMeds, rPCE, frptBox, fODMedNVA, fODChangeUnreleasedRenew, rODAllergy,
-     UBAGlobals, fClinicWardMeds, uTemplateFields, VAUtils, System.UITypes, rTIU, ORSystem, RpcConf1, uInit;
+     UBAGlobals, fClinicWardMeds, uTemplateFields, VAUtils, System.UITypes, rTIU, ORSystem, RpcConf1, uInit, fODRTC;
 
 var
   uPatientLocked: Boolean;
@@ -134,6 +134,7 @@ var
   uOrderSetTime: TFMDateTime;
   uNewMedDialog: Integer;
   MOBDLLHandle : THandle = 0;
+  MOBDLLName : string = 'OrderCom.dll';
   //QOALTOI: FQOAltOI;
 
 const
@@ -188,8 +189,6 @@ const
                   'If you are a nurse and need to document a clinic medication that has been previously administered greater than 23 hours in the past you need to go to BCMA.';
 
   SHARE_DIR = '\VISTA\Common Files\';
-//  MOBDLLName = 'BCMAOrderCom.dll';
-  MOBDLLName = 'OrderCom.dll';
   LoadMOBProc: TLoadMOBProc = nil;
 
 function CreateOrderDialog(Sender: TComponent; FormID: integer; AnEvent: TOrderDelayEvent; ODEvtID: integer = 0): TfrmODBase;
@@ -228,6 +227,7 @@ begin
   OD_MEDOUTPT:  DialogClass := TfrmODMedOut;
   OD_MEDNONVA:  DialogClass := TfrmODMedNVA;
   OD_MISC:      DialogClass := TfrmODMisc;
+  OD_RTC:       DialogClass := TfrmODRTC;
   OD_GENERIC:
      begin
       if ODEvtID>0 then
@@ -2422,7 +2422,7 @@ begin
 end;
 
 //CQ 15530 - Add BCMA Med Order Button Functionality as part of Clinic Orders - JCS
-procedure LoadMOBDLL;
+function LoadMOBDLL: TDllRtnRec;
 //var
 //  MOBDLLPath: string;
 begin
@@ -2430,7 +2430,10 @@ begin
   begin
   //  MOBDLLPath := GetProgramFilesPath + SHARE_DIR + MOBDLLName;
 //    MOBDLLHandle := LoadLibrary(PChar(MOBDLLPath));
-    MOBDLLHandle := LoadDll(MOBDLLName);
+    MOBDLLName := GetMOBDLLName();
+    Result := LoadDll(MOBDLLName);
+    MOBDLLHandle := Result.DLL_HWND;
+
   end;
 end;
 
@@ -2468,6 +2471,7 @@ var
 
 begin
   Result := True;
+  MOBDLLName := GetMOBDLLName();
 
   MOBDLLPath := FindDllDir(MOBDLLName);
   if MOBDLLPath = '' then
@@ -2479,7 +2483,7 @@ begin
   begin
   DLLVersion := ClientVersion(MOBDLLPath);
     if DLLVersion = '' then DLLVersion := '<FILE MISSING OR INVALID>';
-    ResultStr := DLLVersionCheck(MOBDLLName, DLLVersion);
+    ResultStr := DLLVersionCheck('CPRS MOB DLL', DLLVersion);
     MOBDLLRequiredVersion := Piece(ResultStr, '^', 2);
 
 

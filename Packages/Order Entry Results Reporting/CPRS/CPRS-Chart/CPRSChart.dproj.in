@@ -40,7 +40,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_UnitSearchPath>@SOURCE@\..\CPRS-Lib;@SOURCE@\..\VA;@SOURCE@\..\..\..\RPC Broker\BDK\Source;@SOURCE@\..\VA\VA508Accessibility;@SOURCE@\..\PKI;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>@SOURCE@\XE8\508\Source;@SOURCE@\XE8\Borland\Source;@SOURCE@\XE8\Broker\Source;@SOURCE@\XE8\CopyPaste\Source;@SOURCE@\XE8\ExceptionLogger\Source;@SOURCE@\XE8\FilemanComponents\Source;@SOURCE@\XE8\OR\Source;@SOURCE@\XE8\VA\Source; @SOURCE@\..\CPRS-Lib;@SOURCE@\..\VA;@SOURCE@\..\..\..\RPC Broker\BDK\Source;@SOURCE@\..\VA\VA508Accessibility;@SOURCE@\..\PKI;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_MapFile>3</DCC_MapFile>
         <DCC_WriteableConstants>true</DCC_WriteableConstants>
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
@@ -99,10 +99,13 @@
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
-    <ItemGroup>
+<ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <RcCompile Include="@SOURCE@\Cover Sheet\mGridPanelFrame.rc">
+            <Form>mGridPanelFrame.res</Form>
+        </RcCompile>
         <DCCReference Include="fPage.pas">
             <Form>frmPage</Form>
         </DCCReference>
@@ -112,11 +115,11 @@
         <DCCReference Include="fHP.pas">
             <Form>frmHP</Form>
         </DCCReference>
-        <DCCReference Include="fCover.pas">
-            <Form>frmCover</Form>
-        </DCCReference>
         <DCCReference Include="fMeds.pas">
             <Form>frmMeds</Form>
+        </DCCReference>
+        <DCCReference Include="fNotes.pas">
+            <Form>frmNotes</Form>
         </DCCReference>
         <DCCReference Include="fDCSumm.pas">
             <Form>frmDCSumm</Form>
@@ -886,13 +889,125 @@
             <Form>RadioLVFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="fNotes.pas">
-            <Form>frmNotes</Form>
-        </DCCReference>
         <DCCReference Include="mTreeGrid.pas">
             <Form>TreeGridFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="fDeferDialog.pas">
+            <Form>frmDeferDialog</Form>
+        </DCCReference>
+        <DCCReference Include="fViewNotifications.pas">
+            <Form>frmViewNotifications</Form>
+        </DCCReference>
+        <DCCReference Include="fNotificationProcessor.pas">
+            <Form>frmNotificationProcessor</Form>
+        </DCCReference>
+        <DCCReference Include="uInfoBoxWithBtnControls.pas"/>
+        <DCCReference Include="Orders\fODRTC.pas">
+            <Form>frmODRTC</Form>
+        </DCCReference>
+        <DCCReference Include="Womens Health\fWVEIEReasonsDlg.pas">
+            <Form>frmWVEIEReasonsDlg</Form>
+        </DCCReference>
+        <DCCReference Include="Womens Health\fWVPregLacStatusUpdate.pas">
+            <Form>frmWVPregLacStatusUpdate</Form>
+        </DCCReference>
+        <DCCReference Include="Womens Health\iWVInterface.pas"/>
+        <DCCReference Include="Womens Health\oWVController.pas"/>
+        <DCCReference Include="Womens Health\oWVPatient.pas"/>
+        <DCCReference Include="Cover Sheet\fCoverSheet.pas">
+            <Form>frmCoverSheet</Form>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\fCoverSheetDetailDisplay.pas">
+            <Form>frmCoverSheetDetailDisplay</Form>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\iCoverSheetIntf.pas"/>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel.pas">
+            <Form>fraCoverSheetDisplayPanel</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_ActiveMeds.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_ActiveMeds</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_Allergies.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_Allergies</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_Appts.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_Appts</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_Immunizations.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_Immunizations</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_Labs.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_Labs</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_Postings.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_Postings</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_ProblemList.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_ProblemList</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_Reminders.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_Reminders</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_Vitals.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_Vitals</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_CPRS_WH.pas">
+            <Form>fraCoverSheetDisplayPanel_CPRS_WH</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_Web.pas">
+            <Form>fraCoverSheetDisplayPanel_Web</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\mCoverSheetDisplayPanel_WidgetClock.pas">
+            <Form>fraCoverSheetDisplayPanel_WidgetClock</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\oCoverSheet.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_ActiveMeds.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_Allergies.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_Appts.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_Immunizations.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_Labs.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_Postings.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_ProblemList.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_Reminders.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_Vitals.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_CPRS_WH.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_Web.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParam_WidgetClock.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParamEnumerator.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetParamList.pas"/>
+        <DCCReference Include="Cover Sheet\iGridPanelIntf.pas"/>
+        <DCCReference Include="Cover Sheet\mGridPanelFrame.pas">
+            <Form>fraGridPanelFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Cover Sheet\oGridPanelDisplay.pas"/>
+        <DCCReference Include="Cover Sheet\oGridPanelFunctions.pas"/>
+        <DCCReference Include="Cover Sheet\oDelimitedString.pas"/>
+        <DCCReference Include="Orders\fOrdersPickEvent.pas">
+            <Form>frmOrdersPickEvent</Form>
+        </DCCReference>
+        <DCCReference Include="Womens Health\oWVWebSite.pas"/>
+        <DCCReference Include="Cover Sheet\oCoverSheetGrid.pas"/>
         <RidlCompile Include="CPRSChart.ridl"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>

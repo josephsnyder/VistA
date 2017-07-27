@@ -3,39 +3,48 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
-	Description: Signon Form Configuration Dialog.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+  Unit: SgnonCnf Signon Form configuration dialog.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
-{**************************************************
-1.1P31 - Modified to store signon configuration under
-         the HKCU key - this permits users on NT2000
-         machines who have USER access to set their
-         configuration.  Also, makes configuration specific
-         to users on machines which might be shared.
+{ **************************************************
+  Changes in v1.1.65 (HGW 08/05/2015 ) XWB*1.1*65
+  1. None.
 
-         Also make it so that configuration is only written
-         to the registry when the user indicates that it
-         should be saved (previously the default values
-         were written into the registry as well as applied
-         to the window if data was not in the registry).
-         The default values previously stored in the registry
-         would override any changes in the signon window
-         design via coding.  To overcome this, if the user
-         does not have saved configuration data, the window
-         generated on opening will be used as the default, and
-         the default data written into the registry as defaults.
-         This will permit the user to restore to the current
-         window defaults if desired, but will not overwrite
-         changes released for the window in later patches.
-************************************************************}
+  Changes in v1.1.60 (HGW 05/08/2014 ) XWB*1.1*60
+  1. None. Windows Registry access errors resolved in Xwbut1.pas.
 
-unit Sgnoncnf;
+  Changes in v1.1.31 (DCM ) XWB*1.1*31
+  1. Modified to store signon configuration under the HKCU key. This
+     permits users on NT2000 machines who have USER access to set their
+     configuration.  Also, makes configuration specific to user on
+     machines which might be shared.
+  2. Make it so that configuration is only written to the registry
+     when the user indicates that it should be saved (previously the
+     default values were written into the registry as well as applied
+     to the window if data was not in the registry). The default
+     values previously stored in the registry would override any changes
+     in the signon window design via coding.  To overcome this, if the
+     user does not have saved configuration data, the window generated
+     on opening will be used as the default, and the default data written
+     into the registry as defaults.  This will permit the user to restore
+     to the current window defaults if desired, but will not overwrite
+     changes released for the window in later patches.
+************************************************** }
+unit SgnonCnf;
 
 interface
 
-uses WinTypes, WinProcs, Classes, Graphics, Forms, Controls, Buttons,
-  StdCtrls, ExtCtrls, Dialogs, SysUtils, MFunStr, XWBut1;
+uses
+  {System}
+  Classes, SysUtils, UITypes,
+  {WinApi}
+  WinTypes, WinProcs,
+  {VA}
+  MFunStr, XWBut1,
+  {Vcl}
+  Graphics, Forms, Controls, Buttons, StdCtrls, ExtCtrls, Dialogs;
 
 type
   TSignonValues = class(TObject)
@@ -142,29 +151,16 @@ var
   SignonDefaults: TSignonValues;
   IsSharedBroker: Boolean;
 
-{
-const
-  DfltWidth: integer = 794; // 631; // 611;  // 608;
-  DfltHeight: integer = 591;  // 467; // 300;
-  DfltIntroClr: longint = clWindow;
-  DfltPosition: string = '0';
-  DfltSize: string = '0';
-  DfltIntroFont: string = '';  //  'Fixedsys^8'; // 'Courier New^8';
-  DfltIntroFontStyle: TFontStyles = [fsBold];
-  DfltBackClr: integer = 0;
-  p:string = '[';
-}
-
 implementation
 
 {$R *.DFM}
 
-uses 
-  UITypes, LoginFrm, fSgnonDlg, Trpcb;
+uses
+  {VA}
+  Loginfrm, fSgnonDlg, Trpcb;
 
 procedure TfrmSignonConfig.Button1Click(Sender: TObject);
 begin
-//  FontDialog1.Execute;
   Controller.FontDialog;
 end;
 
@@ -184,7 +180,6 @@ var
   strFontSettings: String;
 begin
   { Test handling of Defaults }
-//  ShowMessage
   InitialValues.SetEqual(SignonDefaults);
   InitialValues.Position := '0';
   InitialValues.Size := '0';
@@ -278,8 +273,8 @@ begin
   frmSignonConfig.Controller := Self;
   OrigHelp := Application.HelpFile;             // Save original helpfile.
   try
-//    Application.HelpFile := ReadRegData(HKLM, REG_BROKER, 'BrokerDr') +
-//                           '\clagent.hlp';      // Identify ConnectTo helpfile.
+    Application.HelpFile := ReadRegData(HKLM, REG_BROKER, 'BrokerDr') +
+                           '\clagent.hlp';      // Identify ConnectTo helpfile.
     with frmSignonConfig do
     begin
       // set selections for entry to form

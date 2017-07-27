@@ -1,4 +1,3 @@
-{$WARN UNSAFE_CODE OFF}
 unit VERGENCECONTEXTORLib_TLB;
 { **************************************************************
 	Package: XWB - Kernel RPCBroker
@@ -6,9 +5,20 @@ unit VERGENCECONTEXTORLib_TLB;
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
 	Description: Contains TRPCBroker and related components.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+  Unit: VERGENCECONTEXTORLib_TLB CCOW Vergence Contextor Type Library.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
+{ **************************************************
+  Changes in v1.1.65 (HGW 08/05/2015) XWB*1.1*65
+  1. None.
+
+  Changes in v1.1.60 (HGW 12/18/2013) XWB*1.1*60
+  1. None.
+
+  Changes in v1.1.50 (JLI 09/01/2011) XWB*1.1*50
+  1. None.
+************************************************** }
 
 // ************************************************************************ //
 // WARNING                                                                    
@@ -52,7 +62,13 @@ unit VERGENCECONTEXTORLib_TLB;
 {$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers. 
 interface
 
-uses Windows, ActiveX, Classes, Graphics, OleServer, OleCtrls, StdVCL;
+uses
+  {System}
+  Classes,
+  {WinApi}
+  Windows, ActiveX,
+  {Vcl}
+  Vcl.Graphics, Vcl.OleServer, Vcl.OleCtrls, StdVCL;
 
 // *********************************************************************//
 // GUIDS declared in the TypeLibrary. Following prefixes are used:        
@@ -913,7 +929,9 @@ procedure Register;
 }
 implementation
 
-uses ComObj;
+uses
+  {System}
+  ComObj;
 
 class function CoContextor.Create: IContextor;
 begin
@@ -1756,5 +1774,4 @@ begin
     TContextorParticipant]);
 end;
 }
-{$WARN UNSAFE_CODE ON}
 end.

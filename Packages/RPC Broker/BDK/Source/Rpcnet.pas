@@ -4,30 +4,47 @@
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
 	Description: Contains TRPCBroker and related components.
-  Unit: RpcNet winsock utilities.
-	Current Release: Version 1.1 Patch 50
+  Unit: Rpcnet winsock utilities.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
 { **************************************************
-  Changes in v1.1.13 (JLI 8/23/2000) XWB*1.1*13
+  Changes in v1.1.65 (HGW 08/05/2015) XWB*1.1*65
+  1. None.
+
+  Changes in v1.1.60 (HGW 07/16/2013) XWB*1.1*60
+  1. Symbol 'StrDispose' is deprecated in Delphi XE4, moved to the AnsiStrings unit.
+  2. Symbol 'StrPas' is deprecated in Delphi XE4, moved to the AnsiStrings unit.
+  3. Upgraded from WinSock 1.1 to WinSock 2.2
+  4. //TODO - Replace uses winsock with uses winsock2 and fix errors.
+  5. //TODO - IPv6 changes required by Microsoft:
+     a. Replace gethostbyname function calls with calls to one of the new getaddrinfo
+        Windows Sockets functions. The getaddrinfo function with support for the IPv6
+        protocol is available on Windows XP and later. The IPv6 protocol is also supported
+        on Windows 2000 when the IPv6 Technology Preview for Windows 2000 is installed.
+
+  Changes in v1.1.13 (JLI 08/23/2000) XWB*1.1*13
   1. Made changes to cursor dependent on current cursor being crDefault
      so that the application can set it to a different cursor for long or
      repeated processes without the cursor 'flashing' repeatedly.
 ************************************************** }
-
-
-unit RpcNet ;
+unit Rpcnet ;
 
 interface
 
 uses
-  SysUtils, WinTypes, WinProcs, Messages, Classes, Graphics, Controls,
-  Forms, Dialogs, winsock;
+  {System}
+  AnsiStrings, SysUtils, Classes,
+  {WinApi}
+  WinTypes, WinProcs, Messages, Winsock,
+  {Vcl}
+  Graphics, Controls, Forms, Dialogs;
 
 Const XWB_GHIP = WM_USER + 10000;
-//Const XWB_SELECT = WM_USER + 10001;
 
-Const WINSOCK1_1 = $0101;
+//Upgrade from WinSock 1.1 to WinSock 2.2
+//Const WinSockVer = $0101;
+Const WinSockVer = $0202;
 Const PF_INET = 2;
 Const SOCK_STREAM = 1;
 Const IPPROTO_TCP = 6;
@@ -54,7 +71,6 @@ type
      InUse: boolean;
      pTCPResult: Pointer;
      strTemp: string; {generic output string for async calls}
-//     chrTemp: PChar; {generic out PChar for async calls}  // JLI 090804
      chrTemp: PAnsiChar; {generic out PChar for async calls}  // JLI 090804
      hTCP: THandle; {pseudo handle for async calls}
      hWin: hWnd; {handle for owner window}
@@ -73,12 +89,8 @@ function libGetCurrentProcess: word;
 
 {Socket functions using library RPCLIB.DLL, in this case called locally}
 
-//function  libAbortCall(inst: integer): integer; export;   //P14
-//function  libGetHostIP1(inst: integer; HostName: PChar;  // JLI 090804
-//          var outcome: PChar): integer; export;  // JLI 090804
 function  libGetHostIP1(inst: integer; HostName: PAnsiChar;  // JLI 090804
           var outcome: PAnsiChar): integer; export;  // JLI 090804
-//function  libGetLocalIP(inst: integer; var outcome: PChar): integer; export;  // JLI 090804
 function  libGetLocalIP(inst: integer; var outcome: PAnsiChar): integer; export;  // JLI 090804
 procedure libClose(inst: integer); export;
 function  libOpen:integer; export;
@@ -88,16 +100,13 @@ function GetTCPError:string;
 {Secure Hash Algorithm functions, library SHA.DLL and local interfaces}
 
 function libGetLocalModule: PChar; export;
-//function GetFileHash(fn: PChar): longint; export;  // JLI 090804
 function GetFileHash(fn: PAnsiChar): longint; export;  // JLI 090804
 
 implementation
 
-uses rpcconf1;
-
-{function shsTest: integer; far; external 'SHA';
-procedure shsHash(plain: PChar; size: integer;
-          Hash: PChar); far; external 'SHA';}    //Removed in P14
+uses
+  {VA}
+  Rpcconf1;
 
 {$R *.DFM}
 
@@ -108,17 +117,14 @@ begin
   Result := GetCurrentProcess;
 end;
 
-//function libGetLocalIP(inst: integer; var outcome: PChar): integer;  // JLI 090804
-function libGetLocalIP(inst: integer; var outcome: PAnsiChar): integer;  // JLI 090804
+function libGetLocalIP(inst: integer; var outcome: PAnsiChar): integer;
 var
-//   local: PChar;  // JLI 090804
-   local: PAnsiChar;  // JLI 090804
+   local: PAnsiChar;
 begin
-//     local := StrAlloc(255);  // JLI 090804
-     local := PAnsiChar(StrAlloc(255));  // JLI 090804
+     local := PAnsiChar(StrAlloc(255));
      gethostname( local, 255);
      Result := libGetHostIP1(inst, local, outcome);
-     StrDispose(local);
+     StrDispose(local);     //p60
 end;
 
 function libGetLocalModule: PChar;
@@ -133,8 +139,7 @@ begin
 
 end;
 
-//function GetFileHash(fn: PChar): longint;  // JLI 090804
-function GetFileHash(fn: PAnsiChar): longint;  // JLI 090804
+function GetFileHash(fn: PAnsiChar): longint;
 var
    hFn: integer;
    finfo: TOFSTRUCT;
@@ -168,7 +173,7 @@ begin
      begin
      hWin := AllocateHWnd(RPCFRM1.wndproc);
 
-     WSAStartUp(WINSOCK1_1, WSData);
+     WSAStartUp(WinSockVer, WSData);
      WSAUnhookBlockingHook;
 
      Result := inst;
@@ -188,14 +193,9 @@ begin
      end;
 end;
 
-//function libGetHostIP1(inst: integer; HostName: PChar;  // JLI 090804
-//         var outcome: PChar): integer;  // JLI 090804
-function libGetHostIP1(inst: integer; HostName: PAnsiChar;  // JLI 090804
-         var outcome: PAnsiChar): integer;  // JLI 090804
+function libGetHostIP1(inst: integer; HostName: PAnsiChar;
+         var outcome: PAnsiChar): integer;
 var
-   //RPCFRM1: TRPCFRM1; {P14}
-   //wMsg: TMSG;        {P14}
-   //hWnd: THandle;     {P14}
    ChangeCursor: Boolean;
 
 begin
@@ -214,7 +214,7 @@ begin
 
    if HostName[0] = #0 then
    begin
-        StrCat(outcome,'No Name to Resolve!');
+        StrCat(outcome,'No Name to Resolve!');   //p60
         Result := -1;
         exit;
    end;
@@ -222,7 +222,7 @@ begin
    if CallWait = True then
    begin
         outcome[0] := #0;
-        StrCat(outcome, 'Call in Progress');
+        StrCat(outcome, 'Call in Progress');     //p60
         Result := -1;
         exit;
    end;
@@ -243,6 +243,7 @@ begin
            CallWait := True;
            CallAbort := False;
            PHostEnt(pTCPResult)^.h_name := nil;
+//TODO - Replace gethostbyname function calls with calls to one of the new getaddrinfo Windows Sockets functions.
            hTCP := WSAAsyncGetHostByName(hWin, XWB_GHIP, HostName,
                 pTCPResult, MAXGETHOSTSTRUCT );
            { loop while CallWait is True }
@@ -252,7 +253,7 @@ begin
       end;
    except on EInValidPointer do
      begin
-        StrCat(outcome,'Error in GetHostByName');
+        StrCat(outcome,'Error in GetHostByName');        //p60
         if ChangeCursor then
           Screen.Cursor := crDefault;
      end;
@@ -260,38 +261,12 @@ begin
    end;
 
    FreeMem(pTCPResult, MAXGETHOSTSTRUCT+1);
-   StrCopy(outcome,chrTemp);
+   StrCopy(outcome,chrTemp);   //p60
    Result := 0;
    if ChangeCursor then
      Screen.Cursor := crDefault;
    end;
    end;
-
-(*procedure TRPCFRM1.XWBSELECT(var msgSock: TMessage);
-var
-   noop: integer;
-begin
-     case msgSock.lparam of
-       FD_ACCEPT: {connection arrived}
-          begin
-               noop := 1;
-          end;
-       FD_CONNECT: {connection initiated}
-          begin
-               noop := 1;
-          end;
-       FD_READ:    {data received, put in display}
-          begin
-               noop := 1;
-          end;
-       FD_CLOSE:   {disconnection of accepted socket}
-          begin
-               noop := 1;
-          end;
-       else
-              noop := 1;
-       end;
-end;*)     //Procedure removed in P14.
 
 procedure TRPCFRM1.WndProc(var Message : TMessage);
 begin
@@ -321,20 +296,19 @@ begin
 
    hTCP := msgSock.WParam;
    
-//   chrTemp := StrAlloc(512);  // JLI 090804
    chrTemp := PAnsiChar(StrAlloc(512));  // JLI 090804
 
    CallWait := False;
    If CallAbort = True then  { User aborted call }
    begin
-        StrCopy(ChrTemp,'Abort!');
+        StrCopy(ChrTemp,'Abort!');    //p60
         exit;
    end;
 
    WSAError := WSAGetAsyncError(hTCP); { in case async call failed }
    If  WSAError < 0 then
    begin
-        StrPCopy(chrTemp,AnsiString(IntToStr(WSAError)));
+        StrPCopy(chrTemp,IntToStr(WSAError));    //p60
         exit;
    end;
 
@@ -344,45 +318,21 @@ begin
       StrTemp := '';
        if TCPResult^.h_name = nil then
          begin
-              StrCopy(chrTemp, 'Unknown!');
+              StrCopy(chrTemp, 'Unknown!');    //p60
               if rpcconfig <> nil then
-                rpcconfig.panel4.Caption := String(StrPas(chrTemp));
+                rpcconfig.pnlAddress.Caption := StrPas(chrTemp);   //p60
               exit;
          end;
       {success, return resolved address}
       HostAddr.sin_addr.S_addr := longint(plongint(TCPResult^.h_addr_list^)^);
       chrTemp := inet_ntoa(HostAddr.sin_addr);
    end;
-   except on EInValidPointer do StrCat(chrTemp, 'Error in GetHostByName');
+   except on EInValidPointer do StrCat(chrTemp, 'Error in GetHostByName');      //p60
    end;
 end;
 end;
 
-(*function libAbortCall(inst: integer): integer;
-var
-   WSAError: integer;
-begin
-
-   with WRec[inst] do
-   begin
-
-   WSAError := WSACancelAsyncRequest(hTCP);
-   if WSAError = Socket_Error then
-   begin
-        WSAError := WSAGetLastError;
-        CallWait := False;
-        CallAbort := True;
-        Result := WSAError;
-   end;
-
-   CallAbort := True;
-   CallWait := False;
-   Result := WSAError;
-
-   end;
-
-end; *)    //Removed in P14
-
+//TODO -- Can this be replaced with a call to similar function in Wsockc.pas?
 function GetTCPError:string;
 var
    x: string;

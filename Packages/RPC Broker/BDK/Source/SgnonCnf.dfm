@@ -3,10 +3,11 @@ object frmSignonConfig: TfrmSignonConfig
   Top = 110
   HelpContext = 2
   ActiveControl = CancelBtn
+  Anchors = [akTop]
   BorderStyle = bsDialog
   Caption = 'Sign-on Properties'
-  ClientHeight = 258
-  ClientWidth = 401
+  ClientHeight = 236
+  ClientWidth = 366
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,18 +21,26 @@ object frmSignonConfig: TfrmSignonConfig
   PixelsPerInch = 96
   TextHeight = 14
   object Bevel1: TBevel
-    Left = 8
-    Top = 8
-    Width = 289
-    Height = 249
+    Left = 7
+    Top = 7
+    Width = 264
+    Height = 228
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Shape = bsFrame
     IsControl = True
   end
   object OKBtn: TBitBtn
-    Left = 312
-    Top = 8
-    Width = 77
-    Height = 27
+    Left = 286
+    Top = 7
+    Width = 70
+    Height = 25
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'OK'
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
@@ -59,10 +68,14 @@ object frmSignonConfig: TfrmSignonConfig
     IsControl = True
   end
   object CancelBtn: TBitBtn
-    Left = 312
-    Top = 48
-    Width = 77
-    Height = 27
+    Left = 286
+    Top = 44
+    Width = 70
+    Height = 25
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Cancel = True
     Caption = 'Cancel'
     Default = True
@@ -91,10 +104,14 @@ object frmSignonConfig: TfrmSignonConfig
     IsControl = True
   end
   object HelpBtn: TBitBtn
-    Left = 312
-    Top = 128
-    Width = 77
-    Height = 27
+    Left = 286
+    Top = 117
+    Width = 70
+    Height = 25
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Kind = bkHelp
     Margin = 2
     NumGlyphs = 2
@@ -103,10 +120,14 @@ object frmSignonConfig: TfrmSignonConfig
     IsControl = True
   end
   object rgrWindowPosition: TRadioGroup
-    Left = 24
-    Top = 24
-    Width = 121
-    Height = 81
+    Left = 22
+    Top = 22
+    Width = 111
+    Height = 74
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'Window Position'
     Items.Strings = (
       'Center'
@@ -116,10 +137,14 @@ object frmSignonConfig: TfrmSignonConfig
     TabStop = True
   end
   object rgrWindowSize: TRadioGroup
-    Left = 160
-    Top = 24
-    Width = 121
-    Height = 81
+    Left = 146
+    Top = 22
+    Width = 111
+    Height = 74
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'Window Size'
     Items.Strings = (
       'Normal'
@@ -129,31 +154,43 @@ object frmSignonConfig: TfrmSignonConfig
     TabStop = True
   end
   object GroupBox1: TGroupBox
-    Left = 24
-    Top = 120
-    Width = 257
-    Height = 121
+    Left = 22
+    Top = 110
+    Width = 235
+    Height = 110
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'Intro Text'
     TabOrder = 4
     object Button1: TButton
-      Left = 16
-      Top = 80
-      Width = 97
-      Height = 27
+      Left = 14
+      Top = 73
+      Width = 89
+      Height = 25
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
       Caption = 'Change Font'
       TabOrder = 1
       OnClick = Button1Click
     end
     object rgrIntroBackClr: TRadioGroup
-      Left = 16
-      Top = 24
-      Width = 225
-      Height = 41
+      Left = 14
+      Top = 22
+      Width = 206
+      Height = 37
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
       Caption = 'Background Color'
       Columns = 2
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -10
       Font.Name = 'Courier New'
       Font.Style = [fsBold]
       Items.Strings = (
@@ -166,11 +203,15 @@ object frmSignonConfig: TfrmSignonConfig
     end
   end
   object btnDefaults: TBitBtn
-    Left = 312
-    Top = 88
-    Width = 77
-    Height = 27
+    Left = 286
+    Top = 81
+    Width = 70
+    Height = 24
     HelpContext = 4
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = '&Defaults'
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100

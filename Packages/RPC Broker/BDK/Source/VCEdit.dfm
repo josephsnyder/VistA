@@ -1,9 +1,10 @@
 object frmVCEdit: TfrmVCEdit
   Left = 197
   Top = 197
-  Width = 411
-  Height = 166
-  Caption = 'Change VISTA Verify Code'
+  Anchors = [akTop]
+  Caption = 'Change VistA Verify Code'
+  ClientHeight = 126
+  ClientWidth = 406
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,65 +15,129 @@ object frmVCEdit: TfrmVCEdit
   PixelsPerInch = 96
   TextHeight = 13
   object lblOldVC: TLabel
-    Left = 16
-    Top = 24
-    Width = 74
-    Height = 13
+    Left = 8
+    Top = 12
+    Width = 110
+    Height = 16
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = '&Old verify code:'
     FocusControl = edtOldVC
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object lblNewVC: TLabel
-    Left = 16
-    Top = 64
-    Width = 80
-    Height = 13
+    Left = 7
+    Top = 48
+    Width = 116
+    Height = 16
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = '&New verify code:'
     FocusControl = edtNewVC
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object lblConfirmVC: TLabel
-    Left = 16
-    Top = 104
-    Width = 116
-    Height = 13
+    Left = 8
+    Top = 84
+    Width = 169
+    Height = 16
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'Con&firm new verify code:'
     FocusControl = edtConfirmVC
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object edtOldVC: TEdit
-    Left = 144
-    Top = 16
-    Width = 121
-    Height = 21
+    Left = 184
+    Top = 12
+    Width = 110
+    Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Ctl3D = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentCtl3D = False
+    ParentFont = False
     PasswordChar = '*'
     TabOrder = 0
     OnChange = edtOldVCChange
   end
   object edtNewVC: TEdit
-    Left = 144
-    Top = 56
-    Width = 121
-    Height = 21
+    Left = 184
+    Top = 48
+    Width = 110
+    Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
     PasswordChar = '*'
     TabOrder = 1
     OnChange = edtOldVCChange
     OnExit = edtNewVCExit
   end
   object edtConfirmVC: TEdit
-    Left = 144
-    Top = 96
-    Width = 121
-    Height = 21
+    Left = 184
+    Top = 83
+    Width = 110
+    Height = 24
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
     PasswordChar = '*'
     TabOrder = 2
     OnChange = edtOldVCChange
   end
   object btnOK: TBitBtn
-    Left = 312
-    Top = 16
-    Width = 75
-    Height = 25
+    Left = 298
+    Top = 7
+    Width = 85
+    Height = 26
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = '&OK'
-    TabOrder = 3
-    OnClick = btnOKClick
     Glyph.Data = {
       BE060000424DBE06000000000000360400002800000024000000120000000100
       0800000000008802000000000000000000000001000000010000000000000000
@@ -130,23 +195,36 @@ object frmVCEdit: TfrmVCEdit
       0303030303030303030303030303030303030303030303030303030303030303
       0303}
     NumGlyphs = 2
+    TabOrder = 3
+    OnClick = btnOKClick
   end
   object btnCancel: TBitBtn
-    Left = 312
-    Top = 56
-    Width = 75
-    Height = 25
+    Left = 298
+    Top = 48
+    Width = 85
+    Height = 26
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = '&Cancel'
-    TabOrder = 4
     Kind = bkCancel
+    NumGlyphs = 2
+    TabOrder = 4
+    OnClick = btnCancelClick
   end
   object btnHelp: TBitBtn
-    Left = 312
-    Top = 96
-    Width = 75
-    Height = 25
+    Left = 298
+    Top = 84
+    Width = 85
+    Height = 26
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Kind = bkHelp
+    NumGlyphs = 2
     TabOrder = 5
     OnClick = btnHelpClick
-    Kind = bkHelp
   end
 end

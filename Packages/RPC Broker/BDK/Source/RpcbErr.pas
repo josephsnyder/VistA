@@ -3,17 +3,34 @@
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
-	Description: Error handling for TRPCBroker.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+	Description: Contains TRPCBroker and related components.
+  Unit: RpcbErr error handling for TRPC Broker.
+	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
-unit Rpcberr;
+{ **************************************************
+  Changes in v1.1.65 (HGW 06/23/2016) XWB*1.1*65
+  1. Added error XWB_BadToken for SSOi testing.
+
+  Changes in v1.1.60 (HGW 12/18/2013) XWB*1.1*60
+  1. None.
+
+  Changes in v1.1.50 (JLI 09/01/2011) XWB*1.1*50
+  1. None.
+************************************************** }
+unit RpcbErr;
 
 interface
 
 uses
-  TRPCB, Winsock, Classes, Forms, SysUtils, Controls,
-  StdCtrls, Buttons, ExtCtrls, Graphics, WinProcs;
+  {System}
+  Classes, SysUtils,
+  {WinApi}
+  Winsock2, WinProcs,
+  {VA}
+  Trpcb,
+  {Vcl}
+  Forms, Controls, StdCtrls, Buttons, ExtCtrls, Graphics;
 
 type
   TfrmRpcbError = class(TForm)
@@ -45,6 +62,7 @@ const
        XWB_BadSignOn = XWBBASEERR + 4;
   XWB_BldConnectList = XWBBASEERR + 5;
       XWB_NullRpcVer = XWBBASEERR + 6;
+        XWB_BadToken = XWBBASEERR + 7;
         XWB_ExeNoMem = XWBBASEERR + 100;
        XWB_ExeNoFile = XWB_ExeNoMem +  2;
        XWB_ExeNoPath = XWB_ExeNoMem +  3;
@@ -56,7 +74,9 @@ const
         XWB_ExeDifOS = XWB_ExeNoMem + 12;
        XWB_RpcNotReg = XWBBASEERR + 201;
 implementation
-uses wsockc;
+  uses
+    {VA}
+    Wsockc;
 {$R *.DFM}
 
 
@@ -90,6 +110,7 @@ begin
   end;
 end;
 
+//Can this be redone to use the procedure TXWBWinsock.NetError in Wsockc.pas and remove redundant code?
 procedure NetError(Action : String; ErrType: integer);
 var
    x,s: string;
@@ -173,6 +194,7 @@ begin
         XWB_RpcNotReg      : X := 'Remote procedure not registered to application.';
         XWB_BldConnectList : x := 'BrokerConnections list could not be created';
         XWB_NullRpcVer     : x := 'RpcVersion cannot be empty.' + #13 + 'Default is 0 (zero).';
+        XWB_BadToken       : x := 'Could not log on using STS token.';
         else x := IntToStr(r);
   end;
   s := 'Error encountered.' + chr(13)+chr(10) + 'Function was: ' + Action + chr(13)+chr(10) + 'Error was: ' + x;

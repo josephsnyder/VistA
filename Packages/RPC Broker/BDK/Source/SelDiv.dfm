@@ -1,50 +1,58 @@
 object SelDivForm: TSelDivForm
   Left = 368
   Top = 193
-  Width = 445
-  Height = 213
+  Anchors = [akTop]
   Caption = 'Select Division'
+  ClientHeight = 173
+  ClientWidth = 360
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -16
+  Font.Height = -8
   Font.Name = 'MS Sans Serif'
   Font.Style = [fsBold]
   OldCreateOrder = True
   OnCreate = FormCreate
+  DesignSize = (
+    360
+    173)
   PixelsPerInch = 96
-  TextHeight = 20
+  TextHeight = 13
   object DivLabel1: TLabel
-    Left = 16
-    Top = 8
+    Left = 8
+    Top = 4
     Width = 268
     Height = 16
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'Must Select Division To Continue Signon!'
     Color = clBtnFace
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -6
     Font.Name = 'System'
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
   end
   object btnOK: TBitBtn
-    Left = 16
-    Top = 137
-    Width = 81
-    Height = 25
-    Anchors = [akRight]
+    Left = 7
+    Top = 136
+    Width = 80
+    Height = 30
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = '&OK'
     Default = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -6
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 1
-    OnClick = btnOKClick
     Glyph.Data = {
       BE060000424DBE06000000000000360400002800000024000000120000000100
       0800000000008802000000000000000000000001000000010000000000000000
@@ -102,52 +110,68 @@ object SelDivForm: TSelDivForm
       0303030303030303030303030303030303030303030303030303030303030303
       0303}
     NumGlyphs = 2
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnOKClick
   end
   object btnCancel: TBitBtn
-    Left = 168
-    Top = 137
-    Width = 83
-    Height = 25
+    Left = 139
+    Top = 136
+    Width = 80
+    Height = 30
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akRight]
     Caption = '&Cancel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -6
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    Kind = bkCancel
+    NumGlyphs = 2
     ParentFont = False
     TabOrder = 2
     OnClick = btnCancelClick
-    Kind = bkCancel
   end
   object btnHelp: TBitBtn
-    Left = 336
-    Top = 135
-    Width = 83
-    Height = 26
+    Left = 273
+    Top = 136
+    Width = 80
+    Height = 30
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akRight]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -6
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    Kind = bkHelp
+    NumGlyphs = 2
     ParentFont = False
     TabOrder = 3
     OnClick = btnHelpClick
-    Kind = bkHelp
   end
   object DivListBox: TListBox
-    Left = 16
-    Top = 32
-    Width = 401
-    Height = 90
+    Left = 7
+    Top = 24
+    Width = 346
+    Height = 105
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Anchors = [akTop, akRight]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -6
     Font.Name = 'System'
     Font.Style = [fsBold]
-    ItemHeight = 16
     ParentFont = False
     Sorted = True
     TabOrder = 0

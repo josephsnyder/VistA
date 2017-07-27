@@ -7,7 +7,7 @@ interface
 
 uses
   SysUtils, Dialogs, Controls, Windows, Classes, ORClasses, ORCtrls, ORFn, Forms
-  , TRPCB ;
+  ,rMisc,  TRPCB ;
 
 const
   NoVitalOverrideValue = '^None^';
@@ -128,7 +128,7 @@ var
 const
   VitalsDLLName = 'GMV_VitalsViewEnter.dll';
 
-procedure LoadVitalsDLL;
+function LoadVitalsDLL(): TDllRtnRec;
 procedure UnloadVitalsDLL;
 
 const
@@ -178,7 +178,7 @@ const
 implementation
 
 uses
-  rMisc, uCore, rCore, rVitals, Contnrs, fVitalsDate, VAUtils;
+  uCore, rCore, rVitals, Contnrs, fVitalsDate, VAUtils;
   
 var
   uVitalFrames: TComponentList = nil;
@@ -622,14 +622,15 @@ begin
   for i := 1 to Length(x) do if not CharInSet(x[i], ['0'..'9','.']) then Result := False;
 end;
 
-procedure LoadVitalsDLL;
+function LoadVitalsDLL(): TDllRtnRec;
 //var
 //  GMV_LibName: WideString;
 begin
   if VitalsDLLHandle = 0 then begin
 //    GMV_LibName := ExcludeTrailingPathDelimiter(GetProgramFilesPath) + SHARE_DIR + VitalsDLLName;
 //    VitalsDLLHandle := LoadLibrary(PWideChar(GMV_LibName));
-    VitalsDLLHandle := LoadDll(VitalsDLLName);
+   Result := LoadDll(VitalsDLLName);
+   VitalsDLLHandle := Result.DLL_HWND;
   end;
 end;
 

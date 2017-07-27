@@ -4,19 +4,11 @@
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
 	Developers: Danila Manapsal, Don Craven, Joel Ivey
 	Description: Contains TRPCBroker and related components.
-	Current Release: Version 1.1 Patch 47 (Oct. 11, 2007))
+	Current Release: Version 1.1 Patch 65 (2016))
 *************************************************************** }
 
-{===============================================================================
-  Ray Konopka's Conference 2001 Include File
 
-  This file is included into each component unit and serves as a common
-  place to add conditional defines and compiler directives to be used by all
-  component units.
-
-  Copyright © 1995-2001 by Ray Konopka
-===============================================================================}
-
+{== Delphi Version Properties ==}
 {$IFDEF WIN32}
   {$DEFINE D2_OR_HIGHER}
 {$ENDIF}
@@ -80,7 +72,6 @@
 {$IFDEF VER140}
   {$DEFINE D6_ONLY}
 {$ENDIF}
-
 
 
 {== Code Generation Directives ==}

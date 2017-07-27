@@ -1,9 +1,10 @@
 object frmSignonDialog: TfrmSignonDialog
   Left = 212
   Top = 111
-  Width = 326
-  Height = 188
+  Anchors = [akTop]
   Caption = 'Configuration Selection Question'
+  ClientHeight = 154
+  ClientWidth = 318
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,12 +13,12 @@ object frmSignonDialog: TfrmSignonDialog
   Font.Style = []
   FormStyle = fsStayOnTop
   OldCreateOrder = False
-  PixelsPerInch = 96
+  PixelsPerInch = 120
   TextHeight = 13
   object Label1: TLabel
     Left = 32
     Top = 8
-    Width = 220
+    Width = 214
     Height = 96
     Caption = 'Do you want to use the standard Windows Window Background Color?'
     Font.Charset = DEFAULT_CHARSET
@@ -35,8 +36,6 @@ object frmSignonDialog: TfrmSignonDialog
     Height = 25
     Caption = 'OK'
     Default = True
-    ModalResult = 1
-    TabOrder = 0
     Glyph.Data = {
       BE060000424DBE06000000000000360400002800000024000000120000000100
       0800000000008802000000000000000000000001000000010000000000000000
@@ -93,7 +92,9 @@ object frmSignonDialog: TfrmSignonDialog
       030303030303030303FA0303030303030303030303030303030303F803030303
       0303030303030303030303030303030303030303030303030303030303030303
       0303}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 0
   end
   object btnNO: TBitBtn
     Left = 160
@@ -102,8 +103,6 @@ object frmSignonDialog: TfrmSignonDialog
     Height = 25
     Cancel = True
     Caption = 'NO'
-    ModalResult = 2
-    TabOrder = 1
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -121,6 +120,8 @@ object frmSignonDialog: TfrmSignonDialog
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 1
   end
 end

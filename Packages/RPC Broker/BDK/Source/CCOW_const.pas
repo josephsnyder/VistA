@@ -1,13 +1,24 @@
-unit CCOW_const;
 { **************************************************************
 	Package: XWB - Kernel RPCBroker
 	Date Created: Sept 18, 1997 (Version 1.1)
 	Site Name: Oakland, OI Field Office, Dept of Veteran Affairs
-	Developers: Danila Manapsal, Don Craven, Joel Ivey
+	Developers: Joel Ivey
 	Description: Contains TRPCBroker and related components.
-	Current Release: Version 1.1 Patch 47 (Jun. 17, 2008))
+  Unit: CCOW_const sets CCOW string.
+ 	Current Release: Version 1.1 Patch 65
 *************************************************************** }
 
+{ **************************************************
+  Changes in v1.1.65 (HGW 08/05/2015) XWB*1.1*65
+  1. None.
+
+  Changes in v1.1.60 (HGW 08/28/2013) XWB*1.1*60
+  1. None
+
+  Changes in v1.1.50 (JLI 09/01/2011) XWB*1.1*50
+  1. None
+************************************************** }
+unit CCOW_const;
 
 interface
 const
@@ -21,7 +32,7 @@ const
   //The VistA Token
   CCOW_LOGON_TOKEN = 'user.id.logon.vistatoken';     //CCOW
   //The VistA user Name
-  CCOW_LOGON_NAME = 'user.id.logon.vistaname';            //CCOW
+  CCOW_LOGON_NAME = 'user.id.logon.vistaname';       //CCOW
   // The VistA Vpid
   CCOW_LOGON_VPID = 'user.id.logon.vpid';
   // The generic name

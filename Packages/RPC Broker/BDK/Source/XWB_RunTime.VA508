@@ -1,0 +1,181 @@
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\Loginfrm.dfm
+25287/1196450724
+0
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\RpcbErr.dfm
+2576/1191530215
+2
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\Rpcconf1.dfm
+10060/1191405309
+4
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\Rpcnet.dfm
+359/1191405309
+6
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\SelDiv.dfm
+6746/1191530356
+8
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\SgnonCnf.dfm
+7319/1193562327
+10
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\Splvista.dfm
+782769/1191405309
+12
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\VCEdit.dfm
+6724/1191530596
+14
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\frmSignonMessage.dfm
+6149/1192906116
+16
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBAddServer.dfm
+2724/1191405309
+18
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\fRPCBErrMsg.dfm
+1073/1191530086
+20
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\fSgnonDlg.dfm
+6478/1191530112
+22
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\fPlinkpw.dfm
+1357/1191405309
+24
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\fSSHUsername.dfm
+1342/1191530132
+26
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\fDebugInfo.dfm
+877/1191405309
+28
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBfDebugInfo.dfm
+877/1191405309
+30
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBLoginfrm.dfm
+39682/1192907707
+32
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBRpcbErr.dfm
+2576/1191530215
+34
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBRpcconf1.dfm
+10060/1191405309
+36
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBRpcnet.dfm
+359/1191405309
+38
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBSelDiv.dfm
+6746/1191530356
+40
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBSgnonCnf.dfm
+6406/1191405309
+42
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBSplvista.dfm
+782769/1191405309
+44
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBVCEdit.dfm
+6724/1191530596
+46
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBfrmSignonMessage.dfm
+6125/1191657954
+48
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBfRPCBErrMsg.dfm
+1073/1191530086
+50
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBfSgnonDlg.dfm
+6478/1191530112
+52
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBfPlinkpw.dfm
+1357/1191405309
+54
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\XWBfSSHUsername.dfm
+1342/1191530132
+56
+2
+C:\Users\zzzzzzwestrh\Documents\RAD Studio\Projects\BDK32\Source\AddServer.dfm
+2724/1191405309
+58
+2
+|EOINDEX|
+590
+object frmSignon: TfrmSignon
+131
+object frmRpcbError: TfrmRpcbError
+318
+object rpcConfig: TrpcConfig
+17
+object RPCFRM1: TRPCFRM1
+181
+object SelDivForm: TSelDivForm
+248
+object frmSignonConfig: TfrmSignonConfig
+10611
+object frmVistaSplash: TfrmVistaSplash
+192
+object frmVCEdit: TfrmVCEdit
+152
+object frmSignonMsg: TfrmSignonMsg
+127
+object frmAddServer: TfrmAddServer
+50
+object frmErrMsg: TfrmErrMsg
+138
+object frmSignonDialog: TfrmSignonDialog
+64
+object fPlinkPassword: TfPlinkPassword
+63
+object SSHUsername: TSSHUsername
+42
+object frmDebugInfo: TfrmDebugInfo
+42
+object frmDebugInfo: TfrmDebugInfo
+1301
+object frmSignon: TfrmSignon
+131
+object frmRpcbError: TfrmRpcbError
+318
+object rpcConfig: TrpcConfig
+17
+object RPCFRM1: TRPCFRM1
+181
+object SelDivForm: TSelDivForm
+208
+object frmSignonConfig: TfrmSignonConfig
+10611
+object frmVistaSplash: TfrmVistaSplash
+192
+object frmVCEdit: TfrmVCEdit
+150
+object frmSignonMsg: TfrmSignonMsg
+50
+object frmErrMsg: TfrmErrMsg
+138
+object frmSignonDialog: TfrmSignonDialog
+64
+object fPlinkPassword: TfPlinkPassword
+63
+object SSHUsername: TSSHUsername
+127
+object frmAddServer: TfrmAddServer
