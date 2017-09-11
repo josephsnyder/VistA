@@ -35,6 +35,9 @@ data_table_reference = """
 <script type="text/javascript" src="../../datatable/js/buttons.colVis.min.js"></script>
 <script type="text/javascript" src="../../datatable/js/jquery.highlight.js"></script>
 <script type="text/javascript" src="../../datatable/js/dataTables.searchHighlight.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" src="http://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 
 <!-- Google Analytics -->
 <script>
