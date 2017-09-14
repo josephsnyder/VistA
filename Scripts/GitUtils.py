@@ -18,6 +18,7 @@ import sys
 import subprocess
 import re
 import argparse
+import difflib
 from LoggerManager import logger, initConsoleLogging
 
 """ Utilities Functions to wrap around git command functions via subprocess
@@ -68,10 +69,11 @@ def addChangeSet(gitRepoDir=None, patternList=[]):
                   need to escape wildcard character '*'
     @return: return True if success, False otherwise
   """
-  git_command_list = ["git", "diff", "--stat", "--stat-width=10000","--", "*.zwr"]
+  git_command_list = ["git", "diff","--", "*.zwr"]
   result, output = _runGitCommand(git_command_list, gitRepoDir)
   test = output.split("\n")
-  logger.info(output)
+  outLineStack = []
+  results = []
   """
     Attempts to check each global file for more than two lines of change
     This will prevent every global from being updated in each commit thanks to
@@ -81,11 +83,57 @@ def addChangeSet(gitRepoDir=None, patternList=[]):
     removal of the "Packages/" string from the filename
   """
   patternIncludeList = ["*.m"]
-  for line in test:
-   group = re.match('^[ ]+Packages/(?P<filename>.+.zwr)[ ]+[|][ ]+(?P<numlines>[0-9]+) ', line)
-   if group and (group.group('filename') and group.group('numlines')):
-     if(int(group.group('numlines')) > 2):
-       patternIncludeList.append( group.group('filename'))
+  currentFile=None
+  skipNext=False
+  for index, line in enumerate(test):
+    print line
+    if '.zwr' in line:
+      print results
+      if "OK" in results:
+         patternIncludeList.append(currentFile)
+      currentFile = line[6:].strip()
+      results = []
+      continue
+    if line.startswith("-"):
+      outLineStack.append(line)
+    elif line.startswith("+"):
+      if len(outLineStack):
+        diffStack=[]
+        out = difflib.ndiff(line[1:].split("^"), outLineStack[0][1:].split("^"))
+        print out
+        outList = '|'.join(out).split("|")
+        print outList
+        listlen = len(outList) - 1
+        print "#######"
+        if len(outList) > 2:
+          for i,s in enumerate(outList):
+            print s
+            if i == listlen:
+              results.append("OK")
+            if i < listlen:
+              if s[0]=="-":
+                diffStack.append(s[2:])
+              if s[0] == "+":
+                if len(diffStack):
+                  print "TRYING TO DIFF"
+                  print s[2:]
+                  print diffStack[0]
+                  if re.search("[0-9]{7}(\.[0-9]{4,6})*",s[2:]) or re.search("[0-9]{7}(\.[0-9]{4,6})*",diffStack[0]):
+                    break
+                  if re.search("[0-9]{2}\-[A-Z]{3}\-[0-9]{4}",s[2:]) or re.search("[0-9]{2}\:[0-9]{2}\:[0-9]{2}",diffStack[0]) :
+                    break
+                  if re.search("[0-9]{2}:[0-9]{2}:[0-9]{2}",s[2:]) or re.search("[0-9]{2}\:[0-9]{2}\:[0-9]{2}",diffStack[0]) :
+                    break
+                  # Removes a specific global entry in DEVICE file which maintains a count of the times the device was opened
+                  if re.search("%ZIS\([0-9]+,[0-9]+,5",s[2:]):
+                    break
+                  diffStack.pop(0)
+          print "#########"
+          outLineStack.pop(0)
+      else:
+        results.append("OK")
+  print patternIncludeList
+  sys.exit(0)
   """ Now add everything that can be found or was called for"""
   git_command_list = ["git", "add", "--"]
   totalIncludeList = patternList + patternIncludeList
@@ -174,6 +222,7 @@ def _runGitCommand(gitCmdList, workingDir):
 
 def main():
   initConsoleLogging()
+  addChangeSet("D:/Work/OSEHRA/VistA-M/Packages")
   pass
 
 if __name__ == '__main__':
