@@ -268,7 +268,7 @@ accordionOpenFun = """
         function openAccordionVal(event) {
             $('.accordion').accordion( {active:false, collapsible:true });
             classVal = ".accordion"
-            if (event.target.classList[1] != "Allaccord") {
+            if (event.target.classList[1] != "All") {
               classVal= classVal+"."+event.target.classList[1]
             }
             $(classVal).accordion( 'option', 'active',0 );
@@ -410,8 +410,8 @@ def generateIndexBar(outputFile, inputList, archList=None):
     else:
         archName = inputList[-1]
     outputFile.write("<a onclick=\"openAccordionVal(event)\" class=\"qindex %s\" href=\"#%s\">%s</a>&nbsp;|&nbsp;\n" % (archName.split(" ")[0],archName,
-        inputList[-1]))
-    outputFile.write("<a onclick=\"openAccordionVal(event)\" class=\"qindex Allaccord\" href=\"#%s\">%s</a></div>\n" % ("All","All"))
+        inputList[-1]))href=\"#%s\">%s</a></div>\n" % ("All","All"))
+    outputFile.write("<a onclick=\"openAccordionVal(event)\" class=\"qindex All\" href=\"#%s\">%s</a></div>\n" % ("All","All"))
 # generate Indexed Page Table Row
 def generateIndexedTableRow(outputFile, inputList, httpLinkFunction,
                             nameFunc=None, indexSet=set(char for char in string.uppercase)):
