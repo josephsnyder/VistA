@@ -24,6 +24,7 @@ if(TEST_VISTA_FRESH_CUSTOM_REFRESH)
   mark_as_advanced(TEST_VISTA_FRESH_CUSTOM_COMMAND)
 endif()
 
+option(TEST_VISTA_FRESH_SETUP_LITE "Add the minimal setup of a VistA instance to connect CPRS" OFF)
 set(TEST_VISTA_FRESH_GLOBALS_IMPORT_TIMEOUT 3600 CACHE STRING "Timeout in seconds for importing globals")
 set(TEST_VISTA_FRESH_ROUTINE_IMPORT_TIMEOUT 1500 CACHE STRING "Timeout in seconds for importing routines")
 set(TEST_VISTA_SETUP_SITE_NAME "DEMO.OSEHRA.ORG" CACHE STRING "Name to set for the site address when initializing VistA instance.  Default is 'DEMO.OSEHRA.ORG'")

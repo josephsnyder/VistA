@@ -35,6 +35,10 @@ introText = """**************************************************
   *   Access:  fakeclerk1
   *   Verify:  1Cle!@#$
   *
+  *
+  *  For a Lite setup of VistA, only the Robert Alexander credentials
+  *  will access the system.
+  *
   * If you have any issue, please email your question to admin@osehra.org
   **************************************************
 """
