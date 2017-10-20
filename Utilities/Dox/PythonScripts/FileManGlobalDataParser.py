@@ -133,7 +133,7 @@ def test_getMumpsRoutine():
     for idx, (routine,tag,pos) in enumerate(getMumpsRoutine(input[0])):
       assert (routine, tag, pos) == input[1][idx], "%s: %s" % ((routine, tag, pos), input[1][idx])
 
-class FileManFileData(object):
+class FileManFileData(json.JSONEncoder):
   """
     Class to represent FileMan File data WRT
     either a FileMan file or a subFile
@@ -156,7 +156,8 @@ class FileManFileData(object):
   def __repr__(self):
     return "%s, %s, %s" % (self._fileNo, self._name, self._data)
 
-class FileManDataEntry(object):
+
+class FileManDataEntry(json.JSONEncoder):
   """
   One FileMan File DataEntry
   """
@@ -192,7 +193,8 @@ class FileManDataEntry(object):
   def __repr__(self):
     return "%s: %s: %s" % (self._fileNo, self._ien, self._data)
 
-class FileManDataField(object):
+
+class FileManDataField(json.JSONEncoder):
   """
     Represent an individual field in a FileMan DataEntry
   """

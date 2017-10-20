@@ -48,20 +48,21 @@ class CrossReferenceBuilder(object):
                                         arguments.fileSchemaDir,
                                         arguments.filemanDbJson,
                                         pkgDepJson,
-                                        icrJson)
+                                        icrJson,
+                                        arguments.outdir)
     def buildCrossReference(self, xindexLogDir, MRepositDir,
                             patchRepositDir, fileSchemaDir=None,
-                            filemanDbJson=None, pkgDepJson=None, icrJson=None):
+                            filemanDbJson=None, pkgDepJson=None, icrJson=None,outdir=None):
 
         crossRef = parseCrossReferenceGeneratorArgs(MRepositDir,
                                                     patchRepositDir)
-        if xindexLogDir:
-            crossRef = parseAllCallGraphLog(xindexLogDir,
-                crossRef, icrJson).getCrossReference()
-
+        crossRef.outDir= outdir
         if fileSchemaDir:
             crossRef = parseDataDictionaryLogFile(crossRef,
                                        fileSchemaDir).getCrossReference()
+        if xindexLogDir:
+            crossRef = parseAllCallGraphLog(xindexLogDir,
+                crossRef, icrJson).getCrossReference()
         if filemanDbJson:
             crossRef = parseFileManDBJSONFile(crossRef,
                                    filemanDbJson).getCrossReference()
@@ -77,6 +78,8 @@ def main():
           parents=[crossRefParse])
     parser.add_argument('-pj', '--pkgDepJson',
                         help='Output JSON file for package dependencies')
+    parser.add_argument('-o', '--outdir', required=True,
+                        help='Output Web Page directory')
     result = parser.parse_args()
     from LogManager import initConsoleLogging
     initConsoleLogging()
