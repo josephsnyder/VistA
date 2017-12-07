@@ -2564,44 +2564,6 @@ class WebPageGenerator:
                     self.__generateIndividualRoutinePage__(routine)
         logger.info("End of generating individual routines......")
 
-def testGenerateIndexBar(inputList, outputFile):
-    outputFile = open(outputFile, 'w')
-    outputFile.write("<html><head>Test</head><body>\n")
-    generateIndexBar(outputFile, inputList)
-    outputFile.write("</body></html>")
-    outputFile.close()
-
-#test to play around the Dot
-def testDotCall(outputDir):
-    packageName = "Nursing Service"
-    routineName = "NURA6F1"
-    dirName = os.path.join(outputDir, packageName);
-    outputName = os.path.join(dirName, routineName + ".svg")
-    inputName = os.path.join(dirName, routineName + ".dot")
-    command = "dot -Tsvg -o \"%s\" \"%s\"" % (outputName, inputName)
-    logger.info ("command is [%s]" % command)
-    retCode = subprocess.call(command)
-    logger.info ("calling dot returns %d" % retCode)
-
-# Get the lastest git SHA1 Key from git repository
-def testGetGitLastRev(GitRepoDir, git):
-    gitCommand = "\"" + git + "\"" + " rev-parse --verify HEAD"
-    os.chdir(GitRepoDir)
-    result = subprocess.check_output(gitCommand, shell=True)
-    print result.strip()
-
-# test parsing package.csv file from VistA-M release
-def testPackageCsvParser(packageFile):
-    csvFile = open(packageFile, 'rb')
-    sniffer = csv.Sniffer()
-    dialect = sniffer.sniff(csvFile.read(1024))
-    csvFile.seek(0)
-    hasHeader = sniffer.has_header(csvFile.read(1024))
-    logger.info ("hasHeader: %s" % hasHeader)
-    csvFile.seek(0)
-    reader = csv.reader(csvFile, dialect)
-    for line in reader:
-        print line
 
 # constants
 DEFAULT_OUTPUT_LOG_FILE_NAME = "WebPageGen.log"
