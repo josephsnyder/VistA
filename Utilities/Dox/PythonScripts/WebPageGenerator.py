@@ -559,8 +559,8 @@ class WebPageGenerator:
         footer.close()
     def setDot(self, dot):
         self._hasDot = True
-        self._dotPath = dot
     def __includeHeader__(self, outputFile, indexList=""):
+        self._dot = dot
         for line in (self._header):
             outputFile.write(line)
     def __includeFooter__(self, outputFile):
@@ -596,7 +596,7 @@ class WebPageGenerator:
     def generateWebPage(self):
         self.generateIndexHtmlPage()
         self.generatePackageNamespaceGlobalMappingPage()
-        if self._hasDot and self._dotPath:
+        if self._hasDot and self._dot:
             self.generatePackageDependenciesGraph()
             self.generatePackageDependentsGraph()
         self.generateGlobalNameIndexPage()
@@ -1613,7 +1613,7 @@ class WebPageGenerator:
         inputName = os.path.join(dirName, normalizedName + packageSuffix + ".dot")
         # this is to generated the image in gif format and also cmapx (client side map) to make sure link
         # embeded in the graph is clickable
-        command = "\"%s\" -Tpng -o\"%s\" -Tcmapx -o\"%s\" \"%s\"" % (self._dotPath,
+        command = "\"%s\" -Tpng -o\"%s\" -Tcmapx -o\"%s\" \"%s\"" % (self._dot,
                                                                outputName,
                                                                outputmap,
                                                                inputName)
@@ -1792,7 +1792,7 @@ class WebPageGenerator:
         # this is to generated the image in png format and also cmapx (client side map) to make sure link
         # embeded in the graph is clickable
         # @TODO this should be able to run in parallel
-        command = "\"%s\" -Tpng -o\"%s\" -Tcmapx -o\"%s\" \"%s\"" % (self._dotPath,
+        command = "\"%s\" -Tpng -o\"%s\" -Tcmapx -o\"%s\" \"%s\"" % (self._dot,
                                                                outputName,
                                                                outputmap,
                                                                inputName)
