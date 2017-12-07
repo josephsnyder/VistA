@@ -414,7 +414,7 @@ def generateIndexBar(outputFile, inputList, archList=None , isIndex=False):
         archName = inputList[-1]
     outputFile.write("<a onclick=\"openAccordionVal(event)\" class=\"qindex %s\" href=\"#%s\">%s</a>&nbsp;|&nbsp;\n" % (archName.split(" ")[0],archName, inputList[-1]))
     outputFile.write("<a onclick=\"openAccordionVal(event)\" class=\"qindex Allaccord\" href=\"#%s\">%s</a>&nbsp;|&nbsp;\n" % ("All","All"))
-    if isIndex:
+    if not isIndex:
       outputFile.write("<button class=\"printButton\" onclick=\"writePDF(event)\">PRINT</button></div>\n")
 # generate Indexed Page Table Row
 def generateIndexedTableRow(outputFile, inputList, httpLinkFunction,
