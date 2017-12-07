@@ -471,7 +471,7 @@ def getPackagePackageDependencyHyperLink(packageName,
                                          edgeLinkArch,
                                          tooltip,
                                          name)
-def writeTableHeader(headerList, outputFile,classid=""):
+def writeTableHeader(headerList, outputFile, classid=""):
     outputFile.write("<table>\n")
     outputFile.write("<tr class=\"%s\">\n" % classid)
     for header in headerList:
@@ -496,11 +496,11 @@ def writeGenericTablizedData(headerList, itemList, outputFile, classid=""):
         for itemRow in itemList:
             writeTableData(itemRow, outputFile, classid)
     outputFile.write("</table></div></div>\n")
-def writeListData(listData, outputFile):
-    outputFile.write(generateHtmlListData(listData))
-def generateHtmlListData(listData):
+def writeListData(listData, outputFile, classid=""):
+    outputFile.write(generateHtmlListData(listData, classid))
+def generateHtmlListData(listData, classid=""):
     if not listData : return "<div></div>"
-    output = "<div><ul>"
+    output = "<div class=\"%s\"><ul>" % classid
     for item in listData:
         output += "<li>%s</li>" % item
     output += "</ul></div>"
@@ -559,8 +559,8 @@ class WebPageGenerator:
         footer.close()
     def setDot(self, dot):
         self._hasDot = True
-    def __includeHeader__(self, outputFile, indexList=""):
         self._dot = dot
+    def __includeHeader__(self, outputFile):
         for line in (self._header):
             outputFile.write(line)
     def __includeFooter__(self, outputFile):
@@ -792,27 +792,32 @@ class WebPageGenerator:
     def generateIndividualGlobalPage(self):
         logger.info("Start generating individual globals......")
 
-        indexListGlobal = ["Directly Accessed By Routines"]
         for package in self._allPackages.itervalues():
             for (globalName, globalVar) in package.getAllGlobals().iteritems():
                 isFileManFile = globalVar.isFileManFile()
-                indexListFileMan = ["Info", "Desc", "Directly Accessed By Routines",
-                             "Accessed By FileMan Db Calls",
-                             "Pointed To By FileMan Files", "Pointer To FileMan Files", "Fields"]
+
+                if isFileManFile:
+                    indexList = ["Info", "Desc",
+                                 "Directly Accessed By Routines",
+                                 "Accessed By FileMan Db Calls",
+                                 "Pointed To By FileMan Files",
+                                 "Pointer To FileMan Files", "Fields"]
+                else:
+                    indexList = ["Directly Accessed By Routines"]
+
                 outputFile = open(os.path.join(self._outDir,
                                                getGlobalHtmlFileNameByName(globalName)), 'wb')
-                # write the same _header file
-                self.__includeHeader__(outputFile, indexListFileMan)
+                self.__includeHeader__(outputFile)
+
                 icrList = self.queryICRInfo(package.getName().upper(),"GLOBAL", globalName[1:])
                 if icrList:
-                   indexListFileMan.append("DBIA/ICR Connections")
-                outputFile.write("<script>var titleList = "+str(indexListFileMan)+"</script>\n")
+                  indexList.append("DBIA/ICR Connections")
+
+                outputFile.write("<script>var titleList = "+str(indexList)+"</script>\n")
                 outputFile.write("")
-                # generated the qindex bar
-                if isFileManFile:
-                    generateIndexBar(outputFile, indexListFileMan)
-                else:
-                    generateIndexBar(outputFile, indexListGlobal)
+
+                generateIndexBar(outputFile, indexList)
+
                 outputFile.write("<title id=\"pageTitle\">Global: "+globalName+"</title>")
                 outputFile.write("<div class=\"_header\">\n")
                 outputFile.write("<div class=\"headertitle\">")
@@ -821,14 +826,16 @@ class WebPageGenerator:
                 outputFile.write("<h1>Global: %s</h1>\n</div>\n</div><br/>\n" % globalName)
                 outputFile.write(getAccordionHTML())
                 if isFileManFile:
+                    # Information
                     writeSectionHeader("Information", "Info", outputFile)
                     infoHeader = ["FileMan FileNo", "FileMan Filename", "Package"]
                     itemList = [[globalVar.getFileNo(),
                               globalVar.getFileManName(),
                               getPackageHyperLinkByName(package.getName())]]
-                    writeGenericTablizedData(infoHeader, itemList, outputFile,classid="header")
+                    writeGenericTablizedData(infoHeader, itemList, outputFile, classid="information")
+                    # Description
                     writeSectionHeader("Description", "Desc", outputFile)
-                    writeListData(globalVar.getDescription(), outputFile)
+                    writeListData(globalVar.getDescription(), outputFile, classid="description")
                     writeSectionEnd(outputFile)
                 writeSectionHeader("Directly Accessed By Routines, Total: %d" %
                                     globalVar.getTotalNumberOfReferencedRoutines(),
@@ -842,9 +849,10 @@ class WebPageGenerator:
                     DbCallRtnsNos = [len(x) for x in
                         fileManDbCallRtns.itervalues()]
                     totalNumDbCallRtns = sum(DbCallRtnsNos)
-                writeSectionHeader("Accessed By FileMan Db Calls, Total: %d" %
-                                    totalNumDbCallRtns,
-                                    "Accessed By FileMan Db Calls", outputFile)
+                if isFileManFile:
+                    writeSectionHeader("Accessed By FileMan Db Calls, Total: %d" %
+                                       totalNumDbCallRtns,
+                                       "Accessed By FileMan Db Calls", outputFile)
                 if fileManDbCallRtns:
                     self.generateGlobalRoutineDependentsSection(fileManDbCallRtns,
                         outputFile,classid="gblRtnDep")
@@ -868,11 +876,7 @@ class WebPageGenerator:
                    writeSectionHeader("DBIA/ICR Connections","DBIA/ICR Connections",outputFile)
                    self.generateGlobalICRSection(icrList,outputFile)
                    writeSectionEnd(outputFile)
-                # generated the index bar at the bottom
-                if isFileManFile:
-                    generateIndexBar(outputFile, indexListFileMan)
-                else:
-                    generateIndexBar(outputFile, indexListGlobal)
+                generateIndexBar(outputFile, indexList)
                 self.__includeFooter__(outputFile)
                 outputFile.close()
                 # generate individual sub files
@@ -1103,9 +1107,9 @@ class WebPageGenerator:
 
     def generateGlobalICRSection(self, icrInfo,outfile):
       icrString = "<table style='max-width:80%;'><tbody>"
-      icrString += "<tr><th class='IndexKey'>ICR LINK</th><th class='IndexKey'>Subscribing Package(s)</th><th class='IndexKey'>Fields Referenced</th><th class='IndexKey'>Description</th></th></tr>"
+      icrString += "<tr class='dbaicrconnections'><th class='IndexKey'>ICR LINK</th><th class='IndexKey'>Subscribing Package(s)</th><th class='IndexKey'>Fields Referenced</th><th class='IndexKey'>Description</th></th></tr>"
       for entry in icrInfo:
-        icrString += "<tr><td class='IndexValue globalICR'><a href='%s'>ICR #%s</a></td>" % (getICRHtmlFileName(entry),entry["NUMBER"])
+        icrString += "<tr class='dbaicrconnections'><td class='IndexValue globalICR'><a href='%s'>ICR #%s</a></td>" % (getICRHtmlFileName(entry),entry["NUMBER"])
         icrString += "<td class='IndexValue'>"
         if "SUBSCRIBING PACKAGE" in entry:
           for value in entry["SUBSCRIBING PACKAGE"]:
@@ -1975,12 +1979,12 @@ class WebPageGenerator:
             # Namespace
             outputFile.write(getAccordionHTML())
             writeSectionHeader("Namespace", "Namespace", outputFile)
-            outputFile.write("<div><p><h4 id=\"packageNamespace\">Namespace: %s" % listDataToCommaSeperatorString(package.getNamespaces()))
+            outputFile.write("<div class=packageNamespace>")
+            outputFile.write("<div><p><h4 id=\"packageNamespace\">Namespace: %s</h4></div>" % listDataToCommaSeperatorString(package.getNamespaces()))
             globalNamespaces = package.getGlobalNamespace()
             if globalNamespaces and len(globalNamespaces) > 0:
-                outputFile.write("&nbsp;&nbsp;Additional Global Namespace: %s</h4></div>" % listDataToCommaSeperatorString(globalNamespaces))
-            else:
-                outputFile.write("</h4></div>")
+                outputFile.write("<div><p><h4 id=\"packageNamespace\">Additional Global Namespace: %s</h4></div>" % listDataToCommaSeperatorString(globalNamespaces))
+            outputFile.write("</div>")
             writeSectionEnd(outputFile)
             # link to VA documentation
             writeSectionHeader("Documentation", "Doc", outputFile)
@@ -2182,7 +2186,7 @@ class WebPageGenerator:
         outputFile.write("</div>")
     def __writeRoutineSourceSection__(self, routine, data, header, link, outputFile,classid=""):
         writeSectionHeader(header, link, outputFile)
-        outputFile.write("<div class=\"%s\"><p><span class=\"information\">Source file &lt;<a class=\"el\" href=\"%s\">%s.m</a>&gt;</span></p></div>\n" %
+        outputFile.write("<div class=\"%s\"><p><span class=\"sourcefile\">Source file &lt;<a class=\"el\" href=\"%s\">%s.m</a>&gt;</span></p></div>\n" %
                          (classid,
                           getRoutineSourceHtmlFileName(routine.getOriginalName()),
                           routine.getOriginalName()))
@@ -2223,13 +2227,13 @@ class WebPageGenerator:
         routineName = routine.getName()
         packageName = routine.getPackage().getName()
         outputFile.write("<div><table>\n")
-        writeTableHeader(tableHeader, outputFile)
+        writeTableHeader(tableHeader, outputFile, "entrypoint")
         entryPoints = routine.getEntryPoints()
         for entry in entryPoints:
           comments = entryPoints[entry]["comments"] if entryPoints[entry]["comments"] else ""
           icrNum = entryPoints[entry]["icr"] if entryPoints[entry]["icr"] else ""
           """ Build table string"""
-          outString = "<tr><td class='indexkey'>"+entry +"</td>"
+          outString = "<tr class='entrypoint'><td class='indexkey'>"+entry +"</td>"
           outString += "<td class='indexvalue'>"
           for line in comments:
             outString += line+'<br/>'
@@ -2242,10 +2246,10 @@ class WebPageGenerator:
         writeSectionHeader("Interaction Calls", "Interaction Calls", outputFile)
         routineName = routine.getName()
         packageName = routine.getPackage().getName()
-        writeTableHeader(tableHeader, outputFile)
+        writeTableHeader(tableHeader, outputFile, "interactioncalls")
         calledRtns = routine.getFilteredExternalReference(['DIR','VALM','DDS','DIE','DIC','%ZIS','DIALOG','DIALOGU'])
         for entry in data:  # R and W commands
-          outString = "<tr><td class='indexkey %s'>Function Call: %s</td>" % (classid, entry['type'])
+          outString = "<tr class='interactioncalls'><td class='indexkey %s'>Function Call: %s</td>" % (classid, entry['type'])
           outString += self.__writeInteractionCommandHTML__(entry)
           outString += "</tr>\n"
           outputFile.write(outString)
