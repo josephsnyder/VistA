@@ -265,6 +265,14 @@ find the routine/global via
 <br/>
 """
 
+def writePDFCustomization(outputFile, titleList):
+  outputFile.write("<script>initTitleList="+titleList+"\n")
+  outputFile.write(" initTitleList.forEach(function(obj) {\n")
+  outputFile.write('''   $("#pdfSelection").append('<input class="headerVal" type="checkbox" val="'+obj+'" checked>'+obj+'</input>')\n''');
+  outputFile.write('''   $("#pdfSelection").append('<br/>')\n''');
+  outputFile.write(" })\n")
+  outputFile.write("</script>\n")
+
 # utility functions
 accordionOpenFun = """
     <script type='text/javascript'>
@@ -415,7 +423,11 @@ def generateIndexBar(outputFile, inputList, archList=None , isIndex=False):
     outputFile.write("<a onclick=\"openAccordionVal(event)\" class=\"qindex %s\" href=\"#%s\">%s</a>&nbsp;|&nbsp;\n" % (archName.split(" ")[0],archName, inputList[-1]))
     outputFile.write("<a onclick=\"openAccordionVal(event)\" class=\"qindex Allaccord\" href=\"#%s\">%s</a>&nbsp;|&nbsp;\n" % ("All","All"))
     if not isIndex:
-      outputFile.write("<button class=\"printButton\" onclick=\"writePDF(event)\">PRINT</button></div>\n")
+      outputFile.write("<button class=\"printButton\" onclick=\"startWritePDF(event)\">PRINT</button></div>\n")
+    outputFile.write("<div style=\"display:none;\" id=pdfSelection>\n")
+    outputFile.write('''<h3>Customize PDF page</h3>\n''');
+    outputFile.write('''<p>Select the objects that you wish to see in the downloaded PDF</p>\n''');
+    outputFile.write('''</div>\n''');
 # generate Indexed Page Table Row
 def generateIndexedTableRow(outputFile, inputList, httpLinkFunction,
                             nameFunc=None, indexSet=set(char for char in string.uppercase)):
@@ -812,11 +824,8 @@ class WebPageGenerator:
                 icrList = self.queryICRInfo(package.getName().upper(),"GLOBAL", globalName[1:])
                 if icrList:
                   indexList.append("DBIA/ICR Connections")
-
-                outputFile.write("<script>var titleList = "+str(indexList)+"</script>\n")
-                outputFile.write("")
-
                 generateIndexBar(outputFile, indexList)
+                writePDFCustomization(outputFile, str(indexList))
 
                 outputFile.write("<title id=\"pageTitle\">Global: "+globalName+"</title>")
                 outputFile.write("<div class=\"_header\">\n")
@@ -899,7 +908,7 @@ class WebPageGenerator:
         self.__includeHeader__(outputFile)
         # generated the qindex bar
         generateIndexBar(outputFile, indexList)
-        outputFile.write("<script>var titleList = "+str(indexList)+"</script>\n")
+        writePDFCustomization(outputFile, str(indexList))
         # get the root file package
         fileIter = subFile
         topDownList=[fileIter]
@@ -1970,8 +1979,8 @@ class WebPageGenerator:
             outputFile = open(os.path.join(self._outDir, getPackageHtmlFileName(packageName)), 'w')
             #write the _header part
             self.__includeHeader__(outputFile)
-            outputFile.write("<script>titleList="+str(indexList)+"</script>\n")
             generateIndexBar(outputFile, indexList)
+            writePDFCustomization(outputFile, str(indexList))
             outputFile.write("<title id=\"pageTitle\">Package: "+packageName+"</title>")
             outputFile.write("<div class=\"_header\">\n")
             outputFile.write("<div class=\"headertitle\">")
@@ -2489,8 +2498,8 @@ class WebPageGenerator:
           if item['data'](*extraarg):
             indexList.append(item['name'])
             idxLst.append(idx)
-        outputFile.write("<script>var titleList=%s</script>" % indexList)
         generateIndexBar(outputFile, indexList)
+        writePDFCustomization(outputFile, str(indexList))
         outputFile.write("<title id=\"pageTitle\">Routine: "+routineName+"</title>")
         outputFile.write("<div class=\"_header\">\n")
         outputFile.write("<div class=\"headertitle\">")
