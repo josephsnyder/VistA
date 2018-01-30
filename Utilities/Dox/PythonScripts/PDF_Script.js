@@ -202,7 +202,20 @@ var titleDic  =  {
   // TODO: Need an example that uses this section. Not tested
   "FileMan Files Accessed Via FileMan Db Call":{"tag": "dbcall","sep": /\s{4}/,"generator":getTableListWithHeader,"numCols":3}
   }
-
+function startWritePDF(event){
+  $("#pdfSelection").dialog({
+      modal: true,
+      buttons: {
+        Generate:function() {
+            titleList=[]
+            $(".headerVal:checked").toArray().forEach(function(title) {
+              titleList.push($(title).attr("val"))
+            })
+            writePDF(event)
+        }
+      }
+  })
+}
 function writePDF(event) {
   // Capture images first
   toDataUrl($("#img_called").attr("src"), function(callGraph, callGraphWidth, callGraphHeight) {
