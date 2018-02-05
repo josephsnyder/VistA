@@ -21,7 +21,6 @@
 // https://github.com/bpampuch/pdfmake/issues/359
 var margin = 36;  // 0.5 inches
 var pageWidth = 792 - (2 * margin); // 11 inches
-
 // Capture the DOX images as DataURL to be shown in the PDF
 function toDataUrl(file,callback) {
   var xhr = new XMLHttpRequest();
@@ -48,12 +47,19 @@ function toDataUrl(file,callback) {
 }
 
 // Get the data that should only be shown as text
-function getText(pdfObj) {
-  return {text: $("."+pdfObj.tag).text()};
+function getText(pdfObj,titleIndex) {
+  returnText = $("."+pdfObj.tag).text()
+  if("needsSplit" in pdfObj) {
+    returnText = $("."+pdfObj.tag).first().text()
+    if (titleIndex =="2") {
+    returnText = $("."+pdfObj.tag).last().text()
+    }
+  }
+  return {text:returnText};
 }
 
 // Get table with header
-function getTableListWithHeader(pdfObj) {
+function getTableListWithHeader(pdfObj,titleIndex) {
   var returnObj = [];
   var tableRows = $("tr." + pdfObj.tag);
   for (var row = 0; row < tableRows.length; row++) {
@@ -91,10 +97,16 @@ function getTableListWithHeader(pdfObj) {
 }
 
 // Get table with no headers
-function getTableList(pdfObj) {
+function getTableList(pdfObj,titleIndex) {
   var rowObj = [];
   var returnObj = [];
-  var fullVals = $("."+pdfObj.tag).text().split(pdfObj.sep);
+  var fullVals = [];
+  if("needsSplit" in pdfObj) {
+    targetAccord = $(".accordion")[titleIndex-1]
+    fullVals = $(targetAccord).find("."+pdfObj.tag).text().split(pdfObj.sep);
+  } else {
+    fullVals = $("."+pdfObj.tag).text().split(pdfObj.sep);
+  }
   if (fullVals.length == 1) {
     // Empty table
     return "";
@@ -200,7 +212,19 @@ var titleDic  =  {
   "Interaction Calls":{"tag": "interactioncalls","sep": /\s{4}/,"generator":getTableListWithHeader,"numCols":2,"stretchColumn":1},
   "Marked Items":{"tag": "marked","sep": /\s{4}/,"generator":getTableListWithHeader,"numCols":2,"stretchColumn":1},
   // TODO: Need an example that uses this section. Not tested
-  "FileMan Files Accessed Via FileMan Db Call":{"tag": "dbcall","sep": /\s{4}/,"generator":getTableListWithHeader,"numCols":3}
+  "FileMan Files Accessed Via FileMan Db Call":{"tag": "dbcall","sep": /\s{4}/,"generator":getTableListWithHeader,"numCols":3},
+
+  // Summary Pages
+
+  "Summary":{"tag": "summary","sep": /\s{4}/,"generator":getText,"numCols":8,"needsSplit":true,"header" : "Summary"},
+  "Caller Routines":{"tag": "callerRoutines","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
+  "Called Routines":{"tag": "calledRoutines","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
+  "Referred Routines":{"tag": "referredRoutines","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
+  "Referenced Globals":{"tag": "referredGlobals","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
+  "Referred FileMan Files":{"tag": "referredFileManFiles","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
+  "Referenced FileMan Files":{"tag": "referencedFileManFiles","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
+  "FileMan Db Call Routines":{"tag": "dbCallRoutines","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
+  "FileMan Db Call Accessed FileMan Files":{"tag": "dbCallFileManFiles","sep": /\s{4}/,"generator":getTableList,"numCols":8,"needsSplit":true},
   }
 function startWritePDF(event){
   $("#pdfSelection").dialog({
@@ -259,6 +283,11 @@ function writePDF(event) {
           };
 
           titleList.forEach(function(test) {
+            if(test.indexOf("_")) {
+              arrayVal = test.split("_");
+              test = arrayVal[0]
+              index = arrayVal[1]
+            }
             if (test === "Info" ) {
               // Figure out which Info we are parsing
               if (title.indexOf("Sub-Field") !== -1) { test = "SubfieldInfo"; }
@@ -304,7 +333,7 @@ function writePDF(event) {
                 header.text = test;
               }
               docDefinition.content.push(header);
-              docDefinition.content.push(titleDic[test]["generator"](titleDic[test]));
+              docDefinition.content.push(titleDic[test]["generator"](titleDic[test],index));
               docDefinition.content.push("\n\n");
             }
           });
