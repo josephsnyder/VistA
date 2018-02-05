@@ -535,8 +535,8 @@ def writeSectionHeader(headerName, archName, outputFile):
       outputFile.write(XINDEXLegend)
 def writeSectionEnd(outputFile):
     outputFile.write("</div>")
-def writeSubSectionHeader(headerName, outputFile):
-    outputFile.write("<h3 align=\"left\">%s</h3>\n" % (headerName))
+def writeSubSectionHeader(headerName, outputFile,classid=""):
+    outputFile.write("<h3 class=\"%s\"align=\"left\">%s</h3>\n" % (classid,headerName))
 # class to generate the web page based on input
 class WebPageGenerator:
     def __init__(self, crossReference, outDir, repDir, docRepDir, git,
@@ -1170,7 +1170,7 @@ class WebPageGenerator:
 #===============================================================================
 # method to generate the detail of package
 #===============================================================================
-    def generatePackageRoutineDependencyDetailPage(self, package, depPackage, outputFile):
+    def generatePackageRoutineDependencyDetailPage(self, package, depPackage, outputFile,titleIndex):
         packageHyperLink = getPackageHyperLinkByName(package.getName())
         depPackageHyperLink = getPackageHyperLinkByName(depPackage.getName())
         # generate section header
@@ -1188,18 +1188,24 @@ class WebPageGenerator:
         referencedFileManFiles = set()
         dbCallRoutines = set()
         dbCallFileManFiles = set()
+        titleList = ['Summary'+titleIndex]
         if routineDepDict and depPackage in routineDepDict:
             callerRoutines = routineDepDict[depPackage][0]
             calledRoutines = routineDepDict[depPackage][1]
+            titleList = titleList + ["Caller Routines"+titleIndex, "Called Routines"+titleIndex]
         if globalDepDict and depPackage in globalDepDict:
             referredRoutines = globalDepDict[depPackage][0]
             referredGlobals = globalDepDict[depPackage][1]
+            titleList = titleList + ["Referred Routines"+titleIndex, "Referenced Globals"+titleIndex]
         if fileManDepDict and depPackage in fileManDepDict:
             referredFileManFiles = fileManDepDict[depPackage][0]
             referencedFileManFiles = fileManDepDict[depPackage][1]
+            titleList = titleList + ["Referred FileMan Files"+titleIndex, "Referenced FileMan Files"+titleIndex]
         if dbCallDepDict and depPackage in dbCallDepDict:
             dbCallRoutines = dbCallDepDict[depPackage][0]
             dbCallFileManFiles = dbCallDepDict[depPackage][1]
+            titleList = titleList + ["FileMan Db Call Routines"+titleIndex, "FileMan Db Call Accessed FileMan Files"+titleIndex]
+        writePDFCustomization(outputFile,str(titleList))
         totalCalledHtml = "<span class=\"comment\">%d</span>" % len(callerRoutines)
         totalCallerHtml = "<span class=\"comment\">%d</span>" % len(calledRoutines)
         totalReferredRoutineHtml = "<span class=\"comment\">%d</span>" % len(referredRoutines)
@@ -1220,60 +1226,61 @@ class WebPageGenerator:
                                                                                              packageHyperLink,
                                                                                              totalReferencedFileManFilesHtml,
                                                                                              depPackageHyperLink)
-        summaryHeader += "<BR> Total %s routine(s) in %s accesed via fileman db call to total %s fileman file(s) in %s" % (totalDbCallRoutinesHtml,
+        summaryHeader += "<BR> Total %s routine(s) in %s accessed via fileman db call to total %s fileman file(s) in %s" % (totalDbCallRoutinesHtml,
                                                                                              packageHyperLink,
                                                                                              totalDbCallFileManFilesHtml,
                                                                                              depPackageHyperLink)
-        writeSubSectionHeader(summaryHeader, outputFile)
+        writeSubSectionHeader(summaryHeader, outputFile,classid="summary")
         # print out the routine details
         if len(callerRoutines) > 0:
             writeSubSectionHeader("Caller Routines List in %s : %s" % (packageHyperLink,
                                                                        totalCalledHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(callerRoutines), outputFile,
-                                          getRoutineHtmlFileName, self.getRoutineDisplayName)
+                                          getRoutineHtmlFileName, self.getRoutineDisplayName,classid="callerRoutines")
         if len(calledRoutines) > 0:
             writeSubSectionHeader("Called Routines List in %s : %s" % (depPackageHyperLink,
                                                                        totalCallerHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(calledRoutines), outputFile,
-                                          getRoutineHtmlFileName, self.getRoutineDisplayName)
+                                          getRoutineHtmlFileName, self.getRoutineDisplayName,classid="calledRoutines")
         if len(referredRoutines) > 0:
             writeSubSectionHeader("Referred Routines List in %s : %s" % (packageHyperLink,
                                                                        totalReferredRoutineHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(referredRoutines), outputFile,
-                                          getRoutineHtmlFileName, self.getRoutineDisplayName)
+                                          getRoutineHtmlFileName, self.getRoutineDisplayName,classid="referredRoutines")
         if len(referredGlobals) > 0:
             writeSubSectionHeader("Referenced Globals List in %s : %s" % (depPackageHyperLink,
                                                                        totalReferredGlobalHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(referredGlobals), outputFile,
-                                          getGlobalHtmlFileName)
+                                          getGlobalHtmlFileName,classid="referredGlobals")
         if len(referredFileManFiles) > 0:
             writeSubSectionHeader("Referred FileMan Files List in %s : %s" % (packageHyperLink,
                                                                        totalReferredFileManFilesHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(referredFileManFiles), outputFile,
-                                          getGlobalHtmlFileName, getGlobalDisplayName)
+                                          getGlobalHtmlFileName, getGlobalDisplayName,classid="referredFileManFiles")
         if len(referencedFileManFiles) > 0:
             writeSubSectionHeader("Referenced FileMan Files List in %s : %s" % (depPackageHyperLink,
                                                                        totalReferencedFileManFilesHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(referencedFileManFiles), outputFile,
-                                          getGlobalHtmlFileName, getGlobalDisplayName)
+                                          getGlobalHtmlFileName, getGlobalDisplayName,classid="referencedFileManFiles")
         if len(dbCallRoutines) > 0:
             writeSubSectionHeader("FileMan Db Call Routines List in %s : %s" % (packageHyperLink,
                                                                        totalDbCallRoutinesHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(dbCallRoutines), outputFile,
-                                          getRoutineHtmlFileName, self.getRoutineDisplayName)
+                                          getRoutineHtmlFileName, self.getRoutineDisplayName,classid="dbCallRoutines")
         if len(dbCallFileManFiles) > 0:
             writeSubSectionHeader("FileMan Db Call Accessed FileMan Files List in %s : %s" % (depPackageHyperLink,
                                                                        totalDbCallFileManFilesHtml),
                                                                        outputFile)
             self.generateTablizedItemList(sorted(dbCallFileManFiles), outputFile,
-                                          getGlobalHtmlFileName)
+                                          getGlobalHtmlFileName,classid="dbCallFileManFiles")
+        writeSectionEnd(outputFile)
         outputFile.write("<br/>\n")
 #===============================================================================
 # method to generate the individual package/package interaction detail page
@@ -1287,14 +1294,14 @@ class WebPageGenerator:
         inputList = ["%s-->%s" % (package.getName(), depPackage.getName()),
                    "%s-->%s" % (depPackage.getName(), package.getName())]
         archList = [package.getName(), depPackage.getName()]
-        generateIndexBar(outputFile, inputList, archList, isIndex = True)
+        generateIndexBar(outputFile, inputList, archList, isIndex = False)
         outputFile.write("<title id=\"pageTitle\">" + package.getName() + " : "+ depPackage.getName() + "</title>")
         outputFile.write("<div><h1>%s and %s Interaction Details</h1></div>\n" %
                          (packageHyperLink, depPackageHyperLink))
         #generate the summary part.
-        self.generatePackageRoutineDependencyDetailPage(package, depPackage, outputFile)
-        self.generatePackageRoutineDependencyDetailPage(depPackage, package, outputFile)
-        generateIndexBar(outputFile, inputList, archList, isIndex = True)
+        self.generatePackageRoutineDependencyDetailPage(package, depPackage, outputFile,"_1")
+        self.generatePackageRoutineDependencyDetailPage(depPackage, package, outputFile,"_2")
+        generateIndexBar(outputFile, inputList, archList, isIndex = False)
         self.__includeFooter__(outputFile)
         outputFile.close()
     def __parseReadCmd__(self,matchArray, routine,lineNo):
@@ -1965,7 +1972,7 @@ class WebPageGenerator:
                                    % (classid, htmlMappingFunc(sortedItemList[position]),
                                       displayName))
                 outputFile.write("</tr>\n")
-            outputFile.write("</table>\n</div></div>\n")
+            outputFile.write("</table>\n</div>\n")
         else:
             outputFile.write("<div>\n</div>\n")
 #===============================================================================
