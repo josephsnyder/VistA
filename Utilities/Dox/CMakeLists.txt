@@ -149,4 +149,15 @@ if(GENERATE_VIVIAN)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/GeneratePackageDep.cmake.in ${SCRIPT_OUTPUT_DIR}/GeneratePackageDep.cmake @ONLY)
   add_test(GeneratePackageDep ${CMAKE_COMMAND} -P ${SCRIPT_OUTPUT_DIR}/GeneratePackageDep.cmake)
   set_tests_properties(GeneratePackageDep PROPERTIES TIMEOUT 7200)
+
+# 9. Run Requirements parser to generate the data needed for the BFF & Requirements page
+# to json and html (ViViaN)
+  set(DOCUMENT_VISTA_REQUIREMENTS_OUTPUT_DIR "${DOCUMENT_VISTA_OUTPUT_DIR}")
+  set(DOCUMENT_VISTA_REQUIREMENTS_OLD "" CACHE STRING "Path to a previous version of the Unfulfilled Requirements Data")
+  mark_as_advanced(DOCUMENT_VISTA_REQUIREMENTS_OLD)
+
+  file(MAKE_DIRECTORY "${DOCUMENT_VISTA_REQUIREMENTS_OUTPUT_DIR}/requirements")
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/RequirementsParser.cmake.in ${SCRIPT_OUTPUT_DIR}/RequirementsParser.cmake @ONLY)
+  add_test(RequirementsParser ${CMAKE_COMMAND} -P ${SCRIPT_OUTPUT_DIR}/RequirementsParser.cmake)
+
 endif()

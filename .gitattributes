@@ -1,6 +1,7 @@
 .git*            export-ignore
 .hooks*          export-ignore
 
+
 *                text=auto
 *                whitespace=tab-in-indent
 *                conflict-marker-size=81
@@ -21,6 +22,7 @@
 *.RSA           -whitespace
 *.JSON          -whitespace
 
+*.xls           hooks.MaxObjectKiB=2048
 # Restore checks in some files otherwise disabled above.
 CMakeLists.txt   whitespace=tab-in-indent
 
