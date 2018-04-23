@@ -505,6 +505,7 @@ class FileManGlobalDataParser(object):
 
   def _updateHL7Reference(self):
     protocol = self._glbData['101']
+    outJSON = {}
     for ien in sorted(protocol.dataEntries.keys(), key=lambda x: float(x)):
       protocolEntry = protocol.dataEntries[ien]
       if '4' in protocolEntry.fields:
@@ -543,6 +544,21 @@ class FileManGlobalDataParser(object):
               if tag:
                 hl7Info['tag'] = tag
               self._rtnRefDict.setdefault(rtn,{}).setdefault('101',[]).append(hl7Info)
+        else:
+          # Set up protocol menu tree
+          print "!!!!!!!!!!!!"
+          if "10" in protocolEntry.fields:
+            outJSON[protocolEntry.name]={"children":[]}
+            for entry in protocolEntry.fields["10"].value.dataEntries.keys():
+                name = protocolEntry.fields["10"].value.dataEntries[entry].name
+                if '6' in protocolEntry.fields["10"].value.dataEntries[entry].fields.keys():
+                  name = protocolEntry.fields["10"].value.dataEntries[entry].fields["6"].value
+                outJSON[protocolEntry.name]["children"].append(name)
+            print "!!!!!!!!!!!!"
+    with open(os.path.join("C:\Users\joe.snyder\Desktop","protocol.json"), 'w') as output:
+              logging.info("Generate File: %s" % output.name)
+              json.dump(outJSON, output)
+    sys.exit(1)
 
   def _updateRPCRefence(self):
     rpcData = self._glbData['8994']
