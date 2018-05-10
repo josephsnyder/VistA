@@ -35,6 +35,15 @@ foreach(fvariable ${freshinfo})
   endif(NOT ${fvariable})
 endforeach(fvariable ${freshinfo})
 
+if(TEST_VISTA_FRESH_M_DIR)
+  execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags WORKING_DIRECTORY ${TEST_VISTA_FRESH_M_DIR} OUTPUT_VARIABLE GIT_TAG )
+  string(STRIP ${GIT_TAG} GIT_TAG)
+  if(${GIT_TAG} STREQUAL "")
+    execute_process(COMMAND ${GIT_EXECUTABLE} rev-prase HEAD WORKING_DIRECTORY ${TEST_VISTA_FRESH_M_DIR} OUTPUT_VARIABLE GIT_TAG )
+    string(STRIP ${GIT_TAG} GIT_TAG)
+  set(VISTA_M_TAG ${GIT_TAG} PARENT_SCOPE)
+endif()
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/ImportRG.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/ImportRG.cmake @ONLY)
 
 set(logfile "${VISTA_BINARY_DIR}/Testing/Log/RoutineImport.log")
