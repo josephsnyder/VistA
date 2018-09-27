@@ -35,7 +35,7 @@ VistA.write('K ^XUTL("XQ",$J)')
 pkgPrefixLst = FindPackagePrefixes('@package_file_name@',
                                    os.path.join('@VISTA_SOURCE_DIR@',
                                                 'Packages.csv'))
-VistA.write('D ^XINDEX')
+VistA.write('D ^XONDEX')
 if VistA.type == 'cache':
   VistA.wait('No =>')
   VistA.write('No')
