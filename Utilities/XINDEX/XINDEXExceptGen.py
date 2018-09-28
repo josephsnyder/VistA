@@ -60,9 +60,12 @@ def generateXindexExceptionList(logFileName, VistADir, MType, WarnFlag, routineS
     packageName=packageName[0:packageName.find("Test.log")]
     currentRoutineName=""
     try:
-      packagedir=os.path.join(VistADir,"Packages",packageName.replace('_',' '),"XINDEXException")
+      packagedir=os.path.join(VistADir,"Packages",packageName.replace('_',' '))
       if not os.path.exists(packagedir):
         os.mkdir(packagedir)
+      exceptiondir=os.path.join(packagedir,"XINDEXException")
+      if not os.path.exists(exceptiondir):
+        os.mkdir(exceptiondir)
     except OSError as founderror:
       print founderror.strerror
     for line in packageLogFile:

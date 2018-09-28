@@ -1,0 +1,8 @@
+DEVOPN+1     F - Reference to routine '^%ZOSV1'. That isn't in this UCI.
+JOBPAR+1     F - Reference to routine '^%ZOSV1'. That isn't in this UCI.
+UCICHECK+6   F - Reference to routine '^%m'. That isn't in this UCI.
+F - Reference to routine '^%mixinterp'. That isn't in this UCI.
+F - Reference to routine '^%mixinterp'. That isn't in this UCI.
+JOBPAR+3     F - Reference to routine '^%mjob'. That isn't in this UCI.
+ACTJ+1       F - Reference to routine '^%mjob'. That isn't in this UCI.
+PRGMODE+5    F - Reference to routine '^%mshell'. That isn't in this UCI.
