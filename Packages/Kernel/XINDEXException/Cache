@@ -1,0 +1,33 @@
+LGTM+2       F - Unrecognized argument in SET command.
+SID+4        F - Call to missing label '$$defdir' in this routine.
+V2CL1        F - Call to this MISSING LABEL (see INVOKED BY list).
+$$OSTYPE     F - Call to this MISSING LABEL (see INVOKED BY list).
+$$RTNDIR     F - Call to this MISSING LABEL (see INVOKED BY list).
+GLOINTEG+7   F - Call to missing label '$$CheckGlobalIntegrity' in this routi
+GETDIRGL+6   F - Call to missing label '$$GetDirGlobals' in this routine.
+GLOINTEG+6   F - Label is not valid.
+GETDIRGL+5   F - Label is not valid.
+DCMPST+4     F - Label is not valid.
+F - Reference to routine '^%SYS.DATABASE'. That isn't in this UC
+ALLGLO+20    F - Block structure mismatch.
+ALLGLO+33    F - Block structure mismatch.
+ONTDATA+2    F - General Syntax Error.
+ONTSTBIG+10  F - General Syntax Error.
+AONTVUE+2    F - General Syntax Error.
+AONTVUE+3    F - General Syntax Error.
+AONTVUE+4    F - General Syntax Error.
+AONTVUE+6    F - General Syntax Error.
+ONTGD+12     F - Call to missing label '$$GetGlobalPointers' in this routine.
+ONTGD+11     F - Label is not valid.
+ASKBYAPI+6   F - Reference to routine '^%FILE'. That isn't in this UCI.
+F - Reference to routine '^%SYS.FILE'. That isn't in this UCI.
+$$STOP       F - Call to this MISSING LABEL (see INVOKED BY list).
+FILES+6      F - Invalid or wrong number of arguments to a function.
+SEARCH+1     F - Invalid or wrong number of arguments to a function.
+SEARCH+4     F - Invalid or wrong number of arguments to a function.
+SEARCH+5     F - Invalid or wrong number of arguments to a function.
+OCPU+5       F - Invalid or wrong number of arguments to a function.
+O1+2         F - Invalid or wrong number of arguments to a function.
+T1+2         F - Invalid or wrong number of arguments to a function.
+XCPU+2       F - Invalid or wrong number of arguments to a function.
+X4+7         F - Invalid or wrong number of arguments to a function.
