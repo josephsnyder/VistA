@@ -34,7 +34,7 @@ inputRegEx = re.compile("INPUT TO WHAT FILE", re.I)
 class CustomInstaller(DefaultKIDSBuildInstaller):
   def __init__(self, kidsFile, kidsInstallName,
                seqNo = None, logFile = None, multiBuildList=None,
-               duz=17, **kargs):
+               duz=11720, **kargs):
     print kidsInstallName, seqNo
     assert kidsInstallName == "PXRM*2.0*63"
     DefaultKIDSBuildInstaller.__init__(self, kidsFile,

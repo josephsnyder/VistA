@@ -353,7 +353,7 @@ class PatchSequenceApply(object):
       seqNo = patchHist.getLatestSeqNo()
       if patchInfo.seqNo < seqNo:
         logger.error("SeqNo out of order, %s less than latest one %s" %
-                      (patchInfo.seqNo), seqNo)
+                      (patchInfo.seqNo, seqNo))
         return False
     # check all the dependencies
     for item in patchInfo.depKIDSBuild:

@@ -6,7 +6,6 @@ Version : 5.3       SEQ #838                    Status: Released
                   Compliance Date: JUL 22, 2018
 =============================================================================
 
-Associated patches: (v)DG*5.3*71   <<= must be installed BEFORE `DG*5.3*957'
 
 Subject: DATE/TIME VALUE BEING REPORTED AS INVALID
 

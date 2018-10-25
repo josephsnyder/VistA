@@ -30,7 +30,7 @@ from DefaultKIDSBuildInstaller import DefaultKIDSBuildInstaller
 class CustomInstaller(DefaultKIDSBuildInstaller):
   def __init__(self, kidsFile, kidsInstallName,
                seqNo = None, logFile = None, multiBuildList=None,
-               duz=17, **kargs):
+               duz=11720, **kargs):
     print kidsInstallName, seqNo
     assert kidsInstallName == "ROR*1.5*28" and int(seqNo) == 28
     DefaultKIDSBuildInstaller.__init__(self, kidsFile,

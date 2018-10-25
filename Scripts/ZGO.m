@@ -84,6 +84,7 @@ CONFIG ; Obtain configuration for Open and obtaining globals
  . S CONFIG("LISTF")="S Y=$ZSEARCH(X)"
  W "ZGO does not support "_$ZV,!
  Q
+ ;
 GTMIOW(IO) ; GT.M open-for-output impl.
  O IO:(newversion:noreadonly:nowrap:except="S IO=""""") I IO'=""
  Q
@@ -196,6 +197,7 @@ RUNJOBS ; [Private] Run child workers
 VISIT(G) ; [Private] Visit export Files; and if there is a non-Fileman node, export that separately.
  s $et="d ^%ZTER HALT"
  w !,$J,": ",G,!
+ n nofile
  n gDev ; global device
  N gHasFiles S gHasFiles=$O(FILES(G,""))'=""!($d(FILES(G))=1)
  ;
@@ -212,9 +214,12 @@ VISIT(G) ; [Private] Visit export Files; and if there is a non-Fileman node, exp
  .. s tracker(fileGlobal)=""
  .. ; See if file was exported already
  .. S IO=$$HOSTFILE(fileRef)
- .. X CONFIG("OPENIOR")
+ .. k nofile
+ .. D
+ ... N $ET,$ES S $ET="G BADOPEN"
+ ... X CONFIG("OPENIOR")
  .. ;
- .. I  D
+ .. I '$d(nofile) do
  ... U $P W IO_" Exported already",! ; Succeeded; don't export again
  ... C IO
  .. ;
@@ -262,8 +267,10 @@ VISIT(G) ; [Private] Visit export Files; and if there is a non-Fileman node, exp
  ; Reexport guard
  i $d(FILES(G))=1 s IO=$$HOSTFILE($NA(FILES(G)))
  e  s IO=$$HOSTPATH($E(G,2,$L(G)))
- X CONFIG("OPENIOR")
- I  D
+ d
+ . N $ET,$ES S $ET="G BADOPEN"
+ . X CONFIG("OPENIOR")
+ I '$d(nofile) do
  . U $P W IO_" Exported already",! ; Succeeded; don't export again
  . C IO
  E  D
@@ -285,6 +292,10 @@ VISIT(G) ; [Private] Visit export Files; and if there is a non-Fileman node, exp
  .. I $L($SY,":")=2 D WRITE(gDev,gNode)
  . D CLOSE(gDev)
  quit
+ ;
+BADOPEN ;
+ I $EC[",Z2," S $EC="",nofile=1
+ QUIT
  ;
 DUMP(IO,G) ; Dump everything under node G, excluding G itself
  N R,LR

@@ -6,7 +6,7 @@
     "builds": [
         {
             "dependency": [
-                "ETS*1*0"
+                "ENTERPRISE TERMINOLOGY SERVICES 1.0"
             ],
             "name": "ETS*1.0*1"
         }

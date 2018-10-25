@@ -6,7 +6,7 @@ Version : 1         SEQ #1                      Status: Released
                   Compliance Date: OCT 02, 2017
 =============================================================================
 
-Associated patches: (v)ETS*1*0     <<= must be installed BEFORE `ETS*1*1'
+Associated patches: (v)ENTERPRISE TERMINOLOGY SERVICES 1.0     <<= must be installed BEFORE `ETS*1*1'
 
 Subject: RXNORM CODE SET AND LOINC UPDATES
 

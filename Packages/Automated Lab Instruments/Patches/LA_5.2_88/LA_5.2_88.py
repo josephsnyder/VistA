@@ -34,7 +34,7 @@ inputRegEx = re.compile("INPUT TO WHAT FILE", re.I)
 class CustomInstaller(DefaultKIDSBuildInstaller):
   def __init__(self, kidsFile, kidsInstallName,
                seqNo = None, logFile = None, multiBuildList=None,
-               duz=17, **kargs):
+               duz=11720, **kargs):
     print kidsInstallName, seqNo
     assert kidsInstallName == "LA*5.2*88"
     DefaultKIDSBuildInstaller.__init__(self, kidsFile,
@@ -63,7 +63,7 @@ class CustomInstaller(DefaultKIDSBuildInstaller):
       globalImport.importGlobal(vistATestClient, glbFile, timeout=importTimeout)
 
     """ Requires the installer account to have the ZTMQ security key"""
-    menuUtil = VistAMenuUtil(duz=17)
+    menuUtil = VistAMenuUtil(duz=11720)
     menuUtil.gotoSystemMenu(vistAClient)
     connection.send("Allocation of Security\r")
     connection.expect("Allocate key")

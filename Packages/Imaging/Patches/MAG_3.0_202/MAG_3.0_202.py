@@ -34,7 +34,7 @@ inputRegEx = re.compile("INPUT TO WHAT FILE", re.I)
 class CustomInstaller(DefaultKIDSBuildInstaller):
   def __init__(self, kidsFile, kidsInstallName,
                seqNo = None, logFile = None, multiBuildList=None,
-               duz=17, **kargs):
+               duz=11720, **kargs):
     print kidsInstallName, seqNo
     assert kidsInstallName == "MAG*3.0*202"
     DefaultKIDSBuildInstaller.__init__(self, kidsFile,
