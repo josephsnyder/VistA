@@ -413,7 +413,9 @@ class ConnectLinuxGTM(ConnectMUMPS):
       raise IndexError('Input to multiwait function is not a list')
 
   def startCoverage(self, routines=['*']):
-    self.write('K ^ZZCOVERAGE VIEW "TRACE":1:"^ZZCOVERAGE"')
+    self.write('K ^ZZCOVERAGE')
+    os.environ["ydb_trace_gbl_name"] = "^ZZCOVERAGE"
+    os.environ["gtm_trace_gbl_name"] = "^ZZCOVERAGE"
     self.coverageRoutines = routines
 
   def stopCoverage(self, path, humanreadable='OFF'):
