@@ -1,18 +1,3 @@
-{
-  Most of Code is Public Domain.
-  MaxDate bug fix by OSEHRA/Sam Habiel (OSE/SMH) for Plan VI (c) Sam Habiel 2018
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-}
 unit fGMV_InputLite;
 
 {
@@ -1103,31 +1088,27 @@ begin
     try
       sDateTime := getCurrentDateTime;
       dtpDate.Date := FMDateTimeToWindowsDateTime(StrToFloat(sDateTime)); // 10/08/2002 AAN
+       dtpDate.MaxDate := dtpDate.Date;
       dtpTime.DateTime := FMDateTimeToWindowsDateTime(StrToFloat(sDateTime));
 {$IFDEF DLL}
       chkbCloseOnSave.Visible := False; // zzzzzzandria 050209
       btnSaveAndExit.Visible := True;
 
       // CurrentTime := Now;
-      // OSE/SMH - There may be an i18n bug in the date time control as after
-      // setting the MaxDate once we cannot reset it. So I moved all the sets
-      // to happen only once.
       if aDateTime <> 0 then
         begin
           CurrentTime := aDateTime; // zzzzzzandra 20081008 fixing discepency between PC and VistA
-          dtpDate.Date := CurrentTime;
+          //dtpDate.MaxDate := 0; // Gotta reset MaxDate here since the datetime came from the DLL Client
+          //dtpDate.Date := 0;
           dtpDate.MaxDate := CurrentTime;
+          dtpDate.Date := Trunc(CurrentTime);
           dtpTime.DateTime := CurrentTime;
         end
       else
-        begin
-          dtpDate.MaxDate := dtpDate.Date;
-          CurrentTime := dtpDate.Date;
-        end;
+        CurrentTime := dtpDate.Date;
       dtpTimeChange(nil);
 {$ELSE}
       CurrentTime := dtpTime.DateTime;
-      dtpDate.MaxDate := dtpDate.Date;
 {$ENDIF}
     except
       on E: EConvertError do

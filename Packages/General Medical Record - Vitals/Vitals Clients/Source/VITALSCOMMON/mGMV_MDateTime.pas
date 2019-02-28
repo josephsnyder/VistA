@@ -1,18 +1,3 @@
-{
-  Most of Code is Public Domain.
-  Date Formats modified by OSEHRA/Sam Habiel (OSE/SMH) for Plan VI (c) Sam Habiel 2018
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-}
 unit mGMV_MDateTime;
 
 interface
@@ -90,8 +75,8 @@ uses uGMV_Common, Sysutils, Controls, fGMV_DateRange
 constructor TMDateTime.Create;
 begin
   inherited;
-  DateTimeFormat := 'ddddd hh:nn:ss';
-  DateFormat := 'ddddd';
+  DateTimeFormat := 'mm/dd/yy hh:nn:ss';
+  DateFormat := 'mm/dd/yy';
   TimeFormat := 'hh:nn:ss';
 end;
 
@@ -107,7 +92,7 @@ end;
 
 function TMDateTime.getWSLong:String;
 begin
-  Result := FormatDateTime('dddddd',FDateTime);
+  Result := FormatDateTime('dddd mmmm mm, yyyy',FDateTime);
 end;
 
 procedure TMDateTime.setWDate(aDateTime:TDateTime);

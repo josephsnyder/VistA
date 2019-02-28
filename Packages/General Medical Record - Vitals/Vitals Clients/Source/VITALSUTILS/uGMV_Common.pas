@@ -1,19 +1,3 @@
-{
-  Most of Code is Public Domain.
-  Modified by OSEHRA/Sam Habiel (OSE/SMH) for Plan VI (c) Sam Habiel 2018
-  Removed change of - to /. Send from server with / already.
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-}
 unit uGMV_Common;
 {
 ================================================================================
@@ -1024,14 +1008,12 @@ var
   i: Integer;
   d: double;
 begin
-  (* OSE/SMH - Don't do that! i18n dates break
   i := pos('-',s);
   while i > 0 do
     begin
       s := copy(s,1,i-1)+'/'+copy(s,i+1,Length(s));
       i := pos('-',s);
     end;
-  *)
   try
     d := StrToDateTime(s);
   except

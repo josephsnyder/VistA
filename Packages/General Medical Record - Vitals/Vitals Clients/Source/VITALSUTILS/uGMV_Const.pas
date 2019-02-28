@@ -1,18 +1,3 @@
-{
-  Most of Code is Public Domain.
-  Date Formats modified by OSEHRA/Sam Habiel (OSE/SMH) for Plan VI (c) Sam Habiel 2018
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-}
 unit uGMV_Const;
 
 interface
@@ -123,15 +108,15 @@ const
         'Qualifiers management is not supported locally.'+#13#10+
         'If you wish to request a new term or modify an existing term'+#13#10+
         'please  refer to the New Term Rapid Turnaround (NTRT) web site located at'+#13#10+
-        '                            http://domaindomain.ext/ntrt/ '+#13#10+
+        '                            http://vista.domain.ext/ntrt/ '+#13#10+
         'If you have any questions regarding this new term request process,'+#13#10+
          'please contact the ERT NTRT Coordinator via e-mail at VHA OI SDD HDS NTRT.';
 
-  GMV_WEBSITE = 'http://domaindomain.ext/ClinicalSpecialties/vitals/';
+  GMV_WEBSITE = 'http://vista.domain.ext/ClinicalSpecialties/vitals/';
   MetricList = 'HEIGHT TEMPERATURE WEIGHT CIRCUMFERENCE/GIRTH CENTRAL VENOUS PRESSURE'; // zzzzzzandria 060725 HD0000000149958
 
-  GMV_DateTimeFormat = 'ddddd hh:nn:ss';
-  GMV_DateFormat = 'ddddd';
+  GMV_DateTimeFormat = 'mm/dd/yyyy hh:nn:ss';
+  GMV_DateFormat = 'mm/dd/yyyy';
   GMV_TimeFormat = 'hh:nn:ss';
 
 implementation

@@ -1,19 +1,3 @@
-{
-  Most of Code is Public Domain.
-  Modified by OSEHRA/Sam Habiel (OSE/SMH) for Plan VI (c) Sam Habiel 2018
-  Don't change - to / here; send from server with / already.
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-}
 unit mGMV_GridGraph;
 {
 ================================================================================
@@ -947,7 +931,7 @@ var
   begin
     try
       ss := grdVitals.Cells[aCol, rHeader];
-      // ss := ReplaceStr(ss,'-','/'); {OSE/SMH - DON'T DO THIS FOR I18N DATES!}
+      ss := ReplaceStr(ss,'-','/');
       // zzzzzzandria 061228 - replacement for chart only. to fix position
       ss := ReplaceStr(ss,'24:00:00','23:59:59');
 
@@ -2619,6 +2603,7 @@ var
       ss := grdVitals.Cells[aCol, rHeader];
       if ss <>'' then
         begin
+          ss := ReplaceStr(ss,'-','/');
           if pos(' 24:',sS)>0 then
             ss := piece(ss,' ',1);
           Result := StrToDateTime(ss);
