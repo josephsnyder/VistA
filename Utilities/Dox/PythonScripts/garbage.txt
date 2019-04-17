@@ -1,0 +1,16 @@
+2019-04-03 16:28:52,914 WARNING ^DD(50,30)=None does not have a 0 subscript
+2019-04-03 16:28:53,337 WARNING ['PATIENT', "MRP2'X", 'PS(55,', '0;1', 'S DINUM=X']: FileMan global root mismatch 'DPT(' : 'PS(55,'
+2019-04-03 16:28:53,810 WARNING ['DATA NAME', "*P63'X", 'DD(63.04,', '.2;1', 'S DIC("S")="I Y>1" D ', 'DIC K DIC S DIC=DIE,X=+Y K:Y<0 X I $D(X) S Y=$O(', 'LAB(60,"C","CH;"_X_";1",0)) I Y>0 W !,*7,"  WILL PRINT AS ",$P(', 'LAB(60,Y,0),U,1)']: FileMan global root mismatch 'LR(' : 'DD(63.04,'
+2019-04-03 16:28:53,887 WARNING ['INTERNAL NAME', "*P63'XO", 'DD(63.3,', '0;4', 'S DIC("S")="I Y>2,Y<200,X\'[""INTERP"",X\'[""SCREEN""" D ', 'DIC K DIC S DIC=$G(DIE),X=+Y K:Y<0 X K:$P(', 'LAB(62.06,DA,0),U,8) X']: FileMan global root mismatch 'LR(' : 'DD(63.3,'
+2019-04-03 16:28:53,887 WARNING ['AFB INTERNAL NAME', "*P63'XO", 'DD(63.39,', '0;8', 'S DIC("S")="I $$GET1', 'DID(63.39,Y,"""",""GLOBAL SUBSCRIPT LOCATION"")?1""2.""1.N1"";1""" D ', 'DIC K DIC S DIC=$G(DIE),X=+Y K:Y<0 X K:$P(', 'LAB(62.06,DA,0),U,4) X']: FileMan global root mismatch 'LR(' : 'DD(63.39,'
+2019-04-03 16:28:54,176 WARNING ['HEADER', "MP64.5'", 'LAB(64.5,1,1,', '0;1', 'Q']: FileMan global root mismatch 'LAB(64.5,' : 'LAB(64.5,1,1,'
+2019-04-03 16:28:54,233 WARNING Recursive subfile pointer for 66.021
+2019-04-03 16:28:55,117 WARNING ^DD(120.821,.01)=None does not have a 0 subscript
+2019-04-03 16:28:55,117 WARNING ^DD(120.821,.02)=None does not have a 0 subscript
+2019-04-03 16:28:55,120 WARNING ^DD(120.831,.01)=None does not have a 0 subscript
+2019-04-03 16:28:55,120 WARNING ^DD(120.831,.02)=None does not have a 0 subscript
+2019-04-03 16:28:55,575 WARNING ['REQUIRED FIELDS FOR SCHEDULING', "M*P130'X", 'DD(130,', '0;1', 'S DIC("S")="I Y\'=.01,Y\'=.04,Y\'=.09,Y\'=.14,Y\'=26,\'+$P(', '(0),U,2)" D ', 'DIC K DIC S DIC=DIE,X=+Y K:Y<0 X']: FileMan global root mismatch 'SRF(' : 'DD(130,'
+2019-04-03 16:28:55,598 WARNING ['LABORATORY DATA NAME', "M*P63'X", 'DD(63.04,', '0;1', 'S DIC("S")="I Y>1" D ', 'DIC K DIC S DIC=DIE,X=+Y K:Y<0 X']: FileMan global root mismatch 'LR(' : 'DD(63.04,'
+2019-04-03 16:28:57,945 WARNING ^DD(403.12,.01)=None does not have a 0 subscript
+2019-04-03 16:29:03,878 WARNING ['PARENT', "P9000010.11'I", 'AUPDVIMM(', '12;8', 'Q']: FileMan global root mismatch 'AUPNVIMM(' : 'AUPDVIMM('
+2019-04-03 16:29:03,880 WARNING ^DD(9002099.3,.01)=None does not have a 0 subscript
