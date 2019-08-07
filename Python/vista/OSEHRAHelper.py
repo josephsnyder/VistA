@@ -149,6 +149,15 @@ class ConnectMUMPS(object):
       self.IENumber = number
     self.write('')
 
+  def send(self, command):
+    return self.write(command.strip())
+
+  def expect(self, command, tout=15):
+    if isinstance(command,list):
+      return self.multiwait(command, tout)
+    else:
+      return self.wait_re(command, tout)
+
 class ConnectWinCache(ConnectMUMPS):
   def __init__(self, logfile, instance, namespace, location='127.0.0.1'):
     super(ConnectMUMPS, self).__init__()
@@ -186,9 +195,9 @@ class ConnectWinCache(ConnectMUMPS):
         logging.debug('ERROR: expected: ' + command + 'actual: ' + rbuf)
         raise TestHelper.TestError('ERROR: expected: ' + command + 'actual: ' + rbuf)
     else:
-        self.log.write(rbuf)
+        self.log.write(rbuf.decode('utf-8'))
         logging.debug(rbuf)
-        self.lastconnection=rbuf
+        self.lastconnection=rbuf.decode('utf-8')
         return 1
 
   def wait_re(self, command, timeout=30):
@@ -204,7 +213,7 @@ class ConnectWinCache(ConnectMUMPS):
     if output[2]:
       self.log.write(output[2].decode('utf-8'))
       self.log.flush()
-      self.lastconnection=output[2]
+      self.lastconnection=output[2].decode('utf-8')
       return output
 
   def multiwait(self, options, tout=15):
@@ -218,7 +227,7 @@ class ConnectWinCache(ConnectMUMPS):
         logging.debug('ERROR: expected: ' + str(options))
         raise TestHelper.TestError('ERROR: expected: ' + str(options))
       self.log.write(index[2].decode('utf-8'))
-      self.lastconnection=index[2]
+      self.lastconnection=index[2].decode('utf-8')
       return index[0]
     else:
       raise IndexError('Input to multiwait function is not a list')
@@ -299,7 +308,7 @@ class ConnectLinuxCache(ConnectMUMPS):
         logging.debug('ERROR: expected: ' + command)
         raise TestHelper.TestError('ERROR: expected: ' + command)
     else:
-        self.lastconnection=self.connection.before
+        self.lastconnection=self.connection.before.decode('utf-8')
         return 1
 
   def wait_re(self, command, timeout=15):
@@ -307,7 +316,7 @@ class ConnectLinuxCache(ConnectMUMPS):
     if not timeout: timeout = -1
     compCommand = re.compile(command,re.I)
     self.connection.expect(compCommand, timeout)
-    self.lastconnection=self.connection.before
+    self.lastconnection=self.connection.before.decode('utf-8')
 
   def multiwait(self, options, tout=15):
     logging.debug('connection.expect: ' + str(options))
@@ -317,7 +326,7 @@ class ConnectLinuxCache(ConnectMUMPS):
         logging.debug('ERROR: expected: ' + options)
         raise TestHelper.TestError('ERROR: expected: ' + options)
       self.connection.logfile_read.write(options[index])
-      self.lastconnection=self.connection.before
+      self.lastconnection=self.connection.before.decode('utf-8')
       return index
     else:
       raise IndexError('Input to multiwait function is not a list')
@@ -401,15 +410,17 @@ class ConnectLinuxGTM(ConnectMUMPS):
         logging.debug('ERROR: expected: ' + command)
         raise TestHelper.TestError('ERROR: expected: ' + command)
     else:
-        self.lastconnection=self.connection.before
+        self.lastconnection=self.connection.before.decode('utf-8')
         return 1
 
   def wait_re(self, command, timeout=None):
     logging.debug('connection.expect: ' + str(command))
+    if isinstance(command,str):
+      command=command.encode('utf-8')
     if not timeout: timeout = -1
-    compCommand = re.compile(command,re.I)
+    compCommand = re.compile(command, re.I)
     self.connection.expect(compCommand, timeout)
-    self.lastconnection=self.connection.before
+    self.lastconnection=self.connection.before.decode('utf-8')
 
   def multiwait(self, options, tout=15):
     logging.debug('connection.expect: ' + str(options))
@@ -418,8 +429,8 @@ class ConnectLinuxGTM(ConnectMUMPS):
       if index == -1:
         logging.debug('ERROR: expected: ' + str(options))
         raise TestHelper.TestError('ERROR: expected: ' + str(options))
-      self.connection.logfile_read.write(options[index])
-      self.lastconnection=self.connection.before
+      self.connection.logfile_read.write(options[index].encode("utf-8"))
+      self.lastconnection=self.connection.before.decode('utf-8')
       return index
     else:
       raise IndexError('Input to multiwait function is not a list')
