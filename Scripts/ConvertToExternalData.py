@@ -16,14 +16,15 @@
 from __future__ import division
 from builtins import object
 from past.utils import old_div
-import sys
+import argparse
+import codecs
+import glob
 import os
 import re
-import tempfile
 import shutil
-import argparse
-import glob
 import stat
+import sys
+import tempfile
 
 from LoggerManager import logger, initConsoleLogging, initFileLogging
 
@@ -189,14 +190,14 @@ def generateSha1Sum(inputFilename):
 """ utility method to generate sha1 hash key for file like object """
 def generateSha1SumCommon(fileObject, buf=1024):
   import hashlib
-  sha1sum = hashlib.sha1()
+  hashString = b''
   while True:
     nByte = fileObject.read(buf)
     if nByte:
-      sha1sum.update(nByte.encode('utf-8'))
+      hashString += nByte.encode('ascii')
     else:
       break
-  return sha1sum.hexdigest()
+  return hashlib.sha1(hashString).hexdigest()
 
 """ Convert the KIDS Build, Global or TXT file to External Data format """
 
