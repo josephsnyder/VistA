@@ -264,6 +264,22 @@ def getRoutineLink(routineName):
     filename = "Routine_%s.html" % normalizeName(routineName)
     return urllib.parse.quote(filename)
 
+def getSourceCodeHrefLink(rtnName, dox_url, **kargs):
+    crossRef = None
+    tagVal=''
+    if 'crossRef' in kargs:
+      crossRef = kargs['crossRef']
+    if crossRef:
+      routine = crossRef.getRoutineByName(rtnName)
+    if 'tag' in kargs:
+      tagVal = kargs['tag']
+      rtnName = tagVal
+    if routine:
+      return '<a href=\"%s/%s#%s\">%s</a>' % (dox_url,
+                                              getRoutineSourceHtmlFileName(routine.getName()),
+                                              tagVal,
+                                              rtnName)
+    return rtnName
 def getRoutineHRefLink(rtnName, dox_url, **kargs):
     crossRef = None
     if 'crossRef' in kargs:

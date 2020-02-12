@@ -84,6 +84,13 @@ def getFileHtmlLink(dataEntry, value, **kargs):
   htmlFile = getDataEntryHtmlFileName(dataEntry.ien, dataEntry.fileNo)
   return "<a href=\"%s/%s/%s\">%s</a>" % (FILES_URL, dataEntry.fileNo.replace(".", "_"), htmlFile, value)
 
+def getSourceTagHtmlLink(dataEntry, tagName, **kargs):
+  routineName = dataEntry.fields[".03"].value
+  return _getSourceTagHtmlLink(routineName, tagName, **kargs)
+
+def _getSourceTagHtmlLink(routineName, tagName, **kargs):
+  return UtilityFunctions.getSourceCodeHrefLink(routineName, DOX_URL, tag=tagName , **kargs)
+
 def getRoutineHRefLink(dataEntry, routineName, **kargs):
   return _getRoutineHRefLink(routineName, **kargs)
 
@@ -155,7 +162,7 @@ def getFreeTextLink(dataEntry, value, **kargs):
 # fields and logic to convert to html for RPC List
 rpc_list_fields = (
        ("Name", '.01', getFileHtmlLink), # Name
-       ("Tag", '.02', None), # Tag
+       ("Tag", '.02', getSourceTagHtmlLink), # Tag
        ("Routine", '.03', getRoutineHRefLink), # Routine
        ("Availability", '.05', None),# Availability
        ("Description", '1', getWordProcessingDataBrief),# Description
@@ -211,7 +218,7 @@ HLO_list_fields = (
        ("Name", '.01', getFileHtmlLink), # Name
        ("Package", '2', getFileManFilePointerLink), # Type
        ("HL7 Type Tag", '1/.01', "771.2/.01", getFreeTextLink), # Action Tag
-       ("Action Tag", '1/.04', None), # Action Tag
+       ("Action Tag", '1/.04', getSourceTagHtmlLink), # Action Tag
        ("Action Routine", '1/.05', getRoutineHRefLink), # Action Routine
    )
 
@@ -729,7 +736,7 @@ class FileManDataToHtml(object):
         if fldId == '.01':
           row[fieldsList.index(dataField.name)] = dataHtmlLink
         else:
-          row[fieldsList.index(dataField.name)] = self._dataFieldToHtml(dataField, False, dataField.name, writeLabels=False)
+          row[fieldsList.index(dataField.name)] = self._dataFieldToHtml(dataField, False, dataField.name, dataEntry.fields, writeLabels=False)
       rows.append(row)
     return rows
 
@@ -788,12 +795,12 @@ class FileManDataToHtml(object):
     fields = sorted(dataEntry.fields.keys())
     for fldId in fields:
       dataField = dataEntry.fields[fldId]
-      retval += self._dataFieldToHtml(dataField, isRoot, parentName)
+      retval += self._dataFieldToHtml(dataField, isRoot, parentName, dataEntry.fields)
     if not isRoot:
       retval += "</li>\n"
     return retval
 
-  def _dataFieldToHtml(self, dataField, isRoot, parentName, writeLabels=True):
+  def _dataFieldToHtml(self, dataField, isRoot, parentName, parentData, writeLabels=True):
     fieldType = dataField.type
     name = dataField.name
     value = dataField.value
@@ -802,6 +809,8 @@ class FileManDataToHtml(object):
       value = getMumpsRoutineHtmlLinks(value, self.crossRef)
     elif fieldType == FileManField.FIELD_TYPE_FREE_TEXT and name.find("ROUTINE") >=0:
       value = _getRoutineHRefLink(str(value), crossRef=self.crossRef)
+    elif fieldType == FileManField.FIELD_TYPE_FREE_TEXT and name.find("TAG") >=0:
+      value = _getSourceTagHtmlLink(str(parentData['.03'].value), str(value), crossRef=self.crossRef)
     elif fieldType == FileManField.FIELD_TYPE_SUBFILE_POINTER:
       if value and value.dataEntries:
         if isRoot:
